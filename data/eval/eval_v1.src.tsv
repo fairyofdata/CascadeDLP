@@ -1,0 +1,59 @@
+# 합성 평가 세트 v1 원본 (분석자 = Claude 생성). 전부 지어낸 인물·연락처다.
+# 형식: lang<TAB>text<TAB>note   — 스팬 표기: [[TYPE:ENTITY_ID|원문]]  (ENTITY_ID 생략 가능)
+# 메일·URL은 예약 도메인(example.com/.jp/.org), 전화는 가상 번호. tools/build_eval.py 가 JSONL로 변환한다.
+ko	내일 오전에 [[PERSON:P1|한서윤]] 님과 회의가 있습니다.	P1 한글
+ja	[[PERSON:P1|ハン・ソユン]]さんから資料が届きました。	P1 가나
+en	Please cc [[PERSON:P1|Seoyun Han]] on the next thread.	P1 로마자(이름-성 순)
+ja+ko	[[PERSON:P1|韓瑞允]]（[[PERSON:P1|한서윤]]）さんの連絡先は [[EMAIL|seoyun.han@example.com]] です。	P1 한자+한글 병기, 메일 안의 이름은 EMAIL로만
+ko	[[PERSON:P2|타나카 하루토]] 씨가 오카야마 지사로 옮겼대요.	P2 한글 표기 일본인. 오카야마는 지명(라벨 없음)
+ja	[[PERSON:P2|田中陽翔]]です。よろしくお願いします。	P2 한자
+en	Meeting notes from [[PERSON:P2|Tanaka Haruto]] are attached.	P2 로마자(성-이름 순)
+ja	担当は[[PERSON:P2|たなか はると]]になります。	P2 히라가나
+ko	[[PERSON:P3|박민재]] 과장 휴대폰: [[PHONE|010-2847-3916]]	P3 한글 + 한국 휴대폰
+ja	[[PERSON:P3|パク・ミンジェ]]課長は来週から出張です。	P3 가나
+en	[[PERSON:P3|Minjae Park]] and [[PERSON:P4|Emily Carter]] will co-present.	P3·P4 로마자
+ja+en	[[PERSON:P3|朴珉在]]さん([[PERSON:P3|Park Minjae]])にも共有しました。	P3 한자 + 괄호 안 로마자
+ja+en	CCに[[PERSON:P3|Park Minjae]]を入れてください。	P3 로마자(성-이름 순)
+ja	[[PERSON:P4|エミリー・カーター]]さんの来日は4月です。	P4 가나
+ko	[[PERSON:P4|에밀리 카터]] 씨에게 [[EMAIL|e.carter@example.org]]로 보내 주세요.	P4 한글 + 메일
+ja	[[PERSON:P5|佐藤美咲]]（[[PERSON:P5|さとう みさき]]）様、お世話になっております。	P5 한자+히라가나 병기
+ko	[[PERSON:P5|사토 미사키]] 님이 견적서를 보내셨어요.	P5 한글
+en	[[PERSON:P5|Misaki Sato]] from the Osaka office called.	P5 로마자. Osaka는 지명(라벨 없음)
+ko	[[PERSON:P6|이도윤]] 대리, 내선 402번으로 연락 주세요.	P6. 내선번호는 PII 아님
+en	[[PERSON:P6|Doyun Lee]] is out until Friday.	P6 로마자
+ja	[[PERSON:P6|イ・ドユン]]さんの住所は[[ADDRESS|서울특별시 마포구 월드컵로 12길 34]]です。	P6 가나 + 일본어 문장 속 한글 주소
+ja	[[PERSON:P7|山本健一]]部長 TEL [[PHONE|086-255-0417]]	P7 + 일본 고정전화(오카야마 국번)
+en	Ping [[PERSON:P7|Kenichi Yamamoto]] about the invoice.	P7 로마자
+ko	[[PERSON:P7|야마모토 켄이치]] 부장님께 결재 올렸습니다.	P7 한글
+ja	〒[[POSTAL|700-0024]] [[ADDRESS|岡山県岡山市北区駅元町1-8]]に移転しました。	일본 우편번호(〒 기호는 스팬 밖) + 주소
+ko	우편번호 [[POSTAL|04157]], [[ADDRESS|서울 마포구 도화동 5-3]]으로 반송해 주세요.	한국 5자리 우편번호 + 주소
+ja	携帯は[[PHONE|090-3712-5584]]、メールは[[EMAIL|k.mori@example.jp]]です。	일본 휴대폰 + 메일(이름 없음)
+en	Call me at [[PHONE|+81-90-6621-0938]] or [[PHONE|+82-10-5530-7721]].	국제 형식 일·한 번호
+ko	대표번호 [[PHONE|02-6953-1180]]로 문의하세요.	한국 서울 국번
+ja	詳細は[[URL|https://example.jp/staff/profile?id=4471]]をご覧ください。	URL
+en	My portfolio: [[URL|https://www.example.com/~jlee]]	URL
+ko	주민등록번호 [[ID_NUMBER|920315-2847561]]은 보내지 마세요.	한국 주민번호 형식(가상)
+ja	マイナンバー [[ID_NUMBER|4829 1057 3364]] を記入してください。	마이넘버 12자리(띄어쓰기)
+ko	[[ORG|주식회사 한빛테크]]의 [[PERSON|정하은]] 팀장입니다.	ORG + 단독 인물
+ja	[[ORG|株式会社みどり製作所]] 営業部 [[PERSON|小林翼]]	ORG + 단독 인물
+en	I worked at [[ORG|Northwind Analytics]] with [[PERSON|Oliver Grant]].	ORG + 단독 인물
+ja+ko+en	昨日、[[PERSON:P8|최유나]]さんと[[PERSON:P9|Nakamura Sota]]から連絡があり、[[ADDRESS|岡山市北区表町2丁目]]の事務所で会う予定です。	3언어 혼용 한 문장
+ja	[[PERSON:P8|チェ・ユナ]]さんは韓国語と日本語ができます。	P8 가나
+ko	[[PERSON:P9|나카무라 소타]] 씨는 다음 달 서울 출장.	P9 한글
+ja	[[PERSON:P9|中村颯太]]	P9 한자 단독(문맥 없음)
+ko	김치찌개 주문번호 1234-5678, 총 12,000원입니다.	함정: 전화처럼 보이는 주문번호·금액, 김치(성씨 김) — 라벨 없음
+ja	2026-09-29 13:30 に会議室Bで。	함정: 날짜·시각 — 라벨 없음
+en	Version 3.14.7 was released on 2026-09-01.	함정: 버전 번호 — 라벨 없음
+ko	봄이 오면 하늘이 맑아요.	함정: 이름으로도 쓰이는 일반어(하늘, 봄) — 라벨 없음
+ja	春が来たら、桜を見に行きましょう。	함정: 이름으로도 쓰이는 일반어(春, 桜) — 라벨 없음
+ko	[[PERSON|하늘]]이가 어제 전화했어.	하늘이 사람 이름(조사 '이가' 앞)
+ja	[[PERSON|春]]ちゃんが迎えに来ます。	春가 사람 이름(ちゃん)
+en	[[PERSON|Grace]] said the build was green.	이름만 있는 영어 인물(일반어 grace와 동형)
+ko	[[PERSON|강지호]]([[EMAIL|jiho_kang92@example.com]], [[PHONE|010-7719-2045]])	인물+메일+전화 연속
+ja	差出人: [[PERSON|吉田 さくら]] <[[EMAIL|sakura.y@example.jp]]>	메일 헤더형, 성명 사이 공백
+en	Ship to: [[PERSON|Daniel Wu]], [[ADDRESS|221 Maple Ave, Springfield, IL]] [[POSTAL|62704]]	영문 주소 + 미국 우편번호
+ko	[[ADDRESS|경기도 성남시 분당구 판교역로 235]] [[ORG|에이치앤랩]] 3층	한국 도로명 주소 + ORG
+ja	[[PERSON:P1|ソユン]]さん、明日の件ですが…	P1 이름만(성 생략) 가나
+ko	[[PERSON:P2|하루토]] 씨 오늘 늦는대요.	P2 이름만 한글
+en	Thanks, [[PERSON:P4|Emily]]!	P4 이름만
+ja	[[PERSON:P7|山本]]さんに確認します。	P7 성만 — 동명이인 위험(연결 판단 어려움)

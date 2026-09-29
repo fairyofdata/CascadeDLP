@@ -1,0 +1,581 @@
+{
+ "date": "2026-09-30",
+ "mode": "rules+llm",
+ "model": "qwen3.5:4b",
+ "prompt_version": "v2",
+ "eval": "data/eval/eval_v1.jsonl",
+ "exact": {
+  "PERSON": {
+   "tp": 42,
+   "fp": 2,
+   "fn": 4,
+   "P": 0.955,
+   "R": 0.913,
+   "F": 0.933
+  },
+  "EMAIL": {
+   "tp": 5,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "PHONE": {
+   "tp": 7,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "POSTAL": {
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ADDRESS": {
+   "tp": 3,
+   "fp": 6,
+   "fn": 3,
+   "P": 0.333,
+   "R": 0.5,
+   "F": 0.4
+  },
+  "URL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ID_NUMBER": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ORG": {
+   "tp": 2,
+   "fp": 3,
+   "fn": 2,
+   "P": 0.4,
+   "R": 0.5,
+   "F": 0.444
+  },
+  "ALL": {
+   "tp": 66,
+   "fp": 11,
+   "fn": 9,
+   "P": 0.857,
+   "R": 0.88,
+   "F": 0.868
+  }
+ },
+ "overlap": {
+  "PERSON": {
+   "tp": 43,
+   "fp": 1,
+   "fn": 3,
+   "P": 0.977,
+   "R": 0.935,
+   "F": 0.956
+  },
+  "EMAIL": {
+   "tp": 5,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "PHONE": {
+   "tp": 7,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "POSTAL": {
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ADDRESS": {
+   "tp": 6,
+   "fp": 3,
+   "fn": 0,
+   "P": 0.667,
+   "R": 1.0,
+   "F": 0.8
+  },
+  "URL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ID_NUMBER": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ORG": {
+   "tp": 4,
+   "fp": 1,
+   "fn": 0,
+   "P": 0.8,
+   "R": 1.0,
+   "F": 0.889
+  },
+  "ALL": {
+   "tp": 72,
+   "fp": 5,
+   "fn": 3,
+   "P": 0.935,
+   "R": 0.96,
+   "F": 0.947
+  }
+ },
+ "latency_ms": {
+  "mean": 2615,
+  "median": 2582,
+  "max": 2973
+ },
+ "linking": {
+  "n_surfaces": 44,
+  "n_clusters_multi": 9,
+  "cluster_exact": 6,
+  "cluster_exact_rate": 0.667,
+  "pair_P": 0.972,
+  "pair_R": 0.636,
+  "pair_F": 0.769,
+  "seconds": 117.49,
+  "wrong_clusters": [
+   [
+    "春",
+    "하루토"
+   ]
+  ],
+  "split_clusters": [
+   [
+    "한서윤",
+    "ハン・ソユン",
+    "Seoyun Han",
+    "韓瑞允",
+    "ソユン"
+   ],
+   [
+    "타나카 하루토",
+    "田中陽翔",
+    "Tanaka Haruto",
+    "たなか はると",
+    "하루토"
+   ],
+   [
+    "박민재",
+    "パク・ミンジェ",
+    "Minjae Park",
+    "朴珉在",
+    "Park Minjae"
+   ]
+  ],
+  "romanized": {
+   "한서윤": {
+    "family": "han",
+    "given": "seo-yoon",
+    "nationality": "korean"
+   },
+   "ハン・ソユン": {
+    "family": "han",
+    "given": "yoon",
+    "nationality": "korean"
+   },
+   "Seoyun Han": {
+    "family": "han",
+    "given": "seoyun",
+    "nationality": "korean"
+   },
+   "韓瑞允": {
+    "family": "han",
+    "given": "yoon",
+    "nationality": "korean"
+   },
+   "타나카 하루토": {
+    "family": "tanaka",
+    "given": "haruto",
+    "nationality": "japanese"
+   },
+   "田中陽翔": {
+    "family": "tanaka",
+    "given": "hiko",
+    "nationality": "japanese"
+   },
+   "Tanaka Haruto": {
+    "family": "tanaka",
+    "given": "haruto",
+    "nationality": "japanese"
+   },
+   "たなか はると": {
+    "family": "tanaka",
+    "given": "haruto",
+    "nationality": "japanese"
+   },
+   "박민재": {
+    "family": "park",
+    "given": "minjae",
+    "nationality": "korean"
+   },
+   "パク・ミンジェ": {
+    "family": "park",
+    "given": "minjeong",
+    "nationality": "korean"
+   },
+   "Minjae Park": {
+    "family": "park",
+    "given": "minjae",
+    "nationality": "korean"
+   },
+   "Emily Carter": {
+    "family": "carter",
+    "given": "emily",
+    "nationality": "other"
+   },
+   "朴珉在": {
+    "family": "park",
+    "given": "minjin",
+    "nationality": "korean"
+   },
+   "Park Minjae": {
+    "family": "park",
+    "given": "minjae",
+    "nationality": "korean"
+   },
+   "エミリー・カーター": {
+    "family": "carter",
+    "given": "emily",
+    "nationality": "other"
+   },
+   "에밀리 카터": {
+    "family": "carter",
+    "given": "emily",
+    "nationality": "other"
+   },
+   "佐藤美咲": {
+    "family": "sato",
+    "given": "misaki",
+    "nationality": "japanese"
+   },
+   "さとう みさき": {
+    "family": "sato",
+    "given": "misaki",
+    "nationality": "japanese"
+   },
+   "사토 미사키": {
+    "family": "sato",
+    "given": "misaki",
+    "nationality": "japanese"
+   },
+   "Misaki Sato": {
+    "family": "sato",
+    "given": "misaki",
+    "nationality": "japanese"
+   },
+   "이도윤": {
+    "family": "lee",
+    "given": "do-yoon",
+    "nationality": "korean"
+   },
+   "Doyun Lee": {
+    "family": "lee",
+    "given": "doyun",
+    "nationality": "korean"
+   },
+   "イ・ドユン": {
+    "family": "i",
+    "given": "dooyun",
+    "nationality": "korean"
+   },
+   "山本健一": {
+    "family": "yamamoto",
+    "given": "kenichi",
+    "nationality": "japanese"
+   },
+   "Kenichi Yamamoto": {
+    "family": "yamamoto",
+    "given": "kenichi",
+    "nationality": "japanese"
+   },
+   "야마모토 켄이치": {
+    "family": "yamamoto",
+    "given": "kenichi",
+    "nationality": "japanese"
+   },
+   "정하은": {
+    "family": "jeong",
+    "given": "haeun",
+    "nationality": "korean"
+   },
+   "小林翼": {
+    "family": "kobayashi",
+    "given": "tsubasa",
+    "nationality": "japanese"
+   },
+   "Oliver Grant": {
+    "family": "grant",
+    "given": "oliver",
+    "nationality": "other"
+   },
+   "최유나": {
+    "family": "choi",
+    "given": "yuna",
+    "nationality": "korean"
+   },
+   "Nakamura Sota": {
+    "family": "nakamura",
+    "given": "sota",
+    "nationality": "japanese"
+   },
+   "チェ・ユナ": {
+    "family": "che",
+    "given": "yuna",
+    "nationality": "japanese"
+   },
+   "나카무라 소타": {
+    "family": "nakamura",
+    "given": "sota",
+    "nationality": "japanese"
+   },
+   "中村颯太": {
+    "family": "nakamura",
+    "given": "sota",
+    "nationality": "japanese"
+   },
+   "하늘": {
+    "family": "",
+    "given": "han",
+    "nationality": "korean"
+   },
+   "春": {
+    "family": "",
+    "given": "haru",
+    "nationality": "japanese"
+   },
+   "Grace": {
+    "family": "",
+    "given": "grace",
+    "nationality": "other"
+   },
+   "강지호": {
+    "family": "gang",
+    "given": "jiho",
+    "nationality": "korean"
+   },
+   "吉田 さくら": {
+    "family": "yoshida",
+    "given": "sakura",
+    "nationality": "japanese"
+   },
+   "Daniel Wu": {
+    "family": "wu",
+    "given": "daniel",
+    "nationality": "other"
+   },
+   "ソユン": {
+    "family": "",
+    "given": "yoon",
+    "nationality": "korean"
+   },
+   "하루토": {
+    "family": "haru",
+    "given": "to",
+    "nationality": "japanese"
+   },
+   "Emily": {
+    "family": "",
+    "given": "emily",
+    "nationality": "other"
+   },
+   "山本": {
+    "family": "yamamoto",
+    "given": "",
+    "nationality": "japanese"
+   }
+  }
+ },
+ "errors": [
+  {
+   "id": "e005",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "오카야마"
+  },
+  {
+   "id": "e010",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "課長"
+  },
+  {
+   "id": "e018",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "Osaka"
+  },
+  {
+   "id": "e021",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "イ・ドユン"
+  },
+  {
+   "id": "e025",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "岡山県岡山市北区駅元町1-8"
+  },
+  {
+   "id": "e025",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "岡山県岡山市北区駅元町"
+  },
+  {
+   "id": "e025",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "1-8"
+  },
+  {
+   "id": "e034",
+   "kind": "miss",
+   "type": "ORG",
+   "text": "주식회사 한빛테크"
+  },
+  {
+   "id": "e034",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "한빛테크"
+  },
+  {
+   "id": "e035",
+   "kind": "miss",
+   "type": "ORG",
+   "text": "株式会社みどり製作所"
+  },
+  {
+   "id": "e035",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "株式会社みどり製作所 営業部"
+  },
+  {
+   "id": "e036",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Oliver Grant"
+  },
+  {
+   "id": "e040",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "中村颯太"
+  },
+  {
+   "id": "e040",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "中村"
+  },
+  {
+   "id": "e040",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "颯太"
+  },
+  {
+   "id": "e048",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Grace"
+  },
+  {
+   "id": "e051",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "221 Maple Ave, Springfield, IL"
+  },
+  {
+   "id": "e051",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "221 Maple Ave"
+  },
+  {
+   "id": "e052",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "경기도 성남시 분당구 판교역로 235"
+  },
+  {
+   "id": "e052",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "판교역로"
+  }
+ ],
+ "linking_before": {
+  "n_surfaces": 44,
+  "n_clusters_multi": 9,
+  "cluster_exact": 5,
+  "cluster_exact_rate": 0.556,
+  "pair_P": 1.0,
+  "pair_R": 0.618,
+  "pair_F": 0.764,
+  "seconds": 117.49,
+  "wrong_clusters": [],
+  "split_clusters": [
+   [
+    "한서윤",
+    "ハン・ソユン",
+    "Seoyun Han",
+    "韓瑞允",
+    "ソユン"
+   ],
+   [
+    "타나카 하루토",
+    "田中陽翔",
+    "Tanaka Haruto",
+    "たなか はると",
+    "하루토"
+   ],
+   [
+    "박민재",
+    "パク・ミンジェ",
+    "Minjae Park",
+    "朴珉在",
+    "Park Minjae"
+   ],
+   [
+    "최유나",
+    "チェ・ユナ"
+   ]
+  ]
+ }
+}

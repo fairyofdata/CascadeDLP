@@ -1,0 +1,583 @@
+{
+ "date": "2026-09-30",
+ "mode": "rules+gliner",
+ "model": "gliner_multi_pii-v1",
+ "prompt_version": null,
+ "eval": "data/eval/eval_v1.jsonl",
+ "exact": {
+  "PERSON": {
+   "tp": 21,
+   "fp": 20,
+   "fn": 25,
+   "P": 0.512,
+   "R": 0.457,
+   "F": 0.483
+  },
+  "EMAIL": {
+   "tp": 5,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "PHONE": {
+   "tp": 7,
+   "fp": 1,
+   "fn": 0,
+   "P": 0.875,
+   "R": 1.0,
+   "F": 0.933
+  },
+  "POSTAL": {
+   "tp": 3,
+   "fp": 1,
+   "fn": 0,
+   "P": 0.75,
+   "R": 1.0,
+   "F": 0.857
+  },
+  "ADDRESS": {
+   "tp": 0,
+   "fp": 3,
+   "fn": 6,
+   "P": 0.0,
+   "R": 0.0,
+   "F": 0.0
+  },
+  "URL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ID_NUMBER": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ORG": {
+   "tp": 3,
+   "fp": 2,
+   "fn": 1,
+   "P": 0.6,
+   "R": 0.75,
+   "F": 0.667
+  },
+  "ALL": {
+   "tp": 43,
+   "fp": 27,
+   "fn": 32,
+   "P": 0.614,
+   "R": 0.573,
+   "F": 0.593
+  }
+ },
+ "overlap": {
+  "PERSON": {
+   "tp": 41,
+   "fp": 0,
+   "fn": 5,
+   "P": 1.0,
+   "R": 0.891,
+   "F": 0.943
+  },
+  "EMAIL": {
+   "tp": 5,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "PHONE": {
+   "tp": 7,
+   "fp": 1,
+   "fn": 0,
+   "P": 0.875,
+   "R": 1.0,
+   "F": 0.933
+  },
+  "POSTAL": {
+   "tp": 3,
+   "fp": 1,
+   "fn": 0,
+   "P": 0.75,
+   "R": 1.0,
+   "F": 0.857
+  },
+  "ADDRESS": {
+   "tp": 2,
+   "fp": 1,
+   "fn": 4,
+   "P": 0.667,
+   "R": 0.333,
+   "F": 0.444
+  },
+  "URL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ID_NUMBER": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ORG": {
+   "tp": 4,
+   "fp": 1,
+   "fn": 0,
+   "P": 0.8,
+   "R": 1.0,
+   "F": 0.889
+  },
+  "ALL": {
+   "tp": 66,
+   "fp": 4,
+   "fn": 9,
+   "P": 0.943,
+   "R": 0.88,
+   "F": 0.91
+  }
+ },
+ "latency_ms": {
+  "mean": 58,
+  "median": 57,
+  "max": 94
+ },
+ "linking": {
+  "n_surfaces": 44,
+  "n_clusters_multi": 9,
+  "cluster_exact": 0,
+  "cluster_exact_rate": 0.0,
+  "pair_P": 0.0,
+  "pair_R": 0.0,
+  "pair_F": 0.0,
+  "seconds": 0.0,
+  "wrong_clusters": [],
+  "split_clusters": [
+   [
+    "한서윤",
+    "ハン・ソユン",
+    "Seoyun Han",
+    "韓瑞允",
+    "ソユン"
+   ],
+   [
+    "타나카 하루토",
+    "田中陽翔",
+    "Tanaka Haruto",
+    "たなか はると",
+    "하루토"
+   ],
+   [
+    "박민재",
+    "パク・ミンジェ",
+    "Minjae Park",
+    "朴珉在",
+    "Park Minjae"
+   ],
+   [
+    "Emily Carter",
+    "エミリー・カーター",
+    "에밀리 카터",
+    "Emily"
+   ],
+   [
+    "佐藤美咲",
+    "さとう みさき",
+    "사토 미사키",
+    "Misaki Sato"
+   ],
+   [
+    "이도윤",
+    "Doyun Lee",
+    "イ・ドユン"
+   ],
+   [
+    "山本健一",
+    "Kenichi Yamamoto",
+    "야마모토 켄이치",
+    "山本"
+   ],
+   [
+    "최유나",
+    "チェ・ユナ"
+   ],
+   [
+    "Nakamura Sota",
+    "나카무라 소타",
+    "中村颯太"
+   ]
+  ],
+  "romanized": null
+ },
+ "errors": [
+  {
+   "id": "e001",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "한서윤"
+  },
+  {
+   "id": "e001",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "한서윤 님과"
+  },
+  {
+   "id": "e002",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "ハン・ソユン"
+  },
+  {
+   "id": "e002",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "ハン・ソユンさんから資料が届きました"
+  },
+  {
+   "id": "e005",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "타나카 하루토"
+  },
+  {
+   "id": "e005",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "타나카 하루토 씨가"
+  },
+  {
+   "id": "e005",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "오카야마 지사로"
+  },
+  {
+   "id": "e006",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "田中陽翔"
+  },
+  {
+   "id": "e006",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "田中陽翔です"
+  },
+  {
+   "id": "e008",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "たなか はると"
+  },
+  {
+   "id": "e009",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "박민재"
+  },
+  {
+   "id": "e009",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "박민재 과장"
+  },
+  {
+   "id": "e010",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "パク・ミンジェ"
+  },
+  {
+   "id": "e010",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "パク・ミンジェ課長は来週から出張です"
+  },
+  {
+   "id": "e012",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "朴珉在"
+  },
+  {
+   "id": "e013",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Park Minjae"
+  },
+  {
+   "id": "e013",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "CCにPark Minjaeを入れてください"
+  },
+  {
+   "id": "e014",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "エミリー・カーター"
+  },
+  {
+   "id": "e014",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "エミリー・カーターさんの来日は4月です"
+  },
+  {
+   "id": "e015",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "에밀리 카터"
+  },
+  {
+   "id": "e015",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "에밀리 카터 씨에게"
+  },
+  {
+   "id": "e016",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "佐藤美咲"
+  },
+  {
+   "id": "e016",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "佐藤美咲（"
+  },
+  {
+   "id": "e018",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "Osaka office"
+  },
+  {
+   "id": "e019",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "이도윤"
+  },
+  {
+   "id": "e019",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "이도윤 대리"
+  },
+  {
+   "id": "e021",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "イ・ドユン"
+  },
+  {
+   "id": "e021",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "서울특별시 마포구 월드컵로 12길 34"
+  },
+  {
+   "id": "e022",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "山本健一"
+  },
+  {
+   "id": "e022",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "山本健一部長"
+  },
+  {
+   "id": "e025",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "岡山県岡山市北区駅元町1-8"
+  },
+  {
+   "id": "e026",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "서울 마포구 도화동 5-3"
+  },
+  {
+   "id": "e026",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "서울 마포구 도화동 5-3으로"
+  },
+  {
+   "id": "e034",
+   "kind": "miss",
+   "type": "ORG",
+   "text": "주식회사 한빛테크"
+  },
+  {
+   "id": "e034",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "주식회사 한빛테크의"
+  },
+  {
+   "id": "e035",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "小林翼"
+  },
+  {
+   "id": "e037",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "최유나"
+  },
+  {
+   "id": "e037",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Nakamura Sota"
+  },
+  {
+   "id": "e037",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "岡山市北区表町2丁目"
+  },
+  {
+   "id": "e037",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "최유나さんとNakamura Sotaから連絡があり"
+  },
+  {
+   "id": "e038",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "チェ・ユナ"
+  },
+  {
+   "id": "e038",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "チェ・ユナさんは韓国語と日本語ができます"
+  },
+  {
+   "id": "e039",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "나카무라 소타"
+  },
+  {
+   "id": "e039",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "나카무라 소타 씨는"
+  },
+  {
+   "id": "e046",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "하늘"
+  },
+  {
+   "id": "e046",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "하늘이가"
+  },
+  {
+   "id": "e046",
+   "kind": "extra",
+   "type": "PHONE",
+   "text": "전화했어"
+  },
+  {
+   "id": "e047",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "春"
+  },
+  {
+   "id": "e047",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "春ちゃんが迎えに来ます"
+  },
+  {
+   "id": "e051",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "221 Maple Ave, Springfield, IL"
+  },
+  {
+   "id": "e051",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "221 Maple Ave"
+  },
+  {
+   "id": "e052",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "경기도 성남시 분당구 판교역로 235"
+  },
+  {
+   "id": "e052",
+   "kind": "extra",
+   "type": "POSTAL",
+   "text": "분당구"
+  },
+  {
+   "id": "e053",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "ソユン"
+  },
+  {
+   "id": "e053",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "ソユンさん"
+  },
+  {
+   "id": "e054",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "하루토"
+  },
+  {
+   "id": "e054",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "하루토 씨"
+  },
+  {
+   "id": "e056",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "山本"
+  },
+  {
+   "id": "e056",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "山本さんに確認します"
+  }
+ ]
+}

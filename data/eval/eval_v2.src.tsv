@@ -1,0 +1,62 @@
+# 합성 평가 세트 v2 원본 (분석자 = Claude 생성, 2026-09-30). 전부 지어낸 인물·연락처다.
+# 목적: v1에 맞춰 고친 코드의 과적합 확인(홀드아웃). 코드를 고정한 채 한 번만 채점한다.
+# v1과 겹치지 않는 이름·주소·형식. 보강: ADDRESS, 동명이인(같은 성·비슷한 이름), 읽기가 여럿인 한자 이름, 긴 혼용 문장, 형식 변형.
+# 형식: lang<TAB>text<TAB>note   — 스팬 표기: [[TYPE:ENTITY_ID|원문]]
+ko	다음 주 킥오프는 [[PERSON:Q1|정민호]] 책임이 진행합니다.	Q1 한글
+ja	[[PERSON:Q1|チョン・ミンホ]]さんが司会を担当します。	Q1 가나
+en	[[PERSON:Q1|Jung Minho]] will chair the kickoff.	Q1 로마자(성-이름)
+ja+ko	名刺には[[PERSON:Q1|鄭敏浩]]と書いてありました。	Q1 한자(한국 이름)
+ko	[[PERSON:Q1|민호]] 씨, 자료 확인 부탁해요.	Q1 이름만
+ko	[[PERSON:Q2|김민정]] 대리와 [[PERSON:Q3|김민준]] 주임은 같은 팀이다.	Q2·Q3 비슷한 이름(동명이인 위험)
+ja	[[PERSON:Q2|キム・ミンジョン]]さんは経理担当です。	Q2 가나
+en	[[PERSON:Q2|Minjeong Kim]] approved the budget.	Q2 로마자
+ja+ko	[[PERSON:Q3|金民俊]]（[[PERSON:Q3|김민준]]）さんは開発担当。	Q3 한자+한글 병기
+en	Please loop in [[PERSON:Q3|Minjun Kim]] from dev.	Q3 로마자
+ko	참석자: [[PERSON:Q1|정민호]] [[PERSON:Q3|김민준]] [[PERSON|오세린]]	공백으로만 구분된 명단(조각 병합이 잘못 합칠 위험)
+ko	참석자: [[PERSON:Q2|김민정]], [[PERSON:Q1|정민호]], [[PERSON:Q9|윤하람]]	쉼표 구분 명단
+ja	[[PERSON:Q4|山本健太]]と[[PERSON:Q5|山本健一]]は兄弟ではありません。	Q4·Q5 같은 성
+ja	[[PERSON:Q4|やまもと けんた]]くんが受付にいます。	Q4 히라가나 + くん
+ko	[[PERSON:Q4|야마모토 겐타]] 씨는 오사카 출신이에요.	Q4 한글(겐타 표기)
+en	[[PERSON:Q4|Kenta Yamamoto]] joined in April.	Q4 로마자
+en	[[PERSON:Q5|Ken'ichi Yamamoto]] signed the NDA.	Q5 로마자(아포스트로피)
+ja	[[PERSON|山本]]さんに聞いてください。	성만 — 山本 두 명(Q4/Q5) → 연결하면 안 됨(eid 없음)
+ja	[[PERSON:Q6|高橋結衣]]さんの誕生日は来週です。	Q6 한자
+ja	[[PERSON:Q6|たかはし ゆい]]	Q6 히라가나 단독
+ko	[[PERSON:Q6|다카하시 유이]] 님 앞으로 보내 주세요.	Q6 한글
+en	[[PERSON:Q6|Yui Takahashi]] is on leave.	Q6 로마자
+ja	[[PERSON:Q7|伊藤大翔]]さん（[[PERSON:Q7|いとう ひろと]]）が来ます。	Q7 읽기가 여럿인 한자(大翔) + 후리가나
+en	[[PERSON:Q7|Hiroto Ito]] sent the minutes.	Q7 로마자
+ko	[[PERSON:Q7|이토 히로토]] 씨가 회의록을 보냈어요.	Q7 한글
+ko	[[PERSON:Q8|오세린]] 선임 연락처는 [[PHONE|010 4418 2093]]입니다.	Q8 드문 성(오) + 공백 구분 휴대폰
+ja	[[PERSON:Q8|オ・セリン]]さんは来月着任です。	Q8 가나
+en	[[PERSON:Q8|Serin Oh]] from Seoul HQ.	Q8 로마자. Seoul은 지명
+ko	[[PERSON:Q9|윤하람]] 매니저에게 전달했습니다.	Q9 한글
+ja	[[PERSON:Q9|ユン・ハラム]]さん	Q9 가나 단독
+en	[[PERSON:Q9|Haram Yun]] and [[PERSON:Q10|Sophie Martin]] met in Tokyo.	Q9 Yun 표기(별칭) + Q10
+ja	[[PERSON:Q10|ソフィー・マルタン]]さんはパリ支社の方です。	Q10 가나. パリ는 지명
+ko	[[PERSON:Q10|소피 마르탱]] 씨의 메일은 [[EMAIL|sophie.martin+jp@mail.example.org]]	Q10 한글 + 서브도메인·플러스 메일
+ja	[[ADDRESS|東京都千代田区丸の内3丁目4-1 サンプルビル12階]]	일본 주소 + 건물·층
+ja	お届け先：〒[[POSTAL|530-0001]] [[ADDRESS|大阪府大阪市北区梅田2-5-10]]	배송지 형식
+ko	주소: [[ADDRESS|부산광역시 해운대구 센텀중앙로 97, 1203호]]	한국 도로명 + 호수(쉼표 포함)
+ko	[[ADDRESS|대전 유성구 봉명동 544-7]]으로 이사했어요.	한국 지번 주소 + 조사
+en	Mail it to [[ADDRESS|1600 Harbor Blvd, Suite 210, Oakland, CA]] [[POSTAL|94607]].	영문 주소 쉼표 여러 개
+ja	[[PERSON|佐々木]]さんの自宅は[[ADDRESS|岡山市中区浜3丁目]]の近くです。	주소 조각(丁目까지)
+ko	[[ADDRESS|서울 강남구 테헤란로 152]]에 있는 [[ORG|주식회사 다온소프트]] 사무실	주소+ORG
+ja+en	Office: [[ADDRESS|3-7-2 Nishi-Shinjuku, Shinjuku-ku, Tokyo]]	일본 주소 로마자 표기
+ja	フリーダイヤル [[PHONE|0120-555-731]] までお電話ください。	일본 프리다이얼(끝 3자리)
+ja	代表 [[PHONE|(03) 5412-7788]]	괄호 국번
+en	Fax: [[PHONE|+81 6 6345 1122]]	국제번호 공백 구분
+ko	인터넷전화 [[PHONE|070-8812-4406]]로 걸어 주세요.	한국 070
+ja	社員番号 A-20417、内線 3301。	함정: 사번·내선 — 라벨 없음
+ko	계좌 이체 금액 1,250,000원, 영수증 번호 2026-0930-118.	함정: 금액·영수증 번호 — 라벨 없음
+en	Room 402, Building C — see floor map v2.3.	함정: 방 번호·버전 — 라벨 없음
+ja	明日は晴れ、最高気温は27度の予報です。	함정: 晴(이름에도 쓰임) — 라벨 없음
+ko	[[ORG|한결회계법인]] 감사팀 보고서 초안입니다.	ORG 한국 법인
+ja	[[ORG|合同会社ひかりラボ]]と業務委託契約を結びました。	ORG 일본 합동회사
+en	The pilot with [[ORG|Bluefin Logistics Ltd.]] starts in May.	ORG 영문
+ja+ko+en	先週の会議で[[PERSON:Q2|김민정]]さんが[[PERSON:Q10|Sophie]]に[[ORG|合同会社ひかりラボ]]の件を説明し、[[PERSON:Q6|高橋]]さんは[[EMAIL|yui.t@example.jp]]で資料を共有した。	3언어 긴 문장, 성만/이름만 섞임(高橋=Q6 단독 성)
+ko+ja	[[PERSON:Q7|히로토]] 씨가 「[[PERSON:Q4|けんた]]くんに渡して」라고 했어요.	한국어 문장 안의 일본어 인용 + 이름만
+en+ko	FYI [[PERSON:Q1|Minho]] said 「[[PERSON:Q9|하람]] 님이 내일 휴가」.	영어 문장 안의 한국어 인용
+ko	주민번호 [[ID_NUMBER|851207-1523846]], 여권번호 [[ID_NUMBER|M12345678]]	주민번호 + 한국 여권번호 형식
+ja	マイナンバー：[[ID_NUMBER|3141-5926-5358]]	마이넘버 하이픈 구분
+en	See [[URL|https://docs.example.com/team/q3?owner=serin]] and [[URL|www.example.org/careers]].	URL 두 개(www 형식 포함)

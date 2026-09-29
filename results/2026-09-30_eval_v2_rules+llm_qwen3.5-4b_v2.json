@@ -1,0 +1,625 @@
+{
+ "date": "2026-09-30",
+ "mode": "rules+llm",
+ "model": "qwen3.5:4b",
+ "prompt_version": "v2",
+ "eval": "data/eval/eval_v2.jsonl",
+ "exact": {
+  "PERSON": {
+   "tp": 45,
+   "fp": 2,
+   "fn": 5,
+   "P": 0.957,
+   "R": 0.9,
+   "F": 0.928
+  },
+  "EMAIL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "PHONE": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 3,
+   "P": 1.0,
+   "R": 0.4,
+   "F": 0.571
+  },
+  "POSTAL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ADDRESS": {
+   "tp": 1,
+   "fp": 7,
+   "fn": 7,
+   "P": 0.125,
+   "R": 0.125,
+   "F": 0.125
+  },
+  "URL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ID_NUMBER": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 1,
+   "P": 1.0,
+   "R": 0.667,
+   "F": 0.8
+  },
+  "ORG": {
+   "tp": 3,
+   "fp": 5,
+   "fn": 2,
+   "P": 0.375,
+   "R": 0.6,
+   "F": 0.462
+  },
+  "ALL": {
+   "tp": 59,
+   "fp": 14,
+   "fn": 18,
+   "P": 0.808,
+   "R": 0.766,
+   "F": 0.787
+  }
+ },
+ "overlap": {
+  "PERSON": {
+   "tp": 47,
+   "fp": 0,
+   "fn": 3,
+   "P": 1.0,
+   "R": 0.94,
+   "F": 0.969
+  },
+  "EMAIL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "PHONE": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 3,
+   "P": 1.0,
+   "R": 0.4,
+   "F": 0.571
+  },
+  "POSTAL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ADDRESS": {
+   "tp": 6,
+   "fp": 2,
+   "fn": 2,
+   "P": 0.75,
+   "R": 0.75,
+   "F": 0.75
+  },
+  "URL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ID_NUMBER": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 1,
+   "P": 1.0,
+   "R": 0.667,
+   "F": 0.8
+  },
+  "ORG": {
+   "tp": 5,
+   "fp": 3,
+   "fn": 0,
+   "P": 0.625,
+   "R": 1.0,
+   "F": 0.769
+  },
+  "ALL": {
+   "tp": 68,
+   "fp": 5,
+   "fn": 9,
+   "P": 0.932,
+   "R": 0.883,
+   "F": 0.907
+  }
+ },
+ "latency_ms": {
+  "mean": 2716,
+  "median": 2727,
+  "max": 3232
+ },
+ "linking": {
+  "n_surfaces": 42,
+  "n_clusters_multi": 10,
+  "cluster_exact": 3,
+  "cluster_exact_rate": 0.3,
+  "pair_P": 0.903,
+  "pair_R": 0.431,
+  "pair_F": 0.583,
+  "seconds": 115.34,
+  "wrong_clusters": [
+   [
+    "김민준",
+    "キム・ミンジョン",
+    "金民俊",
+    "Minjun Kim"
+   ]
+  ],
+  "split_clusters": [
+   [
+    "정민호",
+    "チョン・ミンホ",
+    "Jung Minho",
+    "鄭敏浩",
+    "민호",
+    "Minho"
+   ],
+   [
+    "김민정",
+    "キム・ミンジョン",
+    "Minjeong Kim"
+   ],
+   [
+    "윤하람",
+    "ユン・ハラム",
+    "Haram Yun",
+    "하람"
+   ],
+   [
+    "山本健太",
+    "やまもと けんた",
+    "야마모토 겐타",
+    "Kenta Yamamoto",
+    "けんた"
+   ],
+   [
+    "伊藤大翔",
+    "いとう ひろと",
+    "Hiroto Ito",
+    "이토 히로토",
+    "히로토"
+   ],
+   [
+    "Sophie Martin",
+    "ソフィー・マルタン",
+    "소피 마르탱",
+    "Sophie"
+   ]
+  ],
+  "romanized": {
+   "정민호": {
+    "family": "jeong",
+    "given": "minho",
+    "nationality": "korean"
+   },
+   "チョン・ミンホ": {
+    "family": "jon",
+    "given": "minho",
+    "nationality": "japanese"
+   },
+   "Jung Minho": {
+    "family": "jung",
+    "given": "minho",
+    "nationality": "korean"
+   },
+   "鄭敏浩": {
+    "family": "jeong",
+    "given": "minho",
+    "nationality": "korean"
+   },
+   "민호": {
+    "family": "",
+    "given": "minho",
+    "nationality": "korean"
+   },
+   "김민정": {
+    "family": "kim",
+    "given": "minjeong",
+    "nationality": "korean"
+   },
+   "김민준": {
+    "family": "kim",
+    "given": "minjun",
+    "nationality": "korean"
+   },
+   "キム・ミンジョン": {
+    "family": "kim",
+    "given": "minjun",
+    "nationality": "korean"
+   },
+   "Minjeong Kim": {
+    "family": "kim",
+    "given": "minjeong",
+    "nationality": "korean"
+   },
+   "金民俊": {
+    "family": "kim",
+    "given": "minjun",
+    "nationality": "korean"
+   },
+   "Minjun Kim": {
+    "family": "kim",
+    "given": "minjun",
+    "nationality": "korean"
+   },
+   "오세린": {
+    "family": "",
+    "given": "osein",
+    "nationality": "korean"
+   },
+   "윤하람": {
+    "family": "yoon",
+    "given": "ha",
+    "nationality": "korean"
+   },
+   "山本健太": {
+    "family": "yamamoto",
+    "given": "kenji",
+    "nationality": "japanese"
+   },
+   "山本健一": {
+    "family": "yamamoto",
+    "given": "kenichi",
+    "nationality": "japanese"
+   },
+   "やまもと けんた": {
+    "family": "yamamoto",
+    "given": "ken",
+    "nationality": "japanese"
+   },
+   "야마모토 겐타": {
+    "family": "yamamoto",
+    "given": "genta",
+    "nationality": "japanese"
+   },
+   "Kenta Yamamoto": {
+    "family": "yamamoto",
+    "given": "kenta",
+    "nationality": "japanese"
+   },
+   "Ken'ichi Yamamoto": {
+    "family": "yamamoto",
+    "given": "ken'ichi",
+    "nationality": "japanese"
+   },
+   "山本": {
+    "family": "yamamoto",
+    "given": "",
+    "nationality": "japanese"
+   },
+   "高橋結衣": {
+    "family": "takahashi",
+    "given": "yui",
+    "nationality": "japanese"
+   },
+   "たかはし ゆい": {
+    "family": "takahashi",
+    "given": "yuui",
+    "nationality": "japanese"
+   },
+   "다카하시 유이": {
+    "family": "takahashi",
+    "given": "yuui",
+    "nationality": "japanese"
+   },
+   "Yui Takahashi": {
+    "family": "takahashi",
+    "given": "yui",
+    "nationality": "japanese"
+   },
+   "伊藤大翔": {
+    "family": "ito",
+    "given": "daisho",
+    "nationality": "japanese"
+   },
+   "いとう ひろと": {
+    "family": "ito",
+    "given": "hiroto",
+    "nationality": "japanese"
+   },
+   "Hiroto Ito": {
+    "family": "ito",
+    "given": "hiroto",
+    "nationality": "japanese"
+   },
+   "이토 히로토": {
+    "family": "ito",
+    "given": "hiroto",
+    "nationality": "japanese"
+   },
+   "オ・セリン": {
+    "family": "oh",
+    "given": "serin",
+    "nationality": "japanese"
+   },
+   "Serin Oh": {
+    "family": "oh",
+    "given": "serin",
+    "nationality": "korean"
+   },
+   "ユン・ハラム": {
+    "family": "yun",
+    "given": "harum",
+    "nationality": "korean"
+   },
+   "Haram Yun": {
+    "family": "yun",
+    "given": "haram",
+    "nationality": "korean"
+   },
+   "Sophie Martin": {
+    "family": "martin",
+    "given": "sophie",
+    "nationality": "other"
+   },
+   "ソフィー・マルタン": {
+    "family": "sofie",
+    "given": "martin",
+    "nationality": "other"
+   },
+   "소피 마르탱": {
+    "family": "sophy",
+    "given": "martin",
+    "nationality": "other"
+   },
+   "佐々木": {
+    "family": "sasaki",
+    "given": "",
+    "nationality": "japanese"
+   },
+   "Sophie": {
+    "family": "",
+    "given": "sophie",
+    "nationality": "other"
+   },
+   "高橋": {
+    "family": "takahashi",
+    "given": "",
+    "nationality": "japanese"
+   },
+   "히로토": {
+    "family": "hiroto",
+    "given": "",
+    "nationality": "japanese"
+   },
+   "けんた": {
+    "family": "",
+    "given": "kentaro",
+    "nationality": "japanese"
+   },
+   "Minho": {
+    "family": "",
+    "given": "minho",
+    "nationality": "unknown"
+   },
+   "하람": {
+    "family": "ha",
+    "given": "ram",
+    "nationality": "korean"
+   }
+  }
+ },
+ "errors": [
+  {
+   "id": "e011",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "정민호"
+  },
+  {
+   "id": "e011",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "김민준"
+  },
+  {
+   "id": "e011",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "오세린"
+  },
+  {
+   "id": "e011",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "정민호 김민준 오세린"
+  },
+  {
+   "id": "e023",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "いとう ひろと"
+  },
+  {
+   "id": "e023",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "ひろと"
+  },
+  {
+   "id": "e026",
+   "kind": "miss",
+   "type": "PHONE",
+   "text": "010 4418 2093"
+  },
+  {
+   "id": "e028",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "Seoul"
+  },
+  {
+   "id": "e034",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "東京都千代田区丸の内3丁目4-1 サンプルビル12階"
+  },
+  {
+   "id": "e034",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "東京都千代田区丸の内"
+  },
+  {
+   "id": "e034",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "3丁目4-1"
+  },
+  {
+   "id": "e034",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "サンプルビル"
+  },
+  {
+   "id": "e035",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "大阪府大阪市北区梅田2-5-10"
+  },
+  {
+   "id": "e035",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "大阪府大阪市北区梅田"
+  },
+  {
+   "id": "e035",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "2-5-10"
+  },
+  {
+   "id": "e037",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "대전 유성구 봉명동 544-7"
+  },
+  {
+   "id": "e037",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "대전 유성구"
+  },
+  {
+   "id": "e037",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "봉명동 544-7"
+  },
+  {
+   "id": "e038",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "1600 Harbor Blvd, Suite 210, Oakland, CA"
+  },
+  {
+   "id": "e038",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "1600 Harbor Blvd, Suite 210"
+  },
+  {
+   "id": "e039",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "岡山市中区浜3丁目"
+  },
+  {
+   "id": "e040",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "서울 강남구 테헤란로 152"
+  },
+  {
+   "id": "e040",
+   "kind": "miss",
+   "type": "ORG",
+   "text": "주식회사 다온소프트"
+  },
+  {
+   "id": "e040",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "다온소프트"
+  },
+  {
+   "id": "e041",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "3-7-2 Nishi-Shinjuku, Shinjuku-ku, Tokyo"
+  },
+  {
+   "id": "e041",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "Nishi-Shinjuku, Shinjuku-ku"
+  },
+  {
+   "id": "e042",
+   "kind": "miss",
+   "type": "PHONE",
+   "text": "0120-555-731"
+  },
+  {
+   "id": "e043",
+   "kind": "miss",
+   "type": "PHONE",
+   "text": "(03) 5412-7788"
+  },
+  {
+   "id": "e053",
+   "kind": "miss",
+   "type": "ORG",
+   "text": "合同会社ひかりラボ"
+  },
+  {
+   "id": "e053",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "ひかりラボ"
+  },
+  {
+   "id": "e054",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "けんた"
+  },
+  {
+   "id": "e056",
+   "kind": "miss",
+   "type": "ID_NUMBER",
+   "text": "M12345678"
+  }
+ ]
+}

@@ -1,0 +1,593 @@
+{
+ "date": "2026-09-30",
+ "mode": "rules+llm",
+ "model": "qwen3:8b",
+ "prompt_version": "v2",
+ "eval": "data/eval/eval_v2.jsonl",
+ "exact": {
+  "PERSON": {
+   "tp": 45,
+   "fp": 2,
+   "fn": 5,
+   "P": 0.957,
+   "R": 0.9,
+   "F": 0.928
+  },
+  "EMAIL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "PHONE": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 3,
+   "P": 1.0,
+   "R": 0.4,
+   "F": 0.571
+  },
+  "POSTAL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ADDRESS": {
+   "tp": 4,
+   "fp": 6,
+   "fn": 4,
+   "P": 0.4,
+   "R": 0.5,
+   "F": 0.444
+  },
+  "URL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ID_NUMBER": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 1,
+   "P": 1.0,
+   "R": 0.667,
+   "F": 0.8
+  },
+  "ORG": {
+   "tp": 3,
+   "fp": 4,
+   "fn": 2,
+   "P": 0.429,
+   "R": 0.6,
+   "F": 0.5
+  },
+  "ALL": {
+   "tp": 62,
+   "fp": 12,
+   "fn": 15,
+   "P": 0.838,
+   "R": 0.805,
+   "F": 0.821
+  }
+ },
+ "overlap": {
+  "PERSON": {
+   "tp": 47,
+   "fp": 0,
+   "fn": 3,
+   "P": 1.0,
+   "R": 0.94,
+   "F": 0.969
+  },
+  "EMAIL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "PHONE": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 3,
+   "P": 1.0,
+   "R": 0.4,
+   "F": 0.571
+  },
+  "POSTAL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ADDRESS": {
+   "tp": 7,
+   "fp": 3,
+   "fn": 1,
+   "P": 0.7,
+   "R": 0.875,
+   "F": 0.778
+  },
+  "URL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ID_NUMBER": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 1,
+   "P": 1.0,
+   "R": 0.667,
+   "F": 0.8
+  },
+  "ORG": {
+   "tp": 4,
+   "fp": 3,
+   "fn": 1,
+   "P": 0.571,
+   "R": 0.8,
+   "F": 0.667
+  },
+  "ALL": {
+   "tp": 68,
+   "fp": 6,
+   "fn": 9,
+   "P": 0.919,
+   "R": 0.883,
+   "F": 0.901
+  }
+ },
+ "latency_ms": {
+  "mean": 2599,
+  "median": 2553,
+  "max": 3224
+ },
+ "linking": {
+  "n_surfaces": 42,
+  "n_clusters_multi": 10,
+  "cluster_exact": 3,
+  "cluster_exact_rate": 0.3,
+  "pair_P": 0.811,
+  "pair_R": 0.662,
+  "pair_F": 0.729,
+  "seconds": 108.14,
+  "wrong_clusters": [
+   [
+    "김민정",
+    "김민준",
+    "キム・ミンジョン",
+    "Minjeong Kim",
+    "金民俊",
+    "Minjun Kim"
+   ],
+   [
+    "오세린",
+    "Serin Oh"
+   ]
+  ],
+  "split_clusters": [
+   [
+    "정민호",
+    "チョン・ミンホ",
+    "Jung Minho",
+    "鄭敏浩",
+    "민호",
+    "Minho"
+   ],
+   [
+    "윤하람",
+    "ユン・ハラム",
+    "Haram Yun",
+    "하람"
+   ],
+   [
+    "伊藤大翔",
+    "いとう ひろと",
+    "Hiroto Ito",
+    "이토 히로토",
+    "히로토"
+   ],
+   [
+    "オ・セリン",
+    "Serin Oh"
+   ],
+   [
+    "Sophie Martin",
+    "ソフィー・マルタン",
+    "소피 마르탱",
+    "Sophie"
+   ]
+  ],
+  "romanized": {
+   "정민호": {
+    "family": "jeong",
+    "given": "min-ho",
+    "nationality": "korean"
+   },
+   "チョン・ミンホ": {
+    "family": "chon",
+    "given": "minho",
+    "nationality": "korean"
+   },
+   "Jung Minho": {
+    "family": "jung",
+    "given": "minho",
+    "nationality": "korean"
+   },
+   "鄭敏浩": {
+    "family": "jeong",
+    "given": "minho",
+    "nationality": "korean"
+   },
+   "민호": {
+    "family": "min",
+    "given": "ho",
+    "nationality": "korean"
+   },
+   "김민정": {
+    "family": "kim",
+    "given": "min-jung",
+    "nationality": "korean"
+   },
+   "김민준": {
+    "family": "kim",
+    "given": "min-joon",
+    "nationality": "korean"
+   },
+   "キム・ミンジョン": {
+    "family": "kim",
+    "given": "min-jong",
+    "nationality": "korean"
+   },
+   "Minjeong Kim": {
+    "family": "kim",
+    "given": "minjeong",
+    "nationality": "korean"
+   },
+   "金民俊": {
+    "family": "kim",
+    "given": "min-jun",
+    "nationality": "korean"
+   },
+   "Minjun Kim": {
+    "family": "kim",
+    "given": "minjun",
+    "nationality": "korean"
+   },
+   "오세린": {
+    "family": "oh",
+    "given": "sarin",
+    "nationality": "korean"
+   },
+   "윤하람": {
+    "family": "yun",
+    "given": "halam",
+    "nationality": "korean"
+   },
+   "山本健太": {
+    "family": "yamamoto",
+    "given": "kenta",
+    "nationality": "japanese"
+   },
+   "山本健一": {
+    "family": "yamamoto",
+    "given": "kenichi",
+    "nationality": "japanese"
+   },
+   "やまもと けんた": {
+    "family": "yamamoto",
+    "given": "kenta",
+    "nationality": "japanese"
+   },
+   "야마모토 겐타": {
+    "family": "yamamoto",
+    "given": "genta",
+    "nationality": "japanese"
+   },
+   "Kenta Yamamoto": {
+    "family": "yamamoto",
+    "given": "kenta",
+    "nationality": "japanese"
+   },
+   "Ken'ichi Yamamoto": {
+    "family": "yamamoto",
+    "given": "ken'ichi",
+    "nationality": "japanese"
+   },
+   "山本": {
+    "family": "yamamoto",
+    "given": "",
+    "nationality": "japanese"
+   },
+   "高橋結衣": {
+    "family": "takahashi",
+    "given": "yui",
+    "nationality": "japanese"
+   },
+   "たかはし ゆい": {
+    "family": "takahashi",
+    "given": "yui",
+    "nationality": "japanese"
+   },
+   "다카하시 유이": {
+    "family": "takahashi",
+    "given": "yui",
+    "nationality": "japanese"
+   },
+   "Yui Takahashi": {
+    "family": "takahashi",
+    "given": "yui",
+    "nationality": "japanese"
+   },
+   "伊藤大翔": {
+    "family": "itou",
+    "given": "daisuke",
+    "nationality": "japanese"
+   },
+   "いとう ひろと": {
+    "family": "itou",
+    "given": "hiroto",
+    "nationality": "japanese"
+   },
+   "Hiroto Ito": {
+    "family": "ito",
+    "given": "hiroto",
+    "nationality": "japanese"
+   },
+   "이토 히로토": {
+    "family": "ito",
+    "given": "hiroto",
+    "nationality": "japanese"
+   },
+   "オ・セリン": {
+    "family": "o",
+    "given": "serin",
+    "nationality": "japanese"
+   },
+   "Serin Oh": {
+    "family": "oh",
+    "given": "serin",
+    "nationality": "korean"
+   },
+   "ユン・ハラム": {
+    "family": "yun",
+    "given": "haram",
+    "nationality": "korean"
+   },
+   "Haram Yun": {
+    "family": "yun",
+    "given": "haram",
+    "nationality": "korean"
+   },
+   "Sophie Martin": {
+    "family": "martin",
+    "given": "sophie",
+    "nationality": "other"
+   },
+   "ソフィー・マルタン": {
+    "family": "murtan",
+    "given": "sofi",
+    "nationality": "other"
+   },
+   "소피 마르탱": {
+    "family": "so pi",
+    "given": "martin",
+    "nationality": "other"
+   },
+   "佐々木": {
+    "family": "sawagi",
+    "given": "",
+    "nationality": "japanese"
+   },
+   "Sophie": {
+    "family": "",
+    "given": "sophie",
+    "nationality": "other"
+   },
+   "高橋": {
+    "family": "takahashi",
+    "given": "",
+    "nationality": "japanese"
+   },
+   "히로토": {
+    "family": "hiroto",
+    "given": "",
+    "nationality": "japanese"
+   },
+   "けんた": {
+    "family": "",
+    "given": "kenta",
+    "nationality": "japanese"
+   },
+   "Minho": {
+    "family": "min",
+    "given": "ho",
+    "nationality": "korean"
+   },
+   "하람": {
+    "family": "ha",
+    "given": "ram",
+    "nationality": "korean"
+   }
+  }
+ },
+ "errors": [
+  {
+   "id": "e009",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "金民俊"
+  },
+  {
+   "id": "e009",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "김민준"
+  },
+  {
+   "id": "e009",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "金民俊（김민준）"
+  },
+  {
+   "id": "e011",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "정민호"
+  },
+  {
+   "id": "e011",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "김민준"
+  },
+  {
+   "id": "e011",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "오세린"
+  },
+  {
+   "id": "e011",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "정민호 김민준 오세린"
+  },
+  {
+   "id": "e026",
+   "kind": "miss",
+   "type": "PHONE",
+   "text": "010 4418 2093"
+  },
+  {
+   "id": "e028",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "Seoul HQ"
+  },
+  {
+   "id": "e031",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "Tokyo"
+  },
+  {
+   "id": "e034",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "東京都千代田区丸の内3丁目4-1 サンプルビル12階"
+  },
+  {
+   "id": "e034",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "東京都千代田区丸の内3丁目4-1"
+  },
+  {
+   "id": "e034",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "サンプルビル"
+  },
+  {
+   "id": "e036",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "부산광역시 해운대구 센텀중앙로 97, 1203호"
+  },
+  {
+   "id": "e036",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "부산광역시 해운대구 센텀중앙로 97"
+  },
+  {
+   "id": "e038",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "1600 Harbor Blvd, Suite 210, Oakland, CA"
+  },
+  {
+   "id": "e040",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "서울 강남구 테헤란로 152"
+  },
+  {
+   "id": "e040",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "테헤란로 152"
+  },
+  {
+   "id": "e042",
+   "kind": "miss",
+   "type": "PHONE",
+   "text": "0120-555-731"
+  },
+  {
+   "id": "e043",
+   "kind": "miss",
+   "type": "PHONE",
+   "text": "(03) 5412-7788"
+  },
+  {
+   "id": "e043",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "代表"
+  },
+  {
+   "id": "e048",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "Room 402, Building C"
+  },
+  {
+   "id": "e050",
+   "kind": "miss",
+   "type": "ORG",
+   "text": "한결회계법인"
+  },
+  {
+   "id": "e050",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "한결회계법인 감사팀"
+  },
+  {
+   "id": "e053",
+   "kind": "miss",
+   "type": "ORG",
+   "text": "合同会社ひかりラボ"
+  },
+  {
+   "id": "e055",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "내일 휴가"
+  },
+  {
+   "id": "e056",
+   "kind": "miss",
+   "type": "ID_NUMBER",
+   "text": "M12345678"
+  }
+ ]
+}

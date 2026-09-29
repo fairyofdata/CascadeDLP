@@ -1,0 +1,58 @@
+{"id": "e001", "lang": "ko", "text": "다음 주 킥오프는 정민호 책임이 진행합니다.", "spans": [{"start": 10, "end": 13, "type": "PERSON", "entity_id": "Q1"}], "note": "Q1 한글"}
+{"id": "e002", "lang": "ja", "text": "チョン・ミンホさんが司会を担当します。", "spans": [{"start": 0, "end": 7, "type": "PERSON", "entity_id": "Q1"}], "note": "Q1 가나"}
+{"id": "e003", "lang": "en", "text": "Jung Minho will chair the kickoff.", "spans": [{"start": 0, "end": 10, "type": "PERSON", "entity_id": "Q1"}], "note": "Q1 로마자(성-이름)"}
+{"id": "e004", "lang": "ja+ko", "text": "名刺には鄭敏浩と書いてありました。", "spans": [{"start": 4, "end": 7, "type": "PERSON", "entity_id": "Q1"}], "note": "Q1 한자(한국 이름)"}
+{"id": "e005", "lang": "ko", "text": "민호 씨, 자료 확인 부탁해요.", "spans": [{"start": 0, "end": 2, "type": "PERSON", "entity_id": "Q1"}], "note": "Q1 이름만"}
+{"id": "e006", "lang": "ko", "text": "김민정 대리와 김민준 주임은 같은 팀이다.", "spans": [{"start": 0, "end": 3, "type": "PERSON", "entity_id": "Q2"}, {"start": 8, "end": 11, "type": "PERSON", "entity_id": "Q3"}], "note": "Q2·Q3 비슷한 이름(동명이인 위험)"}
+{"id": "e007", "lang": "ja", "text": "キム・ミンジョンさんは経理担当です。", "spans": [{"start": 0, "end": 8, "type": "PERSON", "entity_id": "Q2"}], "note": "Q2 가나"}
+{"id": "e008", "lang": "en", "text": "Minjeong Kim approved the budget.", "spans": [{"start": 0, "end": 12, "type": "PERSON", "entity_id": "Q2"}], "note": "Q2 로마자"}
+{"id": "e009", "lang": "ja+ko", "text": "金民俊（김민준）さんは開発担当。", "spans": [{"start": 0, "end": 3, "type": "PERSON", "entity_id": "Q3"}, {"start": 4, "end": 7, "type": "PERSON", "entity_id": "Q3"}], "note": "Q3 한자+한글 병기"}
+{"id": "e010", "lang": "en", "text": "Please loop in Minjun Kim from dev.", "spans": [{"start": 15, "end": 25, "type": "PERSON", "entity_id": "Q3"}], "note": "Q3 로마자"}
+{"id": "e011", "lang": "ko", "text": "참석자: 정민호 김민준 오세린", "spans": [{"start": 5, "end": 8, "type": "PERSON", "entity_id": "Q1"}, {"start": 9, "end": 12, "type": "PERSON", "entity_id": "Q3"}, {"start": 13, "end": 16, "type": "PERSON"}], "note": "공백으로만 구분된 명단(조각 병합이 잘못 합칠 위험)"}
+{"id": "e012", "lang": "ko", "text": "참석자: 김민정, 정민호, 윤하람", "spans": [{"start": 5, "end": 8, "type": "PERSON", "entity_id": "Q2"}, {"start": 10, "end": 13, "type": "PERSON", "entity_id": "Q1"}, {"start": 15, "end": 18, "type": "PERSON", "entity_id": "Q9"}], "note": "쉼표 구분 명단"}
+{"id": "e013", "lang": "ja", "text": "山本健太と山本健一は兄弟ではありません。", "spans": [{"start": 0, "end": 4, "type": "PERSON", "entity_id": "Q4"}, {"start": 5, "end": 9, "type": "PERSON", "entity_id": "Q5"}], "note": "Q4·Q5 같은 성"}
+{"id": "e014", "lang": "ja", "text": "やまもと けんたくんが受付にいます。", "spans": [{"start": 0, "end": 8, "type": "PERSON", "entity_id": "Q4"}], "note": "Q4 히라가나 + くん"}
+{"id": "e015", "lang": "ko", "text": "야마모토 겐타 씨는 오사카 출신이에요.", "spans": [{"start": 0, "end": 7, "type": "PERSON", "entity_id": "Q4"}], "note": "Q4 한글(겐타 표기)"}
+{"id": "e016", "lang": "en", "text": "Kenta Yamamoto joined in April.", "spans": [{"start": 0, "end": 14, "type": "PERSON", "entity_id": "Q4"}], "note": "Q4 로마자"}
+{"id": "e017", "lang": "en", "text": "Ken'ichi Yamamoto signed the NDA.", "spans": [{"start": 0, "end": 17, "type": "PERSON", "entity_id": "Q5"}], "note": "Q5 로마자(아포스트로피)"}
+{"id": "e018", "lang": "ja", "text": "山本さんに聞いてください。", "spans": [{"start": 0, "end": 2, "type": "PERSON"}], "note": "성만 — 山本 두 명(Q4/Q5) → 연결하면 안 됨(eid 없음)"}
+{"id": "e019", "lang": "ja", "text": "高橋結衣さんの誕生日は来週です。", "spans": [{"start": 0, "end": 4, "type": "PERSON", "entity_id": "Q6"}], "note": "Q6 한자"}
+{"id": "e020", "lang": "ja", "text": "たかはし ゆい", "spans": [{"start": 0, "end": 7, "type": "PERSON", "entity_id": "Q6"}], "note": "Q6 히라가나 단독"}
+{"id": "e021", "lang": "ko", "text": "다카하시 유이 님 앞으로 보내 주세요.", "spans": [{"start": 0, "end": 7, "type": "PERSON", "entity_id": "Q6"}], "note": "Q6 한글"}
+{"id": "e022", "lang": "en", "text": "Yui Takahashi is on leave.", "spans": [{"start": 0, "end": 13, "type": "PERSON", "entity_id": "Q6"}], "note": "Q6 로마자"}
+{"id": "e023", "lang": "ja", "text": "伊藤大翔さん（いとう ひろと）が来ます。", "spans": [{"start": 0, "end": 4, "type": "PERSON", "entity_id": "Q7"}, {"start": 7, "end": 14, "type": "PERSON", "entity_id": "Q7"}], "note": "Q7 읽기가 여럿인 한자(大翔) + 후리가나"}
+{"id": "e024", "lang": "en", "text": "Hiroto Ito sent the minutes.", "spans": [{"start": 0, "end": 10, "type": "PERSON", "entity_id": "Q7"}], "note": "Q7 로마자"}
+{"id": "e025", "lang": "ko", "text": "이토 히로토 씨가 회의록을 보냈어요.", "spans": [{"start": 0, "end": 6, "type": "PERSON", "entity_id": "Q7"}], "note": "Q7 한글"}
+{"id": "e026", "lang": "ko", "text": "오세린 선임 연락처는 010 4418 2093입니다.", "spans": [{"start": 0, "end": 3, "type": "PERSON", "entity_id": "Q8"}, {"start": 12, "end": 25, "type": "PHONE"}], "note": "Q8 드문 성(오) + 공백 구분 휴대폰"}
+{"id": "e027", "lang": "ja", "text": "オ・セリンさんは来月着任です。", "spans": [{"start": 0, "end": 5, "type": "PERSON", "entity_id": "Q8"}], "note": "Q8 가나"}
+{"id": "e028", "lang": "en", "text": "Serin Oh from Seoul HQ.", "spans": [{"start": 0, "end": 8, "type": "PERSON", "entity_id": "Q8"}], "note": "Q8 로마자. Seoul은 지명"}
+{"id": "e029", "lang": "ko", "text": "윤하람 매니저에게 전달했습니다.", "spans": [{"start": 0, "end": 3, "type": "PERSON", "entity_id": "Q9"}], "note": "Q9 한글"}
+{"id": "e030", "lang": "ja", "text": "ユン・ハラムさん", "spans": [{"start": 0, "end": 6, "type": "PERSON", "entity_id": "Q9"}], "note": "Q9 가나 단독"}
+{"id": "e031", "lang": "en", "text": "Haram Yun and Sophie Martin met in Tokyo.", "spans": [{"start": 0, "end": 9, "type": "PERSON", "entity_id": "Q9"}, {"start": 14, "end": 27, "type": "PERSON", "entity_id": "Q10"}], "note": "Q9 Yun 표기(별칭) + Q10"}
+{"id": "e032", "lang": "ja", "text": "ソフィー・マルタンさんはパリ支社の方です。", "spans": [{"start": 0, "end": 9, "type": "PERSON", "entity_id": "Q10"}], "note": "Q10 가나. パリ는 지명"}
+{"id": "e033", "lang": "ko", "text": "소피 마르탱 씨의 메일은 sophie.martin+jp@mail.example.org", "spans": [{"start": 0, "end": 6, "type": "PERSON", "entity_id": "Q10"}, {"start": 14, "end": 47, "type": "EMAIL"}], "note": "Q10 한글 + 서브도메인·플러스 메일"}
+{"id": "e034", "lang": "ja", "text": "東京都千代田区丸の内3丁目4-1 サンプルビル12階", "spans": [{"start": 0, "end": 26, "type": "ADDRESS"}], "note": "일본 주소 + 건물·층"}
+{"id": "e035", "lang": "ja", "text": "お届け先：〒530-0001 大阪府大阪市北区梅田2-5-10", "spans": [{"start": 6, "end": 14, "type": "POSTAL"}, {"start": 15, "end": 31, "type": "ADDRESS"}], "note": "배송지 형식"}
+{"id": "e036", "lang": "ko", "text": "주소: 부산광역시 해운대구 센텀중앙로 97, 1203호", "spans": [{"start": 4, "end": 30, "type": "ADDRESS"}], "note": "한국 도로명 + 호수(쉼표 포함)"}
+{"id": "e037", "lang": "ko", "text": "대전 유성구 봉명동 544-7으로 이사했어요.", "spans": [{"start": 0, "end": 16, "type": "ADDRESS"}], "note": "한국 지번 주소 + 조사"}
+{"id": "e038", "lang": "en", "text": "Mail it to 1600 Harbor Blvd, Suite 210, Oakland, CA 94607.", "spans": [{"start": 11, "end": 51, "type": "ADDRESS"}, {"start": 52, "end": 57, "type": "POSTAL"}], "note": "영문 주소 쉼표 여러 개"}
+{"id": "e039", "lang": "ja", "text": "佐々木さんの自宅は岡山市中区浜3丁目の近くです。", "spans": [{"start": 0, "end": 3, "type": "PERSON"}, {"start": 9, "end": 18, "type": "ADDRESS"}], "note": "주소 조각(丁目까지)"}
+{"id": "e040", "lang": "ko", "text": "서울 강남구 테헤란로 152에 있는 주식회사 다온소프트 사무실", "spans": [{"start": 0, "end": 15, "type": "ADDRESS"}, {"start": 20, "end": 30, "type": "ORG"}], "note": "주소+ORG"}
+{"id": "e041", "lang": "ja+en", "text": "Office: 3-7-2 Nishi-Shinjuku, Shinjuku-ku, Tokyo", "spans": [{"start": 8, "end": 48, "type": "ADDRESS"}], "note": "일본 주소 로마자 표기"}
+{"id": "e042", "lang": "ja", "text": "フリーダイヤル 0120-555-731 までお電話ください。", "spans": [{"start": 8, "end": 20, "type": "PHONE"}], "note": "일본 프리다이얼(끝 3자리)"}
+{"id": "e043", "lang": "ja", "text": "代表 (03) 5412-7788", "spans": [{"start": 3, "end": 17, "type": "PHONE"}], "note": "괄호 국번"}
+{"id": "e044", "lang": "en", "text": "Fax: +81 6 6345 1122", "spans": [{"start": 5, "end": 20, "type": "PHONE"}], "note": "국제번호 공백 구분"}
+{"id": "e045", "lang": "ko", "text": "인터넷전화 070-8812-4406로 걸어 주세요.", "spans": [{"start": 6, "end": 19, "type": "PHONE"}], "note": "한국 070"}
+{"id": "e046", "lang": "ja", "text": "社員番号 A-20417、内線 3301。", "spans": [], "note": "함정: 사번·내선 — 라벨 없음"}
+{"id": "e047", "lang": "ko", "text": "계좌 이체 금액 1,250,000원, 영수증 번호 2026-0930-118.", "spans": [], "note": "함정: 금액·영수증 번호 — 라벨 없음"}
+{"id": "e048", "lang": "en", "text": "Room 402, Building C — see floor map v2.3.", "spans": [], "note": "함정: 방 번호·버전 — 라벨 없음"}
+{"id": "e049", "lang": "ja", "text": "明日は晴れ、最高気温は27度の予報です。", "spans": [], "note": "함정: 晴(이름에도 쓰임) — 라벨 없음"}
+{"id": "e050", "lang": "ko", "text": "한결회계법인 감사팀 보고서 초안입니다.", "spans": [{"start": 0, "end": 6, "type": "ORG"}], "note": "ORG 한국 법인"}
+{"id": "e051", "lang": "ja", "text": "合同会社ひかりラボと業務委託契約を結びました。", "spans": [{"start": 0, "end": 9, "type": "ORG"}], "note": "ORG 일본 합동회사"}
+{"id": "e052", "lang": "en", "text": "The pilot with Bluefin Logistics Ltd. starts in May.", "spans": [{"start": 15, "end": 37, "type": "ORG"}], "note": "ORG 영문"}
+{"id": "e053", "lang": "ja+ko+en", "text": "先週の会議で김민정さんがSophieに合同会社ひかりラボの件を説明し、高橋さんはyui.t@example.jpで資料を共有した。", "spans": [{"start": 6, "end": 9, "type": "PERSON", "entity_id": "Q2"}, {"start": 12, "end": 18, "type": "PERSON", "entity_id": "Q10"}, {"start": 19, "end": 28, "type": "ORG"}, {"start": 35, "end": 37, "type": "PERSON", "entity_id": "Q6"}, {"start": 40, "end": 56, "type": "EMAIL"}], "note": "3언어 긴 문장, 성만/이름만 섞임(高橋=Q6 단독 성)"}
+{"id": "e054", "lang": "ko+ja", "text": "히로토 씨가 「けんたくんに渡して」라고 했어요.", "spans": [{"start": 0, "end": 3, "type": "PERSON", "entity_id": "Q7"}, {"start": 8, "end": 11, "type": "PERSON", "entity_id": "Q4"}], "note": "한국어 문장 안의 일본어 인용 + 이름만"}
+{"id": "e055", "lang": "en+ko", "text": "FYI Minho said 「하람 님이 내일 휴가」.", "spans": [{"start": 4, "end": 9, "type": "PERSON", "entity_id": "Q1"}, {"start": 16, "end": 18, "type": "PERSON", "entity_id": "Q9"}], "note": "영어 문장 안의 한국어 인용"}
+{"id": "e056", "lang": "ko", "text": "주민번호 851207-1523846, 여권번호 M12345678", "spans": [{"start": 5, "end": 19, "type": "ID_NUMBER"}, {"start": 26, "end": 35, "type": "ID_NUMBER"}], "note": "주민번호 + 한국 여권번호 형식"}
+{"id": "e057", "lang": "ja", "text": "マイナンバー：3141-5926-5358", "spans": [{"start": 7, "end": 21, "type": "ID_NUMBER"}], "note": "마이넘버 하이픈 구분"}
+{"id": "e058", "lang": "en", "text": "See https://docs.example.com/team/q3?owner=serin and www.example.org/careers.", "spans": [{"start": 4, "end": 48, "type": "URL"}, {"start": 53, "end": 76, "type": "URL"}], "note": "URL 두 개(www 형식 포함)"}

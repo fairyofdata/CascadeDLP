@@ -1,0 +1,561 @@
+{
+ "date": "2026-09-30",
+ "mode": "rules",
+ "model": null,
+ "prompt_version": null,
+ "eval": "data/eval/eval_v1.jsonl",
+ "exact": {
+  "PERSON": {
+   "tp": 0,
+   "fp": 0,
+   "fn": 46,
+   "P": 0.0,
+   "R": 0.0,
+   "F": 0.0
+  },
+  "EMAIL": {
+   "tp": 5,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "PHONE": {
+   "tp": 7,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "POSTAL": {
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ADDRESS": {
+   "tp": 0,
+   "fp": 0,
+   "fn": 6,
+   "P": 0.0,
+   "R": 0.0,
+   "F": 0.0
+  },
+  "URL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ID_NUMBER": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ORG": {
+   "tp": 0,
+   "fp": 0,
+   "fn": 4,
+   "P": 0.0,
+   "R": 0.0,
+   "F": 0.0
+  },
+  "ALL": {
+   "tp": 19,
+   "fp": 0,
+   "fn": 56,
+   "P": 1.0,
+   "R": 0.253,
+   "F": 0.404
+  }
+ },
+ "overlap": {
+  "PERSON": {
+   "tp": 0,
+   "fp": 0,
+   "fn": 46,
+   "P": 0.0,
+   "R": 0.0,
+   "F": 0.0
+  },
+  "EMAIL": {
+   "tp": 5,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "PHONE": {
+   "tp": 7,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "POSTAL": {
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ADDRESS": {
+   "tp": 0,
+   "fp": 0,
+   "fn": 6,
+   "P": 0.0,
+   "R": 0.0,
+   "F": 0.0
+  },
+  "URL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ID_NUMBER": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ORG": {
+   "tp": 0,
+   "fp": 0,
+   "fn": 4,
+   "P": 0.0,
+   "R": 0.0,
+   "F": 0.0
+  },
+  "ALL": {
+   "tp": 19,
+   "fp": 0,
+   "fn": 56,
+   "P": 1.0,
+   "R": 0.253,
+   "F": 0.404
+  }
+ },
+ "latency_ms": null,
+ "linking": {
+  "n_surfaces": 44,
+  "n_clusters_multi": 9,
+  "cluster_exact": 0,
+  "cluster_exact_rate": 0.0,
+  "pair_P": 0.0,
+  "pair_R": 0.0,
+  "pair_F": 0.0,
+  "seconds": 0.0,
+  "wrong_clusters": [],
+  "split_clusters": [
+   [
+    "한서윤",
+    "ハン・ソユン",
+    "Seoyun Han",
+    "韓瑞允",
+    "ソユン"
+   ],
+   [
+    "타나카 하루토",
+    "田中陽翔",
+    "Tanaka Haruto",
+    "たなか はると",
+    "하루토"
+   ],
+   [
+    "박민재",
+    "パク・ミンジェ",
+    "Minjae Park",
+    "朴珉在",
+    "Park Minjae"
+   ],
+   [
+    "Emily Carter",
+    "エミリー・カーター",
+    "에밀리 카터",
+    "Emily"
+   ],
+   [
+    "佐藤美咲",
+    "さとう みさき",
+    "사토 미사키",
+    "Misaki Sato"
+   ],
+   [
+    "이도윤",
+    "Doyun Lee",
+    "イ・ドユン"
+   ],
+   [
+    "山本健一",
+    "Kenichi Yamamoto",
+    "야마모토 켄이치",
+    "山本"
+   ],
+   [
+    "최유나",
+    "チェ・ユナ"
+   ],
+   [
+    "Nakamura Sota",
+    "나카무라 소타",
+    "中村颯太"
+   ]
+  ],
+  "romanized": null
+ },
+ "errors": [
+  {
+   "id": "e001",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "한서윤"
+  },
+  {
+   "id": "e002",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "ハン・ソユン"
+  },
+  {
+   "id": "e003",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Seoyun Han"
+  },
+  {
+   "id": "e004",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "韓瑞允"
+  },
+  {
+   "id": "e004",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "한서윤"
+  },
+  {
+   "id": "e005",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "타나카 하루토"
+  },
+  {
+   "id": "e006",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "田中陽翔"
+  },
+  {
+   "id": "e007",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Tanaka Haruto"
+  },
+  {
+   "id": "e008",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "たなか はると"
+  },
+  {
+   "id": "e009",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "박민재"
+  },
+  {
+   "id": "e010",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "パク・ミンジェ"
+  },
+  {
+   "id": "e011",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Minjae Park"
+  },
+  {
+   "id": "e011",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Emily Carter"
+  },
+  {
+   "id": "e012",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "朴珉在"
+  },
+  {
+   "id": "e012",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Park Minjae"
+  },
+  {
+   "id": "e013",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Park Minjae"
+  },
+  {
+   "id": "e014",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "エミリー・カーター"
+  },
+  {
+   "id": "e015",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "에밀리 카터"
+  },
+  {
+   "id": "e016",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "佐藤美咲"
+  },
+  {
+   "id": "e016",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "さとう みさき"
+  },
+  {
+   "id": "e017",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "사토 미사키"
+  },
+  {
+   "id": "e018",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Misaki Sato"
+  },
+  {
+   "id": "e019",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "이도윤"
+  },
+  {
+   "id": "e020",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Doyun Lee"
+  },
+  {
+   "id": "e021",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "イ・ドユン"
+  },
+  {
+   "id": "e021",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "서울특별시 마포구 월드컵로 12길 34"
+  },
+  {
+   "id": "e022",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "山本健一"
+  },
+  {
+   "id": "e023",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Kenichi Yamamoto"
+  },
+  {
+   "id": "e024",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "야마모토 켄이치"
+  },
+  {
+   "id": "e025",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "岡山県岡山市北区駅元町1-8"
+  },
+  {
+   "id": "e026",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "서울 마포구 도화동 5-3"
+  },
+  {
+   "id": "e034",
+   "kind": "miss",
+   "type": "ORG",
+   "text": "주식회사 한빛테크"
+  },
+  {
+   "id": "e034",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "정하은"
+  },
+  {
+   "id": "e035",
+   "kind": "miss",
+   "type": "ORG",
+   "text": "株式会社みどり製作所"
+  },
+  {
+   "id": "e035",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "小林翼"
+  },
+  {
+   "id": "e036",
+   "kind": "miss",
+   "type": "ORG",
+   "text": "Northwind Analytics"
+  },
+  {
+   "id": "e036",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Oliver Grant"
+  },
+  {
+   "id": "e037",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "최유나"
+  },
+  {
+   "id": "e037",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Nakamura Sota"
+  },
+  {
+   "id": "e037",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "岡山市北区表町2丁目"
+  },
+  {
+   "id": "e038",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "チェ・ユナ"
+  },
+  {
+   "id": "e039",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "나카무라 소타"
+  },
+  {
+   "id": "e040",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "中村颯太"
+  },
+  {
+   "id": "e046",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "하늘"
+  },
+  {
+   "id": "e047",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "春"
+  },
+  {
+   "id": "e048",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Grace"
+  },
+  {
+   "id": "e049",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "강지호"
+  },
+  {
+   "id": "e050",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "吉田 さくら"
+  },
+  {
+   "id": "e051",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Daniel Wu"
+  },
+  {
+   "id": "e051",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "221 Maple Ave, Springfield, IL"
+  },
+  {
+   "id": "e052",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "경기도 성남시 분당구 판교역로 235"
+  },
+  {
+   "id": "e052",
+   "kind": "miss",
+   "type": "ORG",
+   "text": "에이치앤랩"
+  },
+  {
+   "id": "e053",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "ソユン"
+  },
+  {
+   "id": "e054",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "하루토"
+  },
+  {
+   "id": "e055",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Emily"
+  },
+  {
+   "id": "e056",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "山本"
+  }
+ ]
+}

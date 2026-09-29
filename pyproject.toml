@@ -1,0 +1,20 @@
+[project]
+name = "piigate"
+version = "0.1.0"
+description = "외부 LLM 앞단의 로컬 개인정보 가명화 레이어 (한·일·영)"
+requires-python = ">=3.12"
+dependencies = ["requests"]
+
+[project.optional-dependencies]
+mcp = ["mcp>=2.2"]
+
+[project.scripts]
+piigate = "piigate.cli:main"
+piigate-mcp = "piigate.mcp_server:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["piigate"]

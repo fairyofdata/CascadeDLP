@@ -1,0 +1,5025 @@
+{
+ "date": "2026-09-30",
+ "model": "qwen3.5:9b",
+ "p5_prompt_version": "p5-v1",
+ "eval": [
+  "data/eval/eval_v1.jsonl",
+  "data/eval/eval_v2.jsonl"
+ ],
+ "translate": {
+  "raw": {
+   "input_unique": 294,
+   "preserved_unique": 294,
+   "invented": 0,
+   "malformed": 0,
+   "outputs": 210,
+   "all_ok": 210,
+   "preservation": 1.0,
+   "all_ok_rate": 1.0
+  },
+  "repaired": {
+   "input_unique": 294,
+   "preserved_unique": 294,
+   "invented": 0,
+   "malformed": 0,
+   "outputs": 210,
+   "all_ok": 210,
+   "preservation": 1.0,
+   "all_ok_rate": 1.0
+  }
+ },
+ "summarize": {
+  "raw": {
+   "input_unique": 312,
+   "preserved_unique": 272,
+   "invented": 0,
+   "malformed": 0,
+   "outputs": 33,
+   "all_ok": 21,
+   "preservation": 0.872,
+   "all_ok_rate": 0.636
+  },
+  "repaired": {
+   "input_unique": 312,
+   "preserved_unique": 272,
+   "invented": 0,
+   "malformed": 0,
+   "outputs": 33,
+   "all_ok": 21,
+   "preservation": 0.872,
+   "all_ok_rate": 0.636
+  }
+ },
+ "latency_s": {
+  "translate_median": 2.63,
+  "summarize_median": 4.66
+ },
+ "translate_items": [
+  {
+   "id": "eval_v1:e001",
+   "target": "ja",
+   "input": "내일 오전에 [PERSON_001] 님과 회의가 있습니다.",
+   "output": "明日の朝、[PERSON_001] 님と会議があります。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e001",
+   "target": "en",
+   "input": "내일 오전에 [PERSON_001] 님과 회의가 있습니다.",
+   "output": "We have a meeting with [PERSON_001] 님 tomorrow morning.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e002",
+   "target": "ko",
+   "input": "[PERSON_001]さんから資料が届きました。",
+   "output": "[PERSON_001] さんから資料が届きました。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e002",
+   "target": "en",
+   "input": "[PERSON_001]さんから資料が届きました。",
+   "output": "We have received the materials from [PERSON_001]-san.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e003",
+   "target": "ko",
+   "input": "Please cc [PERSON_001] on the next thread.",
+   "output": "다음 스레드에서 [PERSON_001]님에게도 사본을 보내주세요.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e003",
+   "target": "ja",
+   "input": "Please cc [PERSON_001] on the next thread.",
+   "output": "次のスレッドで [PERSON_001] を CC してください。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e004",
+   "target": "ko",
+   "input": "[PERSON_001]（[PERSON_001]）さんの連絡先は [EMAIL_001] です。",
+   "output": "[PERSON_001]（[PERSON_001]）さんの連絡先은 [EMAIL_001] 입니다.",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e004",
+   "target": "en",
+   "input": "[PERSON_001]（[PERSON_001]）さんの連絡先は [EMAIL_001] です。",
+   "output": "The contact information for [PERSON_001] (Mr./Ms. [PERSON_001]) is [EMAIL_001].",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e005",
+   "target": "ja",
+   "input": "[PERSON_002] 씨가 오카야마 지사로 옮겼대요.",
+   "output": "[PERSON_002] 씨가 오카야마 지사로 옮겼대요.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e005",
+   "target": "en",
+   "input": "[PERSON_002] 씨가 오카야마 지사로 옮겼대요.",
+   "output": "[PERSON_002] 씨가 오카야마 지사로 옮겼대요.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e006",
+   "target": "ko",
+   "input": "[PERSON_002]です。よろしくお願いします。",
+   "output": "[PERSON_002]입니다. よろしくお願いいたします。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e006",
+   "target": "en",
+   "input": "[PERSON_002]です。よろしくお願いします。",
+   "output": "I am [PERSON_002]. Please take care of me.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e007",
+   "target": "ko",
+   "input": "Meeting notes from [PERSON_002] are attached.",
+   "output": "[PERSON_002] 의 회의록이 첨부되어 있습니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e007",
+   "target": "ja",
+   "input": "Meeting notes from [PERSON_002] are attached.",
+   "output": "[PERSON_002] 氏の会議議事録を添付します。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e008",
+   "target": "ko",
+   "input": "担当は[PERSON_002]になります。",
+   "output": "담당자는 [PERSON_002]입니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e008",
+   "target": "en",
+   "input": "担当は[PERSON_002]になります。",
+   "output": "The person in charge is [PERSON_002].",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e009",
+   "target": "ja",
+   "input": "[PERSON_003] 과장 휴대폰: [PHONE_001]",
+   "output": "[PERSON_003] 과장의携帯電話：[PHONE_001]",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e009",
+   "target": "en",
+   "input": "[PERSON_003] 과장 휴대폰: [PHONE_001]",
+   "output": "[PERSON_003] 과장's mobile phone: [PHONE_001]",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e010",
+   "target": "ko",
+   "input": "[PERSON_003]課長は来週から出張です。",
+   "output": "[PERSON_003] 課長は来週から出張です。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e010",
+   "target": "en",
+   "input": "[PERSON_003]課長は来週から出張です。",
+   "output": "The section chief of [PERSON_003] will be on a business trip starting next week.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e011",
+   "target": "ko",
+   "input": "[PERSON_003] and [PERSON_004] will co-present.",
+   "output": "[PERSON_003] 과 [PERSON_004] 가 공동 진행합니다.",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e011",
+   "target": "ja",
+   "input": "[PERSON_003] and [PERSON_004] will co-present.",
+   "output": "[PERSON_003] と [PERSON_004] が共催します。",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e012",
+   "target": "ko",
+   "input": "[PERSON_003]さん([PERSON_003])にも共有しました。",
+   "output": "[PERSON_003]さん ([PERSON_003]) 에도 공유했습니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e012",
+   "target": "en",
+   "input": "[PERSON_003]さん([PERSON_003])にも共有しました。",
+   "output": "I have also shared it with [PERSON_003]さん ([PERSON_003]).",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e013",
+   "target": "ko",
+   "input": "CCに[PERSON_003]を入れてください。",
+   "output": "CC に [PERSON_003] を入れてください。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e013",
+   "target": "en",
+   "input": "CCに[PERSON_003]を入れてください。",
+   "output": "Please add [PERSON_003] to CC.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e014",
+   "target": "ko",
+   "input": "[PERSON_004]さんの来日は4月です。",
+   "output": "[PERSON_004] さんの来日は 4 月です。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e014",
+   "target": "en",
+   "input": "[PERSON_004]さんの来日は4月です。",
+   "output": "[PERSON_004]さん will be in Japan in April.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e015",
+   "target": "ja",
+   "input": "[PERSON_004] 씨에게 [EMAIL_002]로 보내 주세요.",
+   "output": "[PERSON_004] 씨에게 [EMAIL_002] 로 보내 주세요.",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e015",
+   "target": "en",
+   "input": "[PERSON_004] 씨에게 [EMAIL_002]로 보내 주세요.",
+   "output": "Please send it to [EMAIL_002] for [PERSON_004].",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e016",
+   "target": "ko",
+   "input": "[PERSON_005]（[PERSON_005]）様、お世話になっております。",
+   "output": "[PERSON_005]（[PERSON_005]）様、お世話になっております。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e016",
+   "target": "en",
+   "input": "[PERSON_005]（[PERSON_005]）様、お世話になっております。",
+   "output": "Dear [PERSON_005], thank you for your continued support.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e017",
+   "target": "ja",
+   "input": "[PERSON_005] 님이 견적서를 보내셨어요.",
+   "output": "[PERSON_005] 님께서 견적서를 보내주셨습니다。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e017",
+   "target": "en",
+   "input": "[PERSON_005] 님이 견적서를 보내셨어요.",
+   "output": "[PERSON_005] 님께서 견적서를 보내주셨습니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e018",
+   "target": "ko",
+   "input": "[PERSON_005] from the Osaka office called.",
+   "output": "오사카 지점의 [PERSON_005] 가 전화했습니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e018",
+   "target": "ja",
+   "input": "[PERSON_005] from the Osaka office called.",
+   "output": "大阪支店の [PERSON_005] さんが電話をかけてきました。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e019",
+   "target": "ja",
+   "input": "[PERSON_006] 대리, 내선 402번으로 연락 주세요.",
+   "output": "[PERSON_006] 대리, 내선 402 번으로 연락해 주세요.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e019",
+   "target": "en",
+   "input": "[PERSON_006] 대리, 내선 402번으로 연락 주세요.",
+   "output": "[PERSON_006] 대리, please call me on extension 402.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e020",
+   "target": "ko",
+   "input": "[PERSON_006] is out until Friday.",
+   "output": "[PERSON_006] 은 금요일까지 출근하지 않습니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e020",
+   "target": "ja",
+   "input": "[PERSON_006] is out until Friday.",
+   "output": "[PERSON_006] は金曜日まで外出しています。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e021",
+   "target": "ko",
+   "input": "[PERSON_006]さんの住所は[ADDRESS_001]です。",
+   "output": "[PERSON_006]さんの住所は[ADDRESS_001]です。",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e021",
+   "target": "en",
+   "input": "[PERSON_006]さんの住所は[ADDRESS_001]です。",
+   "output": "The address of [PERSON_006] is [ADDRESS_001].",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e022",
+   "target": "ko",
+   "input": "[PERSON_007]部長 TEL [PHONE_002]",
+   "output": "[PERSON_007]部長 TEL [PHONE_002]",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e022",
+   "target": "en",
+   "input": "[PERSON_007]部長 TEL [PHONE_002]",
+   "output": "[PERSON_007]部長 TEL [PHONE_002]",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e023",
+   "target": "ko",
+   "input": "Ping [PERSON_007] about the invoice.",
+   "output": "[PERSON_007] 씨에게 송장에 대해 연락하세요.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e023",
+   "target": "ja",
+   "input": "Ping [PERSON_007] about the invoice.",
+   "output": "[PERSON_007] さんに請求書について連絡してください。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e024",
+   "target": "ja",
+   "input": "[PERSON_007] 부장님께 결재 올렸습니다.",
+   "output": "[PERSON_007] 部長殿へ承認を提出しました。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e024",
+   "target": "en",
+   "input": "[PERSON_007] 부장님께 결재 올렸습니다.",
+   "output": "I have submitted the approval request to [PERSON_007].",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e025",
+   "target": "ko",
+   "input": "〒[POSTAL_001] [ADDRESS_002]に移転しました。",
+   "output": "〒[POSTAL_001] [ADDRESS_002] に移転しました。",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e025",
+   "target": "en",
+   "input": "〒[POSTAL_001] [ADDRESS_002]に移転しました。",
+   "output": "We have moved to [ADDRESS_002], 〒[POSTAL_001].",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e026",
+   "target": "ja",
+   "input": "우편번호 [POSTAL_002], [ADDRESS_003]으로 반송해 주세요.",
+   "output": "郵便番号 [POSTAL_002]、[ADDRESS_003] へ返送してください。",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e026",
+   "target": "en",
+   "input": "우편번호 [POSTAL_002], [ADDRESS_003]으로 반송해 주세요.",
+   "output": "Please return to postal code [POSTAL_002], [ADDRESS_003].",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e027",
+   "target": "ko",
+   "input": "携帯は[PHONE_003]、メールは[EMAIL_003]です。",
+   "output": "携帯電話は [PHONE_003]、メールは [EMAIL_003] です。",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e027",
+   "target": "en",
+   "input": "携帯は[PHONE_003]、メールは[EMAIL_003]です。",
+   "output": "The phone is [PHONE_003], and the email is [EMAIL_003].",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e028",
+   "target": "ko",
+   "input": "Call me at [PHONE_004] or [PHONE_005].",
+   "output": "[PHONE_004] 또는 [PHONE_005] 로 연락해 주세요.",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e028",
+   "target": "ja",
+   "input": "Call me at [PHONE_004] or [PHONE_005].",
+   "output": "[PHONE_004] または [PHONE_005] までお電話ください。",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e029",
+   "target": "ja",
+   "input": "대표번호 [PHONE_006]로 문의하세요.",
+   "output": "代表番号は [PHONE_006] までお問い合わせください。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e029",
+   "target": "en",
+   "input": "대표번호 [PHONE_006]로 문의하세요.",
+   "output": "Please contact us at representative number [PHONE_006].",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e030",
+   "target": "ko",
+   "input": "詳細は[URL_001]をご覧ください。",
+   "output": "상세 내용은 [URL_001]을 참조하시기 바랍니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e030",
+   "target": "en",
+   "input": "詳細は[URL_001]をご覧ください。",
+   "output": "For details, please visit [URL_001].",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e031",
+   "target": "ko",
+   "input": "My portfolio: [URL_002]",
+   "output": "저의 포트폴리오: [URL_002]",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e031",
+   "target": "ja",
+   "input": "My portfolio: [URL_002]",
+   "output": "私のポートフォリオ：[URL_002]",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e032",
+   "target": "ja",
+   "input": "주민등록번호 [ID_NUMBER_001]은 보내지 마세요.",
+   "output": "住民登録番号 [ID_NUMBER_001] はお送りしないでください。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e032",
+   "target": "en",
+   "input": "주민등록번호 [ID_NUMBER_001]은 보내지 마세요.",
+   "output": "Do not send the resident registration number [ID_NUMBER_001].",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e033",
+   "target": "ko",
+   "input": "マイナンバー [ID_NUMBER_002] を記入してください。",
+   "output": "마이넘버 [ID_NUMBER_002] 를 기입해 주세요.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e033",
+   "target": "en",
+   "input": "マイナンバー [ID_NUMBER_002] を記入してください。",
+   "output": "Please enter your My Number [ID_NUMBER_002].",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e034",
+   "target": "ja",
+   "input": "[ORG_001]의 [PERSON_008] 팀장입니다.",
+   "output": "[ORG_001] の [PERSON_008] チーム長です。",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e034",
+   "target": "en",
+   "input": "[ORG_001]의 [PERSON_008] 팀장입니다.",
+   "output": "I am the team leader of [ORG_001]'s [PERSON_008].",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e035",
+   "target": "ko",
+   "input": "[ORG_002] 営業部 [PERSON_009]",
+   "output": "[ORG_002] 영업부 [PERSON_009]",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e035",
+   "target": "en",
+   "input": "[ORG_002] 営業部 [PERSON_009]",
+   "output": "Sales Department of [ORG_002], [PERSON_009]",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e036",
+   "target": "ko",
+   "input": "I worked at [ORG_003] with [PERSON_010].",
+   "output": "[ORG_003] 에서 [PERSON_010] 과 일했습니다.",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e036",
+   "target": "ja",
+   "input": "I worked at [ORG_003] with [PERSON_010].",
+   "output": "[ORG_003] で [PERSON_010] と働きました。",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e037",
+   "target": "ko",
+   "input": "昨日、[PERSON_011]さんと[PERSON_012]から連絡があり、[ADDRESS_004]の事務所で会う予定です。",
+   "output": "昨日、[PERSON_011] さんと [PERSON_012] から連絡があり、[ADDRESS_004] の事務所で会う予定です。",
+   "report": {
+    "input_unique": 3,
+    "preserved_unique": 3,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 3,
+    "preserved_unique": 3,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e037",
+   "target": "en",
+   "input": "昨日、[PERSON_011]さんと[PERSON_012]から連絡があり、[ADDRESS_004]の事務所で会う予定です。",
+   "output": "Yesterday, I received contact from [PERSON_011]-san and [PERSON_012]-san, and we plan to meet at the office at [ADDRESS_004].",
+   "report": {
+    "input_unique": 3,
+    "preserved_unique": 3,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 3,
+    "preserved_unique": 3,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e038",
+   "target": "ko",
+   "input": "[PERSON_011]さんは韓国語と日本語ができます。",
+   "output": "[PERSON_011]님은 한국어와 일본어를 할 수 있습니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e038",
+   "target": "en",
+   "input": "[PERSON_011]さんは韓国語と日本語ができます。",
+   "output": "[PERSON_011]さん speaks Korean and Japanese.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e039",
+   "target": "ja",
+   "input": "[PERSON_012] 씨는 다음 달 서울 출장.",
+   "output": "[PERSON_012] 씨는来月、ソウル出張です。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e039",
+   "target": "en",
+   "input": "[PERSON_012] 씨는 다음 달 서울 출장.",
+   "output": "[PERSON_012] 씨 will be on a business trip to Seoul next month.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e040",
+   "target": "ko",
+   "input": "[PERSON_012]",
+   "output": "[PERSON_012]",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e040",
+   "target": "en",
+   "input": "[PERSON_012]",
+   "output": "[PERSON_012]",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e046",
+   "target": "ja",
+   "input": "[PERSON_013]이가 어제 전화했어.",
+   "output": "[PERSON_013]이가 어제 전화했습니다。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e046",
+   "target": "en",
+   "input": "[PERSON_013]이가 어제 전화했어.",
+   "output": "[PERSON_013] called yesterday.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e047",
+   "target": "ko",
+   "input": "[PERSON_014]ちゃんが迎えに来ます。",
+   "output": "[PERSON_014]ちゃんが迎えに来ます。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e047",
+   "target": "en",
+   "input": "[PERSON_014]ちゃんが迎えに来ます。",
+   "output": "[PERSON_014]ちゃん will come to pick us up.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e048",
+   "target": "ko",
+   "input": "[PERSON_015] said the build was green.",
+   "output": "[PERSON_015] 이 빌드가 녹색이라고 말했다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e048",
+   "target": "ja",
+   "input": "[PERSON_015] said the build was green.",
+   "output": "[PERSON_015] がビルドはグリーンだと述べた。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e049",
+   "target": "ja",
+   "input": "[PERSON_016]([EMAIL_004], [PHONE_007])",
+   "output": "[PERSON_016]（[EMAIL_004]、[PHONE_007]）",
+   "report": {
+    "input_unique": 3,
+    "preserved_unique": 3,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 3,
+    "preserved_unique": 3,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e049",
+   "target": "en",
+   "input": "[PERSON_016]([EMAIL_004], [PHONE_007])",
+   "output": "[PERSON_016] ([EMAIL_004], [PHONE_007])",
+   "report": {
+    "input_unique": 3,
+    "preserved_unique": 3,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 3,
+    "preserved_unique": 3,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e050",
+   "target": "ko",
+   "input": "差出人: [PERSON_017] <[EMAIL_005]>",
+   "output": "발신인: [PERSON_017]<[EMAIL_005]>",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e050",
+   "target": "en",
+   "input": "差出人: [PERSON_017] <[EMAIL_005]>",
+   "output": "Sender: [PERSON_017] <[EMAIL_005]>",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e051",
+   "target": "ko",
+   "input": "Ship to: [PERSON_018], [ADDRESS_005] [POSTAL_003]",
+   "output": "배송처: [PERSON_018], [ADDRESS_005] [POSTAL_003]",
+   "report": {
+    "input_unique": 3,
+    "preserved_unique": 3,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 3,
+    "preserved_unique": 3,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e051",
+   "target": "ja",
+   "input": "Ship to: [PERSON_018], [ADDRESS_005] [POSTAL_003]",
+   "output": "発送先：[PERSON_018]、[ADDRESS_005][POSTAL_003]",
+   "report": {
+    "input_unique": 3,
+    "preserved_unique": 3,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 3,
+    "preserved_unique": 3,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e052",
+   "target": "ja",
+   "input": "[ADDRESS_006] [ORG_004] 3층",
+   "output": "[ADDRESS_006][ORG_004] 3 층",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e052",
+   "target": "en",
+   "input": "[ADDRESS_006] [ORG_004] 3층",
+   "output": "[ADDRESS_006] [ORG_004] 3rd Floor",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e053",
+   "target": "ko",
+   "input": "[PERSON_001]さん、明日の件ですが…",
+   "output": "[PERSON_001] さん、明日の件ですが…",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e053",
+   "target": "en",
+   "input": "[PERSON_001]さん、明日の件ですが…",
+   "output": "Regarding tomorrow's matter... [PERSON_001]-san",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e054",
+   "target": "ja",
+   "input": "[PERSON_002] 씨 오늘 늦는대요.",
+   "output": "[PERSON_002] 씨는 오늘 늦나요.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e054",
+   "target": "en",
+   "input": "[PERSON_002] 씨 오늘 늦는대요.",
+   "output": "[PERSON_002] 씨가 오늘 지각할 것 같다고 합니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e055",
+   "target": "ko",
+   "input": "Thanks, [PERSON_004]!",
+   "output": "감사합니다, [PERSON_004]님!",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e055",
+   "target": "ja",
+   "input": "Thanks, [PERSON_004]!",
+   "output": "ありがとうございます、[PERSON_004] さん！",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e056",
+   "target": "ko",
+   "input": "[PERSON_007]さんに確認します。",
+   "output": "[PERSON_007] さんに確認します。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v1:e056",
+   "target": "en",
+   "input": "[PERSON_007]さんに確認します。",
+   "output": "I will confirm with [PERSON_007]-san.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e001",
+   "target": "ja",
+   "input": "다음 주 킥오프는 [PERSON_019] 책임이 진행합니다.",
+   "output": "来週のキックオフは、[PERSON_019] さんが責任を持って進行します。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e001",
+   "target": "en",
+   "input": "다음 주 킥오프는 [PERSON_019] 책임이 진행합니다.",
+   "output": "Next week's kickoff will be led by [PERSON_019].",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e002",
+   "target": "ko",
+   "input": "[PERSON_019]さんが司会を担当します。",
+   "output": "[PERSON_019] さんが司会を担当します。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e002",
+   "target": "en",
+   "input": "[PERSON_019]さんが司会を担当します。",
+   "output": "[PERSON_019]さん will serve as the moderator.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e003",
+   "target": "ko",
+   "input": "[PERSON_019] will chair the kickoff.",
+   "output": "[PERSON_019] 이 개회식을 주재합니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e003",
+   "target": "ja",
+   "input": "[PERSON_019] will chair the kickoff.",
+   "output": "[PERSON_019] がキックオフを司会を務めます。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e004",
+   "target": "ko",
+   "input": "名刺には[PERSON_019]と書いてありました。",
+   "output": "명함에는 [PERSON_019]라고 적혀 있었습니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e004",
+   "target": "en",
+   "input": "名刺には[PERSON_019]と書いてありました。",
+   "output": "The business card had [PERSON_019] written on it.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e005",
+   "target": "ja",
+   "input": "[PERSON_019] 씨, 자료 확인 부탁해요.",
+   "output": "[PERSON_019] 씨, 자료 확인 부탁해요.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e005",
+   "target": "en",
+   "input": "[PERSON_019] 씨, 자료 확인 부탁해요.",
+   "output": "[PERSON_019] 씨, please check the materials.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e006",
+   "target": "ja",
+   "input": "[PERSON_020] 대리와 [PERSON_021] 주임은 같은 팀이다.",
+   "output": "[PERSON_020] 大里と [PERSON_021] 主役は同じチームです。",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e006",
+   "target": "en",
+   "input": "[PERSON_020] 대리와 [PERSON_021] 주임은 같은 팀이다.",
+   "output": "[PERSON_020] 대리 and [PERSON_021] 주임 are on the same team.",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e007",
+   "target": "ko",
+   "input": "[PERSON_020]さんは経理担当です。",
+   "output": "[PERSON_020]さんは経理担当です。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e007",
+   "target": "en",
+   "input": "[PERSON_020]さんは経理担当です。",
+   "output": "[PERSON_020] さんは経理担当です。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e008",
+   "target": "ko",
+   "input": "[PERSON_020] approved the budget.",
+   "output": "[PERSON_020] 이 예산을 승인했습니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e008",
+   "target": "ja",
+   "input": "[PERSON_020] approved the budget.",
+   "output": "[PERSON_020] が予算を承認した。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e009",
+   "target": "ko",
+   "input": "[PERSON_021]（[PERSON_021]）さんは開発担当。",
+   "output": "[PERSON_021]（[PERSON_021]）さんは 개발 담당입니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e009",
+   "target": "en",
+   "input": "[PERSON_021]（[PERSON_021]）さんは開発担当。",
+   "output": "[PERSON_021] ([PERSON_021]) is the development person in charge.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e010",
+   "target": "ko",
+   "input": "Please loop in [PERSON_021] from dev.",
+   "output": "dev 에서 [PERSON_021] 을(를) 참여시키세요.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e010",
+   "target": "ja",
+   "input": "Please loop in [PERSON_021] from dev.",
+   "output": "dev の [PERSON_021] を巻き込んでください。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e011",
+   "target": "ja",
+   "input": "참석자: [PERSON_019] [PERSON_021] [PERSON_022]",
+   "output": "出席者：[PERSON_019]、[PERSON_021]、[PERSON_022]",
+   "report": {
+    "input_unique": 3,
+    "preserved_unique": 3,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 3,
+    "preserved_unique": 3,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e011",
+   "target": "en",
+   "input": "참석자: [PERSON_019] [PERSON_021] [PERSON_022]",
+   "output": "Attendees: [PERSON_019], [PERSON_021], [PERSON_022]",
+   "report": {
+    "input_unique": 3,
+    "preserved_unique": 3,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 3,
+    "preserved_unique": 3,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e012",
+   "target": "ja",
+   "input": "참석자: [PERSON_020], [PERSON_019], [PERSON_023]",
+   "output": "참석자: [PERSON_020], [PERSON_019], [PERSON_023]",
+   "report": {
+    "input_unique": 3,
+    "preserved_unique": 3,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 3,
+    "preserved_unique": 3,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e012",
+   "target": "en",
+   "input": "참석자: [PERSON_020], [PERSON_019], [PERSON_023]",
+   "output": "Attendees: [PERSON_020], [PERSON_019], [PERSON_023]",
+   "report": {
+    "input_unique": 3,
+    "preserved_unique": 3,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 3,
+    "preserved_unique": 3,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e013",
+   "target": "ko",
+   "input": "[PERSON_024]と[PERSON_007]は兄弟ではありません。",
+   "output": "[PERSON_024] 과 [PERSON_007] 은 형제나 자매가 아닙니다.",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e013",
+   "target": "en",
+   "input": "[PERSON_024]と[PERSON_007]は兄弟ではありません。",
+   "output": "[PERSON_024] and [PERSON_007] are not siblings.",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e014",
+   "target": "ko",
+   "input": "[PERSON_024]くんが受付にいます。",
+   "output": "[PERSON_024]くんの受付です。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e014",
+   "target": "en",
+   "input": "[PERSON_024]くんが受付にいます。",
+   "output": "[PERSON_024]くん is at the reception desk.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e015",
+   "target": "ja",
+   "input": "[PERSON_024] 씨는 오사카 출신이에요.",
+   "output": "[PERSON_024] 씨는 오사카 출신이에요.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e015",
+   "target": "en",
+   "input": "[PERSON_024] 씨는 오사카 출신이에요.",
+   "output": "[PERSON_024] 씨 is from Osaka.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e016",
+   "target": "ko",
+   "input": "[PERSON_024] joined in April.",
+   "output": "[PERSON_024] 는 4 월에 입사했습니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e016",
+   "target": "ja",
+   "input": "[PERSON_024] joined in April.",
+   "output": "[PERSON_024] が 4 月に加入しました。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e017",
+   "target": "ko",
+   "input": "[PERSON_007] signed the NDA.",
+   "output": "[PERSON_007]이 NDA에 서명했습니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e017",
+   "target": "ja",
+   "input": "[PERSON_007] signed the NDA.",
+   "output": "[PERSON_007] が非公開契約書に署名しました。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e018",
+   "target": "ko",
+   "input": "[PERSON_007]さんに聞いてください。",
+   "output": "[PERSON_007]さんに聞いてください。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e018",
+   "target": "en",
+   "input": "[PERSON_007]さんに聞いてください。",
+   "output": "Please ask [PERSON_007]-san.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e019",
+   "target": "ko",
+   "input": "[PERSON_025]さんの誕生日は来週です。",
+   "output": "[PERSON_025]さんの誕生日は来週です。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e019",
+   "target": "en",
+   "input": "[PERSON_025]さんの誕生日は来週です。",
+   "output": "[PERSON_025]'s birthday is next week.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e020",
+   "target": "ko",
+   "input": "[PERSON_025]",
+   "output": "[PERSON_025]",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e020",
+   "target": "en",
+   "input": "[PERSON_025]",
+   "output": "[PERSON_025]",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e021",
+   "target": "ja",
+   "input": "[PERSON_025] 님 앞으로 보내 주세요.",
+   "output": "[PERSON_025] 님께 보내주세요。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e021",
+   "target": "en",
+   "input": "[PERSON_025] 님 앞으로 보내 주세요.",
+   "output": "Please send it to [PERSON_025] 님.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e022",
+   "target": "ko",
+   "input": "[PERSON_025] is on leave.",
+   "output": "[PERSON_025] 은 휴가 중입니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e022",
+   "target": "ja",
+   "input": "[PERSON_025] is on leave.",
+   "output": "[PERSON_025] は休暇中です。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e023",
+   "target": "ko",
+   "input": "[PERSON_026]さん（[PERSON_026]）が来ます。",
+   "output": "[PERSON_026]さん ([PERSON_026]) 가 오십니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e023",
+   "target": "en",
+   "input": "[PERSON_026]さん（[PERSON_026]）が来ます。",
+   "output": "[PERSON_026]-san ([PERSON_026]) is coming.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e024",
+   "target": "ko",
+   "input": "[PERSON_026] sent the minutes.",
+   "output": "[PERSON_026] 가 회의록을 보냈습니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e024",
+   "target": "ja",
+   "input": "[PERSON_026] sent the minutes.",
+   "output": "[PERSON_026] が議事録を送りました。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e025",
+   "target": "ja",
+   "input": "[PERSON_026] 씨가 회의록을 보냈어요.",
+   "output": "[PERSON_026] 씨가 회의록을 보냈습니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e025",
+   "target": "en",
+   "input": "[PERSON_026] 씨가 회의록을 보냈어요.",
+   "output": "[PERSON_026] 씨가 회의록을 보냈어요.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e026",
+   "target": "ja",
+   "input": "[PERSON_022] 선임 연락처는 [PHONE_008]입니다.",
+   "output": "[PERSON_022] 선任의 연락처는 [PHONE_008]입니다.",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e026",
+   "target": "en",
+   "input": "[PERSON_022] 선임 연락처는 [PHONE_008]입니다.",
+   "output": "The contact person for [PERSON_022] is [PHONE_008].",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e027",
+   "target": "ko",
+   "input": "[PERSON_022]さんは来月着任です。",
+   "output": "[PERSON_022]さんは来月着任です。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e027",
+   "target": "en",
+   "input": "[PERSON_022]さんは来月着任です。",
+   "output": "[PERSON_022]さん will take up their post next month.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e028",
+   "target": "ko",
+   "input": "[PERSON_022] from Seoul HQ.",
+   "output": "서울 본사의 [PERSON_022]입니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e028",
+   "target": "ja",
+   "input": "[PERSON_022] from Seoul HQ.",
+   "output": "ソウル本社の [PERSON_022] 様。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e029",
+   "target": "ja",
+   "input": "[PERSON_023] 매니저에게 전달했습니다.",
+   "output": "[PERSON_023] 様へお伝えいたしました。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e029",
+   "target": "en",
+   "input": "[PERSON_023] 매니저에게 전달했습니다.",
+   "output": "I have delivered it to Manager [PERSON_023].",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e030",
+   "target": "ko",
+   "input": "[PERSON_023]さん",
+   "output": "[PERSON_023]さん",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e030",
+   "target": "en",
+   "input": "[PERSON_023]さん",
+   "output": "[PERSON_023]さん",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e031",
+   "target": "ko",
+   "input": "[PERSON_023] and [PERSON_027] met in Tokyo.",
+   "output": "[PERSON_023] 과 [PERSON_027] 는 도쿄에서 만났습니다.",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e031",
+   "target": "ja",
+   "input": "[PERSON_023] and [PERSON_027] met in Tokyo.",
+   "output": "[PERSON_023] と [PERSON_027] は東京で出会いました。",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e032",
+   "target": "ko",
+   "input": "[PERSON_027]さんはパリ支社の方です。",
+   "output": "[PERSON_027]さんはパリ支社の方です。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e032",
+   "target": "en",
+   "input": "[PERSON_027]さんはパリ支社の方です。",
+   "output": "[PERSON_027]さん is from the Paris branch office.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e033",
+   "target": "ja",
+   "input": "[PERSON_027] 씨의 메일은 [EMAIL_006]",
+   "output": "[PERSON_027] 씨의 메일은 [EMAIL_006] 입니다.",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e033",
+   "target": "en",
+   "input": "[PERSON_027] 씨의 메일은 [EMAIL_006]",
+   "output": "The email of [PERSON_027] is [EMAIL_006].",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e034",
+   "target": "ko",
+   "input": "[ADDRESS_007]",
+   "output": "[ADDRESS_007]",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e034",
+   "target": "en",
+   "input": "[ADDRESS_007]",
+   "output": "[ADDRESS_007]",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e035",
+   "target": "ko",
+   "input": "お届け先：〒[POSTAL_004] [ADDRESS_008]",
+   "output": "届先：〒[POSTAL_004][ADDRESS_008]",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e035",
+   "target": "en",
+   "input": "お届け先：〒[POSTAL_004] [ADDRESS_008]",
+   "output": "Delivery Address: 〒[POSTAL_004] [ADDRESS_008]",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e036",
+   "target": "ja",
+   "input": "주소: [ADDRESS_009]",
+   "output": "住所：[ADDRESS_009]",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e036",
+   "target": "en",
+   "input": "주소: [ADDRESS_009]",
+   "output": "Address: [ADDRESS_009]",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e037",
+   "target": "ja",
+   "input": "[ADDRESS_010]으로 이사했어요.",
+   "output": "[ADDRESS_010]로 이사했어요.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e037",
+   "target": "en",
+   "input": "[ADDRESS_010]으로 이사했어요.",
+   "output": "I moved to [ADDRESS_010].",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e038",
+   "target": "ko",
+   "input": "Mail it to [ADDRESS_011] [POSTAL_005].",
+   "output": "[ADDRESS_011][POSTAL_005]로 보내세요.",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e038",
+   "target": "ja",
+   "input": "Mail it to [ADDRESS_011] [POSTAL_005].",
+   "output": "[ADDRESS_011][POSTAL_005]宛に送ってください。",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e039",
+   "target": "ko",
+   "input": "[PERSON_028]さんの自宅は[ADDRESS_012]の近くです。",
+   "output": "[PERSON_028]さんの自宅は[ADDRESS_012]の近くです。",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e039",
+   "target": "en",
+   "input": "[PERSON_028]さんの自宅は[ADDRESS_012]の近くです。",
+   "output": "The home of [PERSON_028]-san is near [ADDRESS_012].",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e040",
+   "target": "ja",
+   "input": "[ADDRESS_013]에 있는 [ORG_005] 사무실",
+   "output": "[ADDRESS_013] 에 있는 [ORG_005] 사무실",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e040",
+   "target": "en",
+   "input": "[ADDRESS_013]에 있는 [ORG_005] 사무실",
+   "output": "The office of [ORG_005] located at [ADDRESS_013]",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e041",
+   "target": "ko",
+   "input": "Office: [ADDRESS_014]",
+   "output": "사무실: [ADDRESS_014]",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e041",
+   "target": "en",
+   "input": "Office: [ADDRESS_014]",
+   "output": "Office: [ADDRESS_014]",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e042",
+   "target": "ko",
+   "input": "フリーダイヤル [PHONE_009] までお電話ください。",
+   "output": "무료 전화 번호 [PHONE_009] 로 전화해 주세요.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e042",
+   "target": "en",
+   "input": "フリーダイヤル [PHONE_009] までお電話ください。",
+   "output": "Please call our toll-free number [PHONE_009].",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e043",
+   "target": "ko",
+   "input": "代表 [PHONE_010]",
+   "output": "대표 [PHONE_010]",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e043",
+   "target": "en",
+   "input": "代表 [PHONE_010]",
+   "output": "Representative [PHONE_010]",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e044",
+   "target": "ko",
+   "input": "Fax: [PHONE_011]",
+   "output": "팩스: [PHONE_011]",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e044",
+   "target": "ja",
+   "input": "Fax: [PHONE_011]",
+   "output": "ファクス：[PHONE_011]",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e045",
+   "target": "ja",
+   "input": "인터넷전화 [PHONE_012]로 걸어 주세요.",
+   "output": "インターネット電話 [PHONE_012] にかけてください。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e045",
+   "target": "en",
+   "input": "인터넷전화 [PHONE_012]로 걸어 주세요.",
+   "output": "Please call us at Internet phone number [PHONE_012].",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e050",
+   "target": "ja",
+   "input": "[ORG_006] 감사팀 보고서 초안입니다.",
+   "output": "[ORG_006] 감사팀 보고서 초안입니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e050",
+   "target": "en",
+   "input": "[ORG_006] 감사팀 보고서 초안입니다.",
+   "output": "This is a draft report from [ORG_006]'s gratitude team.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e051",
+   "target": "ko",
+   "input": "[ORG_007]と業務委託契約を結びました。",
+   "output": "[ORG_007] と業務委託契約を結びました。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e051",
+   "target": "en",
+   "input": "[ORG_007]と業務委託契約を結びました。",
+   "output": "We have entered into a business contract with [ORG_007].",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e052",
+   "target": "ko",
+   "input": "The pilot with [ORG_008] starts in May.",
+   "output": "[ORG_008]의 파일럿은 5 월에 시작합니다.",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e052",
+   "target": "ja",
+   "input": "The pilot with [ORG_008] starts in May.",
+   "output": "[ORG_008] のパイロットは 5 月から始まります。",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e053",
+   "target": "ko",
+   "input": "先週の会議で[PERSON_020]さんが[PERSON_027]に[ORG_007]の件を説明し、[PERSON_025]さんは[EMAIL_007]で資料を共有した。",
+   "output": "지난주 회의에서 [PERSON_020] 님이 [PERSON_027] 에게 [ORG_007] 관련 사항을 설명하고, [PERSON_025] 님은 [EMAIL_007] 로 자료를 공유했습니다.",
+   "report": {
+    "input_unique": 5,
+    "preserved_unique": 5,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 5,
+    "preserved_unique": 5,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e053",
+   "target": "en",
+   "input": "先週の会議で[PERSON_020]さんが[PERSON_027]に[ORG_007]の件を説明し、[PERSON_025]さんは[EMAIL_007]で資料を共有した。",
+   "output": "At last week's meeting, [PERSON_020] explained the matter regarding [ORG_007] to [PERSON_027], and [PERSON_025] shared the materials via [EMAIL_007].",
+   "report": {
+    "input_unique": 5,
+    "preserved_unique": 5,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 5,
+    "preserved_unique": 5,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e054",
+   "target": "ja",
+   "input": "[PERSON_026] 씨가 「[PERSON_024]くんに渡して」라고 했어요.",
+   "output": "[PERSON_026] 씨가「[PERSON_024]くんに渡して」と言いました。",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e054",
+   "target": "en",
+   "input": "[PERSON_026] 씨가 「[PERSON_024]くんに渡して」라고 했어요.",
+   "output": "[PERSON_026] 씨가 \"[PERSON_024]くんに渡して\"라고 했어요.",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e055",
+   "target": "ko",
+   "input": "FYI [PERSON_019] said 「[PERSON_023] 님이 내일 휴가」.",
+   "output": "참고로 [PERSON_019] 가「[PERSON_023] 님이 내일 휴가」라고 말했습니다.",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e055",
+   "target": "ja",
+   "input": "FYI [PERSON_019] said 「[PERSON_023] 님이 내일 휴가」.",
+   "output": "念のため、[PERSON_019] は「[PERSON_023] 님が明日休暇です」と言いました。",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e056",
+   "target": "ja",
+   "input": "주민번호 [ID_NUMBER_003], 여권번호 [ID_NUMBER_004]",
+   "output": "住民番号 [ID_NUMBER_003]、パスポート番号 [ID_NUMBER_004]",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e056",
+   "target": "en",
+   "input": "주민번호 [ID_NUMBER_003], 여권번호 [ID_NUMBER_004]",
+   "output": "Resident registration number [ID_NUMBER_003], passport number [ID_NUMBER_004]",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e057",
+   "target": "ko",
+   "input": "マイナンバー：[ID_NUMBER_005]",
+   "output": "마이넘버: [ID_NUMBER_005]",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e057",
+   "target": "en",
+   "input": "マイナンバー：[ID_NUMBER_005]",
+   "output": "My Number: [ID_NUMBER_005]",
+   "report": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 1,
+    "preserved_unique": 1,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e058",
+   "target": "ko",
+   "input": "See [URL_003] and [URL_004].",
+   "output": "[URL_003] 과 [URL_004] 를 확인하세요.",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "id": "eval_v2:e058",
+   "target": "ja",
+   "input": "See [URL_003] and [URL_004].",
+   "output": "[URL_003] と [URL_004] をご覧ください。",
+   "report": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 2,
+    "preserved_unique": 2,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  }
+ ],
+ "summarize_items": [
+  {
+   "doc": 0,
+   "lang": "ko",
+   "input": "내일 오전에 [PERSON_001] 님과 회의가 있습니다.\n[PERSON_001]さんから資料が届きました。\nPlease cc [PERSON_001] on the next thread.\n[PERSON_001]（[PERSON_001]）さんの連絡先は [EMAIL_001] です。\n[PERSON_002] 씨가 오카야마 지사로 옮겼대요.\n[PERSON_002]です。よろしくお願いします。\nMeeting notes from [PERSON_002] are attached.\n担当は[PERSON_002]になります。\n[PERSON_003] 과장 휴대폰: [PHONE_001]\n[PERSON_003]課長は来週から出張です。",
+   "output": "- 내일 오전에 [PERSON_001] 님과 회의를 가지며, [PERSON_001]さんから 자료를 받았습니다.\n- 다음 스레드에서 [PERSON_001]를 CC로 포함해야 하며, [PERSON_001]의 연락처는 [EMAIL_001]입니다.\n- [PERSON_002] 씨가 오카야마 지사로 이직했고, 담당은 [PERSON_002]가 되어 회의록이 첨부되었습니다.\n- [PERSON_003] 과장의 휴대폰 번호는 [PHONE_001]이며, [PERSON_003]課長은 다음 주부터 출장합니다.",
+   "report": {
+    "input_unique": 5,
+    "preserved_unique": 5,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 5,
+    "preserved_unique": 5,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 0,
+   "lang": "ja",
+   "input": "내일 오전에 [PERSON_001] 님과 회의가 있습니다.\n[PERSON_001]さんから資料が届きました。\nPlease cc [PERSON_001] on the next thread.\n[PERSON_001]（[PERSON_001]）さんの連絡先は [EMAIL_001] です。\n[PERSON_002] 씨가 오카야마 지사로 옮겼대요.\n[PERSON_002]です。よろしくお願いします。\nMeeting notes from [PERSON_002] are attached.\n担当は[PERSON_002]になります。\n[PERSON_003] 과장 휴대폰: [PHONE_001]\n[PERSON_003]課長は来週から出張です。",
+   "output": "- 내일 오전에 [PERSON_001] 님과 회의가 있으며, [PERSON_001]さんから資料가 도착했습니다.\n- 다음 스레드에서 [PERSON_001]를 cc로 추가해야 하며, [PERSON_001]의 연락처는 [EMAIL_001]입니다.\n- [PERSON_002] 씨가 오카야마 지사로 이직했고, 담당자는 [PERSON_002]이며 회의록도 첨부되었습니다.\n- [PERSON_003] 과장의 휴대폰 번호는 [PHONE_001]이고, [PERSON_003]課長은 다음 주부터 출장합니다.",
+   "report": {
+    "input_unique": 5,
+    "preserved_unique": 5,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 5,
+    "preserved_unique": 5,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 0,
+   "lang": "en",
+   "input": "내일 오전에 [PERSON_001] 님과 회의가 있습니다.\n[PERSON_001]さんから資料が届きました。\nPlease cc [PERSON_001] on the next thread.\n[PERSON_001]（[PERSON_001]）さんの連絡先は [EMAIL_001] です。\n[PERSON_002] 씨가 오카야마 지사로 옮겼대요.\n[PERSON_002]です。よろしくお願いします。\nMeeting notes from [PERSON_002] are attached.\n担当は[PERSON_002]になります。\n[PERSON_003] 과장 휴대폰: [PHONE_001]\n[PERSON_003]課長は来週から出張です。",
+   "output": "- A meeting with [PERSON_001] 님 is scheduled for tomorrow morning.\n- Materials were received from [PERSON_001]さん, and [PERSON_001] should be cc'd on the next thread.\n- The contact number for [PERSON_003] 과장 is [PHONE_001], while [PERSON_003]課長 will be on a business trip starting next week.\n- [PERSON_002] 씨 has been transferred to the Okayama branch, and meeting notes from [PERSON_002] are attached.\n- The person in charge for this matter is [PERSON_002].",
+   "report": {
+    "input_unique": 5,
+    "preserved_unique": 4,
+    "missing": [
+     "[EMAIL_001]"
+    ],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 5,
+    "preserved_unique": 4,
+    "missing": [
+     "[EMAIL_001]"
+    ],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 1,
+   "lang": "ko",
+   "input": "[PERSON_003] and [PERSON_004] will co-present.\n[PERSON_003]さん([PERSON_003])にも共有しました。\nCCに[PERSON_003]を入れてください。\n[PERSON_004]さんの来日は4月です。\n[PERSON_004] 씨에게 [EMAIL_002]로 보내 주세요.\n[PERSON_005]（[PERSON_005]）様、お世話になっております。\n[PERSON_005] 님이 견적서를 보내셨어요.\n[PERSON_005] from the Osaka office called.\n[PERSON_006] 대리, 내선 402번으로 연락 주세요.\n[PERSON_006] is out until Friday.",
+   "output": "- [PERSON_003] 와 [PERSON_004] 가 공동 발표할 예정이며, [PERSON_003] 에게 공유하고 CC 로 추가해 주십시오.\n- [PERSON_004] 의 일본 방문은 4 월로 결정되었고, [PERSON_004] 에게 [EMAIL_002] 로 연락해 주세요.\n- [PERSON_005] 님으로부터 견적서가 도착했으며, 오사카 지점의 [PERSON_005] 가 전화를 걸었습니다.\n- [PERSON_006] 대리에게 402 번 내선으로 연락해 주시고, 금요일까지 출근하지 않는다는 점을 알려주세요.",
+   "report": {
+    "input_unique": 5,
+    "preserved_unique": 5,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 5,
+    "preserved_unique": 5,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 1,
+   "lang": "ja",
+   "input": "[PERSON_003] and [PERSON_004] will co-present.\n[PERSON_003]さん([PERSON_003])にも共有しました。\nCCに[PERSON_003]を入れてください。\n[PERSON_004]さんの来日は4月です。\n[PERSON_004] 씨에게 [EMAIL_002]로 보내 주세요.\n[PERSON_005]（[PERSON_005]）様、お世話になっております。\n[PERSON_005] 님이 견적서를 보내셨어요.\n[PERSON_005] from the Osaka office called.\n[PERSON_006] 대리, 내선 402번으로 연락 주세요.\n[PERSON_006] is out until Friday.",
+   "output": "- [PERSON_003] と [PERSON_004] が共同で登壇し、[PERSON_003] には共有がなされ、CC に [PERSON_003] を入れるよう指示されています。\n- [PERSON_004] の来日は 4 月であり、[EMAIL_002] で [PERSON_004] へ連絡を送るよう依頼されています。\n- [PERSON_005]（大阪支店）から電話があり、見積書が送られてきたと報告されています。\n- [PERSON_006] に内線 402 番で連絡を依頼され、[PERSON_006] は金曜日まで不在であることが確認されています。",
+   "report": {
+    "input_unique": 5,
+    "preserved_unique": 5,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 5,
+    "preserved_unique": 5,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 1,
+   "lang": "en",
+   "input": "[PERSON_003] and [PERSON_004] will co-present.\n[PERSON_003]さん([PERSON_003])にも共有しました。\nCCに[PERSON_003]を入れてください。\n[PERSON_004]さんの来日は4月です。\n[PERSON_004] 씨에게 [EMAIL_002]로 보내 주세요.\n[PERSON_005]（[PERSON_005]）様、お世話になっております。\n[PERSON_005] 님이 견적서를 보내셨어요.\n[PERSON_005] from the Osaka office called.\n[PERSON_006] 대리, 내선 402번으로 연락 주세요.\n[PERSON_006] is out until Friday.",
+   "output": "- [PERSON_003] and [PERSON_004] will co-present the session.\n- Share the information with [PERSON_003]さん([PERSON_003]) and include [PERSON_003] in the CC list.\n- Send [EMAIL_002] to [PERSON_004] 씨 regarding their visit scheduled for April.\n- Contact [PERSON_006] 대리 via extension 402, noting that [PERSON_006] is unavailable until Friday.\n- Acknowledge the quotation sent by [PERSON_005] 님 and note the call from [PERSON_005] from the Osaka office.",
+   "report": {
+    "input_unique": 5,
+    "preserved_unique": 5,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 5,
+    "preserved_unique": 5,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 2,
+   "lang": "ko",
+   "input": "[PERSON_006]さんの住所は[ADDRESS_001]です。\n[PERSON_007]部長 TEL [PHONE_002]\nPing [PERSON_007] about the invoice.\n[PERSON_007] 부장님께 결재 올렸습니다.\n〒[POSTAL_001] [ADDRESS_002]に移転しました。\n우편번호 [POSTAL_002], [ADDRESS_003]으로 반송해 주세요.\n携帯は[PHONE_003]、メールは[EMAIL_003]です。\nCall me at [PHONE_004] or [PHONE_005].\n대표번호 [PHONE_006]로 문의하세요.\n詳細は[URL_001]をご覧ください。",
+   "output": "- [PERSON_006]さんの住所は[ADDRESS_001]で、〒[POSTAL_001][ADDRESS_002]に移転しました。\n- [PERSON_007]部長の連絡先は TEL [PHONE_002]であり、携帯は[PHONE_003]、メールは[EMAIL_003]です。\n- [PERSON_007]部長へ請求書について Ping するとともに、[PERSON_007] 부장님께 결재 올렸습니다。\n- 返送先は우편번호 [POSTAL_002],[ADDRESS_003]で、詳細は[URL_001]をご覧ください。\n- 連絡は Call me at [PHONE_004] or [PHONE_005]または대표번호 [PHONE_006]로 문의하세요.",
+   "report": {
+    "input_unique": 14,
+    "preserved_unique": 14,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 14,
+    "preserved_unique": 14,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 2,
+   "lang": "ja",
+   "input": "[PERSON_006]さんの住所は[ADDRESS_001]です。\n[PERSON_007]部長 TEL [PHONE_002]\nPing [PERSON_007] about the invoice.\n[PERSON_007] 부장님께 결재 올렸습니다.\n〒[POSTAL_001] [ADDRESS_002]に移転しました。\n우편번호 [POSTAL_002], [ADDRESS_003]으로 반송해 주세요.\n携帯は[PHONE_003]、メールは[EMAIL_003]です。\nCall me at [PHONE_004] or [PHONE_005].\n대표번호 [PHONE_006]로 문의하세요.\n詳細は[URL_001]をご覧ください。",
+   "output": "- [PERSON_006]さんの住所は[ADDRESS_001]です。\n- [PERSON_007]部長の連絡先は TEL [PHONE_002] で、請求書について Ping しました。\n- 〒[POSTAL_001] の [ADDRESS_002] に移転し、〒[POSTAL_002] の [ADDRESS_003] へ返送してください。\n- 携帯は[PHONE_003]、メールは[EMAIL_003]、または [PHONE_004]/[PHONE_005] でご連絡ください。\n- 代表番号は [PHONE_006] で問い合わせ、詳細は [URL_001] をご覧ください。",
+   "report": {
+    "input_unique": 14,
+    "preserved_unique": 14,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 14,
+    "preserved_unique": 14,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 2,
+   "lang": "en",
+   "input": "[PERSON_006]さんの住所は[ADDRESS_001]です。\n[PERSON_007]部長 TEL [PHONE_002]\nPing [PERSON_007] about the invoice.\n[PERSON_007] 부장님께 결재 올렸습니다.\n〒[POSTAL_001] [ADDRESS_002]に移転しました。\n우편번호 [POSTAL_002], [ADDRESS_003]으로 반송해 주세요.\n携帯は[PHONE_003]、メールは[EMAIL_003]です。\nCall me at [PHONE_004] or [PHONE_005].\n대표번호 [PHONE_006]로 문의하세요.\n詳細は[URL_001]をご覧ください。",
+   "output": "- [PERSON_006]'s address is [ADDRESS_001].\n- Contact [PERSON_007] at TEL [PHONE_002] regarding the invoice.\n- The office moved to 〒[POSTAL_001] [ADDRESS_002].\n- Please return items to [POSTAL_002], [ADDRESS_003].\n- Mobile is [PHONE_003], email is [EMAIL_003], and call at [PHONE_004] or [PHONE_005]; inquiries go to 대표번호 [PHONE_006]; details are at [URL_001].",
+   "report": {
+    "input_unique": 14,
+    "preserved_unique": 14,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 14,
+    "preserved_unique": 14,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 3,
+   "lang": "ko",
+   "input": "My portfolio: [URL_002]\n주민등록번호 [ID_NUMBER_001]은 보내지 마세요.\nマイナンバー [ID_NUMBER_002] を記入してください。\n[ORG_001]의 [PERSON_008] 팀장입니다.\n[ORG_002] 営業部 [PERSON_009]\nI worked at [ORG_003] with [PERSON_010].\n昨日、[PERSON_011]さんと[PERSON_012]から連絡があり、[ADDRESS_004]の事務所で会う予定です。\n[PERSON_011]さんは韓国語と日本語ができます。\n[PERSON_012] 씨는 다음 달 서울 출장.\n[PERSON_012]",
+   "output": "- [URL_002] 가 포트폴리오입니다.\n- 주민등록번호 [ID_NUMBER_001] 은 보내지 말아야 하며, 마이ナンバー [ID_NUMBER_002] 를 기입해야 합니다.\n- [ORG_001] 의 [PERSON_008] 팀장과 [ORG_002] 영업부 [PERSON_009] 가 있습니다.\n- [ORG_003] 에서 [PERSON_010] 과 일했으며, [PERSON_011] 님과 [PERSON_012] 님으로부터 연락이 와서 [ADDRESS_004] 사무소에서 만날 예정입니다.\n- [PERSON_011] 님은 한국어와 일본어를 하며, [PERSON_012] 씨는 다음 달 서울 출장을 갑니다.",
+   "report": {
+    "input_unique": 12,
+    "preserved_unique": 12,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 12,
+    "preserved_unique": 12,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 3,
+   "lang": "ja",
+   "input": "My portfolio: [URL_002]\n주민등록번호 [ID_NUMBER_001]은 보내지 마세요.\nマイナンバー [ID_NUMBER_002] を記入してください。\n[ORG_001]의 [PERSON_008] 팀장입니다.\n[ORG_002] 営業部 [PERSON_009]\nI worked at [ORG_003] with [PERSON_010].\n昨日、[PERSON_011]さんと[PERSON_012]から連絡があり、[ADDRESS_004]の事務所で会う予定です。\n[PERSON_011]さんは韓国語と日本語ができます。\n[PERSON_012] 씨는 다음 달 서울 출장.\n[PERSON_012]",
+   "output": "- ポートフォリオは [URL_002] です。\n- 住民登録番号 [ID_NUMBER_001] は送信しないでください。\n- マイナンバー [ID_NUMBER_002] を記入してください。\n- [ORG_001] の [PERSON_008] チーム長で、[ORG_002] 営業部 [PERSON_009] です。\n- [ORG_003] で [PERSON_010] と働いており、昨日 [PERSON_011] さんと [PERSON_012] から連絡があり、[ADDRESS_004] の事務所で会う予定です。",
+   "report": {
+    "input_unique": 12,
+    "preserved_unique": 12,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 12,
+    "preserved_unique": 12,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 3,
+   "lang": "en",
+   "input": "My portfolio: [URL_002]\n주민등록번호 [ID_NUMBER_001]은 보내지 마세요.\nマイナンバー [ID_NUMBER_002] を記入してください。\n[ORG_001]의 [PERSON_008] 팀장입니다.\n[ORG_002] 営業部 [PERSON_009]\nI worked at [ORG_003] with [PERSON_010].\n昨日、[PERSON_011]さんと[PERSON_012]から連絡があり、[ADDRESS_004]の事務所で会う予定です。\n[PERSON_011]さんは韓国語と日本語ができます。\n[PERSON_012] 씨는 다음 달 서울 출장.\n[PERSON_012]",
+   "output": "- The user's portfolio is located at [URL_002].\n- Do not send the resident registration number [ID_NUMBER_001], but please fill in the My Number [ID_NUMBER_002].\n- [PERSON_008] is the team leader of [ORG_001], and [PERSON_009] works in the sales department of [ORG_002].\n- The user previously worked at [ORG_003] with [PERSON_010].\n- Yesterday, [PERSON_011] and [PERSON_012] contacted the user to meet at the office at [ADDRESS_004]; [PERSON_011] speaks Korean and Japanese, while [PERSON_012] is traveling to Seoul next month.",
+   "report": {
+    "input_unique": 12,
+    "preserved_unique": 12,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 12,
+    "preserved_unique": 12,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 4,
+   "lang": "ko",
+   "input": "[PERSON_013]이가 어제 전화했어.\n[PERSON_014]ちゃんが迎えに来ます。\n[PERSON_015] said the build was green.\n[PERSON_016]([EMAIL_004], [PHONE_007])\n差出人: [PERSON_017] <[EMAIL_005]>\nShip to: [PERSON_018], [ADDRESS_005] [POSTAL_003]\n[ADDRESS_006] [ORG_004] 3층\n[PERSON_001]さん、明日の件ですが…\n[PERSON_002] 씨 오늘 늦는대요.\nThanks, [PERSON_004]!",
+   "output": "- [PERSON_013] 이가 어제 전화를 했습니다.\n- [PERSON_014] ちゃんが迎え에 오고, [PERSON_015] 는 건물이 녹색이라고 말했습니다.\n- 이메일의 발신자는 [PERSON_017] (<[EMAIL_005]>) 으로, 배송 대상은 [PERSON_018] ([ADDRESS_005] [POSTAL_003]) 입니다.\n- 주소는 [ADDRESS_006] [ORG_004] 3 층이며, [PERSON_001] さん 에게 내일 일정을 알리고 있습니다.\n- [PERSON_002] 씨 가 오늘 늦을 것이라고 하며, [PERSON_004] 에게 감사함을 표했습니다.",
+   "report": {
+    "input_unique": 16,
+    "preserved_unique": 13,
+    "missing": [
+     "[EMAIL_004]",
+     "[PERSON_016]",
+     "[PHONE_007]"
+    ],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 16,
+    "preserved_unique": 13,
+    "missing": [
+     "[EMAIL_004]",
+     "[PERSON_016]",
+     "[PHONE_007]"
+    ],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 4,
+   "lang": "ja",
+   "input": "[PERSON_013]이가 어제 전화했어.\n[PERSON_014]ちゃんが迎えに来ます。\n[PERSON_015] said the build was green.\n[PERSON_016]([EMAIL_004], [PHONE_007])\n差出人: [PERSON_017] <[EMAIL_005]>\nShip to: [PERSON_018], [ADDRESS_005] [POSTAL_003]\n[ADDRESS_006] [ORG_004] 3층\n[PERSON_001]さん、明日の件ですが…\n[PERSON_002] 씨 오늘 늦는대요.\nThanks, [PERSON_004]!",
+   "output": "- [PERSON_013] 이가 어제 전화를 했습니다.\n- [PERSON_014] ちゃんが迎えに来ます。\n- [PERSON_015] 가 건물이 녹색이라고 말했습니다.\n- 메일에서 차출인은 [PERSON_017], 수신인은 [PERSON_018] 입니다.\n- [PERSON_004] 에게 감사의 인사를 전했습니다.",
+   "report": {
+    "input_unique": 16,
+    "preserved_unique": 6,
+    "missing": [
+     "[ADDRESS_005]",
+     "[ADDRESS_006]",
+     "[EMAIL_004]",
+     "[EMAIL_005]",
+     "[ORG_004]",
+     "[PERSON_001]",
+     "[PERSON_002]",
+     "[PERSON_016]",
+     "[PHONE_007]",
+     "[POSTAL_003]"
+    ],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 16,
+    "preserved_unique": 6,
+    "missing": [
+     "[ADDRESS_005]",
+     "[ADDRESS_006]",
+     "[EMAIL_004]",
+     "[EMAIL_005]",
+     "[ORG_004]",
+     "[PERSON_001]",
+     "[PERSON_002]",
+     "[PERSON_016]",
+     "[PHONE_007]",
+     "[POSTAL_003]"
+    ],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 4,
+   "lang": "en",
+   "input": "[PERSON_013]이가 어제 전화했어.\n[PERSON_014]ちゃんが迎えに来ます。\n[PERSON_015] said the build was green.\n[PERSON_016]([EMAIL_004], [PHONE_007])\n差出人: [PERSON_017] <[EMAIL_005]>\nShip to: [PERSON_018], [ADDRESS_005] [POSTAL_003]\n[ADDRESS_006] [ORG_004] 3층\n[PERSON_001]さん、明日の件ですが…\n[PERSON_002] 씨 오늘 늦는대요.\nThanks, [PERSON_004]!",
+   "output": "- [PERSON_013] called yesterday.\n- [PERSON_014] will come to pick up.\n- [PERSON_015] said the building was green.\n- The email sender is [PERSON_017] <[EMAIL_005]> with contact details ([EMAIL_004], [PHONE_007]).\n- The shipment is addressed to [PERSON_018] at [ADDRESS_005] [POSTAL_003], 3rd floor, [ORG_004].",
+   "report": {
+    "input_unique": 16,
+    "preserved_unique": 11,
+    "missing": [
+     "[ADDRESS_006]",
+     "[PERSON_001]",
+     "[PERSON_002]",
+     "[PERSON_004]",
+     "[PERSON_016]"
+    ],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 16,
+    "preserved_unique": 11,
+    "missing": [
+     "[ADDRESS_006]",
+     "[PERSON_001]",
+     "[PERSON_002]",
+     "[PERSON_004]",
+     "[PERSON_016]"
+    ],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 5,
+   "lang": "ko",
+   "input": "[PERSON_007]さんに確認します。\n다음 주 킥오프는 [PERSON_019] 책임이 진행합니다.\n[PERSON_019]さんが司会を担当します。\n[PERSON_019] will chair the kickoff.\n名刺には[PERSON_019]と書いてありました。\n[PERSON_019] 씨, 자료 확인 부탁해요.\n[PERSON_020] 대리와 [PERSON_021] 주임은 같은 팀이다.\n[PERSON_020]さんは経理担当です。\n[PERSON_020] approved the budget.\n[PERSON_021]（[PERSON_021]）さんは開発担当。",
+   "output": "- [PERSON_007] さんに 확인합니다.\n- 다음 주 킥오프는 [PERSON_019] 가 진행하며, [PERSON_019] 가 회의를 주관하고 명함에도 [PERSON_019] 로 표기되어 있습니다.\n- [PERSON_019] 는 자료 확인을 요청받았습니다.\n- [PERSON_020] 과 [PERSON_021] 은 같은 팀이며, 각각 [PERSON_020] 이 회계 담당이고 [PERSON_021] 이 개발 담당입니다.\n- [PERSON_020] 이 예산을 승인했습니다.",
+   "report": {
+    "input_unique": 4,
+    "preserved_unique": 4,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 4,
+    "preserved_unique": 4,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 5,
+   "lang": "ja",
+   "input": "[PERSON_007]さんに確認します。\n다음 주 킥오프는 [PERSON_019] 책임이 진행합니다.\n[PERSON_019]さんが司会を担当します。\n[PERSON_019] will chair the kickoff.\n名刺には[PERSON_019]と書いてありました。\n[PERSON_019] 씨, 자료 확인 부탁해요.\n[PERSON_020] 대리와 [PERSON_021] 주임은 같은 팀이다.\n[PERSON_020]さんは経理担当です。\n[PERSON_020] approved the budget.\n[PERSON_021]（[PERSON_021]）さんは開発担当。",
+   "output": "- [PERSON_007]さんに確認します。\n- [PERSON_019]さんが司会を担当します。\n- [PERSON_020]さんは経理担当です。\n- [PERSON_021]さんは開発担当です。",
+   "report": {
+    "input_unique": 4,
+    "preserved_unique": 4,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 4,
+    "preserved_unique": 4,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 5,
+   "lang": "en",
+   "input": "[PERSON_007]さんに確認します。\n다음 주 킥오프는 [PERSON_019] 책임이 진행합니다.\n[PERSON_019]さんが司会を担当します。\n[PERSON_019] will chair the kickoff.\n名刺には[PERSON_019]と書いてありました。\n[PERSON_019] 씨, 자료 확인 부탁해요.\n[PERSON_020] 대리와 [PERSON_021] 주임은 같은 팀이다.\n[PERSON_020]さんは経理担当です。\n[PERSON_020] approved the budget.\n[PERSON_021]（[PERSON_021]）さんは開発担当。",
+   "output": "- [PERSON_007] will confirm the details.\n- The kickoff next week will be led by [PERSON_019].\n- [PERSON_019] will serve as the chairperson and is listed on the business card.\n- [PERSON_020], who handles finance, approved the budget.\n- [PERSON_020] and [PERSON_021] are on the same team, with [PERSON_021] responsible for development.",
+   "report": {
+    "input_unique": 4,
+    "preserved_unique": 4,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 4,
+    "preserved_unique": 4,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 6,
+   "lang": "ko",
+   "input": "Please loop in [PERSON_021] from dev.\n참석자: [PERSON_019] [PERSON_021] [PERSON_022]\n참석자: [PERSON_020], [PERSON_019], [PERSON_023]\n[PERSON_024]と[PERSON_007]は兄弟ではありません。\n[PERSON_024]くんが受付にいます。\n[PERSON_024] 씨는 오사카 출신이에요.\n[PERSON_024] joined in April.\n[PERSON_007] signed the NDA.\n[PERSON_007]さんに聞いてください。\n[PERSON_025]さんの誕生日は来週です。",
+   "output": "- [PERSON_021]이 개발팀에서 회의에 참석해야 합니다.\n- 참석자는 [PERSON_019], [PERSON_021], [PERSON_022]입니다.\n- [PERSON_024]는 오사카 출신이며 4 월에 입사했습니다.",
+   "report": {
+    "input_unique": 8,
+    "preserved_unique": 4,
+    "missing": [
+     "[PERSON_007]",
+     "[PERSON_020]",
+     "[PERSON_023]",
+     "[PERSON_025]"
+    ],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 8,
+    "preserved_unique": 4,
+    "missing": [
+     "[PERSON_007]",
+     "[PERSON_020]",
+     "[PERSON_023]",
+     "[PERSON_025]"
+    ],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 6,
+   "lang": "ja",
+   "input": "Please loop in [PERSON_021] from dev.\n참석자: [PERSON_019] [PERSON_021] [PERSON_022]\n참석자: [PERSON_020], [PERSON_019], [PERSON_023]\n[PERSON_024]と[PERSON_007]は兄弟ではありません。\n[PERSON_024]くんが受付にいます。\n[PERSON_024] 씨는 오사카 출신이에요.\n[PERSON_024] joined in April.\n[PERSON_007] signed the NDA.\n[PERSON_007]さんに聞いてください。\n[PERSON_025]さんの誕生日は来週です。",
+   "output": "- [PERSON_021] が dev から参加します。\n- 出席者は [PERSON_019], [PERSON_021], [PERSON_022] です。\n- [PERSON_024] と [PERSON_007] は兄弟ではありません。",
+   "report": {
+    "input_unique": 8,
+    "preserved_unique": 5,
+    "missing": [
+     "[PERSON_020]",
+     "[PERSON_023]",
+     "[PERSON_025]"
+    ],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 8,
+    "preserved_unique": 5,
+    "missing": [
+     "[PERSON_020]",
+     "[PERSON_023]",
+     "[PERSON_025]"
+    ],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 6,
+   "lang": "en",
+   "input": "Please loop in [PERSON_021] from dev.\n참석자: [PERSON_019] [PERSON_021] [PERSON_022]\n참석자: [PERSON_020], [PERSON_019], [PERSON_023]\n[PERSON_024]と[PERSON_007]は兄弟ではありません。\n[PERSON_024]くんが受付にいます。\n[PERSON_024] 씨는 오사카 출신이에요.\n[PERSON_024] joined in April.\n[PERSON_007] signed the NDA.\n[PERSON_007]さんに聞いてください。\n[PERSON_025]さんの誕生日は来週です。",
+   "output": "- [PERSON_021] from dev has been looped in for the meeting.\n- The attendees include [PERSON_019], [PERSON_021], and [PERSON_022].\n- [PERSON_024] is not related to [PERSON_007], but [PERSON_024]くん is currently at reception.\n- [PERSON_024] 씨는 오사카 출신이에요, joined in April, and [PERSON_007] has signed the NDA.\n- Please ask [PERSON_007]さんに for details, as [PERSON_025]さんの birthday is next week.",
+   "report": {
+    "input_unique": 8,
+    "preserved_unique": 6,
+    "missing": [
+     "[PERSON_020]",
+     "[PERSON_023]"
+    ],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 8,
+    "preserved_unique": 6,
+    "missing": [
+     "[PERSON_020]",
+     "[PERSON_023]"
+    ],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 7,
+   "lang": "ko",
+   "input": "[PERSON_025]\n[PERSON_025] 님 앞으로 보내 주세요.\n[PERSON_025] is on leave.\n[PERSON_026]さん（[PERSON_026]）が来ます。\n[PERSON_026] sent the minutes.\n[PERSON_026] 씨가 회의록을 보냈어요.\n[PERSON_022] 선임 연락처는 [PHONE_008]입니다.\n[PERSON_022]さんは来月着任です。\n[PERSON_022] from Seoul HQ.\n[PERSON_023] 매니저에게 전달했습니다.",
+   "output": "- [PERSON_025] 님은 휴가 중이므로 메일을 [PERSON_026] 에게 보내 주세요.\n- [PERSON_026] 가 회의록을 보냈으며, 곧 출근할 예정입니다.\n- [PERSON_022] 선임의 연락처는 [PHONE_008] 이며, 다음 달 서울 본부에 착任합니다.\n- [PERSON_023] 은 매니저에게 내용을 전달했습니다.",
+   "report": {
+    "input_unique": 5,
+    "preserved_unique": 5,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 5,
+    "preserved_unique": 5,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 7,
+   "lang": "ja",
+   "input": "[PERSON_025]\n[PERSON_025] 님 앞으로 보내 주세요.\n[PERSON_025] is on leave.\n[PERSON_026]さん（[PERSON_026]）が来ます。\n[PERSON_026] sent the minutes.\n[PERSON_026] 씨가 회의록을 보냈어요.\n[PERSON_022] 선임 연락처는 [PHONE_008]입니다.\n[PERSON_022]さんは来月着任です。\n[PERSON_022] from Seoul HQ.\n[PERSON_023] 매니저에게 전달했습니다.",
+   "output": "- [PERSON_025] 님은 휴직 중이므로 메일을 [PERSON_026] さん께 보내 주세요.\n- [PERSON_026] さんが 회의록을 보냈습니다.\n- [PERSON_022] 선임의 연락처는 [PHONE_008]이며, 다음 달에 서울 본사에서 착임합니다.\n- [PERSON_023] 이 매니저에게 내용을 전달했습니다.",
+   "report": {
+    "input_unique": 5,
+    "preserved_unique": 5,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 5,
+    "preserved_unique": 5,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 7,
+   "lang": "en",
+   "input": "[PERSON_025]\n[PERSON_025] 님 앞으로 보내 주세요.\n[PERSON_025] is on leave.\n[PERSON_026]さん（[PERSON_026]）が来ます。\n[PERSON_026] sent the minutes.\n[PERSON_026] 씨가 회의록을 보냈어요.\n[PERSON_022] 선임 연락처는 [PHONE_008]입니다.\n[PERSON_022]さんは来月着任です。\n[PERSON_022] from Seoul HQ.\n[PERSON_023] 매니저에게 전달했습니다.",
+   "output": "- Send the message to [PERSON_025] 님 as they are currently on leave.\n- [PERSON_026]さん（[PERSON_026]）is coming and has sent the minutes.\n- The contact number for [PERSON_022] 선임 is [PHONE_008], and they will assume duty next month from Seoul HQ.\n- Information was delivered to the manager by [PERSON_023].",
+   "report": {
+    "input_unique": 5,
+    "preserved_unique": 5,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 5,
+    "preserved_unique": 5,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 8,
+   "lang": "ko",
+   "input": "[PERSON_023]さん\n[PERSON_023] and [PERSON_027] met in Tokyo.\n[PERSON_027]さんはパリ支社の方です。\n[PERSON_027] 씨의 메일은 [EMAIL_006]\n[ADDRESS_007]\nお届け先：〒[POSTAL_004] [ADDRESS_008]\n주소: [ADDRESS_009]\n[ADDRESS_010]으로 이사했어요.\nMail it to [ADDRESS_011] [POSTAL_005].\n[PERSON_028]さんの自宅は[ADDRESS_012]の近くです。",
+   "output": "- [PERSON_023]과 [PERSON_027]는 도쿄에서 만났습니다.\n- [PERSON_027]의 이메일 주소는 [EMAIL_006]입니다.\n- 우편물은 [ADDRESS_011] [POSTAL_005]로 보내야 합니다.\n- [PERSON_028]의 집은 [ADDRESS_012] 근처에 있습니다.",
+   "report": {
+    "input_unique": 12,
+    "preserved_unique": 7,
+    "missing": [
+     "[ADDRESS_007]",
+     "[ADDRESS_008]",
+     "[ADDRESS_009]",
+     "[ADDRESS_010]",
+     "[POSTAL_004]"
+    ],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 12,
+    "preserved_unique": 7,
+    "missing": [
+     "[ADDRESS_007]",
+     "[ADDRESS_008]",
+     "[ADDRESS_009]",
+     "[ADDRESS_010]",
+     "[POSTAL_004]"
+    ],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 8,
+   "lang": "ja",
+   "input": "[PERSON_023]さん\n[PERSON_023] and [PERSON_027] met in Tokyo.\n[PERSON_027]さんはパリ支社の方です。\n[PERSON_027] 씨의 메일은 [EMAIL_006]\n[ADDRESS_007]\nお届け先：〒[POSTAL_004] [ADDRESS_008]\n주소: [ADDRESS_009]\n[ADDRESS_010]으로 이사했어요.\nMail it to [ADDRESS_011] [POSTAL_005].\n[PERSON_028]さんの自宅は[ADDRESS_012]の近くです。",
+   "output": "- [PERSON_023] と [PERSON_027] は東京で出会いました。\n- [PERSON_027] さんはパリ支社に所属しており、メールは [EMAIL_006] です。\n- お届け先は〒[POSTAL_004] の [ADDRESS_008] で、住所は [ADDRESS_009] です。\n- [ADDRESS_010] に引っ越しましたので、手紙は [ADDRESS_011] [POSTAL_005] へ送ってください。\n- [PERSON_028] さんの自宅は [ADDRESS_012] の近くにあります。",
+   "report": {
+    "input_unique": 12,
+    "preserved_unique": 11,
+    "missing": [
+     "[ADDRESS_007]"
+    ],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 12,
+    "preserved_unique": 11,
+    "missing": [
+     "[ADDRESS_007]"
+    ],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 8,
+   "lang": "en",
+   "input": "[PERSON_023]さん\n[PERSON_023] and [PERSON_027] met in Tokyo.\n[PERSON_027]さんはパリ支社の方です。\n[PERSON_027] 씨의 메일은 [EMAIL_006]\n[ADDRESS_007]\nお届け先：〒[POSTAL_004] [ADDRESS_008]\n주소: [ADDRESS_009]\n[ADDRESS_010]으로 이사했어요.\nMail it to [ADDRESS_011] [POSTAL_005].\n[PERSON_028]さんの自宅は[ADDRESS_012]の近くです。",
+   "output": "- [PERSON_023] and [PERSON_027] met in Tokyo.\n- [PERSON_027] works at the Paris branch, and their email is [EMAIL_006].\n- The delivery address is 〒[POSTAL_004] [ADDRESS_008], located near [ADDRESS_012].\n- [PERSON_028]'s home is near [ADDRESS_012].\n- Mail should be sent to [ADDRESS_011] [POSTAL_005].",
+   "report": {
+    "input_unique": 12,
+    "preserved_unique": 9,
+    "missing": [
+     "[ADDRESS_007]",
+     "[ADDRESS_009]",
+     "[ADDRESS_010]"
+    ],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 12,
+    "preserved_unique": 9,
+    "missing": [
+     "[ADDRESS_007]",
+     "[ADDRESS_009]",
+     "[ADDRESS_010]"
+    ],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 9,
+   "lang": "ko",
+   "input": "[ADDRESS_013]에 있는 [ORG_005] 사무실\nOffice: [ADDRESS_014]\nフリーダイヤル [PHONE_009] までお電話ください。\n代表 [PHONE_010]\nFax: [PHONE_011]\n인터넷전화 [PHONE_012]로 걸어 주세요.\n[ORG_006] 감사팀 보고서 초안입니다.\n[ORG_007]と業務委託契約を結びました。\nThe pilot with [ORG_008] starts in May.\n先週の会議で[PERSON_020]さんが[PERSON_027]に[ORG_007]の件を説明し、[PERSON_025]さんは[EMAIL_007]で資料を共有した。",
+   "output": "- [ADDRESS_013]에 위치한 [ORG_005] 사무실의 연락처로, 대표 [PHONE_010], 팩스 [PHONE_011], 인터넷전화 [PHONE_012]를 통해 연락할 수 있습니다.\n- [ORG_006] 감사팀에서 보고서 초안을 제출했습니다.\n- [ORG_007]와 업무 위탁 계약을 체결하였으며, 5 월에 [ORG_008]와의 파일럿 프로젝트가 시작됩니다.\n- 지난주 회의에서 [PERSON_020] 님이 [PERSON_027] 에게 [ORG_007] 관련 내용을 설명하고, [PERSON_025] 님은 [EMAIL_007]로 자료를 공유했습니다.",
+   "report": {
+    "input_unique": 14,
+    "preserved_unique": 12,
+    "missing": [
+     "[ADDRESS_014]",
+     "[PHONE_009]"
+    ],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 14,
+    "preserved_unique": 12,
+    "missing": [
+     "[ADDRESS_014]",
+     "[PHONE_009]"
+    ],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 9,
+   "lang": "ja",
+   "input": "[ADDRESS_013]에 있는 [ORG_005] 사무실\nOffice: [ADDRESS_014]\nフリーダイヤル [PHONE_009] までお電話ください。\n代表 [PHONE_010]\nFax: [PHONE_011]\n인터넷전화 [PHONE_012]로 걸어 주세요.\n[ORG_006] 감사팀 보고서 초안입니다.\n[ORG_007]と業務委託契約を結びました。\nThe pilot with [ORG_008] starts in May.\n先週の会議で[PERSON_020]さんが[PERSON_027]に[ORG_007]の件を説明し、[PERSON_025]さんは[EMAIL_007]で資料を共有した。",
+   "output": "- [ADDRESS_013] にある [ORG_005] のオフィスでは、フリーダイヤル [PHONE_009]、代表 [PHONE_010]、ファクス [PHONE_011]、インターネット電話 [PHONE_012] で連絡できます。\n- [ORG_006] 感謝チームから報告書の草案が送られました。\n- [ORG_007] と業務委託契約を締結しました。\n- [PERSON_020] さんが [PERSON_027] に [ORG_007] の件を説明し、[PERSON_025] さんは [EMAIL_007] で資料を共有しました。\n- [ORG_008] とのパイロットプログラムは 5 月に開始されます。",
+   "report": {
+    "input_unique": 14,
+    "preserved_unique": 13,
+    "missing": [
+     "[ADDRESS_014]"
+    ],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 14,
+    "preserved_unique": 13,
+    "missing": [
+     "[ADDRESS_014]"
+    ],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 9,
+   "lang": "en",
+   "input": "[ADDRESS_013]에 있는 [ORG_005] 사무실\nOffice: [ADDRESS_014]\nフリーダイヤル [PHONE_009] までお電話ください。\n代表 [PHONE_010]\nFax: [PHONE_011]\n인터넷전화 [PHONE_012]로 걸어 주세요.\n[ORG_006] 감사팀 보고서 초안입니다.\n[ORG_007]と業務委託契約を結びました。\nThe pilot with [ORG_008] starts in May.\n先週の会議で[PERSON_020]さんが[PERSON_027]に[ORG_007]の件を説明し、[PERSON_025]さんは[EMAIL_007]で資料を共有した。",
+   "output": "- Contact [ORG_005] at [ADDRESS_013], with office details at [ADDRESS_014] and phone lines including free dial [PHONE_009], main line [PHONE_010], fax [PHONE_011], and internet phone [PHONE_012].\n- [ORG_006] has submitted a draft report for the gratitude team.\n- A business contract was established with [ORG_007].\n- The pilot program involving [ORG_008] is scheduled to begin in May.\n- During last week's meeting, [PERSON_020] explained matters regarding [ORG_007] to [PERSON_027], while [PERSON_025] shared materials via [EMAIL_007].",
+   "report": {
+    "input_unique": 14,
+    "preserved_unique": 14,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 14,
+    "preserved_unique": 14,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 10,
+   "lang": "ko",
+   "input": "[PERSON_026] 씨가 「[PERSON_024]くんに渡して」라고 했어요.\nFYI [PERSON_019] said 「[PERSON_023] 님이 내일 휴가」.\n주민번호 [ID_NUMBER_003], 여권번호 [ID_NUMBER_004]\nマイナンバー：[ID_NUMBER_005]\nSee [URL_003] and [URL_004].",
+   "output": "- [PERSON_026] 씨가 [PERSON_024] 님에게 전달하라고 했습니다.\n- 참고로 [PERSON_019] 는 [PERSON_023] 님이 내일 휴가를 낸다고 말했습니다.\n- 주민번호는 [ID_NUMBER_003], 여권번호는 [ID_NUMBER_004] 입니다.\n- 마이ナンバー는 [ID_NUMBER_005] 입니다.\n- 자세한 내용은 [URL_003] 과 [URL_004] 를 확인하세요.",
+   "report": {
+    "input_unique": 9,
+    "preserved_unique": 9,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 9,
+    "preserved_unique": 9,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 10,
+   "lang": "ja",
+   "input": "[PERSON_026] 씨가 「[PERSON_024]くんに渡して」라고 했어요.\nFYI [PERSON_019] said 「[PERSON_023] 님이 내일 휴가」.\n주민번호 [ID_NUMBER_003], 여권번호 [ID_NUMBER_004]\nマイナンバー：[ID_NUMBER_005]\nSee [URL_003] and [URL_004].",
+   "output": "- [PERSON_026] 씨가 [PERSON_024]くんに渡해달라고 요청했습니다.\n- FYI 로 [PERSON_019] 가 [PERSON_023] 님이 내일 휴가라고 말했습니다.\n- 주민번호는 [ID_NUMBER_003], 여권번호는 [ID_NUMBER_004] 입니다.\n- 마이ナンバー는 [ID_NUMBER_005] 입니다.\n- 자세한 내용은 [URL_003] 과 [URL_004] 를 확인하세요.",
+   "report": {
+    "input_unique": 9,
+    "preserved_unique": 9,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 9,
+    "preserved_unique": 9,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  },
+  {
+   "doc": 10,
+   "lang": "en",
+   "input": "[PERSON_026] 씨가 「[PERSON_024]くんに渡して」라고 했어요.\nFYI [PERSON_019] said 「[PERSON_023] 님이 내일 휴가」.\n주민번호 [ID_NUMBER_003], 여권번호 [ID_NUMBER_004]\nマイナンバー：[ID_NUMBER_005]\nSee [URL_003] and [URL_004].",
+   "output": "- [PERSON_026] 씨가 [PERSON_024]くんに渡して라고 했어요.\n- FYI [PERSON_019] said「[PERSON_023] 님이 내일 휴가」.\n- 주민번호 [ID_NUMBER_003], 여권번호 [ID_NUMBER_004]\n- 마이ナンバー：[ID_NUMBER_005]\n- See [URL_003] and [URL_004].",
+   "report": {
+    "input_unique": 9,
+    "preserved_unique": 9,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   },
+   "report_repaired": {
+    "input_unique": 9,
+    "preserved_unique": 9,
+    "missing": [],
+    "invented": [],
+    "malformed": []
+   }
+  }
+ ]
+}

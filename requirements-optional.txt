@@ -1,0 +1,4 @@
+# NER 기준선. Python 3.14에서 설치가 안 되면 건너뛰고 PLAN.md에 기록한다.
+gliner
+sentencepiece  # GLiNER(mDeBERTa) 토크나이저
+protobuf

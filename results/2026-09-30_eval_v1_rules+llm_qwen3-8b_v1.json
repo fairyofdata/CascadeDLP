@@ -1,0 +1,316 @@
+{
+ "date": "2026-09-30",
+ "mode": "rules+llm",
+ "model": "qwen3:8b",
+ "prompt_version": "v1",
+ "eval": "data/eval/eval_v1.jsonl",
+ "exact": {
+  "PERSON": {
+   "tp": 39,
+   "fp": 4,
+   "fn": 7,
+   "P": 0.907,
+   "R": 0.848,
+   "F": 0.876
+  },
+  "EMAIL": {
+   "tp": 5,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "PHONE": {
+   "tp": 7,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "POSTAL": {
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ADDRESS": {
+   "tp": 2,
+   "fp": 6,
+   "fn": 4,
+   "P": 0.25,
+   "R": 0.333,
+   "F": 0.286
+  },
+  "URL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ID_NUMBER": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ORG": {
+   "tp": 4,
+   "fp": 3,
+   "fn": 0,
+   "P": 0.571,
+   "R": 1.0,
+   "F": 0.727
+  },
+  "ALL": {
+   "tp": 64,
+   "fp": 13,
+   "fn": 11,
+   "P": 0.831,
+   "R": 0.853,
+   "F": 0.842
+  }
+ },
+ "overlap": {
+  "PERSON": {
+   "tp": 42,
+   "fp": 1,
+   "fn": 4,
+   "P": 0.977,
+   "R": 0.913,
+   "F": 0.944
+  },
+  "EMAIL": {
+   "tp": 5,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "PHONE": {
+   "tp": 7,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "POSTAL": {
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ADDRESS": {
+   "tp": 6,
+   "fp": 2,
+   "fn": 0,
+   "P": 0.75,
+   "R": 1.0,
+   "F": 0.857
+  },
+  "URL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ID_NUMBER": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ORG": {
+   "tp": 4,
+   "fp": 3,
+   "fn": 0,
+   "P": 0.571,
+   "R": 1.0,
+   "F": 0.727
+  },
+  "ALL": {
+   "tp": 71,
+   "fp": 6,
+   "fn": 4,
+   "P": 0.922,
+   "R": 0.947,
+   "F": 0.934
+  }
+ },
+ "latency_ms": {
+  "mean": 2561,
+  "median": 2532,
+  "max": 3146
+ },
+ "linking": {
+  "n_surfaces": 44,
+  "n_clusters_multi": 9,
+  "cluster_exact": 0,
+  "cluster_exact_rate": 0.0,
+  "pair_P": 0.058,
+  "pair_R": 1.0,
+  "pair_F": 0.11,
+  "seconds": 5.01
+ },
+ "errors": [
+  {
+   "id": "e004",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "韓瑞允"
+  },
+  {
+   "id": "e004",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "한서윤"
+  },
+  {
+   "id": "e005",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "오카야마 지사"
+  },
+  {
+   "id": "e008",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "たなか はると"
+  },
+  {
+   "id": "e008",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "たなか"
+  },
+  {
+   "id": "e008",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "はると"
+  },
+  {
+   "id": "e018",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "Osaka"
+  },
+  {
+   "id": "e019",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "내선"
+  },
+  {
+   "id": "e021",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "서울특별시 마포구 월드컵로 12길 34"
+  },
+  {
+   "id": "e021",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "월드컵로 12길 34"
+  },
+  {
+   "id": "e022",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "部長"
+  },
+  {
+   "id": "e023",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Kenichi Yamamoto"
+  },
+  {
+   "id": "e023",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "Ping Kenichi Yamamoto"
+  },
+  {
+   "id": "e026",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "서울 마포구 도화동 5-3"
+  },
+  {
+   "id": "e026",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "도화동"
+  },
+  {
+   "id": "e039",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "서울"
+  },
+  {
+   "id": "e046",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "하늘"
+  },
+  {
+   "id": "e047",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "春"
+  },
+  {
+   "id": "e047",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "春ちゃん"
+  },
+  {
+   "id": "e048",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Grace"
+  },
+  {
+   "id": "e051",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "221 Maple Ave, Springfield, IL"
+  },
+  {
+   "id": "e051",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "221 Maple Ave"
+  },
+  {
+   "id": "e052",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "경기도 성남시 분당구 판교역로 235"
+  },
+  {
+   "id": "e052",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "판교역로 235"
+  }
+ ]
+}

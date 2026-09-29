@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+# 가명 맵과 실데이터 — 절대 커밋하지 않는다
+maps/
+data/private/
+*.map.json
+*.restore.json
+restore/
+.piigate/
+# 개인 작업 메모 (사용자 개인 정보 포함) — 공개 저장소에 올리지 않는다
+CLAUDE.md
+START_PROMPT.md
+.claude/
+# 측정 중 임시 파일
+results/_p5_tmp*

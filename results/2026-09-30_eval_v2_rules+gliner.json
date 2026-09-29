@@ -1,0 +1,667 @@
+{
+ "date": "2026-09-30",
+ "mode": "rules+gliner",
+ "model": "gliner_multi_pii-v1",
+ "prompt_version": null,
+ "eval": "data/eval/eval_v2.jsonl",
+ "exact": {
+  "PERSON": {
+   "tp": 23,
+   "fp": 22,
+   "fn": 27,
+   "P": 0.511,
+   "R": 0.46,
+   "F": 0.484
+  },
+  "EMAIL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "PHONE": {
+   "tp": 4,
+   "fp": 2,
+   "fn": 1,
+   "P": 0.667,
+   "R": 0.8,
+   "F": 0.727
+  },
+  "POSTAL": {
+   "tp": 2,
+   "fp": 1,
+   "fn": 0,
+   "P": 0.667,
+   "R": 1.0,
+   "F": 0.8
+  },
+  "ADDRESS": {
+   "tp": 1,
+   "fp": 5,
+   "fn": 7,
+   "P": 0.167,
+   "R": 0.125,
+   "F": 0.143
+  },
+  "URL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ID_NUMBER": {
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ORG": {
+   "tp": 3,
+   "fp": 5,
+   "fn": 2,
+   "P": 0.375,
+   "R": 0.6,
+   "F": 0.462
+  },
+  "ALL": {
+   "tp": 40,
+   "fp": 35,
+   "fn": 37,
+   "P": 0.533,
+   "R": 0.519,
+   "F": 0.526
+  }
+ },
+ "overlap": {
+  "PERSON": {
+   "tp": 44,
+   "fp": 1,
+   "fn": 6,
+   "P": 0.978,
+   "R": 0.88,
+   "F": 0.926
+  },
+  "EMAIL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "PHONE": {
+   "tp": 5,
+   "fp": 1,
+   "fn": 0,
+   "P": 0.833,
+   "R": 1.0,
+   "F": 0.909
+  },
+  "POSTAL": {
+   "tp": 2,
+   "fp": 1,
+   "fn": 0,
+   "P": 0.667,
+   "R": 1.0,
+   "F": 0.8
+  },
+  "ADDRESS": {
+   "tp": 5,
+   "fp": 1,
+   "fn": 3,
+   "P": 0.833,
+   "R": 0.625,
+   "F": 0.714
+  },
+  "URL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ID_NUMBER": {
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ORG": {
+   "tp": 4,
+   "fp": 4,
+   "fn": 1,
+   "P": 0.5,
+   "R": 0.8,
+   "F": 0.615
+  },
+  "ALL": {
+   "tp": 67,
+   "fp": 8,
+   "fn": 10,
+   "P": 0.893,
+   "R": 0.87,
+   "F": 0.882
+  }
+ },
+ "latency_ms": {
+  "mean": 111,
+  "median": 108,
+  "max": 140
+ },
+ "linking": {
+  "n_surfaces": 42,
+  "n_clusters_multi": 10,
+  "cluster_exact": 0,
+  "cluster_exact_rate": 0.0,
+  "pair_P": 0.0,
+  "pair_R": 0.0,
+  "pair_F": 0.0,
+  "seconds": 0.0,
+  "wrong_clusters": [],
+  "split_clusters": [
+   [
+    "정민호",
+    "チョン・ミンホ",
+    "Jung Minho",
+    "鄭敏浩",
+    "민호",
+    "Minho"
+   ],
+   [
+    "김민정",
+    "キム・ミンジョン",
+    "Minjeong Kim"
+   ],
+   [
+    "김민준",
+    "金民俊",
+    "Minjun Kim"
+   ],
+   [
+    "윤하람",
+    "ユン・ハラム",
+    "Haram Yun",
+    "하람"
+   ],
+   [
+    "山本健太",
+    "やまもと けんた",
+    "야마모토 겐타",
+    "Kenta Yamamoto",
+    "けんた"
+   ],
+   [
+    "山本健一",
+    "Ken'ichi Yamamoto"
+   ],
+   [
+    "高橋結衣",
+    "たかはし ゆい",
+    "다카하시 유이",
+    "Yui Takahashi",
+    "高橋"
+   ],
+   [
+    "伊藤大翔",
+    "いとう ひろと",
+    "Hiroto Ito",
+    "이토 히로토",
+    "히로토"
+   ],
+   [
+    "オ・セリン",
+    "Serin Oh"
+   ],
+   [
+    "Sophie Martin",
+    "ソフィー・マルタン",
+    "소피 마르탱",
+    "Sophie"
+   ]
+  ],
+  "romanized": null
+ },
+ "errors": [
+  {
+   "id": "e002",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "チョン・ミンホ"
+  },
+  {
+   "id": "e002",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "チョン・ミンホさんが司会を担当します"
+  },
+  {
+   "id": "e004",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "鄭敏浩"
+  },
+  {
+   "id": "e005",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "민호"
+  },
+  {
+   "id": "e005",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "민호 씨"
+  },
+  {
+   "id": "e006",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "김민정"
+  },
+  {
+   "id": "e006",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "김민준"
+  },
+  {
+   "id": "e006",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "김민정 대리와"
+  },
+  {
+   "id": "e006",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "김민준 주임은"
+  },
+  {
+   "id": "e007",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "キム・ミンジョン"
+  },
+  {
+   "id": "e007",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "キム・ミンジョンさんは経理担当です"
+  },
+  {
+   "id": "e010",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "dev"
+  },
+  {
+   "id": "e013",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "山本健太"
+  },
+  {
+   "id": "e013",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "山本健一"
+  },
+  {
+   "id": "e013",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "山本健太と山本健一は兄弟ではありません"
+  },
+  {
+   "id": "e014",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "やまもと けんた"
+  },
+  {
+   "id": "e014",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "やまもと けんたくんが受付にいます"
+  },
+  {
+   "id": "e015",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "야마모토 겐타"
+  },
+  {
+   "id": "e015",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "야마모토 겐타 씨는"
+  },
+  {
+   "id": "e017",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "NDA"
+  },
+  {
+   "id": "e018",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "山本"
+  },
+  {
+   "id": "e018",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "山本さんに聞いてください"
+  },
+  {
+   "id": "e019",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "高橋結衣"
+  },
+  {
+   "id": "e019",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "高橋結衣さんの誕生日は来週です"
+  },
+  {
+   "id": "e021",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "다카하시 유이"
+  },
+  {
+   "id": "e021",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "다카하시 유이 님"
+  },
+  {
+   "id": "e023",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "伊藤大翔"
+  },
+  {
+   "id": "e023",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "伊藤大翔さん"
+  },
+  {
+   "id": "e025",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "이토 히로토"
+  },
+  {
+   "id": "e025",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "이토 히로토 씨가"
+  },
+  {
+   "id": "e026",
+   "kind": "miss",
+   "type": "PHONE",
+   "text": "010 4418 2093"
+  },
+  {
+   "id": "e026",
+   "kind": "extra",
+   "type": "PHONE",
+   "text": "010 4418 2093입니다"
+  },
+  {
+   "id": "e027",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "オ・セリン"
+  },
+  {
+   "id": "e027",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "オ・セリンさんは来月着任です"
+  },
+  {
+   "id": "e028",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "Seoul HQ"
+  },
+  {
+   "id": "e029",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "윤하람"
+  },
+  {
+   "id": "e029",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "윤하람 매니저에게"
+  },
+  {
+   "id": "e030",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "ユン・ハラム"
+  },
+  {
+   "id": "e030",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "ユン・ハラムさん"
+  },
+  {
+   "id": "e032",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "ソフィー・マルタン"
+  },
+  {
+   "id": "e032",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "ソフィー・マルタンさんはパリ支社の方です"
+  },
+  {
+   "id": "e033",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "소피 마르탱"
+  },
+  {
+   "id": "e033",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "소피 마르탱 씨의"
+  },
+  {
+   "id": "e034",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "東京都千代田区丸の内3丁目4-1 サンプルビル12階"
+  },
+  {
+   "id": "e034",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "東京都千代田区丸の内3丁目4-1"
+  },
+  {
+   "id": "e035",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "大阪府大阪市北区梅田2-5-10"
+  },
+  {
+   "id": "e035",
+   "kind": "extra",
+   "type": "POSTAL",
+   "text": "大阪府大阪市北区梅田2-5-10"
+  },
+  {
+   "id": "e036",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "부산광역시 해운대구 센텀중앙로 97, 1203호"
+  },
+  {
+   "id": "e037",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "대전 유성구 봉명동 544-7"
+  },
+  {
+   "id": "e037",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "봉명동 544-7으로"
+  },
+  {
+   "id": "e038",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "1600 Harbor Blvd, Suite 210, Oakland, CA"
+  },
+  {
+   "id": "e038",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "1600 Harbor Blvd, Suite 210"
+  },
+  {
+   "id": "e039",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "佐々木"
+  },
+  {
+   "id": "e039",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "岡山市中区浜3丁目"
+  },
+  {
+   "id": "e039",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "佐々木さんの自宅は岡山市中区浜3丁目の近くです"
+  },
+  {
+   "id": "e040",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "서울 강남구 테헤란로 152"
+  },
+  {
+   "id": "e040",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "서울 강남구 테헤란로 152에"
+  },
+  {
+   "id": "e041",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "Office"
+  },
+  {
+   "id": "e043",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "代表"
+  },
+  {
+   "id": "e046",
+   "kind": "extra",
+   "type": "PHONE",
+   "text": "3301"
+  },
+  {
+   "id": "e048",
+   "kind": "extra",
+   "type": "ADDRESS",
+   "text": "Room 402, Building C"
+  },
+  {
+   "id": "e051",
+   "kind": "miss",
+   "type": "ORG",
+   "text": "合同会社ひかりラボ"
+  },
+  {
+   "id": "e051",
+   "kind": "extra",
+   "type": "ORG",
+   "text": "合同会社ひかりラボと業務委託契約を結びました"
+  },
+  {
+   "id": "e053",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "김민정"
+  },
+  {
+   "id": "e053",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Sophie"
+  },
+  {
+   "id": "e053",
+   "kind": "miss",
+   "type": "ORG",
+   "text": "合同会社ひかりラボ"
+  },
+  {
+   "id": "e053",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "高橋"
+  },
+  {
+   "id": "e054",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "히로토"
+  },
+  {
+   "id": "e054",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "けんた"
+  },
+  {
+   "id": "e054",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "히로토 씨가"
+  },
+  {
+   "id": "e055",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "하람"
+  },
+  {
+   "id": "e055",
+   "kind": "extra",
+   "type": "PERSON",
+   "text": "하람 님이"
+  }
+ ]
+}

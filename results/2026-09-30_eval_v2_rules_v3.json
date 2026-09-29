@@ -1,0 +1,609 @@
+{
+ "date": "2026-09-30",
+ "mode": "rules",
+ "model": null,
+ "prompt_version": null,
+ "eval": "data/eval/eval_v2.jsonl",
+ "exact": {
+  "PERSON": {
+   "tp": 0,
+   "fp": 0,
+   "fn": 50,
+   "P": 0.0,
+   "R": 0.0,
+   "F": 0.0
+  },
+  "EMAIL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "PHONE": {
+   "tp": 5,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "POSTAL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ADDRESS": {
+   "tp": 0,
+   "fp": 0,
+   "fn": 8,
+   "P": 0.0,
+   "R": 0.0,
+   "F": 0.0
+  },
+  "URL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ID_NUMBER": {
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ORG": {
+   "tp": 0,
+   "fp": 0,
+   "fn": 5,
+   "P": 0.0,
+   "R": 0.0,
+   "F": 0.0
+  },
+  "ALL": {
+   "tp": 14,
+   "fp": 0,
+   "fn": 63,
+   "P": 1.0,
+   "R": 0.182,
+   "F": 0.308
+  }
+ },
+ "overlap": {
+  "PERSON": {
+   "tp": 0,
+   "fp": 0,
+   "fn": 50,
+   "P": 0.0,
+   "R": 0.0,
+   "F": 0.0
+  },
+  "EMAIL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "PHONE": {
+   "tp": 5,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "POSTAL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ADDRESS": {
+   "tp": 0,
+   "fp": 0,
+   "fn": 8,
+   "P": 0.0,
+   "R": 0.0,
+   "F": 0.0
+  },
+  "URL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ID_NUMBER": {
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "P": 1.0,
+   "R": 1.0,
+   "F": 1.0
+  },
+  "ORG": {
+   "tp": 0,
+   "fp": 0,
+   "fn": 5,
+   "P": 0.0,
+   "R": 0.0,
+   "F": 0.0
+  },
+  "ALL": {
+   "tp": 14,
+   "fp": 0,
+   "fn": 63,
+   "P": 1.0,
+   "R": 0.182,
+   "F": 0.308
+  }
+ },
+ "latency_ms": null,
+ "linking": {
+  "n_surfaces": 42,
+  "n_clusters_multi": 10,
+  "cluster_exact": 0,
+  "cluster_exact_rate": 0.0,
+  "pair_P": 0.0,
+  "pair_R": 0.0,
+  "pair_F": 0.0,
+  "seconds": 0.0,
+  "wrong_clusters": [],
+  "split_clusters": [
+   [
+    "정민호",
+    "チョン・ミンホ",
+    "Jung Minho",
+    "鄭敏浩",
+    "민호",
+    "Minho"
+   ],
+   [
+    "김민정",
+    "キム・ミンジョン",
+    "Minjeong Kim"
+   ],
+   [
+    "김민준",
+    "金民俊",
+    "Minjun Kim"
+   ],
+   [
+    "윤하람",
+    "ユン・ハラム",
+    "Haram Yun",
+    "하람"
+   ],
+   [
+    "山本健太",
+    "やまもと けんた",
+    "야마모토 겐타",
+    "Kenta Yamamoto",
+    "けんた"
+   ],
+   [
+    "山本健一",
+    "Ken'ichi Yamamoto"
+   ],
+   [
+    "高橋結衣",
+    "たかはし ゆい",
+    "다카하시 유이",
+    "Yui Takahashi",
+    "高橋"
+   ],
+   [
+    "伊藤大翔",
+    "いとう ひろと",
+    "Hiroto Ito",
+    "이토 히로토",
+    "히로토"
+   ],
+   [
+    "オ・セリン",
+    "Serin Oh"
+   ],
+   [
+    "Sophie Martin",
+    "ソフィー・マルタン",
+    "소피 마르탱",
+    "Sophie"
+   ]
+  ],
+  "romanized": null
+ },
+ "errors": [
+  {
+   "id": "e001",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "정민호"
+  },
+  {
+   "id": "e002",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "チョン・ミンホ"
+  },
+  {
+   "id": "e003",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Jung Minho"
+  },
+  {
+   "id": "e004",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "鄭敏浩"
+  },
+  {
+   "id": "e005",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "민호"
+  },
+  {
+   "id": "e006",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "김민정"
+  },
+  {
+   "id": "e006",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "김민준"
+  },
+  {
+   "id": "e007",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "キム・ミンジョン"
+  },
+  {
+   "id": "e008",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Minjeong Kim"
+  },
+  {
+   "id": "e009",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "金民俊"
+  },
+  {
+   "id": "e009",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "김민준"
+  },
+  {
+   "id": "e010",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Minjun Kim"
+  },
+  {
+   "id": "e011",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "정민호"
+  },
+  {
+   "id": "e011",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "김민준"
+  },
+  {
+   "id": "e011",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "오세린"
+  },
+  {
+   "id": "e012",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "김민정"
+  },
+  {
+   "id": "e012",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "정민호"
+  },
+  {
+   "id": "e012",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "윤하람"
+  },
+  {
+   "id": "e013",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "山本健太"
+  },
+  {
+   "id": "e013",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "山本健一"
+  },
+  {
+   "id": "e014",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "やまもと けんた"
+  },
+  {
+   "id": "e015",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "야마모토 겐타"
+  },
+  {
+   "id": "e016",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Kenta Yamamoto"
+  },
+  {
+   "id": "e017",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Ken'ichi Yamamoto"
+  },
+  {
+   "id": "e018",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "山本"
+  },
+  {
+   "id": "e019",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "高橋結衣"
+  },
+  {
+   "id": "e020",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "たかはし ゆい"
+  },
+  {
+   "id": "e021",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "다카하시 유이"
+  },
+  {
+   "id": "e022",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Yui Takahashi"
+  },
+  {
+   "id": "e023",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "伊藤大翔"
+  },
+  {
+   "id": "e023",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "いとう ひろと"
+  },
+  {
+   "id": "e024",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Hiroto Ito"
+  },
+  {
+   "id": "e025",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "이토 히로토"
+  },
+  {
+   "id": "e026",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "오세린"
+  },
+  {
+   "id": "e027",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "オ・セリン"
+  },
+  {
+   "id": "e028",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Serin Oh"
+  },
+  {
+   "id": "e029",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "윤하람"
+  },
+  {
+   "id": "e030",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "ユン・ハラム"
+  },
+  {
+   "id": "e031",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Haram Yun"
+  },
+  {
+   "id": "e031",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Sophie Martin"
+  },
+  {
+   "id": "e032",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "ソフィー・マルタン"
+  },
+  {
+   "id": "e033",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "소피 마르탱"
+  },
+  {
+   "id": "e034",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "東京都千代田区丸の内3丁目4-1 サンプルビル12階"
+  },
+  {
+   "id": "e035",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "大阪府大阪市北区梅田2-5-10"
+  },
+  {
+   "id": "e036",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "부산광역시 해운대구 센텀중앙로 97, 1203호"
+  },
+  {
+   "id": "e037",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "대전 유성구 봉명동 544-7"
+  },
+  {
+   "id": "e038",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "1600 Harbor Blvd, Suite 210, Oakland, CA"
+  },
+  {
+   "id": "e039",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "佐々木"
+  },
+  {
+   "id": "e039",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "岡山市中区浜3丁目"
+  },
+  {
+   "id": "e040",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "서울 강남구 테헤란로 152"
+  },
+  {
+   "id": "e040",
+   "kind": "miss",
+   "type": "ORG",
+   "text": "주식회사 다온소프트"
+  },
+  {
+   "id": "e041",
+   "kind": "miss",
+   "type": "ADDRESS",
+   "text": "3-7-2 Nishi-Shinjuku, Shinjuku-ku, Tokyo"
+  },
+  {
+   "id": "e050",
+   "kind": "miss",
+   "type": "ORG",
+   "text": "한결회계법인"
+  },
+  {
+   "id": "e051",
+   "kind": "miss",
+   "type": "ORG",
+   "text": "合同会社ひかりラボ"
+  },
+  {
+   "id": "e052",
+   "kind": "miss",
+   "type": "ORG",
+   "text": "Bluefin Logistics Ltd."
+  },
+  {
+   "id": "e053",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "김민정"
+  },
+  {
+   "id": "e053",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Sophie"
+  },
+  {
+   "id": "e053",
+   "kind": "miss",
+   "type": "ORG",
+   "text": "合同会社ひかりラボ"
+  },
+  {
+   "id": "e053",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "高橋"
+  },
+  {
+   "id": "e054",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "히로토"
+  },
+  {
+   "id": "e054",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "けんた"
+  },
+  {
+   "id": "e055",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "Minho"
+  },
+  {
+   "id": "e055",
+   "kind": "miss",
+   "type": "PERSON",
+   "text": "하람"
+  }
+ ]
+}
