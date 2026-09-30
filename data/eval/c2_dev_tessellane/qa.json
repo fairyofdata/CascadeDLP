@@ -1,0 +1,18 @@
+{
+ "note": "C6 효용 측정용 질문 (분석자 생성, 2026-09-30). answers는 허용 표기(대소문자 무시, 하나라도 포함되면 정답).",
+ "items": [
+  {"doc": "01_architecture_ko.md", "q": "조율기는 점수를 어디에서 받는가?", "answers": ["리플 랭크", "Ripple Rank", "リップルランク", "ripple_rank"]},
+  {"doc": "01_architecture_ko.md", "q": "레벨3 파이프라인은 몇 단계로 이루어지는가?", "answers": ["세 단계", "3단계", "3 단계", "3개", "three", "3 stages"]},
+  {"doc": "01_architecture_ko.md", "q": "나이트 하베스트는 언제 실행되는가?", "answers": ["새벽 2시", "2시", "02:00", "2 AM", "2am"]},
+  {"doc": "01_architecture_ko.md", "q": "2차 개발에서 독립 서비스로 분리하려는 것은 무엇인가?", "answers": ["조율기", "Adaptive Scheduler", "適応スケジューラ", "adaptive_scheduler"]},
+  {"doc": "01_architecture_ko.md", "q": "골든 슬롯은 몇 시부터 몇 시까지인가?", "answers": ["9~11", "9-11", "9시", "09:00", "오전 9"]},
+  {"doc": "02_README_en.md", "q": "Which service reconciles deliveries with accounting?", "answers": ["Ledger Bridge", "ledger_bridge", "레저 브리지", "元帳ブリッジ"]},
+  {"doc": "02_README_en.md", "q": "How often does the dock status agent report?", "answers": ["30s", "30 s", "30 seconds", "30초", "30秒", "every 30"]},
+  {"doc": "02_README_en.md", "q": "Which component is route building delegated to?", "answers": ["Braid Solver", "braid_solver", "브레이드 솔버", "ブレイドソルバー"]},
+  {"doc": "03_spec_ja.md", "q": "適応スケジューラは経路計算をどこに依頼するか？", "answers": ["ブレイドソルバー", "Braid Solver", "브레이드 솔버", "braid_solver"]},
+  {"doc": "03_spec_ja.md", "q": "精算データと突き合わせるのはどのコンポーネントか？", "answers": ["元帳ブリッジ", "Ledger Bridge", "레저 브리지", "ledger_bridge"]},
+  {"doc": "04_meeting_mixed.md", "q": "레저 브리지 재시도는 몇 회로 합의했는가?", "answers": ["3회", "3回", "3 times", "three", "세 번", "3번"]},
+  {"doc": "05_adr_ledger.md", "q": "이벤트 방식으로 바꾼 뒤 Adaptive Scheduler의 p99 지연은 얼마나 줄었나?", "answers": ["40%", "40 %", "40퍼센트"]},
+  {"doc": "05_adr_ledger.md", "q": "이 변경으로 어느 고객사의 정산 리포트가 늦어질 수 있나?", "answers": ["소라네 로지스틱스", "Sorane Logistics", "ソラネ物流"]}
+ ]
+}

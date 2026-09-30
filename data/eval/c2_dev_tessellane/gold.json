@@ -2,18 +2,134 @@
  "project": "tessellane",
  "note": "C2 개발용 합성 가상 프로젝트의 정답 용어집 (분석자 생성, 2026-09-30). 문서에 실제로 나오는 표기만.",
  "entries": [
-  {"id": "PROJECT_01", "kind": "PROJECT", "surfaces": ["테셀레인", "Tessellane", "TSL", "テセレーン"]},
-  {"id": "COMPONENT_01", "kind": "COMPONENT", "surfaces": ["조율기", "Adaptive Scheduler", "adaptive_scheduler", "AdaptiveScheduler", "適応スケジューラ"]},
-  {"id": "COMPONENT_02", "kind": "COMPONENT", "surfaces": ["레저 브리지", "Ledger Bridge", "ledger_bridge", "元帳ブリッジ"]},
-  {"id": "COMPONENT_03", "kind": "COMPONENT", "surfaces": ["도크 펄스", "Dock Pulse", "dock_pulse", "ドックパルス"]},
-  {"id": "ALGORITHM_01", "kind": "ALGORITHM", "surfaces": ["브레이드 솔버", "Braid Solver", "braid_solver", "ブレイドソルバー"]},
-  {"id": "ALGORITHM_02", "kind": "ALGORITHM", "surfaces": ["리플 랭크", "Ripple Rank", "ripple_rank", "リップルランク"]},
-  {"id": "TERM_01", "kind": "TERM", "surfaces": ["레벨3 파이프라인", "Level-3 Pipeline", "L3パイプライン"]},
-  {"id": "TERM_02", "kind": "TERM", "surfaces": ["나이트 하베스트", "Night Harvest", "夜間ハーベスト"]},
-  {"id": "TERM_03", "kind": "TERM", "surfaces": ["골든 슬롯", "Golden Slot", "ゴールデンスロット"]},
-  {"id": "ORG_01", "kind": "ORG", "surfaces": ["소라네 로지스틱스", "Sorane Logistics", "ソラネ物流"]}
+  {
+   "id": "PROJECT_01",
+   "kind": "PROJECT",
+   "surfaces": [
+    "테셀레인",
+    "Tessellane",
+    "TSL",
+    "テセレーン"
+   ],
+   "alias": "사내 물류 최적화 플랫폼"
+  },
+  {
+   "id": "COMPONENT_01",
+   "kind": "COMPONENT",
+   "surfaces": [
+    "조율기",
+    "Adaptive Scheduler",
+    "adaptive_scheduler",
+    "AdaptiveScheduler",
+    "適応スケジューラ"
+   ],
+   "alias": "작업 우선순위 스케줄러"
+  },
+  {
+   "id": "COMPONENT_02",
+   "kind": "COMPONENT",
+   "surfaces": [
+    "레저 브리지",
+    "Ledger Bridge",
+    "ledger_bridge",
+    "元帳ブリッジ"
+   ],
+   "alias": "정산 연동 모듈"
+  },
+  {
+   "id": "COMPONENT_03",
+   "kind": "COMPONENT",
+   "surfaces": [
+    "도크 펄스",
+    "Dock Pulse",
+    "dock_pulse",
+    "ドックパルス"
+   ],
+   "alias": "창고 도크 상태 에이전트"
+  },
+  {
+   "id": "ALGORITHM_01",
+   "kind": "ALGORITHM",
+   "surfaces": [
+    "브레이드 솔버",
+    "Braid Solver",
+    "braid_solver",
+    "ブレイドソルバー"
+   ],
+   "alias": "경로 계산 알고리즘"
+  },
+  {
+   "id": "ALGORITHM_02",
+   "kind": "ALGORITHM",
+   "surfaces": [
+    "리플 랭크",
+    "Ripple Rank",
+    "ripple_rank",
+    "リップルランク"
+   ],
+   "alias": "우선순위 점수 산식"
+  },
+  {
+   "id": "TERM_01",
+   "kind": "TERM",
+   "surfaces": [
+    "레벨3 파이프라인",
+    "Level-3 Pipeline",
+    "L3パイプライン"
+   ],
+   "alias": "3단계 처리 흐름"
+  },
+  {
+   "id": "TERM_02",
+   "kind": "TERM",
+   "surfaces": [
+    "나이트 하베스트",
+    "Night Harvest",
+    "夜間ハーベスト"
+   ],
+   "alias": "야간 주문 수집 배치"
+  },
+  {
+   "id": "TERM_03",
+   "kind": "TERM",
+   "surfaces": [
+    "골든 슬롯",
+    "Golden Slot",
+    "ゴールデンスロット"
+   ],
+   "alias": "우선 배송 시간대"
+  },
+  {
+   "id": "ORG_01",
+   "kind": "ORG",
+   "surfaces": [
+    "소라네 로지스틱스",
+    "Sorane Logistics",
+    "ソラネ物流"
+   ],
+   "alias": "주요 고객사"
+  }
  ],
- "distractors": ["PostgreSQL", "cron", "스케줄러", "Grafana", "Kafka", "Redis", "Kubernetes", "API Gateway", "GitHub Actions",
-                 "Sprint 14", "OKR", "dead-letter", "스케줄러", "スケジューラ"],
- "persons": ["윤서하", "Mika Tanabe", "田辺 美佳", "Daniel Wu"]
+ "distractors": [
+  "PostgreSQL",
+  "cron",
+  "스케줄러",
+  "Grafana",
+  "Kafka",
+  "Redis",
+  "Kubernetes",
+  "API Gateway",
+  "GitHub Actions",
+  "Sprint 14",
+  "OKR",
+  "dead-letter",
+  "스케줄러",
+  "スケジューラ"
+ ],
+ "persons": [
+  "윤서하",
+  "Mika Tanabe",
+  "田辺 美佳",
+  "Daniel Wu"
+ ]
 }

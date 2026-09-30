@@ -1,0 +1,18 @@
+{
+ "note": "C6 효용 측정용 질문 (분석자 생성, 2026-09-30). answers는 허용 표기(대소문자 무시, 하나라도 포함되면 정답).",
+ "items": [
+  {"doc": "01_overview_en.md", "q": "Where does the ingest gateway write the data?", "answers": ["InfluxDB"]},
+  {"doc": "01_overview_en.md", "q": "Which algorithm produces the anomaly score?", "answers": ["Kappa Lattice", "카파 격자", "カッパ格子"]},
+  {"doc": "01_overview_en.md", "q": "At what time does Dawn Sweep recalibrate the sensors?", "answers": ["04:30", "4:30", "4時30分", "4시 30"]},
+  {"doc": "01_overview_en.md", "q": "Which customer is the first deployment for?", "answers": ["Orinoa Motors", "오리노아 모터스", "オリノア自動車"]},
+  {"doc": "02_design_ko.md", "q": "센서 드리프트를 제거하는 단계는 무엇인가?", "answers": ["이중 창 보정", "Twin Window Correction", "二重窓補正"]},
+  {"doc": "02_design_ko.md", "q": "레드라인 지수가 얼마를 넘으면 라인 리더에게 호출이 가는가?", "answers": ["0.8"]},
+  {"doc": "02_design_ko.md", "q": "엠버 캐시는 점수를 몇 시간 보관하는가?", "answers": ["72"]},
+  {"doc": "03_runbook_ja.md", "q": "残り火キャッシュの使用率が何%を超えたら古い特徴量を削除するか？", "answers": ["90"]},
+  {"doc": "03_runbook_ja.md", "q": "カッパ格子のスコアが急に0になったら、何の入力を確認するか？", "answers": ["二重窓補正", "Twin Window Correction", "이중 창 보정"]},
+  {"doc": "04_meeting_mixed.md", "q": "Kappa Lattice 재학습은 무엇 이후에 해야 하는가?", "answers": ["Dawn Sweep", "새벽 스윕", "夜明けスイープ"]},
+  {"doc": "04_meeting_mixed.md", "q": "tide_gate 재시작 시 세션이 끊기는 문제에 대해 MQTT QoS를 몇으로 바꿨나?", "answers": ["QoS 1", "QoS1", "1로", "QoS를 1"]},
+  {"doc": "05_adr_cache.md", "q": "Ember Cache를 Redis 대신 무엇 기반으로 옮겼는가?", "answers": ["SSD", "RocksDB"]},
+  {"doc": "05_adr_cache.md", "q": "블루 시프트 이후 복구 시간은 얼마로 줄었나?", "answers": ["3분", "3 minutes", "3分", "3 min"]}
+ ]
+}
