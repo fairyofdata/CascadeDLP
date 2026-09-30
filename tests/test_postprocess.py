@@ -34,6 +34,13 @@ def test_name_list_not_merged():
     assert [x for x, _ in surfaces(t, got)] == ["정민호", "김민준", "오세린"]
 
 
+def test_numeric_only_llm_spans_dropped():
+    """'04:30'을 주소로 가리는 과잉 가림 방지 (형식 있는 번호는 규칙 층이 맡음)."""
+    t = "Dawn Sweep runs at 04:30 in Room 402"
+    got = tidy(t, [Span(19, 24, "ADDRESS", "llm"), Span(0, 10, "ORG", "llm")])
+    assert surfaces(t, got) == [("Dawn Sweep", "ORG")]
+
+
 def test_strip_honorifics():
     t1 = "春ちゃんが来ます"
     assert surfaces(t1, tidy(t1, [Span(0, 4, "PERSON")])) == [("春", "PERSON")]

@@ -1,0 +1,28 @@
+{
+ "model": "qwen3.5:9b",
+ "pipeline_version": "v4",
+ "runs": [
+  {
+   "chunk": 1500,
+   "names_total": 12,
+   "names_leaked": 0,
+   "names_leaked_with_q": 1,
+   "numeric_over_masked": 0,
+   "seconds": 76.8,
+   "leaks": [
+    "with_q:03_spec_ja.md:田辺 美佳×1"
+   ]
+  },
+  {
+   "chunk": 300,
+   "names_total": 12,
+   "names_leaked": 0,
+   "names_leaked_with_q": 1,
+   "numeric_over_masked": 0,
+   "seconds": 141.7,
+   "leaks": [
+    "with_q:01_overview_en.md:Priya Raman×1"
+   ]
+  }
+ ]
+}

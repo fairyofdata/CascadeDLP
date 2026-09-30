@@ -1,0 +1,354 @@
+{
+ "corpus": "c2_dev_tessellane",
+ "model": "qwen3.5:9b",
+ "pipeline_version": "v5",
+ "utility_prompt_version": "u1",
+ "results": {
+  "raw": {
+   "correct": 10,
+   "total": 13,
+   "term_exposed": 297,
+   "person_exposed": 13,
+   "seconds": 35.5,
+   "accuracy": 0.769
+  },
+  "pii": {
+   "correct": 9,
+   "total": 13,
+   "term_exposed": 272,
+   "person_exposed": 1,
+   "seconds": 139.2,
+   "accuracy": 0.692
+  },
+  "alias": {
+   "correct": 12,
+   "total": 13,
+   "term_exposed": 0,
+   "person_exposed": 1,
+   "seconds": 141.5,
+   "accuracy": 0.923
+  },
+  "opaque": {
+   "correct": 12,
+   "total": 13,
+   "term_exposed": 0,
+   "person_exposed": 1,
+   "seconds": 139.4,
+   "accuracy": 0.923
+  }
+ },
+ "items": [
+  {
+   "doc": "01_architecture_ko.md",
+   "q": "조율기는 점수를 어디에서 받는가?",
+   "raw": {
+    "ok": true,
+    "answer": "조율기는 점수를 리플 랭크(Ripple Rank)에서 받습니다.",
+    "restored": "조율기는 점수를 리플 랭크(Ripple Rank)에서 받습니다."
+   },
+   "pii": {
+    "ok": false,
+    "answer": "제공된 문서에는 [PERSON_002] 가 점수를 어디서 받는지 명시되어 있지 않습니다.",
+    "restored": "제공된 문서에는 조율기 가 점수를 어디서 받는지 명시되어 있지 않습니다."
+   },
+   "alias": {
+    "ok": true,
+    "answer": "[COMPONENT_01: 작업 우선순위 스케줄러]는 점수를 [ALGORITHM_02: 우선순위 점수 산식]에서 받습니다.",
+    "restored": "조율기는 점수를 리플 랭크에서 받습니다."
+   },
+   "opaque": {
+    "ok": true,
+    "answer": "[COMPONENT_01] 는 점수를 [ALGORITHM_02] 에서 받습니다.",
+    "restored": "조율기 는 점수를 리플 랭크 에서 받습니다."
+   }
+  },
+  {
+   "doc": "01_architecture_ko.md",
+   "q": "레벨3 파이프라인은 몇 단계로 이루어지는가?",
+   "raw": {
+    "ok": true,
+    "answer": "레벨3 파이프라인은 수집, 정제, 배정의 3 단계로 이루어집니다.",
+    "restored": "레벨3 파이프라인은 수집, 정제, 배정의 3 단계로 이루어집니다."
+   },
+   "pii": {
+    "ok": false,
+    "answer": "제공된 문서에는 [ORG_002] 파이프라인의 단계 수에 대한 정보가 없습니다.",
+    "restored": "제공된 문서에는 레벨3 파이프라인의 단계 수에 대한 정보가 없습니다."
+   },
+   "alias": {
+    "ok": true,
+    "answer": "[TERM_01: 3단계 처리 흐름]은 수집, 정제, 배정의 3 단계로 이루어집니다.",
+    "restored": "레벨3 파이프라인은 수집, 정제, 배정의 3 단계로 이루어집니다."
+   },
+   "opaque": {
+    "ok": true,
+    "answer": "[TERM_01]은 수집, 정제, 배정의 3 단계로 이루어집니다.",
+    "restored": "레벨3 파이프라인은 수집, 정제, 배정의 3 단계로 이루어집니다."
+   }
+  },
+  {
+   "doc": "01_architecture_ko.md",
+   "q": "나이트 하베스트는 언제 실행되는가?",
+   "raw": {
+    "ok": true,
+    "answer": "나이트 하베스트는 매일 새벽 2시에 실행됩니다.",
+    "restored": "나이트 하베스트는 매일 새벽 2시에 실행됩니다."
+   },
+   "pii": {
+    "ok": true,
+    "answer": "[ORG_003] 는 매일 새벽 2시에 실행됩니다.",
+    "restored": "나이트 하베스트 는 매일 새벽 2시에 실행됩니다."
+   },
+   "alias": {
+    "ok": true,
+    "answer": "[TERM_02: 야간 주문 수집 배치] 는 매일 새벽 2시에 실행됩니다.",
+    "restored": "나이트 하베스트 는 매일 새벽 2시에 실행됩니다."
+   },
+   "opaque": {
+    "ok": true,
+    "answer": "매일 새벽 2시에 실행됩니다.",
+    "restored": "매일 새벽 2시에 실행됩니다."
+   }
+  },
+  {
+   "doc": "01_architecture_ko.md",
+   "q": "2차 개발에서 독립 서비스로 분리하려는 것은 무엇인가?",
+   "raw": {
+    "ok": false,
+    "answer": "[COMPONENT_01]",
+    "restored": "[COMPONENT_01]"
+   },
+   "pii": {
+    "ok": true,
+    "answer": "조율기 (Adaptive Scheduler) 가 독립 서비스로 분리됩니다.",
+    "restored": "조율기 (Adaptive Scheduler) 가 독립 서비스로 분리됩니다."
+   },
+   "alias": {
+    "ok": true,
+    "answer": "[COMPONENT_01: 작업 우선순위 스케줄러]입니다.",
+    "restored": "조율기입니다."
+   },
+   "opaque": {
+    "ok": true,
+    "answer": "[COMPONENT_01]",
+    "restored": "조율기"
+   }
+  },
+  {
+   "doc": "01_architecture_ko.md",
+   "q": "골든 슬롯은 몇 시부터 몇 시까지인가?",
+   "raw": {
+    "ok": true,
+    "answer": "골든 슬롯은 오전 9시부터 11시까지입니다.",
+    "restored": "골든 슬롯은 오전 9시부터 11시까지입니다."
+   },
+   "pii": {
+    "ok": true,
+    "answer": "[ORG_005]는 오전 9시부터 11시까지입니다.",
+    "restored": "골든 슬롯는 오전 9시부터 11시까지입니다."
+   },
+   "alias": {
+    "ok": true,
+    "answer": "[TERM_03: 우선 배송 시간대]는 오전 9시부터 11시까지입니다.",
+    "restored": "골든 슬롯는 오전 9시부터 11시까지입니다."
+   },
+   "opaque": {
+    "ok": true,
+    "answer": "[TERM_03]은 오전 9시부터 11시까지입니다.",
+    "restored": "골든 슬롯은 오전 9시부터 11시까지입니다."
+   }
+  },
+  {
+   "doc": "02_README_en.md",
+   "q": "Which service reconciles deliveries with accounting?",
+   "raw": {
+    "ok": true,
+    "answer": "Ledger Bridge",
+    "restored": "Ledger Bridge"
+   },
+   "pii": {
+    "ok": true,
+    "answer": "Ledger Bridge",
+    "restored": "Ledger Bridge"
+   },
+   "alias": {
+    "ok": true,
+    "answer": "[COMPONENT_02: 정산 연동 모듈]",
+    "restored": "Ledger Bridge"
+   },
+   "opaque": {
+    "ok": true,
+    "answer": "[COMPONENT_02]",
+    "restored": "Ledger Bridge"
+   }
+  },
+  {
+   "doc": "02_README_en.md",
+   "q": "How often does the dock status agent report?",
+   "raw": {
+    "ok": true,
+    "answer": "The dock status agent reports every 30 seconds.",
+    "restored": "The dock status agent reports every 30 seconds."
+   },
+   "pii": {
+    "ok": true,
+    "answer": "The dock status agent reports every 30 seconds.",
+    "restored": "The dock status agent reports every 30 seconds."
+   },
+   "alias": {
+    "ok": true,
+    "answer": "The dock status agent reports every 30 seconds.",
+    "restored": "The dock status agent reports every 30 seconds."
+   },
+   "opaque": {
+    "ok": true,
+    "answer": "The dock status agent reports every 30 seconds.",
+    "restored": "The dock status agent reports every 30 seconds."
+   }
+  },
+  {
+   "doc": "02_README_en.md",
+   "q": "Which component is route building delegated to?",
+   "raw": {
+    "ok": true,
+    "answer": "Route building is delegated to the Braid Solver (`braid_solver`).",
+    "restored": "Route building is delegated to the Braid Solver (`braid_solver`)."
+   },
+   "pii": {
+    "ok": true,
+    "answer": "Route building is delegated to the Braid Solver (`braid_solver`).",
+    "restored": "Route building is delegated to the Braid Solver (`braid_solver`)."
+   },
+   "alias": {
+    "ok": true,
+    "answer": "Route building is delegated to the [ALGORITHM_01: 경로 계산 알고리즘].",
+    "restored": "Route building is delegated to the Braid Solver."
+   },
+   "opaque": {
+    "ok": true,
+    "answer": "Route building is delegated to the [ALGORITHM_01].",
+    "restored": "Route building is delegated to the Braid Solver."
+   }
+  },
+  {
+   "doc": "03_spec_ja.md",
+   "q": "適応スケジューラは経路計算をどこに依頼するか？",
+   "raw": {
+    "ok": true,
+    "answer": "適応スケジューラは経路計算をブレイドソルバーに依頼します。",
+    "restored": "適応スケジューラは経路計算をブレイドソルバーに依頼します。"
+   },
+   "pii": {
+    "ok": true,
+    "answer": "適応スケジューラは経路計算をブレイドソルバーに依頼します。",
+    "restored": "適応スケジューラは経路計算をブレイドソルバーに依頼します。"
+   },
+   "alias": {
+    "ok": true,
+    "answer": "[COMPONENT_01: 작업 우선순위 스케줄러] は [ALGORITHM_01: 경로 계산 알고리즘] に経路計算を依頼します。",
+    "restored": "適応スケジューラ は ブレイドソルバー に経路計算を依頼します。"
+   },
+   "opaque": {
+    "ok": true,
+    "answer": "[COMPONENT_01] は経路計算を [ALGORITHM_01] に依頼します。",
+    "restored": "適応スケジューラ は経路計算を ブレイドソルバー に依頼します。"
+   }
+  },
+  {
+   "doc": "03_spec_ja.md",
+   "q": "精算データと突き合わせるのはどのコンポーネントか？",
+   "raw": {
+    "ok": false,
+    "answer": "[COMPONENT_01]",
+    "restored": "[COMPONENT_01]"
+   },
+   "pii": {
+    "ok": false,
+    "answer": "ブレイドソルバー",
+    "restored": "ブレイドソルバー"
+   },
+   "alias": {
+    "ok": true,
+    "answer": "[COMPONENT_02: 정산 연동 모듈]",
+    "restored": "元帳ブリッジ"
+   },
+   "opaque": {
+    "ok": true,
+    "answer": "[COMPONENT_02]",
+    "restored": "元帳ブリッジ"
+   }
+  },
+  {
+   "doc": "04_meeting_mixed.md",
+   "q": "레저 브리지 재시도는 몇 회로 합의했는가?",
+   "raw": {
+    "ok": false,
+    "answer": "레저 브리지 재시도는 3 회로 합의했습니다.",
+    "restored": "레저 브리지 재시도는 3 회로 합의했습니다."
+   },
+   "pii": {
+    "ok": false,
+    "answer": "[ORG_006] 재시도는 3 회로 합의했습니다.",
+    "restored": "레저 브리지 재시도는 3 회로 합의했습니다."
+   },
+   "alias": {
+    "ok": false,
+    "answer": "3 회로 합의했습니다.",
+    "restored": "3 회로 합의했습니다."
+   },
+   "opaque": {
+    "ok": false,
+    "answer": "[COMPONENT_02] 재시도는 3 회로 합의했습니다.",
+    "restored": "元帳ブリッジ 재시도는 3 회로 합의했습니다."
+   }
+  },
+  {
+   "doc": "05_adr_ledger.md",
+   "q": "이벤트 방식으로 바꾼 뒤 Adaptive Scheduler의 p99 지연은 얼마나 줄었나?",
+   "raw": {
+    "ok": true,
+    "answer": "이벤트 방식으로 바꾼 뒤 Adaptive Scheduler의 p99 지연은 40% 줄었습니다.",
+    "restored": "이벤트 방식으로 바꾼 뒤 Adaptive Scheduler의 p99 지연은 40% 줄었습니다."
+   },
+   "pii": {
+    "ok": true,
+    "answer": "이벤트 방식으로 바꾼 뒤 Adaptive Scheduler 의 p99 지연은 40% 줄었습니다.",
+    "restored": "이벤트 방식으로 바꾼 뒤 Adaptive Scheduler 의 p99 지연은 40% 줄었습니다."
+   },
+   "alias": {
+    "ok": true,
+    "answer": "이벤트 방식으로 바꾼 뒤 [COMPONENT_01: 작업 우선순위 스케줄러]의 p99 지연은 40% 줄었습니다.",
+    "restored": "이벤트 방식으로 바꾼 뒤 조율기의 p99 지연은 40% 줄었습니다."
+   },
+   "opaque": {
+    "ok": true,
+    "answer": "이벤트 방식으로 바꾼 뒤 [COMPONENT_01]의 p99 지연은 40% 줄었습니다.",
+    "restored": "이벤트 방식으로 바꾼 뒤 조율기의 p99 지연은 40% 줄었습니다."
+   }
+  },
+  {
+   "doc": "05_adr_ledger.md",
+   "q": "이 변경으로 어느 고객사의 정산 리포트가 늦어질 수 있나?",
+   "raw": {
+    "ok": true,
+    "answer": "소라네 로지스틱스",
+    "restored": "소라네 로지스틱스"
+   },
+   "pii": {
+    "ok": true,
+    "answer": "소라네 로지스틱스",
+    "restored": "소라네 로지스틱스"
+   },
+   "alias": {
+    "ok": true,
+    "answer": "[ORG_01: 주요 고객사]의 정산 리포트가 늦어질 수 있습니다.",
+    "restored": "소라네 로지스틱스의 정산 리포트가 늦어질 수 있습니다."
+   },
+   "opaque": {
+    "ok": true,
+    "answer": "[ORG_01]의 정산 리포트가 늦어질 수 있습니다.",
+    "restored": "소라네 로지스틱스의 정산 리포트가 늦어질 수 있습니다."
+   }
+  }
+ ]
+}

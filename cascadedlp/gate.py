@@ -25,7 +25,9 @@ from .pseudo import TOKEN_RE, PseudoMap, mask, unmask
 from .spans import Span, resolve
 
 MAX_LINK_SURFACES = 200
-CHUNK_CHARS = 1500   # LLM 탐지 1회에 넣는 최대 글자 수 (한·일 1500자 ≈ 수천 토큰, 8K 컨텍스트에 여유)
+CHUNK_CHARS = 1500   # 긴 문서를 나누는 기본 크기 (한·일 1500자 ≈ 수천 토큰, 8K 컨텍스트에 여유)
+# 개인정보 탐지는 더 작게 나눈다: 긴 입력에서 로컬 LLM이 이름을 놓치고 입력 모양에 따라 흔들렸다(C6에서 발견).
+DETECT_CHUNK_CHARS = 300
 
 
 def chunks(text: str, limit: int = CHUNK_CHARS) -> list[tuple[int, str]]:
@@ -161,7 +163,7 @@ class Gate:
         pmap = PseudoMap(self.map_path)
         spans = rules.detect(text) + g_spans
         if self.cfg.model:
-            for offset, chunk in chunks(text):  # 긴 문서는 나눠서 (LLM 컨텍스트 8K)
+            for offset, chunk in chunks(text, DETECT_CHUNK_CHARS):  # 나눠서 탐지
                 spans += [Span(s.start + offset, s.end + offset, s.type, s.source)
                           for s in llm.detect(chunk, self.cfg.model)[0]]
         # L0(공개) 용어는 겹침 정리까지는 참여해서 LLM이 그 자리를 가리지 못하게 하고, 그다음 빼서 원문 그대로 둔다
