@@ -47,6 +47,22 @@ answer = call_external_llm(r.masked_text)     # 외부 API에는 가명화된 �
 g.unmask_to_file(answer, r.job_id, "memo_answer.txt")
 ```
 
+## 0. 라우터 (C5) — 권장 진입점
+문서를 로컬이 먼저 보고 경로를 정한다(문서 단위).
+| 경로 | 조건 | 밖으로 나가는 것 |
+|---|---|---|
+| cloud_raw | 민감 항목 없음 | 원문 |
+| cloud_masked | 개인정보·L1/L2 용어만 | 가린 텍스트 |
+| local_only | L3 용어 포함 | 없음 (로컬 모델 답은 로컬 파일로) |
+| block | 비밀키 형식 (`secret_policy`: block 기본 / mask) | 없음 |
+```powershell
+cascadedlp --project myproj route 설계서.md -o 보낼것.md          # 결정 + cloud_*면 보낼 텍스트 파일
+cascadedlp --project myproj route 설계서.md -q "요약해줘" -o 답.md  # local_only면 로컬 모델 답을 답.md에
+cascadedlp audit -n 20                                            # 무엇이 어디로 갔나 (내용 없이)
+```
+MCP: `route_file(path, question?, project?, local_answer_path?)`.
+⚠ L3 용어가 여러 문서에 흩어져 있으면 대부분 로컬 전용이 된다 — L3는 **의미가 정말 비밀인 소수 항목**에만.
+
 ## 4. 프로젝트 용어집 (C1)
 "이 프로젝트에서만 특별한 말"을 적어 두면 레벨대로 가린다. 파일: `~/.cascadedlp/projects/<프로젝트>/glossary.json`
 (가명 맵보다 민감 — 저장소에 두지 말 것. 예시: [data/eval/c1_tessellane/glossary.json](data/eval/c1_tessellane/glossary.json))

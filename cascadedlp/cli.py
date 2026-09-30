@@ -12,6 +12,7 @@ import json
 import sys
 
 from .gate import Gate, GateConfig
+from .router import audit, route_file, sha
 
 
 def main(argv=None):
@@ -37,6 +38,12 @@ def main(argv=None):
     bs.add_argument("-o", "--output", help="검토 md (기본 ~/.cascadedlp/projects/<프로젝트>/review.md)")
     ar = sub.add_parser("apply-review", help="체크한 후보를 용어집에 반영 (--project 필요)")
     ar.add_argument("review")
+    rt = sub.add_parser("route", help="문서를 보고 경로 결정: cloud_raw / cloud_masked / local_only / block")
+    rt.add_argument("input")
+    rt.add_argument("-q", "--question", help="local_only일 때 로컬 모델에 시킬 요청")
+    rt.add_argument("-o", "--output", help="cloud_*: 보낼 텍스트 파일 / local_only: 로컬 답 파일")
+    au = sub.add_parser("audit", help="감사 로그 최근 기록 (내용 없이 해시·개수·경로)")
+    au.add_argument("-n", type=int, default=20)
     a = ap.parse_args(argv)
 
     cfg = GateConfig.load(a.home)
@@ -53,6 +60,8 @@ def main(argv=None):
             return 2
         with open(a.output, "w", encoding="utf-8", newline="") as f:
             f.write(r.masked_text)
+        audit(gate, {"route": "cloud_masked", "source": sha(a.input), "project": r.project, "chars_out": len(r.masked_text),
+                     "counts": r.counts, "job_id": r.job_id, "via": "cli mask"})
         print(f"가명화 {sum(r.counts.values())}개 {r.counts} → {a.output}  ({r.seconds}s, 용어집: {r.project or '없음'})")
         print(f"job: {r.job_id}")
         print(f"복원: cascadedlp unmask <답변파일> --job {r.job_id} -o <결과파일>")
@@ -89,6 +98,28 @@ def main(argv=None):
             info = apply_review(Path(a.review).read_text(encoding="utf-8"), pdir / "glossary.json", project)
             print(f"추가 {info['added']}개, 표기 보강 {info['extended']}개 → 전체 {info['total']}개 ({info['path']})")
             print(f"점검: cascadedlp glossary-check {project}")
+    elif a.cmd == "route":
+        cloud = None
+        r = route_file(gate, a.input, a.project, a.question, a.output if a.question else None)
+        print(f"경로: {r.route}  ({', '.join(r.reasons)})")
+        if r.notice:
+            print(f"  {r.notice}")
+        if r.route in ("cloud_raw", "cloud_masked"):
+            cloud = r.text
+            if a.output:
+                with open(a.output, "w", encoding="utf-8", newline="") as f:
+                    f.write(cloud)
+                print(f"  보낼 텍스트 → {a.output}" + (f"  (복원 job: {r.job_id})" if r.route == "cloud_masked" else ""))
+        if r.local_answer_path:
+            print(f"  로컬 답 → {r.local_answer_path}")
+        return {"block": 3, "local_only": 2}.get(r.route, 0)
+    elif a.cmd == "audit":
+        path = cfg.home / "audit.jsonl"
+        lines = path.read_text(encoding="utf-8").splitlines()[-a.n:] if path.exists() else []
+        for line in lines:
+            e = json.loads(line)
+            print(f"{e['time']}  {e['route']:12s} {e.get('project') or '-':12s} out {e.get('chars_out', 0):>6}자  "
+                  f"{e.get('counts') or ''}")
     elif a.cmd == "glossary-check":
         gl = gate.glossary(a.project)
         levels = {}

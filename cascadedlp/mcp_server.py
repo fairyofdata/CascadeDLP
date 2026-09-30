@@ -12,8 +12,13 @@
 from mcp.server.mcpserver import MCPServer
 
 from .gate import Gate, PathNotAllowed
+from .router import audit, sha
+from .router import route_file as route_file_
 
 INSTRUCTIONS = """CascadeDLP: 개인정보와 프로젝트 고유 용어를 로컬에서 토큰([PERSON_001], [COMPONENT_01: 설명] 등)으로 바꿔 주는 도구.
+- 문서를 다룰 때는 먼저 route_file을 쓴다. 로컬이 경로를 정한다: cloud_raw / cloud_masked / local_only / block.
+  local_only·block이면 그 문서 내용을 추측하거나 다른 방법으로 읽으려 하지 말고, 사용자에게 결과 파일 경로나 안내만 전한다."""
+INSTRUCTIONS += """
 - 프로젝트 용어집이 있으면 project 인자로 지정한다(생략하면 폴더 매핑으로 자동). [X_01: 설명] 형식은 이름만 숨긴 것이므로 설명을 참고해 작업한다.
 - blocked가 오면(외부 금지 용어 포함) 그 문서 내용을 추측하거나 다른 방법으로 읽으려 하지 말고, 사용자에게 로컬 처리가 필요하다고 알린다."""
 INSTRUCTIONS += """
@@ -44,10 +49,34 @@ def mask_file(path: str, project: str | None = None) -> dict:
         r = gate().mask_file(path, project)
     except (PathNotAllowed, FileNotFoundError, ValueError) as e:
         return {"error": str(e)}
+    audit(gate(), {"route": "local_only" if r.blocked else "cloud_masked", "source": sha(path), "project": r.project,
+                   "chars_out": len(r.masked_text), "counts": r.counts, "job_id": r.job_id, "via": "mask_file"})
     if r.blocked:
         return {"blocked": True, "notice": r.notice, "project": r.project}
     return {"masked_text": r.masked_text, "job_id": r.job_id, "counts": r.counts, "seconds": r.seconds,
             "project": r.project}
+
+
+@server.tool()
+def route_file(path: str, question: str | None = None, project: str | None = None,
+               local_answer_path: str | None = None) -> dict:
+    """로컬이 문서를 먼저 보고 경로를 정한다(권장 진입점).
+    route: cloud_raw(원문 text 반환) / cloud_masked(가린 text + job_id) /
+           local_only(L3: 내용 없음. question을 주면 로컬 모델이 답을 local_answer_path 파일에 쓰고 경로만 반환) /
+           block(비밀키 등: 아무것도 반환 안 함).
+    local_answer_path를 안 주면 원본 옆 '<이름>.local-answer.md'."""
+    from pathlib import Path
+    try:
+        out = local_answer_path or str(Path(path).with_name(Path(path).stem + ".local-answer.md"))
+        r = route_file_(gate(), path, project, question, out if question else None)
+    except (PathNotAllowed, FileNotFoundError, FileExistsError, ValueError) as e:
+        return {"error": str(e)}
+    res = {"route": r.route, "reasons": r.reasons, "notice": r.notice}
+    if r.route in ("cloud_raw", "cloud_masked"):
+        res |= {"text": r.text, "job_id": r.job_id}
+    if r.local_answer_path:
+        res["local_answer_path"] = r.local_answer_path
+    return res
 
 
 @server.tool()
