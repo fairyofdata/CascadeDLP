@@ -10,6 +10,13 @@
 
 | `c1_tessellane/docs_v1.jsonl` + `glossary.json` | 분석자 생성 (Claude, 합성 가상 프로젝트) | 35문장 / 36스팬, 용어집 9항목 | 2026-09-30 |
 
+| `c2_dev_tessellane/` (docs 5 + gold.json) | 분석자 생성 (Claude, 합성) | 문서 5개, 정답 10항목·표기 31 | 2026-09-30 |
+| `c2_holdout_quillmere/` (docs 5 + gold.json) | 분석자 생성 (Claude, 합성, **코드 작성 전**) | 문서 5개, 정답 10항목·표기 31 | 2026-09-30 |
+
+### C2 부트스트랩 세트
+- 프로젝트마다 한 설계서·영 README·일 사양서/운영서·혼용 회의록·ADR. 함정: 일반 기술 용어(Kubernetes, cron, Grafana, MQTT …), 일반명사(스케줄러, 캐시, 게이트웨이), 사람 이름.
+- 홀드아웃(Quillmere)은 개발 중 채점하지 않고 코드 고정 후 1회만(`results/frozen_code_c2_holdout.sha256`).
+
 ### C1 Tessellane (프로젝트 용어집)
 - 가상 프로젝트 "Tessellane"의 설계서 문장(한·일·영). 용어 스팬 33 + 개인정보·비밀키 3.
 - 용어집: L0 1 · L1 5(미확정 1 → 실효 L2) · L2 2 · L3 1, 고객사명 1.

@@ -20,6 +20,7 @@
 | [0014](0014-p5-local-transform.md) | P5 로컬 번역·요약: 번역 토큰 보존 100% | 09-30 | 실측 |
 | [0015](0015-cascade-dlp-direction.md) | **방향 전환: PII 마스커 → 캐스케이딩 DLP (CascadeDLP로 개명)** | 09-30 | 사용자 결정 |
 | [0016](0016-project-glossary.md) | C1 프로젝트 용어집: 레벨별 처리(L0 그대로·L1 설명형 별칭·L2 토큰·L3 거부), SECRET 규칙 | 09-30 | 사용자 선택 |
+| [0017](0017-glossary-bootstrap.md) | C2 용어집 부트스트랩: LLM 후보 → md 체크리스트 → apply. 홀드아웃 항목 10/10, 잘못 합침 0 | 09-30 | 사용자 선택 |
 
 > 0001–0014는 옛 이름(LocalPIIGate, 패키지 `piigate`) 시절의 기록이라 본문 표기를 그대로 둔다.
 

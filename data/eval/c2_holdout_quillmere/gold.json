@@ -1,0 +1,18 @@
+{
+ "project": "quillmere",
+ "note": "C2 홀드아웃 합성 가상 프로젝트의 정답 용어집 (분석자 생성, 2026-09-30, 코드 작성 전). 문서에 실제로 나오는 표기만. 개발 중 채점 금지.",
+ "entries": [
+  {"id": "PROJECT_01", "kind": "PROJECT", "surfaces": ["Quillmere", "QLM", "퀼미어", "クイルミア"]},
+  {"id": "COMPONENT_01", "kind": "COMPONENT", "surfaces": ["Tide Gate", "tide_gate", "조수문", "タイドゲート"]},
+  {"id": "COMPONENT_02", "kind": "COMPONENT", "surfaces": ["Ember Cache", "ember_cache", "엠버 캐시", "残り火キャッシュ"]},
+  {"id": "COMPONENT_03", "kind": "COMPONENT", "surfaces": ["Weft Board", "웨프트 보드", "ウェフトボード"]},
+  {"id": "ALGORITHM_01", "kind": "ALGORITHM", "surfaces": ["Kappa Lattice", "카파 격자", "カッパ格子"]},
+  {"id": "ALGORITHM_02", "kind": "ALGORITHM", "surfaces": ["Twin Window Correction", "이중 창 보정", "二重窓補正"]},
+  {"id": "TERM_01", "kind": "TERM", "surfaces": ["Redline Index", "레드라인 지수", "レッドライン指数"]},
+  {"id": "TERM_02", "kind": "TERM", "surfaces": ["Dawn Sweep", "새벽 스윕", "夜明けスイープ"]},
+  {"id": "TERM_03", "kind": "TERM", "surfaces": ["Blue Shift", "블루 시프트", "ブルーシフト"]},
+  {"id": "ORG_01", "kind": "ORG", "surfaces": ["Orinoa Motors", "오리노아 모터스", "オリノア自動車"]}
+ ],
+ "distractors": ["MQTT", "PLC", "InfluxDB", "Grafana", "cron", "Kubernetes", "Redis", "RocksDB", "SSD", "캐시", "게이트웨이", "QoS"],
+ "persons": ["Priya Raman", "한도겸", "森本 さやか"]
+}

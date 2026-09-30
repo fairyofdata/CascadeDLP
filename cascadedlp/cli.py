@@ -32,6 +32,11 @@ def main(argv=None):
     sub.add_parser("entities")
     gc = sub.add_parser("glossary-check")
     gc.add_argument("project")
+    bs = sub.add_parser("bootstrap", help="문서 폴더에서 용어집 후보 검토 md를 만든다 (--project 필요)")
+    bs.add_argument("folder")
+    bs.add_argument("-o", "--output", help="검토 md (기본 ~/.cascadedlp/projects/<프로젝트>/review.md)")
+    ar = sub.add_parser("apply-review", help="체크한 후보를 용어집에 반영 (--project 필요)")
+    ar.add_argument("review")
     a = ap.parse_args(argv)
 
     cfg = GateConfig.load(a.home)
@@ -57,6 +62,33 @@ def main(argv=None):
         info = gate.unmask_to_file(answer, a.job, a.output, overwrite=a.overwrite)
         print(f"복원 {info['restored']}/{info['tokens_in_answer']} → {info['path']}"
               + (f"  (복원 못 한 토큰 {info['unresolved']}개)" if info["unresolved"] else ""))
+    elif a.cmd in ("bootstrap", "apply-review"):
+        from pathlib import Path
+
+        from .bootstrap import apply_review, bootstrap, render_review
+        project = gate.project_for(project=a.project) if a.project else None
+        if not project:
+            print("--project <이름> 이 필요합니다.")
+            return 1
+        pdir = cfg.home / "projects" / project
+        if a.cmd == "bootstrap":
+            if not cfg.model:
+                print("부트스트랩에는 로컬 LLM이 필요합니다(--rules-only 불가).")
+                return 1
+            out = Path(a.output) if a.output else pdir / "review.md"
+            if out.exists():
+                print(f"이미 있습니다(검토 중인 내용 보호): {out} — 지우거나 -o로 다른 이름을 주세요.")
+                return 1
+            res = bootstrap(a.folder, cfg.model)
+            out.parent.mkdir(parents=True, exist_ok=True)
+            out.write_text(render_review(res, project), encoding="utf-8")
+            print(f"후보 {len(res.groups)}개 (제외 {len(res.excluded)}개), 문서 {res.n_docs}개, "
+                  f"LLM {res.llm_calls}회, {res.seconds}s → {out}")
+            print("⚠ 이 파일은 '무엇이 핵심인가'의 초안입니다. 공유·커밋·외부 전송 금지.")
+        else:
+            info = apply_review(Path(a.review).read_text(encoding="utf-8"), pdir / "glossary.json", project)
+            print(f"추가 {info['added']}개, 표기 보강 {info['extended']}개 → 전체 {info['total']}개 ({info['path']})")
+            print(f"점검: cascadedlp glossary-check {project}")
     elif a.cmd == "glossary-check":
         gl = gate.glossary(a.project)
         levels = {}

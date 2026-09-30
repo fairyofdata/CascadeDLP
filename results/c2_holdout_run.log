@@ -1,0 +1,26 @@
+{
+ "corpus": "c2_holdout_quillmere",
+ "model": "qwen3.5:9b",
+ "bootstrap_version": "b1",
+ "docs": 5,
+ "llm_calls": 14,
+ "seconds": 92.3,
+ "candidates": 21,
+ "excluded": 0,
+ "entry_recall": "10/10",
+ "surface_recall": "30/31",
+ "surface_recall_with_suggestions": "30/31",
+ "candidate_precision": 0.905,
+ "wrong_merges": 0,
+ "fragmented_entries": 5,
+ "suggestions_correct": "0/2",
+ "gold_wrongly_excluded": [],
+ "persons_in_candidates": [],
+ "accept_all_coverage": "62/63",
+ "accept_all_over_masked_occurrences": 2,
+ "noise_candidates": [
+  "Plant Sensor Analytics",
+  "RocksDB"
+ ],
+ "missed_entries": []
+}

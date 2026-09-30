@@ -71,6 +71,16 @@ cascadedlp glossary-check myproj                         # 형식 점검
 cascadedlp --project myproj mask 설계서.md -o 설계서.masked.md
 ```
 
+### 용어집 부트스트랩 (C2) — 문서에서 후보를 모아 검토
+```powershell
+cascadedlp --project myproj bootstrap D:\work\myproj\docs     # → ~/.cascadedlp/projects/myproj/review.md
+# review.md 를 열어: 채택할 항목 [ ]→[x], level·설명·표기 수정. '확인 필요' 표기는 '표기' 줄로 옮겨야 반영
+cascadedlp --project myproj apply-review ~/.cascadedlp/projects/myproj/review.md
+cascadedlp glossary-check myproj
+```
+- 문서(md·txt) 5개에 약 1.5분(RTX 3070, qwen3.5:9b). 🔴 review.md는 "무엇이 핵심인가"의 초안 — 공유·커밋·외부 전송 금지(그래서 MCP에는 없음).
+- 같은 대상이 여러 후보로 쪼개져 나오면 표기를 한 항목으로 옮겨 합친다.
+
 ## 성능 (합성 평가, qwen3.5:9b, RTX 3070) — 자세한 건 results/P4_summary_2026-09-30.md
 - 탐지 F1 0.87~0.93, 문장당 약 2.8초. 교차 표기 연결 정밀도 1.0(다른 사람을 섞지 않음).
 - 한계: 한자 이름 읽기(伊藤大翔), 공백으로만 붙은 2인 명단, 주소 경계. **민감한 문서는 가명화 결과를 눈으로 확인한 뒤 보낼 것.**

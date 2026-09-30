@@ -1,0 +1,23 @@
+{
+ "corpus": "c2_dev_tessellane",
+ "model": "qwen3.5:9b",
+ "bootstrap_version": "b1",
+ "docs": 5,
+ "llm_calls": 14,
+ "seconds": 91.7,
+ "candidates": 16,
+ "excluded": 1,
+ "entry_recall": "10/10",
+ "surface_recall": "31/31",
+ "surface_recall_with_suggestions": "31/31",
+ "candidate_precision": 1.0,
+ "wrong_merges": 0,
+ "fragmented_entries": 5,
+ "suggestions_correct": "3/4",
+ "gold_wrongly_excluded": [],
+ "persons_in_candidates": [],
+ "accept_all_coverage": "73/73",
+ "accept_all_over_masked_occurrences": 0,
+ "noise_candidates": [],
+ "missed_entries": []
+}
