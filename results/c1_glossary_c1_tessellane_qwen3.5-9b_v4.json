@@ -1,0 +1,60 @@
+{
+ "pipeline_version": "v4",
+ "model": "qwen3.5:9b",
+ "glossary": "data\\eval\\c1_tessellane\\glossary.json",
+ "match": {
+  "tp": 33,
+  "fp": 0,
+  "fn": 0,
+  "P": 1.0,
+  "R": 1.0,
+  "F1": 1.0
+ },
+ "gate": {
+  "sentences": 35,
+  "blocked": 2,
+  "blocked_expected": 2,
+  "leaks_glossary": 0,
+  "leaks_other": 0,
+  "over_masked": 0,
+  "l0_kept": 2,
+  "l0_total": 2,
+  "roundtrip_ok": 33,
+  "roundtrip_total": 33
+ },
+ "errors": [],
+ "examples": [
+  {
+   "id": "e001",
+   "masked": "[COMPONENT_01: 작업 우선순위 스케줄러]는 [ALGORITHM_02] 점수를 받아 작업 순서를 다시 정한다."
+  },
+  {
+   "id": "e002",
+   "masked": "The [COMPONENT_01: 작업 우선순위 스케줄러] consumes scores from [ALGORITHM_02]."
+  },
+  {
+   "id": "e003",
+   "masked": "[COMPONENT_01: 작업 우선순위 스케줄러]は[ALGORITHM_02]の結果で優先度を更新する。"
+  },
+  {
+   "id": "e004",
+   "masked": "Entry point: [COMPONENT_01: 작업 우선순위 스케줄러].run() in the worker."
+  },
+  {
+   "id": "e005",
+   "masked": "class [COMPONENT_01: 작업 우선순위 스케줄러] wraps the queue."
+  },
+  {
+   "id": "e006",
+   "masked": "See [COMPONENT_01: 작업 우선순위 스케줄러] config and [ALGORITHM_02] weights."
+  },
+  {
+   "id": "e007",
+   "masked": "[PROJECT_01: 사내 물류 최적화 플랫폼] 2차 개발에서는 [COMPONENT_02: 정산 연동 모듈]를 분리한다."
+  },
+  {
+   "id": "e008",
+   "masked": "[PROJECT_01: 사내 물류 최적화 플랫폼] v2 moves the [COMPONENT_02: 정산 연동 모듈] into its own service."
+  }
+ ]
+}

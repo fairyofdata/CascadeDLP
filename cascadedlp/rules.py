@@ -12,6 +12,11 @@ _NB = r"(?<![\d\-])"   # not-before
 _NA = r"(?![\d\-])"    # not-after
 
 PATTERNS: list[tuple[str, re.Pattern]] = [
+    # 비밀키 (C1): 서비스별 접두어가 있는 형식만. 개인 키 블록은 BEGIN~END 전체
+    ("SECRET", re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----[\s\S]*?-----END [A-Z ]*PRIVATE KEY-----")),
+    ("SECRET", re.compile(r"(?<![A-Za-z0-9])(?:sk-(?:ant-|proj-)?[A-Za-z0-9_\-]{20,}|gh[pousr]_[A-Za-z0-9]{30,}"
+                          r"|github_pat_[A-Za-z0-9_]{30,}|AKIA[0-9A-Z]{16}|xox[baprs]-[A-Za-z0-9\-]{10,}"
+                          r"|hf_[A-Za-z0-9]{30,}|AIza[0-9A-Za-z_\-]{35})(?![A-Za-z0-9])")),
     # URL에 쓸 수 있는 ASCII 문자만 (일본어·한국어가 바로 붙어도 거기서 끊긴다)
     ("URL", re.compile(r"(?:https?://|www\.)[A-Za-z0-9\-._~:/?#@!$&'*+,;=%\[\]()]+")),
     ("EMAIL", re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}")),

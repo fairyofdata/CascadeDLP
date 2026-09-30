@@ -10,7 +10,8 @@ import re
 import sys
 
 MARK = re.compile(r"\[\[([A-Z_]+)(?::([A-Za-z0-9_]+))?\|(.+?)\]\]")
-TYPES = {"PERSON", "EMAIL", "PHONE", "POSTAL", "ADDRESS", "URL", "ID_NUMBER", "ORG"}
+TYPES = {"PERSON", "EMAIL", "PHONE", "POSTAL", "ADDRESS", "URL", "ID_NUMBER", "ORG",
+         "PROJECT", "COMPONENT", "ALGORITHM", "TERM", "SECRET"}  # C1: 프로젝트 용어·비밀키
 
 
 def parse(marked: str):

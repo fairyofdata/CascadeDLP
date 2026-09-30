@@ -1,0 +1,35 @@
+{"id": "e001", "lang": "ko", "text": "조율기는 리플 랭크 점수를 받아 작업 순서를 다시 정한다.", "spans": [{"start": 0, "end": 3, "type": "COMPONENT", "entity_id": "COMPONENT_01"}, {"start": 5, "end": 10, "type": "ALGORITHM", "entity_id": "ALGORITHM_02"}], "note": "L1 + L2"}
+{"id": "e002", "lang": "en", "text": "The Adaptive Scheduler consumes scores from Ripple Rank.", "spans": [{"start": 4, "end": 22, "type": "COMPONENT", "entity_id": "COMPONENT_01"}, {"start": 44, "end": 55, "type": "ALGORITHM", "entity_id": "ALGORITHM_02"}], "note": "같은 내용 영어"}
+{"id": "e003", "lang": "ja", "text": "適応スケジューラはリップルランクの結果で優先度を更新する。", "spans": [{"start": 0, "end": 8, "type": "COMPONENT", "entity_id": "COMPONENT_01"}, {"start": 9, "end": 16, "type": "ALGORITHM", "entity_id": "ALGORITHM_02"}], "note": "같은 내용 일본어"}
+{"id": "e004", "lang": "en", "text": "Entry point: adaptive_scheduler.run() in the worker.", "spans": [{"start": 13, "end": 31, "type": "COMPONENT", "entity_id": "COMPONENT_01"}], "note": "snake_case 변형(용어집에 없는 표기)"}
+{"id": "e005", "lang": "en", "text": "class AdaptiveScheduler wraps the queue.", "spans": [{"start": 6, "end": 23, "type": "COMPONENT", "entity_id": "COMPONENT_01"}], "note": "CamelCase 변형"}
+{"id": "e006", "lang": "en", "text": "See adaptive-scheduler config and ripple_rank weights.", "spans": [{"start": 4, "end": 22, "type": "COMPONENT", "entity_id": "COMPONENT_01"}, {"start": 34, "end": 45, "type": "ALGORITHM", "entity_id": "ALGORITHM_02"}], "note": "kebab·snake 변형"}
+{"id": "e007", "lang": "ko", "text": "테셀레인 2차 개발에서는 레저 브리지를 분리한다.", "spans": [{"start": 0, "end": 4, "type": "PROJECT", "entity_id": "PROJECT_01"}, {"start": 14, "end": 20, "type": "COMPONENT", "entity_id": "COMPONENT_02"}], "note": "프로젝트명 + 모듈"}
+{"id": "e008", "lang": "en", "text": "TSL v2 moves the Ledger Bridge into its own service.", "spans": [{"start": 0, "end": 3, "type": "PROJECT", "entity_id": "PROJECT_01"}, {"start": 17, "end": 30, "type": "COMPONENT", "entity_id": "COMPONENT_02"}], "note": "약칭 TSL"}
+{"id": "e009", "lang": "ja", "text": "テセレーンでは元帳ブリッジが精算を担当する。", "spans": [{"start": 0, "end": 5, "type": "PROJECT", "entity_id": "PROJECT_01"}, {"start": 7, "end": 13, "type": "COMPONENT", "entity_id": "COMPONENT_02"}], "note": "일본어"}
+{"id": "e010", "lang": "en", "text": "LEDGER BRIDGE outages must page the on-call.", "spans": [{"start": 0, "end": 13, "type": "COMPONENT", "entity_id": "COMPONENT_02"}], "note": "대문자 변형"}
+{"id": "e011", "lang": "ko", "text": "레벨3 파이프라인은 수집·정제·배정 세 단계로 이루어진다.", "spans": [{"start": 0, "end": 9, "type": "TERM", "entity_id": "TERM_01"}], "note": "L2 용어"}
+{"id": "e012", "lang": "ko", "text": "레벨 3 파이프라인 설명은 부록 B를 본다.", "spans": [{"start": 0, "end": 10, "type": "TERM", "entity_id": "TERM_01"}], "note": "띄어쓰기 변형"}
+{"id": "e013", "lang": "en", "text": "The Level-3 Pipeline runs every 15 minutes.", "spans": [{"start": 4, "end": 20, "type": "TERM", "entity_id": "TERM_01"}], "note": "영어"}
+{"id": "e014", "lang": "en", "text": "level 3 pipeline latency is tracked on the dashboard.", "spans": [{"start": 0, "end": 16, "type": "TERM", "entity_id": "TERM_01"}], "note": "소문자·띄어쓰기 변형"}
+{"id": "e015", "lang": "ja", "text": "L3パイプラインの遅延は監視対象。", "spans": [{"start": 0, "end": 8, "type": "TERM", "entity_id": "TERM_01"}], "note": "일본어"}
+{"id": "e016", "lang": "ko", "text": "나이트 하베스트는 매일 새벽 2시에 돈다.", "spans": [{"start": 0, "end": 8, "type": "TERM", "entity_id": "TERM_02"}], "note": "미확정 항목 → 실효 L2"}
+{"id": "e017", "lang": "en", "text": "Night Harvest writes to the staging bucket.", "spans": [{"start": 0, "end": 13, "type": "TERM", "entity_id": "TERM_02"}], "note": "미확정 영어"}
+{"id": "e018", "lang": "ko", "text": "소라네 로지스틱스 요구사항 3번을 반영했다.", "spans": [{"start": 0, "end": 9, "type": "ORG", "entity_id": "ORG_01"}], "note": "고객사명 L1"}
+{"id": "e019", "lang": "ja", "text": "ソラネ物流向けの帳票を追加。", "spans": [{"start": 0, "end": 5, "type": "ORG", "entity_id": "ORG_01"}], "note": "고객사 일본어"}
+{"id": "e020", "lang": "en", "text": "Requirement from Sorane Logistics: nightly export.", "spans": [{"start": 17, "end": 33, "type": "ORG", "entity_id": "ORG_01"}], "note": "고객사 영어"}
+{"id": "e021", "lang": "en", "text": "The API layer is built on FastAPI.", "spans": [{"start": 26, "end": 33, "type": "PROJECT", "entity_id": "PROJECT_02"}], "note": "L0 공개 — 그대로 남아야 함"}
+{"id": "e022", "lang": "ko", "text": "FastAPI 버전은 0.12x로 고정한다.", "spans": [{"start": 0, "end": 7, "type": "PROJECT", "entity_id": "PROJECT_02"}], "note": "L0 한국어 문장"}
+{"id": "e023", "lang": "ko", "text": "담당자 윤서하가 조율기 리뷰를 맡는다.", "spans": [{"start": 4, "end": 7, "type": "PERSON"}, {"start": 9, "end": 12, "type": "COMPONENT", "entity_id": "COMPONENT_01"}], "note": "개인정보 + 용어"}
+{"id": "e024", "lang": "en", "text": "Ping dev-lead@example.com before changing Ripple Rank weights.", "spans": [{"start": 5, "end": 25, "type": "EMAIL"}, {"start": 42, "end": 53, "type": "ALGORITHM", "entity_id": "ALGORITHM_02"}], "note": "메일 + 용어"}
+{"id": "e025", "lang": "ko", "text": "브레이드 솔버의 수식은 이 문서에 적지 않는다.", "spans": [{"start": 0, "end": 7, "type": "ALGORITHM", "entity_id": "ALGORITHM_01"}], "note": "L3 → 문서 생성 거부"}
+{"id": "e026", "lang": "en", "text": "Braid Solver replaces the old greedy router.", "spans": [{"start": 0, "end": 12, "type": "ALGORITHM", "entity_id": "ALGORITHM_01"}], "note": "L3 영어"}
+{"id": "e027", "lang": "en", "text": "Deploy key: sk-proj-AbCdEfGhIjKlMnOpQrStUvWx0123456789", "spans": [{"start": 12, "end": 54, "type": "SECRET"}], "note": "가짜 비밀키 형식"}
+{"id": "e028", "lang": "ko", "text": "일반적인 작업 스케줄러는 cron으로 충분하다.", "spans": [], "note": "함정: 일반명사 '스케줄러' — 라벨 없음"}
+{"id": "e029", "lang": "en", "text": "We evaluated an adaptive scheduling paper from 2019.", "spans": [], "note": "함정: adaptive scheduling(다른 말) — 라벨 없음"}
+{"id": "e030", "lang": "en", "text": "Her hair was in a braid; the solver team laughed.", "spans": [], "note": "함정: braid, solver 따로 — 라벨 없음"}
+{"id": "e031", "lang": "en", "text": "A ripple effect in ranking was observed.", "spans": [], "note": "함정: ripple / ranking — 라벨 없음"}
+{"id": "e032", "lang": "ko", "text": "레벨 3 인증이 필요한 화면이다.", "spans": [], "note": "함정: '레벨 3' 뒤 파이프라인 없음 — 라벨 없음"}
+{"id": "e033", "lang": "en", "text": "Atlassian and Tessellation are unrelated terms.", "spans": [], "note": "함정: TSL·Tessellane 부분 문자열 아님 — 라벨 없음"}
+{"id": "e034", "lang": "en", "text": "The ledger and the bridge are separate tables.", "spans": [], "note": "함정: ledger, bridge 따로 — 라벨 없음"}
+{"id": "e035", "lang": "ja", "text": "スケジューラの一般的な設定例。", "spans": [], "note": "함정: 일반명사 スケジューラ — 라벨 없음"}

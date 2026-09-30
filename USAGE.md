@@ -47,6 +47,30 @@ answer = call_external_llm(r.masked_text)     # 외부 API에는 가명화된 �
 g.unmask_to_file(answer, r.job_id, "memo_answer.txt")
 ```
 
+## 4. 프로젝트 용어집 (C1)
+"이 프로젝트에서만 특별한 말"을 적어 두면 레벨대로 가린다. 파일: `~/.cascadedlp/projects/<프로젝트>/glossary.json`
+(가명 맵보다 민감 — 저장소에 두지 말 것. 예시: [data/eval/c1_tessellane/glossary.json](data/eval/c1_tessellane/glossary.json))
+```json
+{"project": "myproj", "entries": [
+  {"id": "COMPONENT_01", "kind": "COMPONENT", "level": 1, "status": "confirmed",
+   "surfaces": ["Adaptive Scheduler", "조율기", "適応スケジューラ"], "alias": "작업 우선순위 스케줄러"}
+]}
+```
+| level | 밖으로 나가는 모양 |
+|---|---|
+| 0 공개 | 그대로 |
+| 1 내부 | `[COMPONENT_01: 작업 우선순위 스케줄러]` (이름만 숨김) |
+| 2 핵심 | `[COMPONENT_01]` |
+| 3 외부 금지 | 클라우드용 텍스트를 만들지 않음 → 로컬 모델로 |
+
+- `status`가 `confirmed`가 아니면 최소 레벨 2로 처리.
+- 표기 하나만 적어도 `adaptive_scheduler`, `AdaptiveScheduler`, `ADAPTIVE SCHEDULER` 같은 변형을 같이 잡는다. 일반명사 그대로(`スケジューラ`)는 적지 말고 한정어가 붙은 표기로.
+- 적용할 프로젝트: `config.json`에 `"projects": {"myproj": ["D:\\work\\myproj"]}` (폴더 아래 파일에 자동), 또는 `--project myproj` / MCP `project` 인자.
+```powershell
+cascadedlp glossary-check myproj                         # 형식 점검
+cascadedlp --project myproj mask 설계서.md -o 설계서.masked.md
+```
+
 ## 성능 (합성 평가, qwen3.5:9b, RTX 3070) — 자세한 건 results/P4_summary_2026-09-30.md
 - 탐지 F1 0.87~0.93, 문장당 약 2.8초. 교차 표기 연결 정밀도 1.0(다른 사람을 섞지 않음).
 - 한계: 한자 이름 읽기(伊藤大翔), 공백으로만 붙은 2인 명단, 주소 경계. **민감한 문서는 가명화 결과를 눈으로 확인한 뒤 보낼 것.**

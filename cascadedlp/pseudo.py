@@ -12,7 +12,14 @@ from pathlib import Path
 
 from .spans import Span
 
-TOKEN_RE = re.compile(r"\[([A-Z_]+)_(\d{3,})\]")
+# [PERSON_001] (가명 맵), [COMPONENT_01] (용어집), [COMPONENT_01: 작업 우선순위 스케줄러] (L1 설명형 별칭)
+TOKEN_RE = re.compile(r"\[([A-Z_]+)_(\d{2,})(?::[^\[\]\n]{0,80})?\]")
+
+
+def canonical(token_text: str) -> str:
+    """'[COMPONENT_01: 설명]' → '[COMPONENT_01]'. 복원은 설명이 아니라 id로 한다(외부 LLM이 설명을 바꿔 써도 복원됨)."""
+    m = TOKEN_RE.fullmatch(token_text)
+    return f"[{m.group(1)}_{m.group(2)}]" if m else token_text
 
 
 def norm(surface: str) -> str:
@@ -70,16 +77,20 @@ def mask(text: str, spans: list[Span], pmap: PseudoMap, links: dict[str, list[st
     """spans(겹침 정리된 것)를 토큰으로 바꾼다. → (가명화된 텍스트, 복원표)
 
     links: {표기: [같은 사람의 다른 표기, ...]} — P4 LLM의 교차 표기 연결 제안.
+    용어집 스팬(meta 있음)은 가명 맵을 쓰지 않고 용어집이 정한 토큰·모양(render)을 쓴다.
     """
     if TOKEN_RE.search(text):
-        raise ValueError("원문에 이미 [TYPE_001] 형태의 문자열이 있어 복원이 모호해집니다.")
+        raise ValueError("원문에 이미 [TYPE_01] 형태의 문자열이 있어 복원이 모호해집니다.")
     links = links or {}
     out, restore, pos = [], [], 0
     for s in sorted(spans, key=lambda s: s.start):
         surface = text[s.start:s.end]
-        tok = pmap.token_for(s.type, surface, links.get(surface, []))
+        if s.meta:
+            tok, shown = s.meta["token"], s.meta["render"]
+        else:
+            tok = shown = pmap.token_for(s.type, surface, links.get(surface, []))
         out.append(text[pos:s.start])
-        out.append(tok)
+        out.append(shown)
         restore.append({"token": tok, "surface": surface})
         pos = s.end
     out.append(text[pos:])
@@ -100,7 +111,7 @@ def unmask(masked: str, restore: list[dict], pmap: PseudoMap | None = None) -> s
         first.setdefault(r["token"], r["surface"])
 
     def repl(m: re.Match) -> str:
-        tok = m.group(0)
+        tok = canonical(m.group(0))
         if queues.get(tok):
             return queues[tok].pop(0)
         if tok in first:

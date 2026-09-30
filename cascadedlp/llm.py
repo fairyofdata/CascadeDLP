@@ -16,7 +16,8 @@ from .spans import Span
 # v1: 탐지 + 연결(표기 목록 전체를 한 번에 묶게 함)
 # v2: 탐지 프롬프트 동일 + 조각 병합·호칭 제거 후처리, 연결은 romanize()(표기마다 로마자 발음) + linking.py가 판정
 # v3: 프롬프트 동일. eval_v2 결과를 보고 후처리(명단 병합 금지)·연결 판정(성 비교 완화)·규칙(전화 형식) 수정
-PROMPT_VERSION = "v3"
+# v4: 프롬프트 동일. C1 — 비밀키 규칙(SECRET) 추가, 프로젝트 용어집 스팬이 LLM보다 우선
+PROMPT_VERSION = "v4"
 OLLAMA_URL = "http://localhost:11434/api/chat"
 OPTIONS = {"temperature": 0, "num_ctx": 8192}
 LLM_TYPES = ["PERSON", "ADDRESS", "ORG"]

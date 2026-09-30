@@ -1,0 +1,38 @@
+# C1 합성 설계서 문장 v1 (분석자 = Claude 생성, 2026-09-30). 가상 프로젝트 Tessellane. 전부 지어낸 것.
+# 형식: lang<TAB>text<TAB>note — 스팬: [[KIND:용어집ID|원문]] (용어집에 적힌 표기와 그 변형). 개인정보는 [[PERSON|..]] 등.
+# 목적: 용어집 매칭의 재현율(표기 변형: 띄어쓰기·_·-·CamelCase·대소문자)과 정밀도(일반명사로 쓰인 같은 단어), 레벨별 출력 확인.
+ko	[[COMPONENT:COMPONENT_01|조율기]]는 [[ALGORITHM:ALGORITHM_02|리플 랭크]] 점수를 받아 작업 순서를 다시 정한다.	L1 + L2
+en	The [[COMPONENT:COMPONENT_01|Adaptive Scheduler]] consumes scores from [[ALGORITHM:ALGORITHM_02|Ripple Rank]].	같은 내용 영어
+ja	[[COMPONENT:COMPONENT_01|適応スケジューラ]]は[[ALGORITHM:ALGORITHM_02|リップルランク]]の結果で優先度を更新する。	같은 내용 일본어
+en	Entry point: [[COMPONENT:COMPONENT_01|adaptive_scheduler]].run() in the worker.	snake_case 변형(용어집에 없는 표기)
+en	class [[COMPONENT:COMPONENT_01|AdaptiveScheduler]] wraps the queue.	CamelCase 변형
+en	See [[COMPONENT:COMPONENT_01|adaptive-scheduler]] config and [[ALGORITHM:ALGORITHM_02|ripple_rank]] weights.	kebab·snake 변형
+ko	[[PROJECT:PROJECT_01|테셀레인]] 2차 개발에서는 [[COMPONENT:COMPONENT_02|레저 브리지]]를 분리한다.	프로젝트명 + 모듈
+en	[[PROJECT:PROJECT_01|TSL]] v2 moves the [[COMPONENT:COMPONENT_02|Ledger Bridge]] into its own service.	약칭 TSL
+ja	[[PROJECT:PROJECT_01|テセレーン]]では[[COMPONENT:COMPONENT_02|元帳ブリッジ]]が精算を担当する。	일본어
+en	[[COMPONENT:COMPONENT_02|LEDGER BRIDGE]] outages must page the on-call.	대문자 변형
+ko	[[TERM:TERM_01|레벨3 파이프라인]]은 수집·정제·배정 세 단계로 이루어진다.	L2 용어
+ko	[[TERM:TERM_01|레벨 3 파이프라인]] 설명은 부록 B를 본다.	띄어쓰기 변형
+en	The [[TERM:TERM_01|Level-3 Pipeline]] runs every 15 minutes.	영어
+en	[[TERM:TERM_01|level 3 pipeline]] latency is tracked on the dashboard.	소문자·띄어쓰기 변형
+ja	[[TERM:TERM_01|L3パイプライン]]の遅延は監視対象。	일본어
+ko	[[TERM:TERM_02|나이트 하베스트]]는 매일 새벽 2시에 돈다.	미확정 항목 → 실효 L2
+en	[[TERM:TERM_02|Night Harvest]] writes to the staging bucket.	미확정 영어
+ko	[[ORG:ORG_01|소라네 로지스틱스]] 요구사항 3번을 반영했다.	고객사명 L1
+ja	[[ORG:ORG_01|ソラネ物流]]向けの帳票を追加。	고객사 일본어
+en	Requirement from [[ORG:ORG_01|Sorane Logistics]]: nightly export.	고객사 영어
+en	The API layer is built on [[PROJECT:PROJECT_02|FastAPI]].	L0 공개 — 그대로 남아야 함
+ko	[[PROJECT:PROJECT_02|FastAPI]] 버전은 0.12x로 고정한다.	L0 한국어 문장
+ko	담당자 [[PERSON|윤서하]]가 [[COMPONENT:COMPONENT_01|조율기]] 리뷰를 맡는다.	개인정보 + 용어
+en	Ping [[EMAIL|dev-lead@example.com]] before changing [[ALGORITHM:ALGORITHM_02|Ripple Rank]] weights.	메일 + 용어
+ko	[[ALGORITHM:ALGORITHM_01|브레이드 솔버]]의 수식은 이 문서에 적지 않는다.	L3 → 문서 생성 거부
+en	[[ALGORITHM:ALGORITHM_01|Braid Solver]] replaces the old greedy router.	L3 영어
+en	Deploy key: [[SECRET|sk-proj-AbCdEfGhIjKlMnOpQrStUvWx0123456789]]	가짜 비밀키 형식
+ko	일반적인 작업 스케줄러는 cron으로 충분하다.	함정: 일반명사 '스케줄러' — 라벨 없음
+en	We evaluated an adaptive scheduling paper from 2019.	함정: adaptive scheduling(다른 말) — 라벨 없음
+en	Her hair was in a braid; the solver team laughed.	함정: braid, solver 따로 — 라벨 없음
+en	A ripple effect in ranking was observed.	함정: ripple / ranking — 라벨 없음
+ko	레벨 3 인증이 필요한 화면이다.	함정: '레벨 3' 뒤 파이프라인 없음 — 라벨 없음
+en	Atlassian and Tessellation are unrelated terms.	함정: TSL·Tessellane 부분 문자열 아님 — 라벨 없음
+en	The ledger and the bridge are separate tables.	함정: ledger, bridge 따로 — 라벨 없음
+ja	スケジューラの一般的な設定例。	함정: 일반명사 スケジューラ — 라벨 없음

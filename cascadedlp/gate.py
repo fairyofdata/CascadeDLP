@@ -12,6 +12,7 @@
 """
 import json
 import os
+import re
 import secrets
 import time
 from collections import Counter
@@ -19,6 +20,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from . import linking, llm, rules
+from .glossary import Glossary
 from .pseudo import TOKEN_RE, PseudoMap, mask, unmask
 from .spans import Span, resolve
 
@@ -59,6 +61,7 @@ class GateConfig:
     model: str | None = "qwen3.5:9b"      # None이면 규칙만 (LLM 없이)
     link: bool = True                     # 교차 표기 연결 사용
     allowed_roots: list[str] = field(default_factory=list)  # restrict_paths일 때 읽기·쓰기 허용 폴더
+    projects: dict[str, list[str]] = field(default_factory=dict)  # {프로젝트: [폴더, ...]} — 폴더 아래 파일에 그 용어집 적용
 
     @classmethod
     def load(cls, home: Path | None = None) -> "GateConfig":
@@ -70,11 +73,11 @@ class GateConfig:
         if path.exists():
             data = json.loads(path.read_text(encoding="utf-8"))
         else:
-            data = {"model": "qwen3.5:9b", "link": True, "allowed_roots": [str(Path.home())]}
+            data = {"model": "qwen3.5:9b", "link": True, "allowed_roots": [str(Path.home())], "projects": {}}
             home.mkdir(parents=True, exist_ok=True)
             path.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
         return cls(home=home, model=data.get("model"), link=data.get("link", True),
-                   allowed_roots=data.get("allowed_roots", []))
+                   allowed_roots=data.get("allowed_roots", []), projects=data.get("projects", {}))
 
 
 @dataclass
@@ -83,10 +86,16 @@ class MaskResult:
     job_id: str
     counts: dict[str, int]      # 유형별 가명화 개수 (원래 값은 없음)
     seconds: float
+    project: str | None = None
+    blocked: bool = False       # L3(외부 금지) 용어가 있어 클라우드용 텍스트를 만들지 않음
+    notice: str = ""
 
 
 class PathNotAllowed(PermissionError):
     pass
+
+
+_PROJECT_NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9_\-]{0,63}")
 
 
 # 허용 범위 안이라도 항상 막는 폴더 (사용자 폴더 기준). 가명 맵 폴더(cfg.home)도 항상 막힌다.
@@ -115,17 +124,48 @@ class Gate:
         raise PathNotAllowed(f"허용 폴더 밖의 경로입니다: {p}  (허용: {self.cfg.allowed_roots or '없음'} — "
                              f"{self.cfg.home / 'config.json'} 의 allowed_roots 에 추가)")
 
+    # ── 프로젝트 용어집 ────────────────────────────────────
+    def project_for(self, path: str | Path | None = None, project: str | None = None) -> str | None:
+        """직접 지정이 우선, 없으면 config의 폴더 매핑으로 찾는다."""
+        if project:
+            if not _PROJECT_NAME.fullmatch(project):
+                raise ValueError("프로젝트 이름은 영문·숫자·_·- 만")
+            return project
+        if path is not None:
+            p = Path(path).resolve()
+            for name, roots in self.cfg.projects.items():
+                if any(p.is_relative_to(Path(r).resolve()) for r in roots):
+                    return name
+        return None
+
+    def glossary(self, project: str | None) -> Glossary:
+        if not project:
+            return Glossary.empty()
+        path = self.cfg.home / "projects" / project / "glossary.json"
+        if not path.exists():
+            raise FileNotFoundError(f"'{project}' 용어집이 없습니다: {path}")
+        return Glossary.load(path)
+
     # ── 가명화 ────────────────────────────────────────────
-    def mask_text(self, text: str) -> MaskResult:
-        """로컬 프로그램용. (MCP에는 노출하지 않는다 — 원문이 호출자를 거치게 되므로)"""
+    def mask_text(self, text: str, project: str | None = None) -> MaskResult:
+        """로컬 프로그램용. (MCP에는 노출하지 않는다 — 원문이 호출자를 거치게 되므로)
+        project를 주면 그 용어집의 레벨대로: L0 그대로 · L1 설명형 별칭 · L2 불투명 토큰 · L3 있으면 생성 거부."""
         t0 = time.perf_counter()
+        gl = self.glossary(project)
+        g_spans = gl.match(text)
+        l3 = sorted({s.entity_id for s in g_spans if s.meta["level"] == 3})
+        if l3:  # 외부 금지 용어가 있으면 클라우드용 텍스트를 만들지 않는다(무엇이 걸렸는지 용어 자체는 알리지 않음)
+            return MaskResult("", "", {}, round(time.perf_counter() - t0, 2), project, blocked=True,
+                              notice=f"L3(외부 금지) 항목 {len(l3)}종({', '.join(l3)})이 있어 클라우드용 텍스트를 만들지 않았습니다. "
+                                     f"로컬 모델로 처리하거나 해당 부분을 빼고 다시 시도하세요.")
         pmap = PseudoMap(self.map_path)
-        spans = rules.detect(text)
+        spans = rules.detect(text) + g_spans
         if self.cfg.model:
             for offset, chunk in chunks(text):  # 긴 문서는 나눠서 (LLM 컨텍스트 8K)
                 spans += [Span(s.start + offset, s.end + offset, s.type, s.source)
                           for s in llm.detect(chunk, self.cfg.model)[0]]
-        spans = resolve(spans)
+        # L0(공개) 용어는 겹침 정리까지는 참여해서 LLM이 그 자리를 가리지 못하게 하고, 그다음 빼서 원문 그대로 둔다
+        spans = [s for s in resolve(spans) if not (s.meta and s.meta["level"] == 0)]
         links = self._links(text, spans, pmap) if (self.cfg.model and self.cfg.link) else {}
         masked, restore = mask(text, spans, pmap, links)
         pmap.save()
@@ -133,12 +173,12 @@ class Gate:
         self.restore_dir.mkdir(parents=True, exist_ok=True)
         (self.restore_dir / f"{job_id}.json").write_text(json.dumps(restore, ensure_ascii=False), encoding="utf-8")
         counts = dict(Counter(TOKEN_RE.match(r["token"]).group(1) for r in restore))
-        return MaskResult(masked, job_id, counts, round(time.perf_counter() - t0, 2))
+        return MaskResult(masked, job_id, counts, round(time.perf_counter() - t0, 2), project)
 
-    def mask_file(self, path: str | Path) -> MaskResult:
+    def mask_file(self, path: str | Path, project: str | None = None) -> MaskResult:
         p = self._check(path)
         with open(p, encoding="utf-8", newline="") as f:  # 줄바꿈을 바꾸지 않아야 바이트 일치 복원
-            return self.mask_text(f.read())
+            return self.mask_text(f.read(), self.project_for(p, project))
 
     def _links(self, text, spans, pmap: PseudoMap) -> dict[str, list[str]]:
         """문서의 이름 + 맵에 이미 있는 이름을 로마자로 비교해 같은 사람 표기를 모은다 → {표기: [같은 사람 표기들]}"""

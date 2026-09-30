@@ -46,12 +46,27 @@ def summarize(masked: str, lang: str, model: str) -> str:
 _LOOSE = re.compile(r"(?:[\[【［「〔(]\s*)?([A-Z]+(?:_[A-Z]+)*)[\s_＿]?(\d{1,4})(?:\s*[\]】］」〕)])?")
 
 
+_KINDS = ("PERSON", "EMAIL", "PHONE", "ADDRESS", "ORG", "URL", "POSTAL", "ID_NUMBER",
+          "PROJECT", "COMPONENT", "ALGORITHM", "TERM", "SECRET")
+
+
 def repair_tokens(output: str, input_tokens: set[str]) -> str:
     """망가진 토큰을 입력에 있던 정확한 토큰으로 되돌린다. 입력에 없던 토큰이 되는 경우는 건드리지 않는다."""
     def fix(m: re.Match) -> str:
-        cand = f"[{m.group(1)}_{int(m.group(2)):03d}]"
-        return cand if cand in input_tokens else m.group(0)
-    return _LOOSE.sub(fix, output)
+        for width in (3, 2):  # 가명 맵은 3자리([PERSON_001]), 용어집은 2자리([COMPONENT_01])
+            cand = f"[{m.group(1)}_{int(m.group(2)):0{width}d}]"
+            if cand in input_tokens:
+                return cand
+        return m.group(0)
+
+    # 이미 올바른 토큰([X_01], [X_01: 설명])은 건드리지 않고, 그 사이 구간에서만 보정한다
+    out, pos = [], 0
+    for t in TOKEN_RE.finditer(output):
+        out.append(_LOOSE.sub(fix, output[pos:t.start()]))
+        out.append(t.group(0))
+        pos = t.end()
+    out.append(_LOOSE.sub(fix, output[pos:]))
+    return "".join(out)
 
 
 def token_report(input_text: str, output: str) -> dict:
@@ -59,9 +74,8 @@ def token_report(input_text: str, output: str) -> dict:
     src_set = {f"[{t}_{n}]" for t, n in src}
     out_tokens = [f"[{t}_{n}]" for t, n in TOKEN_RE.findall(output)]
     out_set = set(out_tokens)
-    loose = [m.group(0) for m in _LOOSE.finditer(output)]
-    malformed = [x for x in loose if not TOKEN_RE.fullmatch(x.strip()) and re.search(r"[A-Z]{3,}", x)
-                 and any(k in x for k in ("PERSON", "EMAIL", "PHONE", "ADDRESS", "ORG", "URL", "POSTAL", "ID_NUMBER"))]
+    outside = TOKEN_RE.sub(" ", output)  # 올바른 토큰을 지운 나머지에서만 망가진 모양을 찾는다
+    malformed = [m.group(0) for m in _LOOSE.finditer(outside) if any(k in m.group(0) for k in _KINDS)]
     return {
         "input_unique": len(src_set),
         "preserved_unique": len(src_set & out_set),       # 입력 토큰 종류 중 출력에 그대로 있는 것

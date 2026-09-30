@@ -1,0 +1,33 @@
+{
+ "project": "tessellane",
+ "note": "합성 가상 프로젝트 용어집 (분석자 생성, 2026-09-30). 실제 회사·제품과 무관한 지어낸 이름.",
+ "entries": [
+  {"id": "PROJECT_01", "kind": "PROJECT", "level": 1, "status": "confirmed",
+   "surfaces": ["Tessellane", "테셀레인", "テセレーン", "TSL"],
+   "alias": "사내 물류 최적화 플랫폼"},
+  {"id": "COMPONENT_01", "kind": "COMPONENT", "level": 1, "status": "confirmed",
+   "surfaces": ["Adaptive Scheduler", "조율기", "適応スケジューラ"],
+   "alias": "작업 우선순위 스케줄러"},
+  {"id": "COMPONENT_02", "kind": "COMPONENT", "level": 1, "status": "confirmed",
+   "surfaces": ["Ledger Bridge", "레저 브리지", "元帳ブリッジ"],
+   "alias": "정산 연동 모듈"},
+  {"id": "ALGORITHM_01", "kind": "ALGORITHM", "level": 3, "status": "confirmed",
+   "surfaces": ["Braid Solver", "브레이드 솔버", "ブレイドソルバー"],
+   "alias": "경로 최적화 알고리즘"},
+  {"id": "ALGORITHM_02", "kind": "ALGORITHM", "level": 2, "status": "confirmed",
+   "surfaces": ["Ripple Rank", "리플 랭크", "リップルランク"],
+   "alias": "우선순위 점수 산식"},
+  {"id": "TERM_01", "kind": "TERM", "level": 2, "status": "confirmed",
+   "surfaces": ["레벨3 파이프라인", "Level-3 Pipeline", "L3パイプライン"],
+   "alias": "다단계 처리 흐름"},
+  {"id": "TERM_02", "kind": "TERM", "level": 1, "status": "proposed",
+   "surfaces": ["Night Harvest", "나이트 하베스트", "夜間ハーベスト"],
+   "alias": "야간 일괄 수집 작업"},
+  {"id": "ORG_01", "kind": "ORG", "level": 1, "status": "confirmed",
+   "surfaces": ["Sorane Logistics", "소라네 로지스틱스", "ソラネ物流"],
+   "alias": "주요 고객사"},
+  {"id": "PROJECT_02", "kind": "PROJECT", "level": 0, "status": "confirmed",
+   "surfaces": ["FastAPI"],
+   "alias": "공개 웹 프레임워크"}
+ ]
+}

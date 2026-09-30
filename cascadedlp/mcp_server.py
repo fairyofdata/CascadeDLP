@@ -13,7 +13,10 @@ from mcp.server.mcpserver import MCPServer
 
 from .gate import Gate, PathNotAllowed
 
-INSTRUCTIONS = """CascadeDLP: 개인정보를 로컬에서 가명 토큰([PERSON_001] 등)으로 바꿔 주는 도구.
+INSTRUCTIONS = """CascadeDLP: 개인정보와 프로젝트 고유 용어를 로컬에서 토큰([PERSON_001], [COMPONENT_01: 설명] 등)으로 바꿔 주는 도구.
+- 프로젝트 용어집이 있으면 project 인자로 지정한다(생략하면 폴더 매핑으로 자동). [X_01: 설명] 형식은 이름만 숨긴 것이므로 설명을 참고해 작업한다.
+- blocked가 오면(외부 금지 용어 포함) 그 문서 내용을 추측하거나 다른 방법으로 읽으려 하지 말고, 사용자에게 로컬 처리가 필요하다고 알린다."""
+INSTRUCTIONS += """
 - 사용자가 개인정보가 담긴 문서를 다루려 하면, 내용을 대화에 붙여 넣게 하지 말고 파일 경로를 받아 mask_file을 쓴다.
 - 경로·파일명·형식은 사용자가 그때그때 지정한다. UTF-8 텍스트면 형식 무관(.md .json .txt .csv 등). json은 가명화 후에도 유효한 json.
 - 복원 파일 이름을 사용자가 정하지 않았으면 원본 옆에 '<원본이름>.restored.<확장자>'처럼 새 이름을 제안한다.
@@ -33,14 +36,18 @@ def gate() -> Gate:
 
 
 @server.tool()
-def mask_file(path: str) -> dict:
-    """로컬 파일의 개인정보를 가명 토큰으로 바꾼 텍스트를 돌려준다. 원래 값은 로컬에만 남는다.
-    반환: masked_text(가명화된 전문), job_id(복원용), counts(유형별 개수). 허용 폴더 안의 파일만."""
+def mask_file(path: str, project: str | None = None) -> dict:
+    """로컬 파일의 개인정보·프로젝트 용어를 토큰으로 바꾼 텍스트를 돌려준다. 원래 값은 로컬에만 남는다.
+    project: 적용할 용어집 이름(생략하면 폴더 매핑). 반환: masked_text, job_id(복원용), counts(유형별 개수).
+    외부 금지(L3) 용어가 있으면 blocked=true와 안내만 돌려준다. 허용 폴더 안의 파일만."""
     try:
-        r = gate().mask_file(path)
-    except (PathNotAllowed, FileNotFoundError) as e:
+        r = gate().mask_file(path, project)
+    except (PathNotAllowed, FileNotFoundError, ValueError) as e:
         return {"error": str(e)}
-    return {"masked_text": r.masked_text, "job_id": r.job_id, "counts": r.counts, "seconds": r.seconds}
+    if r.blocked:
+        return {"blocked": True, "notice": r.notice, "project": r.project}
+    return {"masked_text": r.masked_text, "job_id": r.job_id, "counts": r.counts, "seconds": r.seconds,
+            "project": r.project}
 
 
 @server.tool()

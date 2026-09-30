@@ -10,15 +10,17 @@ class Span:
     start: int
     end: int
     type: str
-    source: str = "rule"          # "rule" | "llm" | "gold"
+    source: str = "rule"          # "rule" | "glossary" | "llm" | "gold"
     entity_id: str | None = field(default=None, compare=False)
+    # 용어집 스팬의 부가 정보: {"token": "[COMPONENT_01]", "render": 밖으로 나갈 모양, "level": 0~3}
+    meta: dict | None = field(default=None, compare=False)
 
     def overlaps(self, other: "Span") -> bool:
         return self.start < other.end and other.start < self.end
 
 
-# 겹칠 때 누가 이기나: 규칙(형식이 확실함) > LLM, 그다음 긴 쪽
-_SOURCE_RANK = {"rule": 0, "gold": 0, "llm": 1}
+# 겹칠 때 누가 이기나: 형식 규칙(확실함) > 사람이 확정한 용어집 > LLM 추정, 그다음 긴 쪽
+_SOURCE_RANK = {"rule": 0, "gold": 0, "glossary": 1, "llm": 2}
 
 
 def resolve(spans: list[Span]) -> list[Span]:
