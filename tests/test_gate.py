@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from piigate.gate import Gate, GateConfig, PathNotAllowed, chunks
+from cascadedlp.gate import Gate, GateConfig, PathNotAllowed, chunks
 
 DOC = "担当: a.b@example.com / 010-2847-3916\n문의는 https://example.jp/p?id=1 로.\n"
 
@@ -88,7 +88,7 @@ def test_config_default_is_user_folder(tmp_path):
 
 def test_denied_folders_even_inside_allowed(tmp_path):
     """허용 범위가 넓어도 가명 맵 폴더·.ssh·.claude 는 항상 막힌다."""
-    home = tmp_path / "piigate_home"
+    home = tmp_path / "cascadedlp_home"
     cfg = GateConfig(home=home, model=None, allowed_roots=[str(tmp_path), str(Path.home())])
     g = Gate(cfg, restrict_paths=True)
     for p in (home / "default.map.json", Path.home() / ".ssh" / "id_rsa", Path.home() / ".claude" / "x.jsonl"):

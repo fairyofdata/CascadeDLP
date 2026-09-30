@@ -1,8 +1,8 @@
 """P2 규칙 층: 한·일·영 형식 변형과 함정(잡으면 안 되는 숫자)."""
 import pytest
 
-from piigate.rules import detect
-from piigate.spans import resolve
+from cascadedlp.rules import detect
+from cascadedlp.spans import resolve
 
 
 def found(text):

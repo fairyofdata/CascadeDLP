@@ -4,9 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from piigate import cli
-from piigate.pseudo import PseudoMap, mask, unmask
-from piigate.spans import Span, resolve
+from cascadedlp import cli
+from cascadedlp.pseudo import PseudoMap, mask, unmask
+from cascadedlp.spans import Span, resolve
 
 EVAL = Path(__file__).parent.parent / "data" / "eval" / "eval_v1.jsonl"
 ROWS = [json.loads(l) for l in EVAL.read_text(encoding="utf-8").splitlines()]

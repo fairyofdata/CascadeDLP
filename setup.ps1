@@ -1,4 +1,4 @@
-﻿# LocalPIIGate 초기 설정 — PowerShell에서 .\setup.ps1
+﻿# CascadeDLP 초기 설정 — PowerShell에서 .\setup.ps1
 # 1) venv  2) 핵심 의존성  3) 선택 의존성(실패해도 계속)  4) Ollama 모델  5) 스모크 테스트
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
@@ -11,7 +11,7 @@ $py = ".\.venv\Scripts\python.exe"
 Write-Host "== 2. 핵심 의존성 ==" -ForegroundColor Cyan
 & $py -m pip install -r requirements.txt
 
-& $py -m pip install -e ".[mcp]"   # piigate / piigate-mcp 명령 설치 (레이어)
+& $py -m pip install -e ".[mcp]"   # cascadedlp / cascadedlp-mcp 명령 설치 (레이어)
 
 Write-Host "== 3. 선택 의존성 (NER 기준선, 실패해도 계속) ==" -ForegroundColor Cyan
 try { & $py -m pip install -r requirements-optional.txt }

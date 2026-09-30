@@ -1,14 +1,27 @@
-# LocalPIIGate
+# CascadeDLP
 
-**외부 LLM 앞단의 로컬 개인정보 가명화 레이어 — 한·일·영 혼용 문서용**
-*A local PII pseudonymization layer in front of external LLMs, built for mixed Korean / Japanese / English text.*
+**제한된 로컬 자원 + 클라우드 최상위 모델을 나눠 쓰는 하이브리드 캐스케이딩 DLP 레이어 — 한·일·영 혼용**
+*A hybrid cascading DLP layer: a small local GPU decides what a frontier cloud model may see — for mixed Korean / Japanese / English work.*
 
-외부 LLM(Claude·GPT 등)에 텍스트를 보내기 **전에** 로컬에서 개인정보를 `[PERSON_001]` 같은 토큰으로 바꾸고, 답이 돌아오면 **로컬 파일로** 원래 값을 되돌립니다.
+GPU 한 장(RTX 3070 8GB)으로는 최상위 모델을 대신할 수 없고, 그렇다고 모든 것을 클라우드에 보낼 수도 없습니다.
+CascadeDLP는 그 사이에서 **로컬 모델이 먼저 읽고, 무엇을 얼마나 가려서 어디로 보낼지** 정합니다.
+목표는 많이 가리는 것이 아니라 **가장 적게 가리고도 보호 목적을 달성하는 것**입니다(정보 보존).
 
 ```
-원문 ─▶ 탐지(규칙 + 로컬 LLM) ─▶ 가명화(일관·가역 토큰) ─▶ 외부 LLM ─▶ 복원(로컬 파일) ─▶ 결과
-                                   └ (선택) 로컬 번역·요약으로 보낼 양 자체를 줄인다
+요청·문서·코드 ─▶ 로컬: 민감 엔티티 식별 → 같은 대상 연결 → 민감도(사람이 확정한 용어집)
+                        │
+      ┌─────────────────┼──────────────────┬──────────────┐
+      ▼                 ▼                  ▼              ▼
+ L0 클라우드 원문   L1–L2 클라우드 가림    L3 로컬 모델만     차단
+                   (설명형 별칭·토큰)         (qwen3.5:9b)
+                        │
+                        ▼ 답 ─▶ 로컬 복원(파일) ─▶ 결과          + 감사 로그: 무엇이 나갔는가
 ```
+
+> **현재 상태**: 1단계(개인정보 엔티티) 구현·실측 완료 — 아래 내용. 프로젝트 고유 용어·코드로의 확장은 [로드맵](#로드맵). 방향 전환 배경은 [ADR-0015](docs/adr/0015-cascade-dlp-direction.md).
+
+### 1단계: 개인정보 엔티티 (구현됨)
+외부 LLM에 보내기 **전에** 로컬에서 개인정보를 `[PERSON_001]` 같은 토큰으로 바꾸고, 답이 돌아오면 **로컬 파일로** 원래 값을 되돌립니다.
 
 ```text
 昨日、한서윤さんと Tanaka Haruto から連絡。ハン・ソユンさんのメールは seoyun.han@example.com
@@ -27,7 +40,7 @@
 ## 설계 원칙
 - **결정론이 먼저, 로컬 LLM은 형식 없는 것만.** 메일·전화·우편번호·URL·ID 형식은 정규식. LLM은 이름·주소·조직명 *후보 문자열*과 이름의 *로마자 발음*만 낸다. 위치 찾기, 토큰 부여, 같은 사람 판정, 복원은 전부 코드가 한다(환각은 원문에 없으므로 자동 폐기).
 - **호출자는 외부 LLM이다.** MCP 도구는 원문을 인자로 받지 않고(파일 경로만), 복원 결과를 돌려주지 않는다(로컬 파일로만).
-- **가명 맵은 로컬에만.** `~/.piigate/` — 어떤 저장소에도 속하지 않는다.
+- **가명 맵은 로컬에만.** `~/.cascadedlp/` — 어떤 저장소에도 속하지 않는다.
 - **개발·평가는 합성 데이터만.**
 
 ## 성능 (합성 평가, qwen3.5:9b, RTX 3070 8GB)
@@ -46,8 +59,8 @@
 
 ## 설치 (Windows, Python 3.12+, [Ollama](https://ollama.com))
 ```powershell
-git clone https://github.com/fairyofdata/LocalPIIGate.git
-cd LocalPIIGate
+git clone https://github.com/fairyofdata/CascadeDLP.git
+cd CascadeDLP
 .\setup.ps1        # venv · 의존성 · pip install -e .[mcp] · Ollama 모델 · 스모크 테스트
 ```
 기본 모델은 `qwen3.5:9b`(약 6.6GB, 8GB VRAM에서 100% GPU). LLM 없이 규칙만 쓰려면 `--rules-only`.
@@ -57,21 +70,21 @@ cd LocalPIIGate
 
 **CLI**
 ```powershell
-piigate mask memo.md -o memo.masked.md            # job id 출력
-piigate unmask answer.md --job <job_id> -o answer.restored.md
-piigate entities                                  # 토큰·유형·표기 수만 (원래 값 없음)
+cascadedlp mask memo.md -o memo.masked.md            # job id 출력
+cascadedlp unmask answer.md --job <job_id> -o answer.restored.md
+cascadedlp entities                                  # 토큰·유형·표기 수만 (원래 값 없음)
 ```
 
 **MCP (Claude Code 등에서 도구로)**
 ```powershell
-claude mcp add --scope user piigate -- <저장소 경로>\.venv\Scripts\piigate-mcp.exe
+claude mcp add --scope user cascadedlp -- <저장소 경로>\.venv\Scripts\cascadedlp-mcp.exe
 ```
 도구: `mask_file(path)` · `unmask_to_file(masked_text, job_id, out_path)` · `list_entities()`
 경로·파일명·형식(md/json/txt/csv)은 대화에서 그때그때 지정. 기본 허용 범위는 사용자 폴더, 가명 맵 폴더·`.ssh`·`.claude`·`AppData` 등은 항상 차단, 덮어쓰기 금지([ADR-0013](docs/adr/0013-path-policy.md)).
 
 **Python API**
 ```python
-from piigate.gate import Gate
+from cascadedlp.gate import Gate
 g = Gate()
 r = g.mask_file("memo.txt")
 answer = call_external_llm(r.masked_text)       # 외부에는 가명화된 텍스트만
@@ -80,13 +93,27 @@ g.unmask_to_file(answer, r.job_id, "memo_answer.txt")
 
 ## 구조
 ```
-piigate/    spans · rules · llm · linking · pseudo · transform · gate(중심 API) · cli · mcp_server
+cascadedlp/    spans · rules · llm · linking · pseudo · transform · gate(중심 API) · cli · mcp_server
 tools/      build_eval · evaluate · relink · p5_eval · gliner_baseline   (측정 도구)
 tests/      LLM 없이 도는 결정론 테스트 (라운드트립·규칙·후처리·경계·P5 보정)
 data/eval/  합성 평가 세트 (v1 개발용, v2 홀드아웃) — 작성자·건수는 README
 results/    측정 결과 (수치 + 합성 문장 오류 목록)
 docs/adr/   설계 결정 기록 (ADR 0001–0014)
 ```
+
+## 로드맵
+문서(설계서·ADR·구조 설명) 먼저, 코드는 그다음([ADR-0015](docs/adr/0015-cascade-dlp-direction.md)).
+
+| 단계 | 내용 | 상태 |
+|---|---|---|
+| P0–P5 | 개인정보 엔티티: 규칙 + 로컬 LLM 탐지, 교차 표기 연결, 가역 가명화, Gate/CLI/MCP, 로컬 번역·요약 | ✅ |
+| C0 | 방향 재정의 (PII 마스커 → 캐스케이딩 DLP), 개명 | ✅ |
+| C1 | 엔티티 확장(`PROJECT` `COMPONENT` `ALGORITHM` `TERM` `SECRET`) + 민감도 L0–L3 + 안전한 설명 + 프로젝트 용어집 | 다음 |
+| C2 | 용어집 부트스트랩: 로컬 LLM이 "이 프로젝트만의 말"과 다른 표기 묶음을 제안 → **사람이 민감도 확정** | |
+| C3 | 정보 보존형 가림: 레벨별로 그대로 / 설명형 별칭 `[COMPONENT_01: 스케줄러]` / 토큰·요약 / 차단 | |
+| C6 | 측정: 합성 가상 프로젝트에서 **효용(과제 성공) 대 유출(보호 용어가 나간 횟수)** | |
+| C4 | 코드: L3 경로 읽기 금지 + 가린 미러 작업공간(핵심 함수는 시그니처·설명만) → 변경분 역매핑 | |
+| C5 | 라우터(클라우드 원문 / 가림 / 로컬만 / 차단) + 감사 로그 | |
 
 ## 알려진 한계
 - 한자 이름만으로는 읽기가 모호하다(伊藤大翔 → hiroto? daisho?) → 교차 연결 실패.

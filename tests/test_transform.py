@@ -1,5 +1,5 @@
 """P5 결정론 부분: 망가진 토큰 보정, 토큰 보고서."""
-from piigate.transform import repair_tokens, token_report
+from cascadedlp.transform import repair_tokens, token_report
 
 IN = "[PERSON_001]さんと[PERSON_002]が[EMAIL_001]で連絡。"
 TOKS = {"[PERSON_001]", "[PERSON_002]", "[EMAIL_001]"}

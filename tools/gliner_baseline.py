@@ -1,7 +1,7 @@
-"""기준선: GLiNER(urchade/gliner_multi_pii-v1)로 스팬 탐지. 비교용이라 piigate 본체에는 넣지 않는다."""
+"""기준선: GLiNER(urchade/gliner_multi_pii-v1)로 스팬 탐지. 비교용이라 cascadedlp 본체에는 넣지 않는다."""
 import time
 
-from piigate.spans import Span
+from cascadedlp.spans import Span
 
 MODEL_ID = "urchade/gliner_multi_pii-v1"
 THRESHOLD = 0.5

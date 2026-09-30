@@ -12,9 +12,9 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from piigate.pseudo import TOKEN_RE, PseudoMap, mask  # noqa: E402
-from piigate.spans import Span  # noqa: E402
-from piigate.transform import P5_PROMPT_VERSION, repair_tokens, summarize, token_report, translate  # noqa: E402
+from cascadedlp.pseudo import TOKEN_RE, PseudoMap, mask  # noqa: E402
+from cascadedlp.spans import Span  # noqa: E402
+from cascadedlp.transform import P5_PROMPT_VERSION, repair_tokens, summarize, token_report, translate  # noqa: E402
 
 
 def masked_rows(paths, tmp_map):

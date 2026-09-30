@@ -1,13 +1,13 @@
-"""Gate — LocalPIIGate의 중심 API. CLI·MCP 서버는 이걸 부르는 얇은 껍데기다.
+"""Gate — CascadeDLP의 중심 API. CLI·MCP 서버는 이걸 부르는 얇은 껍데기다.
 
-    from piigate.gate import Gate
-    g = Gate()                                   # 설정은 ~/.piigate/config.json (없으면 기본값)
+    from cascadedlp.gate import Gate
+    g = Gate()                                   # 설정은 ~/.cascadedlp/config.json (없으면 기본값)
     r = g.mask_file("메모.txt")                   # → r.masked_text 를 외부 LLM에 보낸다
     g.unmask_to_file(llm_answer, r.job_id, "답변_복원.txt")   # 복원은 로컬 파일로만
 
 경계 원칙 (PLAN.md '레이어화 설계'):
 - 호출자(외부 LLM일 수 있음)에게 주는 것은 가명화된 텍스트·job_id·유형별 개수뿐.
-- 원래 값은 가명 맵과 복원표(로컬, ~/.piigate)와 복원 결과 파일에만 존재한다.
+- 원래 값은 가명 맵과 복원표(로컬, ~/.cascadedlp)와 복원 결과 파일에만 존재한다.
 - restrict_paths=True(MCP)면 허용 폴더 안의 파일만 읽고, 그 안에만 새 파일로 쓴다.
 """
 import json
@@ -50,7 +50,7 @@ def chunks(text: str, limit: int = CHUNK_CHARS) -> list[tuple[int, str]]:
 
 
 def default_home() -> Path:
-    return Path(os.environ.get("PIIGATE_HOME", Path.home() / ".piigate"))
+    return Path(os.environ.get("CASCADEDLP_HOME", Path.home() / ".cascadedlp"))
 
 
 @dataclass
@@ -62,7 +62,7 @@ class GateConfig:
 
     @classmethod
     def load(cls, home: Path | None = None) -> "GateConfig":
-        """~/.piigate/config.json 을 읽는다. 없으면 기본값으로 만들어 둔다.
+        """~/.cascadedlp/config.json 을 읽는다. 없으면 기본값으로 만들어 둔다.
         기본 허용 범위 = 사용자 폴더 전체(넓은 울타리). 경로는 대화에서 그때그때 지정하고,
         민감 폴더(DENIED_UNDER_HOME, 가명 맵 폴더)는 설정과 관계없이 항상 막는다."""
         home = Path(home) if home else default_home()

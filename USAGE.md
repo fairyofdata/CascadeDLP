@@ -1,14 +1,14 @@
-# LocalPIIGate 사용법 (레이어)
+# CascadeDLP 사용법 (레이어)
 
 외부 LLM에 보내기 **전에** 로컬에서 개인정보를 `[PERSON_001]` 같은 토큰으로 바꾸고, 답을 받은 뒤 **로컬 파일로** 되돌린다.
 한·일·영 혼용 문서, 같은 사람의 다른 표기(한서윤 / ハン・ソユン / Seoyun Han)를 같은 토큰으로 묶는다.
 
 ## 구조
 ```
-piigate/gate.py        ← 중심 API (Gate)
-  ├ cli.py             ← piigate 명령 (내가 로컬에서 직접)
-  └ mcp_server.py      ← piigate-mcp (다른 Claude Code 대화에서 도구로)
-~/.piigate/            ← 가명 맵·복원표·설정 (절대 공유·커밋 금지)
+cascadedlp/gate.py        ← 중심 API (Gate)
+  ├ cli.py             ← cascadedlp 명령 (내가 로컬에서 직접)
+  └ mcp_server.py      ← cascadedlp-mcp (다른 Claude Code 대화에서 도구로)
+~/.cascadedlp/            ← 가명 맵·복원표·설정 (절대 공유·커밋 금지)
   ├ config.json        {"model": "qwen3.5:9b", "link": true, "allowed_roots": [...]}
   ├ default.map.json   토큰 ↔ 원래 표기 + 로마자 캐시
   └ restore/<job>.json 작업별 복원표
@@ -23,25 +23,25 @@ piigate/gate.py        ← 중심 API (Gate)
 
 ## 1. CLI (로컬)
 ```powershell
-piigate mask 메모.txt -o 메모.masked.txt          # job id 출력
+cascadedlp mask 메모.txt -o 메모.masked.txt          # job id 출력
 # 메모.masked.txt 를 외부 LLM에 보내고, 답을 답변.txt 로 저장
-piigate unmask 답변.txt --job <job_id> -o 답변.복원.txt
-piigate entities                                  # 토큰·유형·표기 수 (원래 값 없음)
-piigate --rules-only mask ...                     # LLM 없이 규칙만 (빠름)
+cascadedlp unmask 답변.txt --job <job_id> -o 답변.복원.txt
+cascadedlp entities                                  # 토큰·유형·표기 수 (원래 값 없음)
+cascadedlp --rules-only mask ...                     # LLM 없이 규칙만 (빠름)
 ```
 
 ## 2. MCP (다른 Claude Code 대화)
 등록 (모든 프로젝트에서 쓰려면 user 범위):
 ```powershell
-claude mcp add --scope user piigate -- <저장소 경로>\.venv\Scripts\piigate-mcp.exe
+claude mcp add --scope user cascadedlp -- <저장소 경로>\.venv\Scripts\cascadedlp-mcp.exe
 ```
 도구: `mask_file(path)`, `unmask_to_file(masked_text, job_id, out_path)`, `list_entities()`.
-대화 예: "`D:\docs\회의록.txt` 를 piigate로 가명화해서 요약해 줘. 복원본은 `D:\docs\회의록_요약.txt` 로."
+대화 예: "`D:\docs\회의록.txt` 를 cascadedlp로 가명화해서 요약해 줘. 복원본은 `D:\docs\회의록_요약.txt` 로."
 
 ## 3. Python API (로컬 프로그램 — 예: 외부 LLM API 호출 스크립트)
 ```python
-from piigate.gate import Gate
-g = Gate()                                    # ~/.piigate/config.json
+from cascadedlp.gate import Gate
+g = Gate()                                    # ~/.cascadedlp/config.json
 r = g.mask_file("memo.txt")                   # 또는 g.mask_text(text) — 로컬 프로그램에서만
 answer = call_external_llm(r.masked_text)     # 외부 API에는 가명화된 텍스트만
 g.unmask_to_file(answer, r.job_id, "memo_answer.txt")
