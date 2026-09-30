@@ -21,7 +21,7 @@ from pathlib import Path
 
 from . import linking, llm, rules
 from .glossary import Glossary
-from .pseudo import TOKEN_RE, PseudoMap, mask, unmask
+from .pseudo import TOKEN_RE, PseudoMap, canonical, mask, unmask
 from .spans import Span, resolve
 
 MAX_LINK_SURFACES = 200
@@ -51,6 +51,37 @@ def chunks(text: str, limit: int = CHUNK_CHARS) -> list[tuple[int, str]]:
     if buf:
         out.append((start, buf))
     return out
+
+
+_SENTENCE = re.compile(r"[^\n.!?。！？]*(?:[.!?。！？]+|$)[ \t]*")
+_LINE_PREFIX = re.compile(r"\s*(?:(?:[-*+]|\d+[.)]|#{1,6}|>)\s+)?")
+
+
+def reduce_context(masked: str, tokens: set[str], mode: str, model: str | None) -> str:
+    """가린 텍스트에서 tokens(L2)가 나오는 문장을 제거(drop)하거나 로컬 LLM으로 일반화(generalize)한다.
+    줄 구조(마크다운 제목·목록)는 유지한다. 일반화 결과가 토큰을 잃으면 안전하게 제거로 대신한다."""
+    if not tokens:
+        return masked
+    out = []
+    for line in masked.splitlines(keepends=True):
+        body = line.rstrip("\r\n")
+        nl = line[len(body):]
+        lead = _LINE_PREFIX.match(body).group(0)   # 목록·번호·제목·인용 기호는 문장과 떼어 항상 남긴다
+        body = body[len(lead):]
+        pieces = [lead]
+        for m in _SENTENCE.finditer(body):
+            s = m.group(0)
+            if not s:
+                continue
+            present = {canonical(t.group(0)) for t in TOKEN_RE.finditer(s)} & tokens
+            if not present:
+                pieces.append(s)
+            elif mode == "generalize" and model:
+                g = llm.generalize(s, model)
+                pieces.append(g + (" " if s.endswith(" ") else "") if all(t in g for t in present) else "")
+            # drop(또는 일반화 실패): 문장을 넣지 않는다
+        out.append("".join(pieces) + nl)
+    return "".join(out)
 
 
 def default_home() -> Path:
@@ -149,9 +180,16 @@ class Gate:
         return Glossary.load(path)
 
     # ── 가명화 ────────────────────────────────────────────
-    def mask_text(self, text: str, project: str | None = None) -> MaskResult:
+    def mask_text(self, text: str, project: str | None = None, l2_context: str = "keep") -> MaskResult:
         """로컬 프로그램용. (MCP에는 노출하지 않는다 — 원문이 호출자를 거치게 되므로)
-        project를 주면 그 용어집의 레벨대로: L0 그대로 · L1 설명형 별칭 · L2 불투명 토큰 · L3 있으면 생성 거부."""
+        project를 주면 그 용어집의 레벨대로: L0 그대로 · L1 설명형 별칭 · L2 불투명 토큰 · L3 있으면 생성 거부.
+        l2_context: L2 항목이 나오는 문장을 어떻게 할지 (C3 정보 보존형 가림)
+          keep       그대로 (이름만 숨김)
+          generalize 로컬 LLM이 '어떻게'(절차·수치·호출 관계)를 빼고 다시 씀
+          drop       문장을 통째로 뺌
+        generalize·drop은 정보를 버리므로 원문과 바이트 일치 복원은 되지 않는다(답에 쓰인 토큰은 복원됨)."""
+        if l2_context not in ("keep", "generalize", "drop"):
+            raise ValueError("l2_context는 keep / generalize / drop")
         t0 = time.perf_counter()
         gl = self.glossary(project)
         g_spans = gl.match(text)
@@ -170,6 +208,9 @@ class Gate:
         spans = [s for s in resolve(spans) if not (s.meta and s.meta["level"] == 0)]
         links = self._links(text, spans, pmap) if (self.cfg.model and self.cfg.link) else {}
         masked, restore = mask(text, spans, pmap, links)
+        if l2_context != "keep":
+            l2_tokens = {e.token for e in gl.entries if e.effective_level == 2}
+            masked = reduce_context(masked, l2_tokens, l2_context, self.cfg.model)
         pmap.save()
         job_id = time.strftime("%Y%m%d-%H%M%S-") + secrets.token_hex(3)
         self.restore_dir.mkdir(parents=True, exist_ok=True)

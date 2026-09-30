@@ -19,7 +19,8 @@ from .spans import Span
 # v3: 프롬프트 동일. eval_v2 결과를 보고 후처리(명단 병합 금지)·연결 판정(성 비교 완화)·규칙(전화 형식) 수정
 # v4: 프롬프트 동일. C1 — 비밀키 규칙(SECRET) 추가, 프로젝트 용어집 스팬이 LLM보다 우선
 # v5: 프롬프트 동일. 개인정보 탐지 조각 300자(gate.DETECT_CHUNK_CHARS), 숫자·시각만인 LLM 스팬 제거
-PROMPT_VERSION = "v5"
+# v6: v5 + L2 문맥 축소 옵션(gate.reduce_context: drop / generalize, GENERALIZE_SYSTEM). 기본(keep) 동작은 v5와 같음
+PROMPT_VERSION = "v6"
 OLLAMA_URL = "http://localhost:11434/api/chat"
 OPTIONS = {"temperature": 0, "num_ctx": 8192}
 LLM_TYPES = ["PERSON", "ADDRESS", "ORG"]
@@ -84,6 +85,22 @@ ROMANIZE_SCHEMA = {
     },
     "required": ["family", "given", "nationality"],
 }
+
+
+GENERALIZE_SYSTEM = """Rewrite the sentence so it keeps only WHAT each placeholder token is, at a high level (its general
+role), and removes HOW it works: internal steps, formulas, parameters, numbers, thresholds, timings, schedules, which
+component calls or feeds which, and design reasons. Keep every placeholder token (like [ALGORITHM_01]) exactly.
+Keep the same language as the input. Keep markdown list markers. Output only the rewritten sentence."""
+
+
+def generalize(sentence: str, model: str) -> str:
+    """C3 정보 보존형 가림: L2 항목이 나오는 문장에서 '어떻게'를 뺀다. (토큰 유지 여부는 호출한 쪽이 확인)"""
+    body = {"model": model, "stream": False, "think": False,
+            "messages": [{"role": "system", "content": GENERALIZE_SYSTEM}, {"role": "user", "content": sentence.strip()}],
+            "options": OPTIONS}
+    r = requests.post(OLLAMA_URL, json=body, timeout=600)
+    r.raise_for_status()
+    return r.json()["message"]["content"].strip().replace("\n", " ")
 
 
 def romanize(surface: str, model: str) -> dict:

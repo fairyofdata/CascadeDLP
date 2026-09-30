@@ -74,6 +74,26 @@ def test_gate_blocks_l3_without_revealing_term(gate):
     assert r.blocked and r.masked_text == "" and "Braid" not in r.notice and "ALGORITHM_01" in r.notice
 
 
+def test_l2_context_drop_removes_sentences_keeps_lines(gate):
+    g, _ = gate
+    text = "# 설계\n- Ripple Rank는 가중합으로 점수를 낸다. 조율기는 큐를 본다.\n- FastAPI 사용.\n"
+    r = g.mask_text(text, "tsl", l2_context="drop")
+    assert r.masked_text == "# 설계\n- [COMPONENT_01: 작업 우선순위 스케줄러]는 큐를 본다.\n- FastAPI 사용.\n"
+
+
+def test_l2_context_generalize_falls_back_to_drop_when_token_lost(gate, monkeypatch):
+    from cascadedlp import llm
+    g, _ = gate
+    monkeypatch.setattr(llm, "generalize", lambda s, m: "점수를 내는 부품이다.")   # 토큰을 잃은 출력 → 안전하게 제거
+    g.cfg.model = "fake"
+    monkeypatch.setattr(llm, "detect", lambda text, model: ([], 0.0))
+    r = g.mask_text("Ripple Rank는 가중합으로 점수를 낸다.\n", "tsl", l2_context="generalize")
+    assert r.masked_text == "\n"
+    monkeypatch.setattr(llm, "generalize", lambda s, m: "[ALGORITHM_02]는 점수를 내는 부품이다.")
+    r = g.mask_text("Ripple Rank는 가중합으로 점수를 낸다.\n", "tsl", l2_context="generalize")
+    assert r.masked_text == "[ALGORITHM_02]는 점수를 내는 부품이다.\n"
+
+
 def test_restore_by_id_even_if_description_changed(gate):
     """외부 LLM이 설명 부분을 바꾸거나 지워도 id로 복원된다."""
     g, _ = gate

@@ -23,7 +23,26 @@
     "AdaptiveScheduler",
     "適応スケジューラ"
    ],
-   "alias": "작업 우선순위 스케줄러"
+   "alias": "작업 우선순위 스케줄러",
+   "secrets": [
+    {
+     "fact": "작업 큐 우선순위를 다시 계산",
+     "keywords": [
+      "우선순위",
+      "priorit",
+      "優先",
+      "순서"
+     ]
+    },
+    {
+     "fact": "창고별 부하를 매번 재계산",
+     "keywords": [
+      "부하",
+      "load",
+      "負荷"
+     ]
+    }
+   ]
   },
   {
    "id": "COMPONENT_02",
@@ -34,7 +53,39 @@
     "ledger_bridge",
     "元帳ブリッジ"
    ],
-   "alias": "정산 연동 모듈"
+   "alias": "정산 연동 모듈",
+   "secrets": [
+    {
+     "fact": "정산·회계 시스템과 맞춤",
+     "keywords": [
+      "정산",
+      "회계",
+      "accounting",
+      "精算",
+      "settle"
+     ]
+    },
+    {
+     "fact": "Kafka 이벤트 방식",
+     "keywords": [
+      "이벤트",
+      "event",
+      "Kafka",
+      "카프카"
+     ]
+    },
+    {
+     "fact": "재시도 3회 후 dead-letter",
+     "keywords": [
+      "재시도",
+      "retry",
+      "リトライ",
+      "dead-letter",
+      "데드레터",
+      "dead letter"
+     ]
+    }
+   ]
   },
   {
    "id": "COMPONENT_03",
@@ -45,7 +96,28 @@
     "dock_pulse",
     "ドックパルス"
    ],
-   "alias": "창고 도크 상태 에이전트"
+   "alias": "창고 도크 상태 에이전트",
+   "secrets": [
+    {
+     "fact": "창고 도크 상태 보고 에이전트",
+     "keywords": [
+      "도크",
+      "dock",
+      "ドック"
+     ]
+    },
+    {
+     "fact": "30초 주기",
+     "keywords": [
+      "30초",
+      "30 초",
+      "30s",
+      "30 s",
+      "30秒",
+      "30 second"
+     ]
+    }
+   ]
   },
   {
    "id": "ALGORITHM_01",
@@ -56,7 +128,27 @@
     "braid_solver",
     "ブレイドソルバー"
    ],
-   "alias": "경로 계산 알고리즘"
+   "alias": "경로 계산 알고리즘",
+   "secrets": [
+    {
+     "fact": "경로를 계산",
+     "keywords": [
+      "경로",
+      "route",
+      "routing",
+      "経路"
+     ]
+    },
+    {
+     "fact": "배정 단계에서 호출됨",
+     "keywords": [
+      "배정",
+      "assign",
+      "配車",
+      "dispatch"
+     ]
+    }
+   ]
   },
   {
    "id": "ALGORITHM_02",
@@ -67,7 +159,25 @@
     "ripple_rank",
     "リップルランク"
    ],
-   "alias": "우선순위 점수 산식"
+   "alias": "우선순위 점수 산식",
+   "secrets": [
+    {
+     "fact": "0~1 점수를 냄",
+     "keywords": [
+      "점수",
+      "score",
+      "スコア"
+     ]
+    },
+    {
+     "fact": "가중치로 조정",
+     "keywords": [
+      "가중치",
+      "weight",
+      "重み"
+     ]
+    }
+   ]
   },
   {
    "id": "TERM_01",
@@ -77,7 +187,35 @@
     "Level-3 Pipeline",
     "L3パイプライン"
    ],
-   "alias": "3단계 처리 흐름"
+   "alias": "3단계 처리 흐름",
+   "secrets": [
+    {
+     "fact": "세 단계",
+     "keywords": [
+      "3단계",
+      "세 단계",
+      "three",
+      "3 단계",
+      "3 stage",
+      "3개 단계"
+     ]
+    },
+    {
+     "fact": "수집·정제·배정",
+     "keywords": [
+      "정제",
+      "clean",
+      "수집",
+      "ingest"
+     ]
+    },
+    {
+     "fact": "cron 체인 대체",
+     "keywords": [
+      "cron"
+     ]
+    }
+   ]
   },
   {
    "id": "TERM_02",
@@ -87,7 +225,27 @@
     "Night Harvest",
     "夜間ハーベスト"
    ],
-   "alias": "야간 주문 수집 배치"
+   "alias": "야간 주문 수집 배치",
+   "secrets": [
+    {
+     "fact": "새벽 2시 실행",
+     "keywords": [
+      "2시",
+      "02:00",
+      "2 AM",
+      "2時",
+      "새벽"
+     ]
+    },
+    {
+     "fact": "전날 주문을 모음",
+     "keywords": [
+      "주문",
+      "order",
+      "注文"
+     ]
+    }
+   ]
   },
   {
    "id": "TERM_03",
@@ -97,7 +255,29 @@
     "Golden Slot",
     "ゴールデンスロット"
    ],
-   "alias": "우선 배송 시간대"
+   "alias": "우선 배송 시간대",
+   "secrets": [
+    {
+     "fact": "오전 9~11시 구간",
+     "keywords": [
+      "9~11",
+      "9-11",
+      "09:00",
+      "9시",
+      "오전 9"
+     ]
+    },
+    {
+     "fact": "우선 처리",
+     "keywords": [
+      "우선",
+      "먼저",
+      "priority",
+      "jump the queue",
+      "優先"
+     ]
+    }
+   ]
   },
   {
    "id": "ORG_01",
