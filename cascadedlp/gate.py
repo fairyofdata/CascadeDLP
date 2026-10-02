@@ -96,6 +96,8 @@ class GateConfig:
     allowed_roots: list[str] = field(default_factory=list)  # restrict_paths일 때 읽기·쓰기 허용 폴더
     projects: dict[str, list[str]] = field(default_factory=dict)  # {프로젝트: [폴더, ...]} — 폴더 아래 파일에 그 용어집 적용
     secret_policy: str = "block"          # 라우터: 비밀키가 있으면 block(어디로도 안 보냄) 또는 mask(가려서 보냄)
+    max_masked_ratio: float = 0.30        # 라우터: 가릴 글자 비율이 이 이상이면 거부(300자 이상 문서만) — 클라우드가 일할 수 없다
+    max_suspects: int = 20                # 라우터: 의심 항목이 이보다 많으면 거부(용어집부터 만들라는 신호)
 
     @classmethod
     def load(cls, home: Path | None = None) -> "GateConfig":
@@ -112,7 +114,8 @@ class GateConfig:
             path.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
         return cls(home=home, model=data.get("model"), link=data.get("link", True),
                    allowed_roots=data.get("allowed_roots", []), projects=data.get("projects", {}),
-                   secret_policy=data.get("secret_policy", "block"))
+                   secret_policy=data.get("secret_policy", "block"),
+                   max_masked_ratio=data.get("max_masked_ratio", 0.30), max_suspects=data.get("max_suspects", 20))
 
 
 @dataclass

@@ -20,7 +20,8 @@ from .spans import Span
 # v4: 프롬프트 동일. C1 — 비밀키 규칙(SECRET) 추가, 프로젝트 용어집 스팬이 LLM보다 우선
 # v5: 프롬프트 동일. 개인정보 탐지 조각 300자(gate.DETECT_CHUNK_CHARS), 숫자·시각만인 LLM 스팬 제거
 # v6: v5 + L2 문맥 축소 옵션(gate.reduce_context: drop / generalize, GENERALIZE_SYSTEM). 기본(keep) 동작은 v5와 같음
-PROMPT_VERSION = "v6"
+# v7: v6 + 라우터의 의심 항목 확인(needs_confirmation)과 거부 기준(가릴 비율·토큰 모양·의심 과다). 가림 자체는 v6과 같음
+PROMPT_VERSION = "v7"
 OLLAMA_URL = "http://localhost:11434/api/chat"
 OPTIONS = {"temperature": 0, "num_ctx": 8192}
 LLM_TYPES = ["PERSON", "ADDRESS", "ORG"]

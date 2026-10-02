@@ -74,6 +74,67 @@ def test_audit_has_no_content(gate, tmp_path):
     assert routes == ["cloud_masked", "local_only", "block"]
 
 
+def suspect_gate(gate, monkeypatch, cands):
+    """로컬 LLM이 있는 것처럼 꾸미고, 후보 추출 결과를 고정한다."""
+    gate.cfg.model = "fake"
+    monkeypatch.setattr(router.llm, "detect", lambda t, m: ([], 0.0))
+    monkeypatch.setattr(router, "term_candidates", lambda text, model: {
+        router.key(s): {"surface": s, "kind": "COMPONENT", "desc": "설명", "llm": True} for s in cands if s in text})
+    return gate
+
+
+def test_suspect_holds_document_then_confirm_releases(gate, monkeypatch):
+    """의심 → 보류(내용·용어를 돌려주지 않음) → 사용자가 로컬에서 표시 → 다시 요청하면 통과."""
+    from cascadedlp.confirm import apply_pending, project_dir
+    g = suspect_gate(gate, monkeypatch, ["Dock Pulse", "Kubernetes", "조율기"])
+    text = "조율기는 Dock Pulse 상태를 읽고 Kubernetes에 배포된다."
+    r = router.route_text(g, text, "tsl")
+    assert r.route == "needs_confirmation" and r.text == "" and r.n_suspects == 2      # 조율기는 용어집에 있음
+    assert "Dock Pulse" not in r.notice and "Kubernetes" not in " ".join(r.reasons)     # 용어는 호출자에게 안 감
+    pdir = project_dir(g.cfg.home, "tsl")
+    md = (pdir / "pending.md").read_text(encoding="utf-8")
+    assert "Dock Pulse" in md and "Kubernetes" in md and "조율기" not in md.split("끝나면")[1]
+    # 사용자가 표시: Dock Pulse 보호, Kubernetes 일반어
+    md = md.replace("## [ ] P001 · Dock Pulse", "## [x] P001 · Dock Pulse").replace("## [ ] P002 · Kubernetes", "## [o] P002 · Kubernetes")
+    (pdir / "pending.md").write_text(md, encoding="utf-8")
+    assert apply_pending(pdir, "tsl") == {"protected": 1, "allowed": 1, "left": 0}
+    r = router.route_text(g, text, "tsl")
+    assert r.route == "cloud_masked" and "Dock Pulse" not in r.text and "Kubernetes" in r.text
+    assert "Dock Pulse" not in audit_lines(g) and "Kubernetes" not in audit_lines(g)
+
+
+def test_undecided_suspect_keeps_holding_and_is_not_duplicated(gate, monkeypatch):
+    from cascadedlp.confirm import apply_pending, parse_pending, project_dir
+    g = suspect_gate(gate, monkeypatch, ["Dock Pulse"])
+    router.route_text(g, "Dock Pulse 점검", "tsl")
+    router.route_text(g, "Dock Pulse 재점검", "tsl")
+    pdir = project_dir(g.cfg.home, "tsl")
+    assert len(parse_pending((pdir / "pending.md").read_text(encoding="utf-8"))) == 1
+    assert apply_pending(pdir, "tsl")["left"] == 1
+    assert router.route_text(g, "Dock Pulse 점검", "tsl").route == "needs_confirmation"
+
+
+def test_no_project_means_no_suspect_check(gate, monkeypatch):
+    g = suspect_gate(gate, monkeypatch, ["Dock Pulse"])
+    assert router.route_text(g, "Dock Pulse 점검").route == "cloud_raw"
+
+
+def test_too_many_suspects_blocks(gate, monkeypatch):
+    names = [f"Module Alpha{chr(97 + i)}" for i in range(6)]
+    g = suspect_gate(gate, monkeypatch, names)
+    g.cfg.max_suspects = 5
+    r = router.route_text(g, " ".join(names), "tsl")
+    assert r.route == "block" and "bootstrap" in r.notice
+
+
+def test_block_when_mostly_masked_or_token_like(gate):
+    long_text = ("조율기 " * 90) + "끝."            # 300자 이상이고 대부분이 가릴 대상
+    r = router.route_text(gate, long_text, "tsl")
+    assert r.route == "block" and "비율" in r.reasons[0]
+    r = router.route_text(gate, "표 참고: [ITEM_01] 값", "tsl")
+    assert r.route == "block" and "모양" in r.reasons[0]
+
+
 def test_restricted_route_file_refuses_outside(tmp_path, monkeypatch):
     monkeypatch.setenv("USERPROFILE", str(tmp_path / "u"))
     monkeypatch.setenv("HOME", str(tmp_path / "u"))

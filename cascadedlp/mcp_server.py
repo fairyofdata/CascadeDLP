@@ -16,8 +16,11 @@ from .router import audit, sha
 from .router import route_file as route_file_
 
 INSTRUCTIONS = """CascadeDLP: 개인정보와 프로젝트 고유 용어를 로컬에서 토큰([PERSON_001], [COMPONENT_01: 설명] 등)으로 바꿔 주는 도구.
-- 문서를 다룰 때는 먼저 route_file을 쓴다. 로컬이 경로를 정한다: cloud_raw / cloud_masked / local_only / block.
-  local_only·block이면 그 문서 내용을 추측하거나 다른 방법으로 읽으려 하지 말고, 사용자에게 결과 파일 경로나 안내만 전한다."""
+- 문서를 다룰 때는 먼저 route_file을 쓴다. 로컬이 경로를 정한다:
+  cloud_raw(감지 없음) / cloud_masked(가려서 전달) / needs_confirmation(의심 항목 — 사용자 확인 전 보류) / local_only / block.
+- needs_confirmation·local_only·block이면 그 문서 내용을 추측하거나 다른 방법(Read 등)으로 읽으려 하지 말고,
+  notice의 안내(로컬 파일 경로, 실행할 명령)만 사용자에게 전한다. 무엇이 의심 항목인지는 너에게 알려 주지 않는다.
+- cloud_masked로 받은 텍스트로 작업한 뒤, 원래 값이 든 결과가 필요하면 unmask_to_file로 로컬 파일에 복원한다."""
 INSTRUCTIONS += """
 - 프로젝트 용어집이 있으면 project 인자로 지정한다(생략하면 폴더 매핑으로 자동). [X_01: 설명] 형식은 이름만 숨긴 것이므로 설명을 참고해 작업한다.
 - blocked가 오면(외부 금지 용어 포함) 그 문서 내용을 추측하거나 다른 방법으로 읽으려 하지 말고, 사용자에게 로컬 처리가 필요하다고 알린다."""
@@ -62,8 +65,9 @@ def route_file(path: str, question: str | None = None, project: str | None = Non
                local_answer_path: str | None = None) -> dict:
     """로컬이 문서를 먼저 보고 경로를 정한다(권장 진입점).
     route: cloud_raw(원문 text 반환) / cloud_masked(가린 text + job_id) /
+           needs_confirmation(용어집에 없는 프로젝트 용어 후보가 있어 보류: 내용 없음, notice에 로컬 확인 방법) /
            local_only(L3: 내용 없음. question을 주면 로컬 모델이 답을 local_answer_path 파일에 쓰고 경로만 반환) /
-           block(비밀키 등: 아무것도 반환 안 함).
+           block(비밀키·가릴 비율 과다 등: 아무것도 반환 안 함).
     local_answer_path를 안 주면 원본 옆 '<이름>.local-answer.md'."""
     from pathlib import Path
     try:

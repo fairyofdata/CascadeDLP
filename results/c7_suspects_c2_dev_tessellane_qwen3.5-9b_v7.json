@@ -1,0 +1,35 @@
+{
+ "corpus": "c2_dev_tessellane",
+ "model": "qwen3.5:9b",
+ "pipeline_version": "v7",
+ "full_glossary_routes": {
+  "01_architecture_ko.md": "cloud_masked",
+  "02_README_en.md": "cloud_masked",
+  "03_spec_ja.md": "cloud_masked",
+  "04_meeting_mixed.md": "cloud_masked",
+  "05_adr_ledger.md": "cloud_masked"
+ },
+ "false_stops": {},
+ "cases": 46,
+ "held": 41,
+ "held_with_that_term_flagged": 41,
+ "masked_by_pii_layer": 2,
+ "leaked": 3,
+ "leaks": [
+  {
+   "entry": "PROJECT_01",
+   "doc": "05_adr_ledger.md",
+   "route": "cloud_masked"
+  },
+  {
+   "entry": "TERM_01",
+   "doc": "04_meeting_mixed.md",
+   "route": "cloud_masked"
+  },
+  {
+   "entry": "TERM_03",
+   "doc": "05_adr_ledger.md",
+   "route": "cloud_masked"
+  }
+ ]
+}

@@ -1,0 +1,8 @@
+용어집이 다 찼을 때 헛멈춤: 2/5개 문서  {'01_overview_en.md': ['Plant Sensor Analytics'], '05_adr_cache.md': ['RocksDB']}
+용어집에서 뺀 용어 48건: 보류 35 (그 용어가 대기 목록에 오름 32) · 개인정보 층이 가림 7 · 그대로 나감 6
+  유출: {'entry': 'PROJECT_01', 'doc': '02_design_ko.md', 'route': 'cloud_masked'}
+  유출: {'entry': 'COMPONENT_03', 'doc': '02_design_ko.md', 'route': 'cloud_masked'}
+  유출: {'entry': 'ALGORITHM_02', 'doc': '04_meeting_mixed.md', 'route': 'cloud_masked'}
+  유출: {'entry': 'TERM_02', 'doc': '02_design_ko.md', 'route': 'cloud_masked'}
+  유출: {'entry': 'TERM_03', 'doc': '02_design_ko.md', 'route': 'cloud_masked'}
+  유출: {'entry': 'TERM_03', 'doc': '04_meeting_mixed.md', 'route': 'cloud_masked'}

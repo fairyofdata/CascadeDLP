@@ -51,10 +51,17 @@ g.unmask_to_file(answer, r.job_id, "memo_answer.txt")
 문서를 로컬이 먼저 보고 경로를 정한다(문서 단위).
 | 경로 | 조건 | 밖으로 나가는 것 |
 |---|---|---|
-| cloud_raw | 민감 항목 없음 | 원문 |
-| cloud_masked | 개인정보·L1/L2 용어만 | 가린 텍스트 |
+| cloud_raw | 감지 없음 | 원문 |
+| cloud_masked | 개인정보·L1/L2 용어 | 가린 텍스트 (답은 로컬에서 복원) |
+| needs_confirmation | 용어집에 없는 프로젝트 용어 후보 | 없음 — 보류. `pending.md`에서 확인 후 `confirm` |
 | local_only | L3 용어 포함 | 없음 (로컬 모델 답은 로컬 파일로) |
-| block | 비밀키 형식 (`secret_policy`: block 기본 / mask) | 없음 |
+| block | 비밀키(`secret_policy`: block 기본 / mask) · 가릴 비율 30%↑ · 원문에 토큰 모양 · 의심 20건↑ | 없음 |
+
+**확인이 필요하다고 나오면** (`needs_confirmation`):
+1. `~/.cascadedlp/projects/<프로젝트>/pending.md`를 연다(로컬 전용 — 공유·외부 전송 금지).
+2. 항목마다 `[x]` 보호 대상(용어집에 추가, level 수정 가능) 또는 `[o]` 일반어(허용 목록)로 표시.
+3. `cascadedlp --project <프로젝트> confirm` → 다시 `route`. 한 번 답한 것은 다시 묻지 않는다.
+관문은 낯선 용어의 약 87–93%를 멈춘다(합성 평가). 전부는 아니므로 **용어집을 먼저 채워 두는 것**이 기본이다.
 ```powershell
 cascadedlp --project myproj route 설계서.md -o 보낼것.md          # 결정 + cloud_*면 보낼 텍스트 파일
 cascadedlp --project myproj route 설계서.md -q "요약해줘" -o 답.md  # local_only면 로컬 모델 답을 답.md에

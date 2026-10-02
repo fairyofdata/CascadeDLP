@@ -100,6 +100,53 @@ class BootstrapResult:
     seconds: float
 
 
+def clean_surface(surface: str) -> str:
+    surface = surface.strip().strip("`*「」『』\"'")
+    words = surface.split(" ")
+    while len(words) > 2 and words[0].casefold() in _LEADING_WORDS:   # 'The Level-3 Pipeline' → 'Level-3 Pipeline'
+        words.pop(0)
+    return " ".join(words)
+
+
+def term_candidates(text: str, model: str) -> dict[str, dict]:
+    """한 문서에서 '프로젝트 용어처럼 생긴 말' 후보 → {key: {"surface", "kind", "desc", "llm"}}.
+    라우터의 의심 항목 검사(C7)가 쓴다. 결정론 후보(코드 표기·영문 고유명)만 있는 것은 공개어 판정으로 걸러낸다."""
+    found: dict[str, dict] = {}
+
+    def add(surface, by_llm, kind="TERM", desc=""):
+        surface = clean_surface(surface)
+        if len(surface) < 2:
+            return
+        item = found.setdefault(key(surface), {"surface": surface, "kind": kind, "desc": desc, "llm": False})
+        if by_llm:
+            item.update(llm=True, kind=kind or item["kind"], desc=desc or item["desc"])
+
+    for chunk in _chunks(text):
+        try:
+            terms = llm._chat(model, EXTRACT_SYSTEM, chunk, EXTRACT_SCHEMA).get("terms", [])
+        except (json.JSONDecodeError, KeyError):
+            terms = []
+        for t in terms:
+            if t.get("text") and t["text"] in chunk:
+                add(t["text"], True, t.get("kind") if t.get("kind") in KINDS else "TERM", t.get("description", ""))
+    for m in list(_CODE_IDENT.finditer(text)) + list(_TITLE.finditer(text)):
+        add(m.group(0), False)
+
+    det_only = {it["surface"]: k for k, it in found.items() if not it["llm"]}
+    names = list(det_only)
+    for i in range(0, len(names), 20):
+        batch = names[i:i + 20]
+        try:
+            items = llm._chat(model, PUBLIC_SYSTEM, "\n".join(batch), PUBLIC_SCHEMA).get("items", [])
+        except (json.JSONDecodeError, KeyError):
+            items = []
+        for it in items:
+            k = det_only.get(it.get("term", "").strip())
+            if k and it.get("public"):
+                found.pop(k, None)
+    return found
+
+
 def read_docs(folder: str | Path) -> list[tuple[str, str]]:
     return [(p.name, p.read_text(encoding="utf-8"))
             for p in sorted(Path(folder).rglob("*")) if p.is_file() and p.suffix.lower() in DOC_SUFFIXES]

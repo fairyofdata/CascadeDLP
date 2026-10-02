@@ -11,6 +11,7 @@ import argparse
 import json
 import sys
 
+from .confirm import apply_pending, project_dir
 from .gate import Gate, GateConfig
 from .router import audit, route_file, sha
 
@@ -42,6 +43,7 @@ def main(argv=None):
     rt.add_argument("input")
     rt.add_argument("-q", "--question", help="local_only일 때 로컬 모델에 시킬 요청")
     rt.add_argument("-o", "--output", help="cloud_*: 보낼 텍스트 파일 / local_only: 로컬 답 파일")
+    sub.add_parser("confirm", help="확인 대기 목록(pending.md)의 표시를 반영: [x] 보호 → 용어집, [o] 일반어 → 허용 (--project 필요)")
     au = sub.add_parser("audit", help="감사 로그 최근 기록 (내용 없이 해시·개수·경로)")
     au.add_argument("-n", type=int, default=20)
     a = ap.parse_args(argv)
@@ -112,7 +114,16 @@ def main(argv=None):
                 print(f"  보낼 텍스트 → {a.output}" + (f"  (복원 job: {r.job_id})" if r.route == "cloud_masked" else ""))
         if r.local_answer_path:
             print(f"  로컬 답 → {r.local_answer_path}")
-        return {"block": 3, "local_only": 2}.get(r.route, 0)
+        return {"block": 3, "local_only": 2, "needs_confirmation": 4}.get(r.route, 0)
+    elif a.cmd == "confirm":
+        if not a.project:
+            print("--project <이름> 이 필요합니다.")
+            return 1
+        project = gate.project_for(project=a.project)
+        info = apply_pending(project_dir(cfg.home, project), project)
+        print(f"보호(용어집에 추가) {info['protected']}건, 일반어(허용) {info['allowed']}건, 아직 미정 {info['left']}건")
+        if info["left"]:
+            print(f"  미정 항목이 나오는 문서는 계속 보류됩니다: {project_dir(cfg.home, project) / 'pending.md'}")
     elif a.cmd == "audit":
         path = cfg.home / "audit.jsonl"
         lines = path.read_text(encoding="utf-8").splitlines()[-a.n:] if path.exists() else []
