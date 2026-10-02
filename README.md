@@ -18,7 +18,13 @@ CascadeDLP는 그 사이에서 **로컬 모델이 먼저 읽고, 무엇을 얼�
                         ▼ 답 ─▶ 로컬 복원(파일) ─▶ 결과          + 감사 로그: 무엇이 나갔는가
 ```
 
-> **현재 상태**: 1단계(개인정보 엔티티)와 C1(프로젝트 용어집) 구현·실측 완료. 코드로의 확장은 [로드맵](#로드맵). 방향 전환 배경은 [ADR-0015](docs/adr/0015-cascade-dlp-direction.md).
+> **현재 상태 (2026-10-01)**: 문서 쪽 흐름 전체가 구현·실측됐다 — 개인정보 가림, 프로젝트 용어집과 자동 초안, 레벨별 가림, 효용·유출 측정, 라우터와 감사 로그. 남은 것은 코드 저장소 지원(C4)과 실제 문서 파일럿. [로드맵](#로드맵) · 방향 전환 배경 [ADR-0015](docs/adr/0015-cascade-dlp-direction.md).
+
+**한눈에 보는 흐름**
+1. 문서 폴더 → 로컬 LLM이 **용어집 초안**(이 프로젝트만의 말)을 만든다 → 사람이 체크하고 레벨(L0–L3)을 정한다.
+2. 요청이 오면 **라우터**가 문서마다 정한다: 원문 그대로 / 가려서 클라우드 / 로컬 전용 / 차단.
+3. 가려서 보낸 경우 답은 **로컬에서 복원**한다. 로컬 전용 결과는 **파일로만** 남는다.
+4. 무엇이 어디로 갔는지 **감사 로그**에 남는다(내용 없이 해시·개수만).
 
 ```text
 Tessellane의 조율기는 Ripple Rank 점수를 쓰고 FastAPI 위에서 돈다.          (용어집: L1·L1·L2·L0)
@@ -36,12 +42,14 @@ Tessellane의 조율기는 Ripple Rank 점수를 쓰고 FastAPI 위에서 돈다
 ```
 
 ## 무엇이 다른가
-이미 많은 PII 도구(Presidio, GLiNER …)가 있습니다. 여기서만 하는 것:
+이미 많은 PII·DLP 도구(Presidio, GLiNER, 상용 DLP …)가 있습니다. 여기서만 하는 것:
 
-1. **한·일·영 혼용 문서** — 한 문장 안에 한글 이름, 가나 이름, 로마자가 섞여도 된다.
-2. **교차 표기 연결** — `한서윤 / 韓瑞允 / ハン・ソユン / Seoyun Han` → 같은 `[PERSON_001]`.
-3. **장기적으로 안정된 가역 가명화** — 오늘 `[PERSON_001]`이던 사람은 다음 주 다른 대화에서도 `[PERSON_001]`. 복원은 원문과 **바이트 단위로 일치**.
-4. **기존 도구를 기준선으로 실측** — GLiNER는 공백 단위로 끊어 일본어 문장을 통째로 잡는 등 한·일 문서에 그대로 쓰기 어려웠다([ADR-0009](docs/adr/0009-gliner-baseline.md)).
+1. **프로젝트 고유 용어를 다룬다** — `조율기`, `Adaptive Scheduler`처럼 일반명사로도 쓰여 규칙으로 못 잡는 말을, 사람이 확정한 용어집으로 표기 변형(`adaptive_scheduler`, `適応スケジューラ`)까지 찾아 레벨대로 처리한다. 용어집 초안은 로컬 LLM이 만든다.
+2. **가림의 한계를 측정했다** — 가림은 이름을 지키지만 의미(설계 의도)는 못 지킨다는 것을 숫자로 확인하고, 의미 보호는 로컬 전용 라우팅으로 풀었다([ADR-0019](docs/adr/0019-semantic-leakage.md)).
+3. **한·일·영 혼용 문서** — 한 문장 안에 한글 이름, 가나 이름, 로마자가 섞여도 된다.
+4. **교차 표기 연결** — `한서윤 / 韓瑞允 / ハン・ソユン / Seoyun Han` → 같은 `[PERSON_001]`.
+5. **장기적으로 안정된 가역 가명화** — 오늘 `[PERSON_001]`이던 사람은 다음 주 다른 대화에서도 `[PERSON_001]`. 복원은 원문과 **바이트 단위로 일치**.
+6. **기존 도구를 기준선으로 실측** — GLiNER는 공백 단위로 끊어 일본어 문장을 통째로 잡는 등 한·일 문서에 그대로 쓰기 어려웠다([ADR-0009](docs/adr/0009-gliner-baseline.md)).
 
 ## 설계 원칙
 - **결정론이 먼저, 로컬 LLM은 형식 없는 것만.** 메일·전화·우편번호·URL·ID 형식은 정규식. LLM은 이름·주소·조직명 *후보 문자열*과 이름의 *로마자 발음*만 낸다. 위치 찾기, 토큰 부여, 같은 사람 판정, 복원은 전부 코드가 한다(환각은 원문에 없으므로 자동 폐기).
@@ -49,7 +57,9 @@ Tessellane의 조율기는 Ripple Rank 점수를 쓰고 FastAPI 위에서 돈다
 - **가명 맵은 로컬에만.** `~/.cascadedlp/` — 어떤 저장소에도 속하지 않는다.
 - **개발·평가는 합성 데이터만.**
 
-## 성능 (합성 평가, qwen3.5:9b, RTX 3070 8GB)
+## 1단계(개인정보 탐지) 성능 (합성 평가, qwen3.5:9b, RTX 3070 8GB)
+용어집·라우터 쪽 측정은 아래 [핵심 발견](#지금까지의-핵심-발견-합성-가상-프로젝트-2곳-로컬-모델-기준)에 있다.
+
 | | 개발 세트 eval_v1 | 홀드아웃 eval_v2 |
 |---|---|---|
 | 탐지 F1 (완전 일치) — 규칙만 | 0.404 | 0.230 |
@@ -76,16 +86,26 @@ cd CascadeDLP
 
 **CLI**
 ```powershell
-cascadedlp mask memo.md -o memo.masked.md            # job id 출력
+# 1) 용어집 만들기 (프로젝트마다 한 번, 로컬 전용)
+cascadedlp --project myproj bootstrap D:\work\myproj\docs      # 후보 검토 파일 생성
+cascadedlp --project myproj apply-review <검토 파일>            # 체크한 항목을 용어집에 반영
+
+# 2) 라우터 — 권장 진입점
+cascadedlp --project myproj route design.md -o to_cloud.md     # 경로 결정 + 보낼 텍스트
+cascadedlp --project myproj route design.md -q "요약해줘" -o answer.md   # 로컬 전용이면 로컬 모델이 답
+cascadedlp audit                                               # 무엇이 어디로 갔나
+
+# 3) 직접 가리고 되돌리기
+cascadedlp mask memo.md -o memo.masked.md                      # job id 출력
 cascadedlp unmask answer.md --job <job_id> -o answer.restored.md
-cascadedlp entities                                  # 토큰·유형·표기 수만 (원래 값 없음)
 ```
 
 **MCP (Claude Code 등에서 도구로)**
 ```powershell
 claude mcp add --scope user cascadedlp -- <저장소 경로>\.venv\Scripts\cascadedlp-mcp.exe
 ```
-도구: `mask_file(path)` · `unmask_to_file(masked_text, job_id, out_path)` · `list_entities()`
+도구: `route_file(path, question?, project?)`(권장) · `mask_file(path, project?)` · `unmask_to_file(masked_text, job_id, out_path)` · `list_entities()`
+용어집 초안 만들기(`bootstrap`)는 "무엇이 핵심인가"의 목록이라 MCP에 없고 CLI로만 한다.
 경로·파일명·형식(md/json/txt/csv)은 대화에서 그때그때 지정. 기본 허용 범위는 사용자 폴더, 가명 맵 폴더·`.ssh`·`.claude`·`AppData` 등은 항상 차단, 덮어쓰기 금지([ADR-0013](docs/adr/0013-path-policy.md)).
 
 **Python API**
@@ -99,12 +119,14 @@ g.unmask_to_file(answer, r.job_id, "memo_answer.txt")
 
 ## 구조
 ```
-cascadedlp/    spans · rules · llm · linking · pseudo · transform · gate(중심 API) · cli · mcp_server
-tools/      build_eval · evaluate · relink · p5_eval · gliner_baseline   (측정 도구)
-tests/      LLM 없이 도는 결정론 테스트 (라운드트립·규칙·후처리·경계·P5 보정)
-data/eval/  합성 평가 세트 (v1 개발용, v2 홀드아웃) — 작성자·건수는 README
-results/    측정 결과 (수치 + 합성 문장 오류 목록)
-docs/adr/   설계 결정 기록 (ADR 0001–0014)
+cascadedlp/  spans · rules · llm · linking · pseudo · transform        (탐지·연결·가명화)
+             glossary · bootstrap                                     (프로젝트 용어집, 자동 초안)
+             gate(중심 API) · router(경로 결정·감사 로그) · cli · mcp_server
+tools/       측정 도구: evaluate · eval_glossary · eval_bootstrap · eval_utility · eval_semantic · eval_doc_pii …
+tests/       LLM 없이 도는 결정론 테스트 134개 (라운드트립·규칙·용어집·라우터·경계 원칙)
+data/eval/   합성 평가 세트: 문장 세트 v1·v2, 가상 프로젝트 Tessellane(개발)·Quillmere(홀드아웃) — 작성자·건수는 README
+results/     측정 결과 (수치 + 합성 데이터의 오류 목록)
+docs/adr/    설계 결정 기록 (ADR 0001–0020)
 ```
 
 ## 로드맵
@@ -129,9 +151,18 @@ docs/adr/   설계 결정 기록 (ADR 0001–0014)
 | L2 + 문장 일반화 | 약 45% 하락 | 0 | 0.44–0.83 |
 | L2 + 문장 제거 | 거의 0 | 0 | 0.39–0.44 |
 
-→ **가림은 이름·개인정보를 효용 손실 없이 지킨다. 그러나 "무엇을 어떻게 하는가"(설계 의도)는 문장 단위로 가려도 새어 나간다.** 의미가 비밀인 것은 가리지 말고 **로컬에서만 처리(L3 라우팅)**해야 한다 — 다음 단계 C5의 근거.
+→ **가림은 이름·개인정보를 효용 손실 없이 지킨다. 그러나 "무엇을 어떻게 하는가"(설계 의도)는 문장 단위로 가려도 새어 나간다.** 의미가 비밀인 것은 가리지 말고 **로컬에서만 처리(L3 라우팅)**해야 한다 — 그래서 라우터(C5)를 만들었다.
+
+그 밖의 측정 결과:
+- 용어집 초안: 처음 보는 가상 프로젝트에서 정답 10항목이 모두 후보에 오르고, 다른 대상을 잘못 합친 것 0 ([ADR-0017](docs/adr/0017-glossary-bootstrap.md)).
+- 용어집 적용: 용어 유출 0, 과잉 가림 0, 복원 바이트 일치 ([ADR-0016](docs/adr/0016-project-glossary.md)).
 
 ## 알려진 한계
+- **가림은 의미를 지키지 못한다.** 설계 의도가 비밀이면 L3로 두고 로컬에서만 처리해야 한다.
+- **L3를 넉넉히 지정하면 클라우드를 못 쓴다.** L3 용어 하나가 문서 5개 중 4개에 나와 대부분 로컬 전용이 됐다 — L3는 소수 항목에만([ADR-0020](docs/adr/0020-router.md)).
+- **긴 문서에서 사람 이름 탐지가 가끔 흔들린다.** 조각을 작게 나눠 크게 줄였지만(노출 10 → 1) 0은 아니다([ADR-0018](docs/adr/0018-utility-vs-leakage.md)).
+- 로컬 전용 경로의 답은 로컬 모델(8K 컨텍스트) 품질이다. 긴 문서는 앞부분만 쓴다.
+- **모든 수치는 분석자가 만든 합성 데이터 기준이다.** 실제 문서 파일럿은 아직 하지 못했다.
 - 한자 이름만으로는 읽기가 모호하다(伊藤大翔 → hiroto? daisho?) → 교차 연결 실패.
 - 공백으로만 붙은 두 사람 이름(`정민호 김민준`)은 한 사람으로 합쳐진다.
 - 주소 경계가 부정확하다(ADDRESS 완전 F1 0.44–0.57).
