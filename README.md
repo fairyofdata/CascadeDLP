@@ -140,8 +140,11 @@ cascadedlp unmask answer.md --job <job_id> -o answer.restored.md
 
 **MCP (Claude Code 등에서 도구로)**
 ```powershell
-claude mcp add --scope user cascadedlp -- <저장소 경로>\.venv\Scripts\cascadedlp-mcp.exe
+claude mcp add --scope user cascadedlp -- <저장소 경로>\.venv\Scripts\python.exe -m cascadedlp.mcp_server
 ```
+- `cascadedlp-mcp.exe`가 아니라 `python.exe -m`으로 등록한다. pip가 만드는 서명 없는 실행 파일은 Windows의 애플리케이션 제어(스마트 앱 컨트롤 등)에 막힐 수 있다(`WinError 4551`).
+- 저장소 폴더를 옮기거나 이름을 바꾸면 등록 경로가 깨진다(`uv_spawn` 오류). 새 위치에서 `pip install -e .[mcp]`로 다시 설치하고 위 명령으로 다시 등록한다.
+
 도구: `route_file(path, question?, project?)`(권장) · `mask_file(path, project?)` · `unmask_to_file(masked_text, job_id, out_path)` · `list_entities()`
 용어집 초안 만들기(`bootstrap`)는 "무엇이 핵심인가"의 목록이라 MCP에 없고 CLI로만 한다.
 경로·파일명·형식(md/json/txt/csv)은 대화에서 그때그때 지정. 기본 허용 범위는 사용자 폴더, 가명 맵 폴더·`.ssh`·`.claude`·`AppData` 등은 항상 차단, 덮어쓰기 금지([ADR-0013](docs/adr/0013-path-policy.md)).

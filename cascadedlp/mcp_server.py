@@ -1,7 +1,8 @@
 """MCP 서버 — 다른 Claude Code 대화에서 CascadeDLP를 도구로 쓰게 한다 (stdio).
 
 등록 (다른 프로젝트에서도 쓰려면 user 범위):
-  claude mcp add --scope user cascadedlp -- <저장소 경로>\\.venv\\Scripts\\cascadedlp-mcp.exe
+  claude mcp add --scope user cascadedlp -- <저장소 경로>\\.venv\\Scripts\\python.exe -m cascadedlp.mcp_server
+  (cascadedlp-mcp.exe 런처는 서명이 없어 Windows 애플리케이션 제어에 막힐 수 있다 — WinError 4551)
 
 🔴 경계: 호출자(Claude)는 외부 LLM이다.
 - 원문은 '파일 경로'로만 받는다. 원문 텍스트를 인자로 받는 도구는 없다.

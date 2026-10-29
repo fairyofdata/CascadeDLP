@@ -33,7 +33,9 @@ cascadedlp --rules-only mask ...                     # LLM 없이 규칙만 (빠
 ## 2. MCP (다른 Claude Code 대화)
 등록 (모든 프로젝트에서 쓰려면 user 범위):
 ```powershell
-claude mcp add --scope user cascadedlp -- <저장소 경로>\.venv\Scripts\cascadedlp-mcp.exe
+claude mcp add --scope user cascadedlp -- <저장소 경로>\.venv\Scripts\python.exe -m cascadedlp.mcp_server
+# cascadedlp-mcp.exe는 Windows 애플리케이션 제어에 막힐 수 있어 python -m 방식을 쓴다.
+# 저장소 폴더를 옮기면: 새 위치에서 pip install -e .[mcp] 후 다시 등록.
 ```
 도구: `mask_file(path)`, `unmask_to_file(masked_text, job_id, out_path)`, `list_entities()`.
 대화 예: "`D:\docs\회의록.txt` 를 cascadedlp로 가명화해서 요약해 줘. 복원본은 `D:\docs\회의록_요약.txt` 로."
