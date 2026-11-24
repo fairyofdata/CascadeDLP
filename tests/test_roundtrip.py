@@ -4,9 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from cascadedlp import cli
-from cascadedlp.pseudo import PseudoMap, mask, unmask
-from cascadedlp.spans import Span, resolve
+from prudentia import cli
+from prudentia.pseudo import PseudoMap, mask, unmask
+from prudentia.spans import Span, resolve
 
 EVAL = Path(__file__).parent.parent / "data" / "eval" / "eval_v1.jsonl"
 ROWS = [json.loads(l) for l in EVAL.read_text(encoding="utf-8").splitlines()]

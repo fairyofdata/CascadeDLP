@@ -24,10 +24,10 @@ from pathlib import Path
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from cascadedlp import llm  # noqa: E402
-from cascadedlp.gate import Gate, GateConfig  # noqa: E402
-from cascadedlp.glossary import surface_pattern  # noqa: E402
-from cascadedlp.pseudo import PseudoMap, unmask  # noqa: E402
+from prudentia import llm  # noqa: E402
+from prudentia.gate import Gate, GateConfig  # noqa: E402
+from prudentia.glossary import surface_pattern  # noqa: E402
+from prudentia.pseudo import PseudoMap, unmask  # noqa: E402
 
 SEMANTIC_PROMPT_VERSION = "s1"
 MODES = ["raw", "alias", "opaque", "generalize", "drop"]

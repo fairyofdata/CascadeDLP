@@ -4,8 +4,8 @@ from pathlib import Path
 
 import pytest
 
-from cascadedlp import router
-from cascadedlp.gate import Gate, GateConfig
+from prudentia import router
+from prudentia.gate import Gate, GateConfig
 
 GLOSSARY = {"project": "tsl", "entries": [
     {"id": "COMPONENT_01", "kind": "COMPONENT", "level": 2, "status": "confirmed", "surfaces": ["조율기"], "alias": ""},
@@ -85,7 +85,7 @@ def suspect_gate(gate, monkeypatch, cands):
 
 def test_suspect_holds_document_then_confirm_releases(gate, monkeypatch):
     """의심 → 보류(내용·용어를 돌려주지 않음) → 사용자가 로컬에서 표시 → 다시 요청하면 통과."""
-    from cascadedlp.confirm import apply_pending, project_dir
+    from prudentia.confirm import apply_pending, project_dir
     g = suspect_gate(gate, monkeypatch, ["Dock Pulse", "Kubernetes", "조율기"])
     text = "조율기는 Dock Pulse 상태를 읽고 Kubernetes에 배포된다."
     r = router.route_text(g, text, "tsl")
@@ -104,7 +104,7 @@ def test_suspect_holds_document_then_confirm_releases(gate, monkeypatch):
 
 
 def test_undecided_suspect_keeps_holding_and_is_not_duplicated(gate, monkeypatch):
-    from cascadedlp.confirm import apply_pending, parse_pending, project_dir
+    from prudentia.confirm import apply_pending, parse_pending, project_dir
     g = suspect_gate(gate, monkeypatch, ["Dock Pulse"])
     router.route_text(g, "Dock Pulse 점검", "tsl")
     router.route_text(g, "Dock Pulse 재점검", "tsl")
@@ -140,6 +140,6 @@ def test_restricted_route_file_refuses_outside(tmp_path, monkeypatch):
     monkeypatch.setenv("HOME", str(tmp_path / "u"))
     g = Gate(GateConfig(home=tmp_path / "home", model=None, allowed_roots=[str(tmp_path / "allowed")]), restrict_paths=True)
     (tmp_path / "secret.md").write_text("x", encoding="utf-8")
-    from cascadedlp.gate import PathNotAllowed
+    from prudentia.gate import PathNotAllowed
     with pytest.raises(PathNotAllowed):
         router.route_file(g, tmp_path / "secret.md")

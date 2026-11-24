@@ -1,12 +1,14 @@
 <!-- 원본: README_KR.md (한국어판이 원본, 영·일은 번역) · 동기화: 2026-11-24 -->
 
-# CascadeDLP
+# Prudentia
+
+옛 이름 CascadeDLP(2026-11-24 개명, [ADR-0024](docs/adr/0024-rename-to-prudentia.md)).
 
 **로컬 모델이 관문을 서고, 통과한 것만 클라우드 모델이 다루는 캐스케이딩 DLP 레이어 — 한·일·영 혼용**
 *A cascading DLP layer: a small local model stands gate in front of a frontier cloud model — for mixed Korean / Japanese / English work.*
 
 GPU 한 장(RTX 3070 8GB)으로는 최상위 모델을 대신할 수 없고, 그렇다고 모든 것을 클라우드에 보낼 수도 없습니다.
-CascadeDLP는 **로컬 모델이 먼저 문서를 읽고 관문 판정을 한 다음, 통과한 것만 클라우드 모델에 넘기고, 돌아온 답을 로컬에서 원래 값으로 되돌립니다.**
+Prudentia는 **로컬 모델이 먼저 문서를 읽고 관문 판정을 한 다음, 통과한 것만 클라우드 모델에 넘기고, 돌아온 답을 로컬에서 원래 값으로 되돌립니다.**
 
 ## 로컬 DLP 관문: 탐지 캐스케이드와 관문 판정 (기준은 민감도)
 
@@ -42,12 +44,12 @@ CascadeDLP는 **로컬 모델이 먼저 문서를 읽고 관문 판정을 한 �
 
 - **탐지 캐스케이드** — 로컬 관문이 민감한 것을 *찾는* 방식. 값싸고 확실한 것부터 차례로 거른다:
   `규칙(형식) → 사람이 확정한 용어집 → 로컬 LLM(애매한 것)`. 앞 단계가 잡은 것은 뒤 단계가 뒤집지 못한다.
-  이름 CascadeDLP의 "캐스케이드"는 **이것만** 뜻한다.
+  이름 Prudentia의 "캐스케이드"는 **이것만** 뜻한다.
 - **관문 판정** — 찾은 결과로 문서를 *어떻게 할지* 정하는 다섯 가지 결론(위 표): 통과 · 가림 · 확인 · 로컬 전용 · 거부.
 
 흔히 말하는 LLM 캐스케이드(싼 모델이 먼저 풀고 어려우면 비싼 모델로 넘기는, 성능·비용 최적화)와는 **다르다.** 클라우드로 넘길지 정하는 기준은 작업 난이도가 아니라 **민감도**다. 난이도로 넘기면 "어렵고 민감한" 문서가 클라우드로 올라가 버리므로 DLP와 양립하지 않는다.
 
-CascadeDLP 자체는 클라우드를 호출하지 않는다. 판정 결과와 가린 텍스트를 호출한 쪽(Claude Code 등)에 돌려주고, 그쪽이 클라우드 작업을 한다.
+Prudentia 자체는 클라우드를 호출하지 않는다. 판정 결과와 가린 텍스트를 호출한 쪽(Claude Code 등)에 돌려주고, 그쪽이 클라우드 작업을 한다.
 
 ## 약속하는 것과 약속하지 않는 것
 **보장 장치가 아니라 위험 감소 계층이다** ([위협 모델, ADR-0022](docs/adr/0022-threat-model.md)).
@@ -93,7 +95,7 @@ Tessellane의 조율기는 Ripple Rank 점수를 쓰고 FastAPI 위에서 돈다
 ## 설계 원칙
 - **결정론이 먼저, 로컬 LLM은 형식 없는 것만.** 메일·전화·우편번호·URL·ID 형식은 정규식. LLM은 이름·주소·조직명 *후보 문자열*과 이름의 *로마자 발음*만 낸다. 위치 찾기, 토큰 부여, 같은 사람 판정, 복원은 전부 코드가 한다(환각은 원문에 없으므로 자동 폐기).
 - **호출자는 외부 LLM이다.** MCP 도구는 원문을 인자로 받지 않고(파일 경로만), 복원 결과를 돌려주지 않는다(로컬 파일로만).
-- **가명 맵은 로컬에만.** `~/.cascadedlp/` — 어떤 저장소에도 속하지 않는다.
+- **가명 맵은 로컬에만.** `~/.prudentia/` — 어떤 저장소에도 속하지 않는다.
 - **개발·평가는 합성 데이터만.**
 
 ## 1단계(개인정보 탐지) 성능 (합성 평가, qwen3.5:9b, RTX 3070 8GB)
@@ -114,8 +116,8 @@ Tessellane의 조율기는 Ripple Rank 점수를 쓰고 FastAPI 위에서 돈다
 
 ## 설치 (Windows, Python 3.12+, [Ollama](https://ollama.com))
 ```powershell
-git clone https://github.com/fairyofdata/CascadeDLP.git
-cd CascadeDLP
+git clone https://github.com/fairyofdata/Prudentia.git
+cd Prudentia
 .\setup.ps1        # venv · 의존성 · pip install -e .[mcp] · Ollama 모델 · 스모크 테스트
 ```
 기본 모델은 `qwen3.5:9b`(약 6.6GB, 8GB VRAM에서 100% GPU). LLM 없이 규칙만 쓰려면 `--rules-only`.
@@ -126,25 +128,25 @@ cd CascadeDLP
 **CLI**
 ```powershell
 # 1) 용어집 만들기 (프로젝트마다 한 번, 로컬 전용)
-cascadedlp --project myproj bootstrap D:\work\myproj\docs      # 후보 검토 파일 생성
-cascadedlp --project myproj apply-review <검토 파일>            # 체크한 항목을 용어집에 반영
+prudentia --project myproj bootstrap D:\work\myproj\docs      # 후보 검토 파일 생성
+prudentia --project myproj apply-review <검토 파일>            # 체크한 항목을 용어집에 반영
 
 # 2) 관문(라우터) — 권장 진입점
-cascadedlp --project myproj route design.md -o to_cloud.md     # 판정 + 통과·가림이면 보낼 텍스트
-cascadedlp --project myproj route design.md -q "요약해줘" -o answer.md   # 로컬 전용이면 로컬 모델이 답
-cascadedlp --project myproj confirm                            # '확인' 판정이 나오면: 대기 목록에 표시한 뒤 반영
-cascadedlp audit                                               # 무엇이 어디로 갔나
+prudentia --project myproj route design.md -o to_cloud.md     # 판정 + 통과·가림이면 보낼 텍스트
+prudentia --project myproj route design.md -q "요약해줘" -o answer.md   # 로컬 전용이면 로컬 모델이 답
+prudentia --project myproj confirm                            # '확인' 판정이 나오면: 대기 목록에 표시한 뒤 반영
+prudentia audit                                               # 무엇이 어디로 갔나
 
 # 3) 직접 가리고 되돌리기
-cascadedlp mask memo.md -o memo.masked.md                      # job id 출력
-cascadedlp unmask answer.md --job <job_id> -o answer.restored.md
+prudentia mask memo.md -o memo.masked.md                      # job id 출력
+prudentia unmask answer.md --job <job_id> -o answer.restored.md
 ```
 
 **MCP (Claude Code 등에서 도구로)**
 ```powershell
-claude mcp add --scope user cascadedlp -- <저장소 경로>\.venv\Scripts\python.exe -m cascadedlp.mcp_server
+claude mcp add --scope user prudentia -- <저장소 경로>\.venv\Scripts\python.exe -m prudentia.mcp_server
 ```
-- `cascadedlp-mcp.exe`가 아니라 `python.exe -m`으로 등록한다. pip가 만드는 서명 없는 실행 파일은 Windows의 애플리케이션 제어(스마트 앱 컨트롤 등)에 막힐 수 있다(`WinError 4551`).
+- `prudentia-mcp.exe`가 아니라 `python.exe -m`으로 등록한다. pip가 만드는 서명 없는 실행 파일은 Windows의 애플리케이션 제어(스마트 앱 컨트롤 등)에 막힐 수 있다(`WinError 4551`).
 - 저장소 폴더를 옮기거나 이름을 바꾸면 등록 경로가 깨진다(`uv_spawn` 오류). 새 위치에서 `pip install -e .[mcp]`로 다시 설치하고 위 명령으로 다시 등록한다.
 
 도구: `route_file(path, question?, project?)`(권장) · `mask_file(path, project?)` · `unmask_to_file(masked_text, job_id, out_path)` · `list_entities()`
@@ -153,7 +155,7 @@ claude mcp add --scope user cascadedlp -- <저장소 경로>\.venv\Scripts\pytho
 
 **Python API**
 ```python
-from cascadedlp.gate import Gate
+from prudentia.gate import Gate
 g = Gate()
 r = g.mask_file("memo.txt")
 answer = call_external_llm(r.masked_text)       # 외부에는 가명화된 텍스트만
@@ -162,7 +164,7 @@ g.unmask_to_file(answer, r.job_id, "memo_answer.txt")
 
 ## 구조
 ```
-cascadedlp/  spans · rules · llm · linking · pseudo · transform        (탐지·연결·가명화)
+prudentia/  spans · rules · llm · linking · pseudo · transform        (탐지·연결·가명화)
              glossary · bootstrap                                     (프로젝트 용어집, 자동 초안)
              gate(중심 API) · router(관문 판정·감사 로그) · confirm(의심 항목 확인) · cli · mcp_server
 tools/       측정 도구: evaluate · eval_glossary · eval_bootstrap · eval_utility · eval_semantic · eval_doc_pii …

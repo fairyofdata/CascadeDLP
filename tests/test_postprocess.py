@@ -1,7 +1,7 @@
 """P4 v2 결정론 부분: 조각 병합·호칭 제거(llm.tidy), 로마자 비교 연결(linking.group). LLM 없이 검사."""
-from cascadedlp.linking import group
-from cascadedlp.llm import tidy
-from cascadedlp.spans import Span
+from prudentia.linking import group
+from prudentia.llm import tidy
+from prudentia.spans import Span
 
 
 def surfaces(text, spans):

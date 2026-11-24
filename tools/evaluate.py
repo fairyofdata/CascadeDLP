@@ -20,9 +20,9 @@ from collections import defaultdict
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from cascadedlp import linking, llm, rules  # noqa: E402
-from cascadedlp.pseudo import norm  # noqa: E402
-from cascadedlp.spans import resolve  # noqa: E402
+from prudentia import linking, llm, rules  # noqa: E402
+from prudentia.pseudo import norm  # noqa: E402
+from prudentia.spans import resolve  # noqa: E402
 
 TYPES = ["PERSON", "EMAIL", "PHONE", "POSTAL", "ADDRESS", "URL", "ID_NUMBER", "ORG"]
 

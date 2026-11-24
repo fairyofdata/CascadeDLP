@@ -1,11 +1,11 @@
 """CLI — Gate를 부르는 얇은 껍데기. 사용자가 로컬에서 직접 돌리는 용도라 경로 제한이 없다.
 
-  cascadedlp mask 메모.txt -o 메모.masked.txt            # job_id가 출력된다
-  cascadedlp --project tessellane mask 설계서.md -o 설계서.masked.md   # 프로젝트 용어집 적용
-  cascadedlp unmask 답변.txt --job <job_id> -o 답변.복원.txt
-  cascadedlp entities                                    # 토큰·유형·표기 수 (원래 값 없음)
-  cascadedlp glossary-check tessellane                   # 용어집 형식 점검
-  옵션: --rules-only (LLM 없이), --model qwen3:8b, --home <폴더> (기본 ~/.cascadedlp)
+  prudentia mask 메모.txt -o 메모.masked.txt            # job_id가 출력된다
+  prudentia --project tessellane mask 설계서.md -o 설계서.masked.md   # 프로젝트 용어집 적용
+  prudentia unmask 답변.txt --job <job_id> -o 답변.복원.txt
+  prudentia entities                                    # 토큰·유형·표기 수 (원래 값 없음)
+  prudentia glossary-check tessellane                   # 용어집 형식 점검
+  옵션: --rules-only (LLM 없이), --model qwen3:8b, --home <폴더> (기본 ~/.prudentia)
 """
 import argparse
 import json
@@ -17,8 +17,8 @@ from .router import audit, route_file, sha
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(prog="cascadedlp")
-    ap.add_argument("--home", help="가명 맵·설정 폴더 (기본 ~/.cascadedlp 또는 CASCADEDLP_HOME)")
+    ap = argparse.ArgumentParser(prog="prudentia")
+    ap.add_argument("--home", help="가명 맵·설정 폴더 (기본 ~/.prudentia 또는 PRUDENTIA_HOME)")
     ap.add_argument("--model", help="로컬 LLM 모델 (기본: config.json)")
     ap.add_argument("--rules-only", action="store_true", help="LLM 없이 규칙만")
     ap.add_argument("--project", help="적용할 프로젝트 용어집 (생략하면 config의 폴더 매핑으로 찾음)")
@@ -36,7 +36,7 @@ def main(argv=None):
     gc.add_argument("project")
     bs = sub.add_parser("bootstrap", help="문서 폴더에서 용어집 후보 검토 md를 만든다 (--project 필요)")
     bs.add_argument("folder")
-    bs.add_argument("-o", "--output", help="검토 md (기본 ~/.cascadedlp/projects/<프로젝트>/review.md)")
+    bs.add_argument("-o", "--output", help="검토 md (기본 ~/.prudentia/projects/<프로젝트>/review.md)")
     ar = sub.add_parser("apply-review", help="체크한 후보를 용어집에 반영 (--project 필요)")
     ar.add_argument("review")
     rt = sub.add_parser("route", help="문서를 보고 경로 결정: cloud_raw / cloud_masked / local_only / block")
@@ -66,7 +66,7 @@ def main(argv=None):
                      "counts": r.counts, "job_id": r.job_id, "via": "cli mask"})
         print(f"가명화 {sum(r.counts.values())}개 {r.counts} → {a.output}  ({r.seconds}s, 용어집: {r.project or '없음'})")
         print(f"job: {r.job_id}")
-        print(f"복원: cascadedlp unmask <답변파일> --job {r.job_id} -o <결과파일>")
+        print(f"복원: prudentia unmask <답변파일> --job {r.job_id} -o <결과파일>")
     elif a.cmd == "unmask":
         with open(a.input, encoding="utf-8", newline="") as f:
             answer = f.read()
@@ -99,7 +99,7 @@ def main(argv=None):
         else:
             info = apply_review(Path(a.review).read_text(encoding="utf-8"), pdir / "glossary.json", project)
             print(f"추가 {info['added']}개, 표기 보강 {info['extended']}개 → 전체 {info['total']}개 ({info['path']})")
-            print(f"점검: cascadedlp glossary-check {project}")
+            print(f"점검: prudentia glossary-check {project}")
     elif a.cmd == "route":
         cloud = None
         r = route_file(gate, a.input, a.project, a.question, a.output if a.question else None)

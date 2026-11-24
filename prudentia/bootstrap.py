@@ -5,7 +5,7 @@
 - 결정론: 코드 표기(snake_case·CamelCase), 영문 고유명(대문자 여러 단어), 표기 변형 정규화, 정의 패턴 A(B), 음차 비교 판정
 - 로컬 LLM: 형식 없는 후보+설명, 사람 이름 탐지, 공개 기술·일반어 판정, 외래어 영어 철자 추정, 번역 관계 제안
 - LLM이 제안한 번역 묶음은 '확인 필요' 줄에 따로 둔다 → 사람이 옮겨야만 반영
-- 🔴 후보 목록은 '무엇이 핵심인가'의 초안이다. CLI 전용(MCP 미노출), 기본 저장 위치는 ~/.cascadedlp/projects/<프로젝트>/
+- 🔴 후보 목록은 '무엇이 핵심인가'의 초안이다. CLI 전용(MCP 미노출), 기본 저장 위치는 ~/.prudentia/projects/<프로젝트>/
 """
 import datetime
 import json
@@ -343,7 +343,7 @@ def render_review(res: BootstrapResult, project: str) -> str:
              "> ⚠ 이 파일은 '무엇이 이 프로젝트의 핵심인가'의 초안이다. 공유·커밋·외부 LLM 전송 금지.",
              "> 사용법: 채택할 항목의 `[ ]`를 `[x]`로. `kind`·`level`(0 공개 · 1 설명만 · 2 토큰 · 3 외부 금지)·`설명`·`표기`를 고쳐도 된다.",
              "> `확인 필요` 줄의 표기는 **`표기` 줄로 옮겨야만** 반영된다. 틀린 표기는 지운다.",
-             f"> 끝나면: `cascadedlp --project {project} apply-review <이 파일>`",
+             f"> 끝나면: `prudentia --project {project} apply-review <이 파일>`",
              ""]
     for n, g in enumerate(res.groups, 1):
         desc = next((d for d in g.descriptions if d), "")

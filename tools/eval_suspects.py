@@ -14,11 +14,11 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from cascadedlp import llm, router  # noqa: E402
-from cascadedlp.bootstrap import key  # noqa: E402
-from cascadedlp.confirm import parse_pending  # noqa: E402
-from cascadedlp.gate import Gate, GateConfig  # noqa: E402
-from cascadedlp.glossary import surface_pattern  # noqa: E402
+from prudentia import llm, router  # noqa: E402
+from prudentia.bootstrap import key  # noqa: E402
+from prudentia.confirm import parse_pending  # noqa: E402
+from prudentia.gate import Gate, GateConfig  # noqa: E402
+from prudentia.glossary import surface_pattern  # noqa: E402
 
 _chat, _detect, _cache = llm._chat, llm.detect, {}
 

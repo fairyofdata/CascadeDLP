@@ -1,13 +1,15 @@
 <!-- Source: README_KR.md (Korean is the source; English and Japanese are translations) · synced 2026-11-24 -->
 
-# CascadeDLP
+# Prudentia
 
 [English](README.md) · [한국어](README_KR.md) · [日本語](README_JP.md)
+
+Formerly CascadeDLP (renamed 2026-11-24, [ADR-0024](docs/adr/0024-rename-to-prudentia.md)).
 
 **A cascading DLP layer: a small local model stands gate in front of a frontier cloud model — for mixed Korean / Japanese / English work.**
 
 One GPU (RTX 3070, 8 GB) cannot replace a top-tier model, and yet not everything can be sent to the cloud.
-In CascadeDLP **a local model reads the document first and makes a gate decision; only what passes goes to the cloud model, and the answer that comes back is restored to the original values locally.**
+In Prudentia **a local model reads the document first and makes a gate decision; only what passes goes to the cloud model, and the answer that comes back is restored to the original values locally.**
 
 ## The local DLP gate: detection cascade and gate decision (the criterion is sensitivity)
 
@@ -43,12 +45,12 @@ In this project the two words mean different things.
 
 - **Detection cascade** — how the local gate *finds* sensitive material. It filters from cheap and certain to expensive:
   `rules (formats) → glossary confirmed by a person → local LLM (ambiguous cases)`. A later stage cannot overturn what an earlier stage caught.
-  The "cascade" in the name CascadeDLP means **only this**.
+  The "cascade" in the name Prudentia means **only this**.
 - **Gate decision** — the five outcomes (table above) that decide *what to do* with the document given what was found: pass · mask · confirm · local only · refuse.
 
 This is **not** the usual LLM cascade (a cheap model tries first and hands hard cases to an expensive one, for performance and cost). Whether to hand off to the cloud is decided by **sensitivity**, not by difficulty. Handing off by difficulty would send "hard and sensitive" documents to the cloud, which cannot coexist with DLP.
 
-CascadeDLP itself never calls the cloud. It returns the decision and the masked text to the caller (Claude Code and the like), and the caller does the cloud work.
+Prudentia itself never calls the cloud. It returns the decision and the masked text to the caller (Claude Code and the like), and the caller does the cloud work.
 
 ## What it promises and what it does not
 **It is a risk-reduction layer, not a guarantee** ([threat model, ADR-0022](docs/adr/0022-threat-model.md)).
@@ -94,7 +96,7 @@ There are already many PII/DLP tools (Presidio, GLiNER, commercial DLP …). Wha
 ## Design principles
 - **Determinism first; the local LLM only for things without a format.** Mail, phone, postal code, URL and ID formats are regular expressions. The LLM only outputs *candidate strings* for names, addresses and organizations, and the *romanized reading* of names. Locating, token assignment, same-person decisions and restoration are all done by code (hallucinations are not in the source, so they are discarded automatically).
 - **The caller is the external LLM.** The MCP tools do not take the source text as an argument (file paths only) and do not return the restored result (local files only).
-- **The pseudonym map stays local.** `~/.cascadedlp/` — it belongs to no repository.
+- **The pseudonym map stays local.** `~/.prudentia/` — it belongs to no repository.
 - **Development and evaluation use synthetic data only.**
 
 ## Stage 1 (personal-data detection) performance (synthetic evaluation, qwen3.5:9b, RTX 3070 8 GB)
@@ -115,8 +117,8 @@ Measurements for the glossary and router are in [key findings](#key-findings-so-
 
 ## Install (Windows, Python 3.12+, [Ollama](https://ollama.com))
 ```powershell
-git clone https://github.com/fairyofdata/CascadeDLP.git
-cd CascadeDLP
+git clone https://github.com/fairyofdata/Prudentia.git
+cd Prudentia
 .\setup.ps1        # venv · dependencies · pip install -e .[mcp] · Ollama model · smoke test
 ```
 The default model is `qwen3.5:9b` (about 6.6 GB, 100% on GPU with 8 GB VRAM). To use rules only without an LLM, pass `--rules-only`.
@@ -127,25 +129,25 @@ Details in [USAGE.md](USAGE.md) (Korean).
 **CLI**
 ```powershell
 # 1) build the glossary (once per project, local only)
-cascadedlp --project myproj bootstrap D:\work\myproj\docs      # writes a candidate review file
-cascadedlp --project myproj apply-review <review file>          # applies the checked items to the glossary
+prudentia --project myproj bootstrap D:\work\myproj\docs      # writes a candidate review file
+prudentia --project myproj apply-review <review file>          # applies the checked items to the glossary
 
 # 2) gate (router) — the recommended entry point
-cascadedlp --project myproj route design.md -o to_cloud.md     # decision + the text to send if pass/mask
-cascadedlp --project myproj route design.md -q "summarize this" -o answer.md   # if local only, the local model answers
-cascadedlp --project myproj confirm                            # after a 'confirm' decision: mark the pending list, then apply
-cascadedlp audit                                               # what went where
+prudentia --project myproj route design.md -o to_cloud.md     # decision + the text to send if pass/mask
+prudentia --project myproj route design.md -q "summarize this" -o answer.md   # if local only, the local model answers
+prudentia --project myproj confirm                            # after a 'confirm' decision: mark the pending list, then apply
+prudentia audit                                               # what went where
 
 # 3) mask and restore directly
-cascadedlp mask memo.md -o memo.masked.md                      # prints a job id
-cascadedlp unmask answer.md --job <job_id> -o answer.restored.md
+prudentia mask memo.md -o memo.masked.md                      # prints a job id
+prudentia unmask answer.md --job <job_id> -o answer.restored.md
 ```
 
 **MCP (as tools in Claude Code and the like)**
 ```powershell
-claude mcp add --scope user cascadedlp -- <repository path>\.venv\Scripts\python.exe -m cascadedlp.mcp_server
+claude mcp add --scope user prudentia -- <repository path>\.venv\Scripts\python.exe -m prudentia.mcp_server
 ```
-- Register with `python.exe -m`, not `cascadedlp-mcp.exe`. The unsigned executable pip creates can be blocked by Windows application control (Smart App Control and the like) (`WinError 4551`).
+- Register with `python.exe -m`, not `prudentia-mcp.exe`. The unsigned executable pip creates can be blocked by Windows application control (Smart App Control and the like) (`WinError 4551`).
 - Moving or renaming the repository folder breaks the registered path (`uv_spawn` error). Reinstall with `pip install -e .[mcp]` in the new location and register again with the command above.
 
 Tools: `route_file(path, question?, project?)` (recommended) · `mask_file(path, project?)` · `unmask_to_file(masked_text, job_id, out_path)` · `list_entities()`
@@ -154,7 +156,7 @@ Paths, file names and formats (md/json/txt/csv) are given in the conversation ea
 
 **Python API**
 ```python
-from cascadedlp.gate import Gate
+from prudentia.gate import Gate
 g = Gate()
 r = g.mask_file("memo.txt")
 answer = call_external_llm(r.masked_text)       # only pseudonymized text goes out
@@ -163,7 +165,7 @@ g.unmask_to_file(answer, r.job_id, "memo_answer.txt")
 
 ## Layout
 ```
-cascadedlp/  spans · rules · llm · linking · pseudo · transform        (detection, linking, pseudonymization)
+prudentia/  spans · rules · llm · linking · pseudo · transform        (detection, linking, pseudonymization)
              glossary · bootstrap                                     (project glossary, automatic draft)
              gate (core API) · router (gate decision, audit log) · confirm (suspicious-item confirmation) · cli · mcp_server
 tools/       measurement tools: evaluate · eval_glossary · eval_bootstrap · eval_utility · eval_semantic · eval_doc_pii …

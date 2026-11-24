@@ -4,10 +4,10 @@ from pathlib import Path
 
 import pytest
 
-from cascadedlp.gate import Gate, GateConfig
-from cascadedlp.glossary import Entry, Glossary
-from cascadedlp.rules import detect
-from cascadedlp.transform import repair_tokens
+from prudentia.gate import Gate, GateConfig
+from prudentia.glossary import Entry, Glossary
+from prudentia.rules import detect
+from prudentia.transform import repair_tokens
 
 ENTRIES = [
     Entry("COMPONENT_01", "COMPONENT", 1, ["Adaptive Scheduler", "조율기"], "작업 우선순위 스케줄러", "confirmed"),
@@ -82,7 +82,7 @@ def test_l2_context_drop_removes_sentences_keeps_lines(gate):
 
 
 def test_l2_context_generalize_falls_back_to_drop_when_token_lost(gate, monkeypatch):
-    from cascadedlp import llm
+    from prudentia import llm
     g, _ = gate
     monkeypatch.setattr(llm, "generalize", lambda s, m: "점수를 내는 부품이다.")   # 토큰을 잃은 출력 → 안전하게 제거
     g.cfg.model = "fake"

@@ -20,9 +20,9 @@ from pathlib import Path
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from cascadedlp.gate import Gate, GateConfig  # noqa: E402
-from cascadedlp.glossary import surface_pattern  # noqa: E402
-from cascadedlp.llm import OLLAMA_URL, PROMPT_VERSION  # noqa: E402
+from prudentia.gate import Gate, GateConfig  # noqa: E402
+from prudentia.glossary import surface_pattern  # noqa: E402
+from prudentia.llm import OLLAMA_URL, PROMPT_VERSION  # noqa: E402
 
 UTILITY_PROMPT_VERSION = "u1"
 MODES = ["raw", "pii", "alias", "opaque"]

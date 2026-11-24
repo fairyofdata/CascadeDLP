@@ -16,9 +16,9 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from cascadedlp.gate import Gate, GateConfig  # noqa: E402
-from cascadedlp.glossary import Glossary  # noqa: E402
-from cascadedlp.llm import PROMPT_VERSION  # noqa: E402
+from prudentia.gate import Gate, GateConfig  # noqa: E402
+from prudentia.glossary import Glossary  # noqa: E402
+from prudentia.llm import PROMPT_VERSION  # noqa: E402
 
 GLOSSARY_KINDS = {"PROJECT", "COMPONENT", "ALGORITHM", "TERM"}
 

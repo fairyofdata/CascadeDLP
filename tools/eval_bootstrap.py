@@ -15,8 +15,8 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from cascadedlp.bootstrap import BOOTSTRAP_PROMPT_VERSION, bootstrap, key, read_docs, render_review  # noqa: E402
-from cascadedlp.glossary import Entry, Glossary, surface_pattern  # noqa: E402
+from prudentia.bootstrap import BOOTSTRAP_PROMPT_VERSION, bootstrap, key, read_docs, render_review  # noqa: E402
+from prudentia.glossary import Entry, Glossary, surface_pattern  # noqa: E402
 
 
 def main(folder, model):

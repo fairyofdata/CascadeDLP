@@ -1,13 +1,15 @@
 <!-- 原本: README_KR.md（韓国語版が原本、英語・日本語は翻訳） · 同期: 2026-11-24 -->
 
-# CascadeDLP
+# Prudentia
 
 [English](README.md) · [한국어](README_KR.md) · [日本語](README_JP.md)
+
+旧名 CascadeDLP（2026-11-24 改名、[ADR-0024](docs/adr/0024-rename-to-prudentia.md)）。
 
 **ローカルモデルが関門に立ち、通ったものだけをクラウドモデルが扱うカスケード型 DLP レイヤー — 韓・日・英の混在文書向け**
 
 GPU 1 枚（RTX 3070 8GB）では最上位モデルの代わりにはなれず、かといってすべてをクラウドに送るわけにもいきません。
-CascadeDLP は **ローカルモデルが先に文書を読んで関門判定を行い、通ったものだけをクラウドモデルに渡し、戻ってきた答えをローカルで元の値に戻します。**
+Prudentia は **ローカルモデルが先に文書を読んで関門判定を行い、通ったものだけをクラウドモデルに渡し、戻ってきた答えをローカルで元の値に戻します。**
 
 ## ローカル DLP 関門：検出カスケードと関門判定（基準は機微度）
 
@@ -43,12 +45,12 @@ CascadeDLP は **ローカルモデルが先に文書を読んで関門判定を
 
 - **検出カスケード** — ローカル関門が機微なものを*見つける*やり方。安く確実なものから順に濾す：
   `規則（形式）→ 人が確定した用語集 → ローカル LLM（曖昧なもの）`。前段が捕まえたものを後段は覆せない。
-  名前 CascadeDLP の「カスケード」は**これだけ**を指す。
+  名前 Prudentia の「カスケード」は**これだけ**を指す。
 - **関門判定** — 見つけた結果から文書を*どうするか*を決める五つの結論（上の表）：通過・マスク・確認・ローカル専用・拒否。
 
 よく言われる LLM カスケード（安いモデルが先に解き、難しければ高いモデルに回す、性能・コスト最適化）とは**違います。** クラウドに回すかを決める基準は作業の難しさではなく**機微度**です。難しさで回すと「難しくて機微な」文書がクラウドに上がってしまい、DLP と両立しません。
 
-CascadeDLP 自体はクラウドを呼びません。判定結果とマスクしたテキストを呼び出し側（Claude Code など）に返し、クラウドの作業はそちらが行います。
+Prudentia 自体はクラウドを呼びません。判定結果とマスクしたテキストを呼び出し側（Claude Code など）に返し、クラウドの作業はそちらが行います。
 
 ## 約束すること、約束しないこと
 **保証装置ではなく、リスクを減らす層です**（[脅威モデル、ADR-0022](docs/adr/0022-threat-model.md)）。
@@ -94,7 +96,7 @@ PII・DLP ツール（Presidio、GLiNER、商用 DLP …）はすでに多くあ
 ## 設計原則
 - **決定論が先、ローカル LLM は形式のないものだけ。** メール・電話・郵便番号・URL・ID の形式は正規表現。LLM は名前・住所・組織名の*候補文字列*と、名前の*ローマ字読み*だけを出す。位置の特定、トークン付与、同一人物の判定、復元はすべてコードが行う（幻覚は原文にないので自動で捨てられる）。
 - **呼び出し側は外部 LLM。** MCP ツールは原文を引数に取らず（ファイルパスのみ）、復元結果を返さない（ローカルファイルのみ）。
-- **仮名マップはローカルにだけ。** `~/.cascadedlp/` — どのリポジトリにも属さない。
+- **仮名マップはローカルにだけ。** `~/.prudentia/` — どのリポジトリにも属さない。
 - **開発・評価は合成データのみ。**
 
 ## 第 1 段階（個人情報検出）の性能（合成評価、qwen3.5:9b、RTX 3070 8GB）
@@ -115,8 +117,8 @@ PII・DLP ツール（Presidio、GLiNER、商用 DLP …）はすでに多くあ
 
 ## インストール（Windows、Python 3.12+、[Ollama](https://ollama.com)）
 ```powershell
-git clone https://github.com/fairyofdata/CascadeDLP.git
-cd CascadeDLP
+git clone https://github.com/fairyofdata/Prudentia.git
+cd Prudentia
 .\setup.ps1        # venv · 依存 · pip install -e .[mcp] · Ollama モデル · スモークテスト
 ```
 既定のモデルは `qwen3.5:9b`（約 6.6GB、8GB VRAM で 100% GPU）。LLM なしで規則だけ使うなら `--rules-only`。
@@ -127,25 +129,25 @@ cd CascadeDLP
 **CLI**
 ```powershell
 # 1) 用語集を作る（プロジェクトごとに一度、ローカル専用）
-cascadedlp --project myproj bootstrap D:\work\myproj\docs      # 候補の確認ファイルを生成
-cascadedlp --project myproj apply-review <確認ファイル>          # チェックした項目を用語集に反映
+prudentia --project myproj bootstrap D:\work\myproj\docs      # 候補の確認ファイルを生成
+prudentia --project myproj apply-review <確認ファイル>          # チェックした項目を用語集に反映
 
 # 2) 関門（ルーター）— 推奨の入口
-cascadedlp --project myproj route design.md -o to_cloud.md     # 判定 + 通過・マスクなら送るテキスト
-cascadedlp --project myproj route design.md -q "要約して" -o answer.md   # ローカル専用ならローカルモデルが答える
-cascadedlp --project myproj confirm                            # 「確認」判定が出たら：保留リストに印を付けてから反映
-cascadedlp audit                                               # 何がどこへ行ったか
+prudentia --project myproj route design.md -o to_cloud.md     # 判定 + 通過・マスクなら送るテキスト
+prudentia --project myproj route design.md -q "要約して" -o answer.md   # ローカル専用ならローカルモデルが答える
+prudentia --project myproj confirm                            # 「確認」判定が出たら：保留リストに印を付けてから反映
+prudentia audit                                               # 何がどこへ行ったか
 
 # 3) 直接マスクして戻す
-cascadedlp mask memo.md -o memo.masked.md                      # job id を出力
-cascadedlp unmask answer.md --job <job_id> -o answer.restored.md
+prudentia mask memo.md -o memo.masked.md                      # job id を出力
+prudentia unmask answer.md --job <job_id> -o answer.restored.md
 ```
 
 **MCP（Claude Code などからツールとして）**
 ```powershell
-claude mcp add --scope user cascadedlp -- <リポジトリのパス>\.venv\Scripts\python.exe -m cascadedlp.mcp_server
+claude mcp add --scope user prudentia -- <リポジトリのパス>\.venv\Scripts\python.exe -m prudentia.mcp_server
 ```
-- `cascadedlp-mcp.exe` ではなく `python.exe -m` で登録します。pip が作る署名なしの実行ファイルは、Windows のアプリケーション制御（スマート アプリ コントロールなど）に止められることがあります（`WinError 4551`）。
+- `prudentia-mcp.exe` ではなく `python.exe -m` で登録します。pip が作る署名なしの実行ファイルは、Windows のアプリケーション制御（スマート アプリ コントロールなど）に止められることがあります（`WinError 4551`）。
 - リポジトリのフォルダーを移動・改名すると登録したパスが壊れます（`uv_spawn` エラー）。新しい場所で `pip install -e .[mcp]` で入れ直し、上のコマンドで登録し直します。
 
 ツール：`route_file(path, question?, project?)`（推奨）· `mask_file(path, project?)` · `unmask_to_file(masked_text, job_id, out_path)` · `list_entities()`
@@ -154,7 +156,7 @@ claude mcp add --scope user cascadedlp -- <リポジトリのパス>\.venv\Scrip
 
 **Python API**
 ```python
-from cascadedlp.gate import Gate
+from prudentia.gate import Gate
 g = Gate()
 r = g.mask_file("memo.txt")
 answer = call_external_llm(r.masked_text)       # 外部には仮名化したテキストだけ
@@ -163,7 +165,7 @@ g.unmask_to_file(answer, r.job_id, "memo_answer.txt")
 
 ## 構成
 ```
-cascadedlp/  spans · rules · llm · linking · pseudo · transform        （検出・連結・仮名化）
+prudentia/  spans · rules · llm · linking · pseudo · transform        （検出・連結・仮名化）
              glossary · bootstrap                                     （プロジェクト用語集、自動草案）
              gate（中心 API）· router（関門判定・監査ログ）· confirm（疑わしい項目の確認）· cli · mcp_server
 tools/       測定ツール：evaluate · eval_glossary · eval_bootstrap · eval_utility · eval_semantic · eval_doc_pii …

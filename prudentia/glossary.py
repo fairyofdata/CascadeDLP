@@ -1,6 +1,6 @@
 """C1 프로젝트 용어집: "이 프로젝트에서만 특별한 말"을 사람이 적어 두고, 적힌 대로 결정론으로 찾는다.
 
-파일: ~/.cascadedlp/projects/<프로젝트>/glossary.json  (가명 맵만큼 민감 — 저장소·MCP 밖)
+파일: ~/.prudentia/projects/<프로젝트>/glossary.json  (가명 맵만큼 민감 — 저장소·MCP 밖)
 {
   "project": "tessellane",
   "entries": [

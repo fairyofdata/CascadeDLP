@@ -1,13 +1,13 @@
-"""MCP 서버 — 다른 Claude Code 대화에서 CascadeDLP를 도구로 쓰게 한다 (stdio).
+"""MCP 서버 — 다른 Claude Code 대화에서 Prudentia를 도구로 쓰게 한다 (stdio).
 
 등록 (다른 프로젝트에서도 쓰려면 user 범위):
-  claude mcp add --scope user cascadedlp -- <저장소 경로>\\.venv\\Scripts\\python.exe -m cascadedlp.mcp_server
-  (cascadedlp-mcp.exe 런처는 서명이 없어 Windows 애플리케이션 제어에 막힐 수 있다 — WinError 4551)
+  claude mcp add --scope user prudentia -- <저장소 경로>\\.venv\\Scripts\\python.exe -m prudentia.mcp_server
+  (prudentia-mcp.exe 런처는 서명이 없어 Windows 애플리케이션 제어에 막힐 수 있다 — WinError 4551)
 
 🔴 경계: 호출자(Claude)는 외부 LLM이다.
 - 원문은 '파일 경로'로만 받는다. 원문 텍스트를 인자로 받는 도구는 없다.
 - 돌려주는 것은 가명화된 텍스트·job_id·유형별 개수뿐. 복원 결과는 파일로만 쓰고 내용을 돌려주지 않는다.
-- 허용 범위(~/.cascadedlp/config.json 의 allowed_roots, 기본 = 사용자 폴더) 밖은 읽지도 쓰지도 않는다.
+- 허용 범위(~/.prudentia/config.json 의 allowed_roots, 기본 = 사용자 폴더) 밖은 읽지도 쓰지도 않는다.
   가명 맵 폴더·.ssh·.claude·AppData 등은 항상 막는다(gate.DENIED_UNDER_HOME).
 """
 from mcp.server.mcpserver import MCPServer
@@ -16,7 +16,7 @@ from .gate import Gate, PathNotAllowed
 from .router import audit, sha
 from .router import route_file as route_file_
 
-INSTRUCTIONS = """CascadeDLP: 개인정보와 프로젝트 고유 용어를 로컬에서 토큰([PERSON_001], [COMPONENT_01: 설명] 등)으로 바꿔 주는 도구.
+INSTRUCTIONS = """Prudentia: 개인정보와 프로젝트 고유 용어를 로컬에서 토큰([PERSON_001], [COMPONENT_01: 설명] 등)으로 바꿔 주는 도구.
 - 문서를 다룰 때는 먼저 route_file을 쓴다. 로컬이 경로를 정한다:
   cloud_raw(감지 없음) / cloud_masked(가려서 전달) / needs_confirmation(의심 항목 — 사용자 확인 전 보류) / local_only / block.
 - needs_confirmation·local_only·block이면 그 문서 내용을 추측하거나 다른 방법(Read 등)으로 읽으려 하지 말고,
@@ -33,7 +33,7 @@ INSTRUCTIONS += """
 - 사용자가 원래 값이 들어간 결과가 필요하면 unmask_to_file로 로컬 파일에 쓰고, 그 경로만 알려 준다.
 - 한·일·영 혼용 문서를 지원한다. 같은 사람의 다른 표기(한글/한자/가나/로마자)는 같은 토큰이 될 수 있다."""
 
-server = MCPServer("cascadedlp", instructions=INSTRUCTIONS)
+server = MCPServer("prudentia", instructions=INSTRUCTIONS)
 _gate: Gate | None = None
 
 

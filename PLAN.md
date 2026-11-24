@@ -1,4 +1,4 @@
-# PLAN — CascadeDLP
+# PLAN — Prudentia
 
 작성 2026-09-29 (별도 설계 세션에서 작성). 오늘 밤 범위 = **P0~P4**, P5는 시간이 남으면.
 
@@ -32,7 +32,7 @@
   - GLiNER ✅ 실측: 공백 단위로 끊어 한·일 문장을 통째로 잡음 → 혼용 문서엔 부적합 (`sentencepiece` 필요, requirements-optional에 추가)
 - ✅ eval_v2 홀드아웃: qwen3.5:9b만 유지(F1 0.875, 연결 7/10·쌍 P 1.0) → **기본 모델 qwen3.5:9b로 고정**. 이후 v3 수정(튜닝 후 v2 F1 0.933, 연결 9/10)
 - ✅ 로마자 캐시: 가명 맵의 `romanized`에 저장 → 새 표기만 LLM 호출
-- ✅ 레이어화: `cascadedlp/gate.py`(Gate API) + CLI(`cascadedlp`) + MCP 서버(`cascadedlp-mcp`), `pip install -e .[mcp]`. 맵·설정은 `~/.cascadedlp/`, MCP는 `allowed_roots` 안에서만 읽기·새 파일 쓰기. MCP E2E(LLM 포함) 통과
+- ✅ 레이어화: `prudentia/gate.py`(Gate API) + CLI(`prudentia`) + MCP 서버(`prudentia-mcp`), `pip install -e .[mcp]`. 맵·설정은 `~/.prudentia/`, MCP는 `allowed_roots` 안에서만 읽기·새 파일 쓰기. MCP E2E(LLM 포함) 통과
 - ✅ 경로 정책 변경(사용자 의견): 고정 목록 대신 넓은 울타리(사용자 폴더) + 항상 차단(맵·.ssh·.claude·AppData 등) + 호출마다 승인. md·json 지원, 긴 문서 1500자 분할
 - ✅ MCP user 범위 등록 (`√ Connected`)
 - eval_v3(사용자 작성)는 하지 않음(사용자 판단)
@@ -57,7 +57,7 @@
 | P5 (선택) | 가명화된 텍스트를 로컬에서 번역·요약 → 가명 토큰이 살아남는지 검사 | 토큰 보존율 |
 
 ## 레이어화 설계 (2026-09-30 결정)
-- 형태: **Python 라이브러리 API(`cascadedlp.gate.Gate`)** 를 중심에 두고, CLI와 **MCP 서버**는 그걸 부르는 얇은 어댑터. (로컬 HTTP·외부 LLM 프록시는 보류)
+- 형태: **Python 라이브러리 API(`prudentia.gate.Gate`)** 를 중심에 두고, CLI와 **MCP 서버**는 그걸 부르는 얇은 어댑터. (로컬 HTTP·외부 LLM 프록시는 보류)
 - 🔴 경계 원칙: 호출자(Claude Code 등)가 곧 외부 LLM이다.
   - 원문은 **파일 경로로만** 받는다(호출자가 원문을 인자로 넘기지 않게).
   - 호출자에게 돌려주는 건 **가명화된 텍스트와 job id뿐**.
@@ -78,14 +78,14 @@
 
 ---
 
-# 2단계 — CascadeDLP (2026-09-30 방향 전환, ADR-0015)
+# 2단계 — Prudentia (2026-09-30 방향 전환, ADR-0015)
 
 목표: RTX 3070 한 장 + 클라우드 최상위 모델의 **하이브리드 캐스케이딩 환경을 안정적으로 운영**하는 계층. 가장 적게 가리고도 보호 목적을 달성한다(정보 보존).
 
 ## 확정된 결정 (사용자)
 - 순서: **문서 먼저 → 코드**
 - 민감도: **로컬 LLM 제안 + 사람 확정**, 확정 후 적용은 결정론, 미확정은 보수적으로
-- 이름: CascadeDLP (패키지 `cascadedlp`, `~/.cascadedlp`, MCP `cascadedlp`)
+- 이름: Prudentia (패키지 `prudentia`, `~/.prudentia`, MCP `prudentia`)
 
 ## 단계
 | 단계 | 할 일 | 끝났다는 기준 |

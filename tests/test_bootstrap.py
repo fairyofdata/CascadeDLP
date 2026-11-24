@@ -2,7 +2,7 @@
 import json
 from collections import Counter
 
-from cascadedlp.bootstrap import BootstrapResult, Group, apply_review, key, parse_review, render_review
+from prudentia.bootstrap import BootstrapResult, Group, apply_review, key, parse_review, render_review
 
 
 def test_key_merges_code_variants():

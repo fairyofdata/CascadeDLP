@@ -49,7 +49,7 @@ def sha(s: str) -> str:
 
 
 def audit(gate: Gate, event: dict):
-    """~/.cascadedlp/audit.jsonl 에 한 줄. 내용·경로 원문은 남기지 않는다(해시·개수·결정만)."""
+    """~/.prudentia/audit.jsonl 에 한 줄. 내용·경로 원문은 남기지 않는다(해시·개수·결정만)."""
     gate.cfg.home.mkdir(parents=True, exist_ok=True)
     event = {"time": time.strftime("%Y-%m-%dT%H:%M:%S"), **event}
     with open(gate.cfg.home / "audit.jsonl", "a", encoding="utf-8") as f:
@@ -99,7 +99,7 @@ def route_text(gate: Gate, text: str, project: str | None = None, question: str 
             if len(suspects) > gate.cfg.max_suspects:
                 res = RouteResult("block", [f"의심 항목 과다({len(suspects)}건)"], n_suspects=len(suspects),
                                   notice=f"용어집에 없는 프로젝트 용어 후보가 너무 많습니다. 먼저 용어집을 만드세요: "
-                                         f"cascadedlp --project {project} bootstrap <문서 폴더>")
+                                         f"prudentia --project {project} bootstrap <문서 폴더>")
             elif suspects:  # 의심되는 것은 사용자에게 확인 — 확인 전에는 보내지 않는다
                 pdir = project_dir(gate.cfg.home, project)
                 left = add_pending(pdir, project, suspects)
@@ -107,7 +107,7 @@ def route_text(gate: Gate, text: str, project: str | None = None, question: str 
                                   n_suspects=len(suspects), pending_path=str(pdir / "pending.md"),
                                   notice=f"확인이 필요한 항목이 있어 보내지 않았습니다(대기 {left}건). 로컬에서 "
                                          f"{pdir / 'pending.md'} 를 열어 [x] 보호 / [o] 일반어로 표시한 뒤 "
-                                         f"`cascadedlp --project {project} confirm` 을 실행하고 다시 요청하세요.")
+                                         f"`prudentia --project {project} confirm` 을 실행하고 다시 요청하세요.")
             elif len(text) >= 300 and masked_chars / len(text) >= gate.cfg.max_masked_ratio:
                 res = RouteResult("block", [f"가릴 비율 {masked_chars / len(text):.0%}"],
                                   notice="가려야 할 부분이 너무 많아 클라우드 모델이 일할 수 없습니다. 로컬에서 처리하세요.")

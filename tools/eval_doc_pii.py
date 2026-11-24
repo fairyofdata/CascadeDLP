@@ -15,9 +15,9 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from cascadedlp import gate as gate_mod  # noqa: E402
-from cascadedlp.gate import Gate, GateConfig  # noqa: E402
-from cascadedlp.llm import PROMPT_VERSION  # noqa: E402
+from prudentia import gate as gate_mod  # noqa: E402
+from prudentia.gate import Gate, GateConfig  # noqa: E402
+from prudentia.llm import PROMPT_VERSION  # noqa: E402
 
 CORPORA = ["data/eval/c2_dev_tessellane", "data/eval/c2_holdout_quillmere"]
 NUMERIC = re.compile(r"[\d\s:.,/~\-%]+")
