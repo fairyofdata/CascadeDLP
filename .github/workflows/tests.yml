@@ -1,0 +1,22 @@
+# Run the unit tests on every push. No deployment. The tests need no model or GPU.
+# Steps come from the shared reusable workflows in fairyofdata/Concordia.
+name: tests
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    uses: fairyofdata/Concordia/.github/workflows/python-tests.yml@v1
+    with:
+      python-versions: '["3.12"]'
+      install: python -m pip install -r requirements.txt
+      test: python -m pytest -q
+
+  hygiene:
+    uses: fairyofdata/Concordia/.github/workflows/hygiene.yml@v1
