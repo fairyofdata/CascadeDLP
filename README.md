@@ -1,76 +1,79 @@
+<!-- Source: README_KR.md (Korean is the source; English and Japanese are translations) · synced 2026-11-24 -->
+
 # CascadeDLP
 
-**로컬 모델이 관문을 서고, 통과한 것만 클라우드 모델이 다루는 캐스케이딩 DLP 레이어 — 한·일·영 혼용**
-*A cascading DLP layer: a small local model stands gate in front of a frontier cloud model — for mixed Korean / Japanese / English work.*
+[English](README.md) · [한국어](README_KR.md) · [日本語](README_JP.md)
 
-GPU 한 장(RTX 3070 8GB)으로는 최상위 모델을 대신할 수 없고, 그렇다고 모든 것을 클라우드에 보낼 수도 없습니다.
-CascadeDLP는 **로컬 모델이 먼저 문서를 읽고 관문 판정을 한 다음, 통과한 것만 클라우드 모델에 넘기고, 돌아온 답을 로컬에서 원래 값으로 되돌립니다.**
+**A cascading DLP layer: a small local model stands gate in front of a frontier cloud model — for mixed Korean / Japanese / English work.**
 
-## 로컬 DLP 관문: 탐지 캐스케이드와 관문 판정 (기준은 민감도)
+One GPU (RTX 3070, 8 GB) cannot replace a top-tier model, and yet not everything can be sent to the cloud.
+In CascadeDLP **a local model reads the document first and makes a gate decision; only what passes goes to the cloud model, and the answer that comes back is restored to the original values locally.**
+
+## The local DLP gate: detection cascade and gate decision (the criterion is sensitivity)
 
 ```
-문서 ─▶ ① 로컬 관문 (규칙 + 로컬 LLM + 사람이 확정한 용어집)
-            │
-            ├─ 감지 없음 ───────────▶ 원문 그대로 ──────────┐
-            ├─ 감지됨 ─────────────▶ 가려서 (토큰으로 치환) ──┤
-            │                                              ▼
-            │                                   ② 클라우드 모델이 작업
-            │                                              │
-            │                                              ▼
-            │                                   ③ 로컬에서 복원 (토큰 → 원래 값, 파일로)
-            │
-            ├─ 의심됨 ─────────────▶ 보내지 않고 사용자에게 확인 (로컬 대기 목록)
-            │                         └ 답하면 기억한다: 보호 → 용어집 / 일반어 → 허용 목록
-            ├─ 의미 자체가 비밀(L3) ──▶ 클라우드로 보내지 않고 로컬 모델만 처리 (결과는 로컬 파일)
-            └─ 처리할 수 없음 ────────▶ 거부 (비밀키, 가릴 것이 너무 많음, 용어집 없이 낯선 용어 과다)
+document ─▶ ① local gate (rules + local LLM + a glossary confirmed by a person)
+              │
+              ├─ nothing detected ─────▶ original text as is ─────────┐
+              ├─ detected ────────────▶ masked (replaced by tokens) ──┤
+              │                                                       ▼
+              │                                        ② the cloud model does the work
+              │                                                       │
+              │                                                       ▼
+              │                                        ③ restored locally (tokens → original values, to a file)
+              │
+              ├─ suspicious ───────────▶ not sent; ask the user (local pending list)
+              │                           └ the answer is remembered: protect → glossary / common word → allow list
+              ├─ the meaning itself is secret (L3) ─▶ never sent to the cloud; only the local model handles it (result to a local file)
+              └─ cannot be handled ────▶ refused (secret keys, too much to mask, too many unknown terms without a glossary)
 
-모든 판정은 감사 로그에 남는다 (내용 없이 해시·개수·경로만).
+Every decision goes to an audit log (no content — only hashes, counts and paths).
 ```
 
-| 관문 판정 | 조건 | 결과 |
+| Gate decision | Condition | Result |
 |---|---|---|
-| **통과** (`cloud_raw`) | 감지된 것 없음 | 원문 그대로 클라우드로 |
-| **가림** (`cloud_masked`) | 개인정보, 용어집의 L1·L2 항목 | 토큰으로 바꿔 클라우드로 → 답은 로컬에서 복원 |
-| **확인** (`needs_confirmation`) | 용어집에 없는데 프로젝트 용어처럼 보이는 말 | 보류. 로컬 대기 목록에서 사용자가 `[x]` 보호 / `[o]` 일반어로 표시 |
-| **로컬 전용** (`local_only`) | 용어집의 L3 항목(의미 자체가 비밀) | 로컬 모델이 처리, 결과는 로컬 파일로만 |
-| **거부** (`block`) | 비밀키, 가릴 비율 30% 이상, 원문에 토큰 모양, 의심 항목 과다 | 어디로도 보내지 않음 |
+| **pass** (`cloud_raw`) | nothing detected | original text to the cloud |
+| **mask** (`cloud_masked`) | personal data, glossary items at L1·L2 | replaced by tokens and sent → the answer is restored locally |
+| **confirm** (`needs_confirmation`) | words that look like project terms but are not in the glossary | held. The user marks them `[x]` protect / `[o]` common word in the local pending list |
+| **local only** (`local_only`) | glossary items at L3 (the meaning itself is secret) | handled by the local model, result only to a local file |
+| **refuse** (`block`) | secret keys, 30% or more to mask, token-shaped strings in the source, too many suspicious items | sent nowhere |
 
-### 용어 두 가지
-이 프로젝트에서 두 말은 서로 다른 것을 가리킨다.
+### Two terms
+In this project the two words mean different things.
 
-- **탐지 캐스케이드** — 로컬 관문이 민감한 것을 *찾는* 방식. 값싸고 확실한 것부터 차례로 거른다:
-  `규칙(형식) → 사람이 확정한 용어집 → 로컬 LLM(애매한 것)`. 앞 단계가 잡은 것은 뒤 단계가 뒤집지 못한다.
-  이름 CascadeDLP의 "캐스케이드"는 **이것만** 뜻한다.
-- **관문 판정** — 찾은 결과로 문서를 *어떻게 할지* 정하는 다섯 가지 결론(위 표): 통과 · 가림 · 확인 · 로컬 전용 · 거부.
+- **Detection cascade** — how the local gate *finds* sensitive material. It filters from cheap and certain to expensive:
+  `rules (formats) → glossary confirmed by a person → local LLM (ambiguous cases)`. A later stage cannot overturn what an earlier stage caught.
+  The "cascade" in the name CascadeDLP means **only this**.
+- **Gate decision** — the five outcomes (table above) that decide *what to do* with the document given what was found: pass · mask · confirm · local only · refuse.
 
-흔히 말하는 LLM 캐스케이드(싼 모델이 먼저 풀고 어려우면 비싼 모델로 넘기는, 성능·비용 최적화)와는 **다르다.** 클라우드로 넘길지 정하는 기준은 작업 난이도가 아니라 **민감도**다. 난이도로 넘기면 "어렵고 민감한" 문서가 클라우드로 올라가 버리므로 DLP와 양립하지 않는다.
+This is **not** the usual LLM cascade (a cheap model tries first and hands hard cases to an expensive one, for performance and cost). Whether to hand off to the cloud is decided by **sensitivity**, not by difficulty. Handing off by difficulty would send "hard and sensitive" documents to the cloud, which cannot coexist with DLP.
 
-CascadeDLP 자체는 클라우드를 호출하지 않는다. 판정 결과와 가린 텍스트를 호출한 쪽(Claude Code 등)에 돌려주고, 그쪽이 클라우드 작업을 한다.
+CascadeDLP itself never calls the cloud. It returns the decision and the masked text to the caller (Claude Code and the like), and the caller does the cloud work.
 
-## 약속하는 것과 약속하지 않는 것
-**보장 장치가 아니라 위험 감소 계층이다** ([위협 모델, ADR-0022](docs/adr/0022-threat-model.md)).
+## What it promises and what it does not
+**It is a risk-reduction layer, not a guarantee** ([threat model, ADR-0022](docs/adr/0022-threat-model.md)).
 
-| 약속한다 | 약속하지 않는다 |
+| Promises | Does not promise |
 |---|---|
-| 개인정보·고객사명·프로젝트 용어 같은 **식별자**를 가려서 보낸다 (용어집에 있으면 노출 0) | **"외부 반출 금지" 방침의 충족.** 가린 문서를 보내는 것도 반출이다 |
-| 의미가 비밀이라고 지정한(L3) 문서는 **로컬에 붙잡아 둔다** | **의미의 보호.** 이름을 다 가려도 "무엇을 어떻게 하는지"는 원문만큼 읽힌다(유출 0.89–0.94) |
-| 낯선 프로젝트 용어가 보이면 **멈추고 묻는다** (87–93%) | 탐지의 완전성. 개인정보 약 8건 중 1건, 낯선 용어 7–13%는 통과할 수 있다 |
-| 무엇이 어디로 갔는지 **기록한다** | 소스코드 지원(문서만), 관문의 강제(지금은 우회 가능) |
+| Masks **identifiers** such as personal data, client names and project terms before sending (zero exposure if they are in the glossary) | **Compliance with a "no data may leave" policy.** Sending a masked document is still sending it out |
+| **Keeps documents whose meaning is marked secret (L3) local** | **Protection of meaning.** Even with every name masked, "what is done and how" reads as well as the original (leakage 0.89–0.94) |
+| **Stops and asks** when it sees unknown project terms (87–93%) | Complete detection. About 1 in 8 personal-data items and 7–13% of unknown terms can get through |
+| **Records** what went where | Source code support (documents only), enforcement of the gate (it can currently be bypassed) |
 
-이 프로젝트는 "마스킹으로 소스코드 반출 금지를 넘을 수 있는가"에서 착안했다. 만들고 재어 본 답은 **넘을 수 없다**이다 — 핵심 로직은 가릴 기준이 없고, 가려도 의미가 샌다. 의미가 비밀이면 답은 가림이 아니라 로컬·사내 모델이다. 대신 반출이 허용된 자료에 대한 실수 방지 계층과, 무엇을 보낼지 정하는 틀(관문 판정·용어집·감사 로그)이 남는다.
+The project started from the question "can masking get around a ban on taking source code outside?". The answer after building and measuring it is **no** — there is no criterion for masking core logic, and meaning leaks even when it is masked. If the meaning is secret, the answer is a local or in-house model, not masking. What remains is a safety layer against mistakes for material that may leave, and a framework for deciding what to send (gate decisions, glossary, audit log).
 
-> **현재 상태 (2026-10-03)**: 문서에 대한 위 흐름 전체가 구현·실측됐다. 남은 것은 코드 저장소 지원(C4)과 실제 문서 파일럿(지금까지의 수치는 모두 합성 데이터). [로드맵](#로드맵) · 방향 전환 배경 [ADR-0015](docs/adr/0015-cascade-dlp-direction.md).
+> **Status (2026-10-03)**: the whole flow above is implemented and measured for documents. What remains is support for code repositories (C4) and a pilot on real documents (all numbers so far are on synthetic data). [Roadmap](#roadmap) · background of the change of direction: [ADR-0015](docs/adr/0015-cascade-dlp-direction.md).
 
-**준비 단계(프로젝트마다 한 번)**: 문서 폴더 → 로컬 LLM이 **용어집 초안**(이 프로젝트만의 말)을 만든다 → 사람이 체크하고 레벨(L0 공개 · L1 이름만 숨김 · L2 토큰 · L3 로컬 전용)을 정한다. 관문은 이 용어집을 기준으로 판정한다.
+**Preparation (once per project)**: document folder → the local LLM drafts a **glossary** (words specific to this project) → a person checks it and sets levels (L0 public · L1 hide the name only · L2 token · L3 local only). The gate decides against this glossary.
 
 ```text
-Tessellane의 조율기는 Ripple Rank 점수를 쓰고 FastAPI 위에서 돈다.          (용어집: L1·L1·L2·L0)
+Tessellane의 조율기는 Ripple Rank 점수를 쓰고 FastAPI 위에서 돈다.          (glossary: L1·L1·L2·L0)
         ↓
 [PROJECT_01: 사내 물류 최적화 플랫폼]의 [COMPONENT_01: 작업 우선순위 스케줄러]는 [ALGORITHM_02] 점수를 쓰고 FastAPI 위에서 돈다.
 ```
 
-### 1단계: 개인정보 엔티티 (구현됨)
-외부 LLM에 보내기 **전에** 로컬에서 개인정보를 `[PERSON_001]` 같은 토큰으로 바꾸고, 답이 돌아오면 **로컬 파일로** 원래 값을 되돌립니다.
+### Stage 1: personal-data entities (implemented)
+**Before** sending to an external LLM, personal data is replaced locally by tokens such as `[PERSON_001]`; when the answer comes back, the original values are restored **into a local file**.
 
 ```text
 昨日、한서윤さんと Tanaka Haruto から連絡。ハン・ソユンさんのメールは seoyun.han@example.com
@@ -78,146 +81,146 @@ Tessellane의 조율기는 Ripple Rank 점수를 쓰고 FastAPI 위에서 돈다
 昨日、[PERSON_001]さんと [PERSON_002] から連絡。[PERSON_001]さんのメールは [EMAIL_001]
 ```
 
-## 무엇이 다른가
-이미 많은 PII·DLP 도구(Presidio, GLiNER, 상용 DLP …)가 있습니다. 여기서만 하는 것:
+## What is different
+There are already many PII/DLP tools (Presidio, GLiNER, commercial DLP …). What only this one does:
 
-1. **프로젝트 고유 용어를 다룬다** — `조율기`, `Adaptive Scheduler`처럼 일반명사로도 쓰여 규칙으로 못 잡는 말을, 사람이 확정한 용어집으로 표기 변형(`adaptive_scheduler`, `適応スケジューラ`)까지 찾아 레벨대로 처리한다. 용어집 초안은 로컬 LLM이 만든다.
-2. **가림의 한계를 측정했다** — 가림은 이름을 지키지만 의미(설계 의도)는 못 지킨다는 것을 숫자로 확인하고, 의미 보호는 로컬 전용 라우팅으로 풀었다([ADR-0019](docs/adr/0019-semantic-leakage.md)).
-3. **한·일·영 혼용 문서** — 한 문장 안에 한글 이름, 가나 이름, 로마자가 섞여도 된다.
-4. **교차 표기 연결** — `한서윤 / 韓瑞允 / ハン・ソユン / Seoyun Han` → 같은 `[PERSON_001]`.
-5. **장기적으로 안정된 가역 가명화** — 오늘 `[PERSON_001]`이던 사람은 다음 주 다른 대화에서도 `[PERSON_001]`. 복원은 원문과 **바이트 단위로 일치**.
-6. **기존 도구를 기준선으로 실측** — GLiNER는 공백 단위로 끊어 일본어 문장을 통째로 잡는 등 한·일 문서에 그대로 쓰기 어려웠다([ADR-0009](docs/adr/0009-gliner-baseline.md)).
+1. **Handles project-specific terms** — words like `조율기` or `Adaptive Scheduler` that are also common nouns and cannot be caught by rules are found through a person-confirmed glossary, including spelling variants (`adaptive_scheduler`, `適応スケジューラ`), and handled by level. The glossary draft is made by the local LLM.
+2. **Measured the limits of masking** — confirmed with numbers that masking protects names but not meaning (design intent), and solved protection of meaning with local-only routing ([ADR-0019](docs/adr/0019-semantic-leakage.md)).
+3. **Mixed Korean / Japanese / English documents** — Hangul names, kana names and romanized names may appear in one sentence.
+4. **Cross-script linking** — `한서윤 / 韓瑞允 / ハン・ソユン / Seoyun Han` → the same `[PERSON_001]`.
+5. **Long-term stable, reversible pseudonymization** — a person who is `[PERSON_001]` today is `[PERSON_001]` in another conversation next week. Restoration matches the original **byte for byte**.
+6. **Measured against existing tools as baselines** — GLiNER splits on whitespace and grabs whole Japanese sentences, which made it hard to use as is for Korean/Japanese documents ([ADR-0009](docs/adr/0009-gliner-baseline.md)).
 
-## 설계 원칙
-- **결정론이 먼저, 로컬 LLM은 형식 없는 것만.** 메일·전화·우편번호·URL·ID 형식은 정규식. LLM은 이름·주소·조직명 *후보 문자열*과 이름의 *로마자 발음*만 낸다. 위치 찾기, 토큰 부여, 같은 사람 판정, 복원은 전부 코드가 한다(환각은 원문에 없으므로 자동 폐기).
-- **호출자는 외부 LLM이다.** MCP 도구는 원문을 인자로 받지 않고(파일 경로만), 복원 결과를 돌려주지 않는다(로컬 파일로만).
-- **가명 맵은 로컬에만.** `~/.cascadedlp/` — 어떤 저장소에도 속하지 않는다.
-- **개발·평가는 합성 데이터만.**
+## Design principles
+- **Determinism first; the local LLM only for things without a format.** Mail, phone, postal code, URL and ID formats are regular expressions. The LLM only outputs *candidate strings* for names, addresses and organizations, and the *romanized reading* of names. Locating, token assignment, same-person decisions and restoration are all done by code (hallucinations are not in the source, so they are discarded automatically).
+- **The caller is the external LLM.** The MCP tools do not take the source text as an argument (file paths only) and do not return the restored result (local files only).
+- **The pseudonym map stays local.** `~/.cascadedlp/` — it belongs to no repository.
+- **Development and evaluation use synthetic data only.**
 
-## 1단계(개인정보 탐지) 성능 (합성 평가, qwen3.5:9b, RTX 3070 8GB)
-용어집·라우터 쪽 측정은 아래 [핵심 발견](#지금까지의-핵심-발견-합성-가상-프로젝트-2곳-로컬-모델-기준)에 있다.
+## Stage 1 (personal-data detection) performance (synthetic evaluation, qwen3.5:9b, RTX 3070 8 GB)
+Measurements for the glossary and router are in [key findings](#key-findings-so-far-two-synthetic-fictional-projects-local-models) below.
 
-| | 개발 세트 eval_v1 | 홀드아웃 eval_v2 |
+| | dev set eval_v1 | holdout eval_v2 |
 |---|---|---|
-| 탐지 F1 (완전 일치) — 규칙만 | 0.404 | 0.230 |
-| 탐지 F1 (완전 일치) — 규칙 + GLiNER | 0.593 | 0.526 |
-| **탐지 F1 (완전 일치) — 규칙 + 로컬 LLM** | **0.873** | **0.875** |
-| 교차 표기 연결 (묶음 완전 일치) | 7/9 | 7/10 |
-| 연결 쌍 정밀도 (다른 사람을 섞지 않음) | 1.000 | 1.000 |
-| 문장당 지연 | ~2.8s | ~2.8s |
+| Detection F1 (exact match) — rules only | 0.404 | 0.230 |
+| Detection F1 (exact match) — rules + GLiNER | 0.593 | 0.526 |
+| **Detection F1 (exact match) — rules + local LLM** | **0.873** | **0.875** |
+| Cross-script linking (exact group match) | 7/9 | 7/10 |
+| Link pair precision (never merges different people) | 1.000 | 1.000 |
+| Latency per sentence | ~2.8s | ~2.8s |
 
-- 홀드아웃은 코드를 고정한 채 1회 채점한 값([ADR-0010](docs/adr/0010-holdout-and-overfitting.md)). 이후 v2 오류를 보고 고친 버전은 v2 F1 0.933·연결 9/10(튜닝 후 수치).
-- 로컬 번역 후 토큰 보존: **210/210** (망가지거나 새로 생긴 토큰 0) — [ADR-0014](docs/adr/0014-p5-local-transform.md).
-- ⚠ 평가 세트는 모두 분석자(LLM) 생성 합성 문장이다. 절대값보다 방식·모델 간 상대 비교로 볼 것.
+- The holdout was scored once with the code frozen ([ADR-0010](docs/adr/0010-holdout-and-overfitting.md)). A version fixed after looking at the v2 errors reaches v2 F1 0.933 and linking 9/10 (numbers after tuning).
+- Token preservation after local translation: **210/210** (no tokens broken or invented) — [ADR-0014](docs/adr/0014-p5-local-transform.md).
+- ⚠ All evaluation sets are synthetic sentences generated by the analyst (an LLM). Read them as relative comparisons between methods and models, not as absolute values.
 
-## 설치 (Windows, Python 3.12+, [Ollama](https://ollama.com))
+## Install (Windows, Python 3.12+, [Ollama](https://ollama.com))
 ```powershell
 git clone https://github.com/fairyofdata/CascadeDLP.git
 cd CascadeDLP
-.\setup.ps1        # venv · 의존성 · pip install -e .[mcp] · Ollama 모델 · 스모크 테스트
+.\setup.ps1        # venv · dependencies · pip install -e .[mcp] · Ollama model · smoke test
 ```
-기본 모델은 `qwen3.5:9b`(약 6.6GB, 8GB VRAM에서 100% GPU). LLM 없이 규칙만 쓰려면 `--rules-only`.
+The default model is `qwen3.5:9b` (about 6.6 GB, 100% on GPU with 8 GB VRAM). To use rules only without an LLM, pass `--rules-only`.
 
-## 사용법
-자세한 건 [USAGE.md](USAGE.md).
+## Usage
+Details in [USAGE.md](USAGE.md) (Korean).
 
 **CLI**
 ```powershell
-# 1) 용어집 만들기 (프로젝트마다 한 번, 로컬 전용)
-cascadedlp --project myproj bootstrap D:\work\myproj\docs      # 후보 검토 파일 생성
-cascadedlp --project myproj apply-review <검토 파일>            # 체크한 항목을 용어집에 반영
+# 1) build the glossary (once per project, local only)
+cascadedlp --project myproj bootstrap D:\work\myproj\docs      # writes a candidate review file
+cascadedlp --project myproj apply-review <review file>          # applies the checked items to the glossary
 
-# 2) 관문(라우터) — 권장 진입점
-cascadedlp --project myproj route design.md -o to_cloud.md     # 판정 + 통과·가림이면 보낼 텍스트
-cascadedlp --project myproj route design.md -q "요약해줘" -o answer.md   # 로컬 전용이면 로컬 모델이 답
-cascadedlp --project myproj confirm                            # '확인' 판정이 나오면: 대기 목록에 표시한 뒤 반영
-cascadedlp audit                                               # 무엇이 어디로 갔나
+# 2) gate (router) — the recommended entry point
+cascadedlp --project myproj route design.md -o to_cloud.md     # decision + the text to send if pass/mask
+cascadedlp --project myproj route design.md -q "summarize this" -o answer.md   # if local only, the local model answers
+cascadedlp --project myproj confirm                            # after a 'confirm' decision: mark the pending list, then apply
+cascadedlp audit                                               # what went where
 
-# 3) 직접 가리고 되돌리기
-cascadedlp mask memo.md -o memo.masked.md                      # job id 출력
+# 3) mask and restore directly
+cascadedlp mask memo.md -o memo.masked.md                      # prints a job id
 cascadedlp unmask answer.md --job <job_id> -o answer.restored.md
 ```
 
-**MCP (Claude Code 등에서 도구로)**
+**MCP (as tools in Claude Code and the like)**
 ```powershell
-claude mcp add --scope user cascadedlp -- <저장소 경로>\.venv\Scripts\python.exe -m cascadedlp.mcp_server
+claude mcp add --scope user cascadedlp -- <repository path>\.venv\Scripts\python.exe -m cascadedlp.mcp_server
 ```
-- `cascadedlp-mcp.exe`가 아니라 `python.exe -m`으로 등록한다. pip가 만드는 서명 없는 실행 파일은 Windows의 애플리케이션 제어(스마트 앱 컨트롤 등)에 막힐 수 있다(`WinError 4551`).
-- 저장소 폴더를 옮기거나 이름을 바꾸면 등록 경로가 깨진다(`uv_spawn` 오류). 새 위치에서 `pip install -e .[mcp]`로 다시 설치하고 위 명령으로 다시 등록한다.
+- Register with `python.exe -m`, not `cascadedlp-mcp.exe`. The unsigned executable pip creates can be blocked by Windows application control (Smart App Control and the like) (`WinError 4551`).
+- Moving or renaming the repository folder breaks the registered path (`uv_spawn` error). Reinstall with `pip install -e .[mcp]` in the new location and register again with the command above.
 
-도구: `route_file(path, question?, project?)`(권장) · `mask_file(path, project?)` · `unmask_to_file(masked_text, job_id, out_path)` · `list_entities()`
-용어집 초안 만들기(`bootstrap`)는 "무엇이 핵심인가"의 목록이라 MCP에 없고 CLI로만 한다.
-경로·파일명·형식(md/json/txt/csv)은 대화에서 그때그때 지정. 기본 허용 범위는 사용자 폴더, 가명 맵 폴더·`.ssh`·`.claude`·`AppData` 등은 항상 차단, 덮어쓰기 금지([ADR-0013](docs/adr/0013-path-policy.md)).
+Tools: `route_file(path, question?, project?)` (recommended) · `mask_file(path, project?)` · `unmask_to_file(masked_text, job_id, out_path)` · `list_entities()`
+Drafting a glossary (`bootstrap`) produces the list of "what is core", so it is not exposed over MCP; it is CLI only.
+Paths, file names and formats (md/json/txt/csv) are given in the conversation each time. The default allowed scope is the user folder; the pseudonym map folder, `.ssh`, `.claude`, `AppData` and the like are always blocked, and overwriting is refused ([ADR-0013](docs/adr/0013-path-policy.md)).
 
 **Python API**
 ```python
 from cascadedlp.gate import Gate
 g = Gate()
 r = g.mask_file("memo.txt")
-answer = call_external_llm(r.masked_text)       # 외부에는 가명화된 텍스트만
+answer = call_external_llm(r.masked_text)       # only pseudonymized text goes out
 g.unmask_to_file(answer, r.job_id, "memo_answer.txt")
 ```
 
-## 구조
+## Layout
 ```
-cascadedlp/  spans · rules · llm · linking · pseudo · transform        (탐지·연결·가명화)
-             glossary · bootstrap                                     (프로젝트 용어집, 자동 초안)
-             gate(중심 API) · router(관문 판정·감사 로그) · confirm(의심 항목 확인) · cli · mcp_server
-tools/       측정 도구: evaluate · eval_glossary · eval_bootstrap · eval_utility · eval_semantic · eval_doc_pii …
-tests/       LLM 없이 도는 결정론 테스트 139개 (라운드트립·규칙·용어집·라우터·확인 흐름·경계 원칙)
-data/eval/   합성 평가 세트: 문장 세트 v1·v2, 가상 프로젝트 Tessellane(개발)·Quillmere(홀드아웃) — 작성자·건수는 README
-results/     측정 결과 (수치 + 합성 데이터의 오류 목록)
-docs/adr/    설계 결정 기록 (ADR 0001–0023)
+cascadedlp/  spans · rules · llm · linking · pseudo · transform        (detection, linking, pseudonymization)
+             glossary · bootstrap                                     (project glossary, automatic draft)
+             gate (core API) · router (gate decision, audit log) · confirm (suspicious-item confirmation) · cli · mcp_server
+tools/       measurement tools: evaluate · eval_glossary · eval_bootstrap · eval_utility · eval_semantic · eval_doc_pii …
+tests/       139 deterministic tests that run without an LLM (round trip, rules, glossary, router, confirmation flow, boundary principles)
+data/eval/   synthetic evaluation sets: sentence sets v1·v2, fictional projects Tessellane (dev) and Quillmere (holdout) — authors and counts in its README
+results/     measurement results (numbers + error lists on synthetic data)
+docs/adr/    design decision records (ADR 0001–0023)
 ```
 
-## 로드맵
-문서(설계서·ADR·구조 설명) 먼저, 코드는 그다음([ADR-0015](docs/adr/0015-cascade-dlp-direction.md)).
+## Roadmap
+Documents (design documents, ADRs, structure descriptions) first, code after ([ADR-0015](docs/adr/0015-cascade-dlp-direction.md)).
 
-| 단계 | 내용 | 상태 |
+| Stage | Contents | Status |
 |---|---|---|
-| P0–P5 | 개인정보 엔티티: 규칙 + 로컬 LLM 탐지, 교차 표기 연결, 가역 가명화, Gate/CLI/MCP, 로컬 번역·요약 | ✅ |
-| C0 | 방향 재정의 (PII 마스커 → 캐스케이딩 DLP), 개명 | ✅ |
-| C1 | 엔티티 확장(`PROJECT` `COMPONENT` `ALGORITHM` `TERM` `SECRET`) + 민감도 L0–L3 + 안전한 설명 + 프로젝트 용어집 ([ADR-0016](docs/adr/0016-project-glossary.md)) | ✅ |
-| C2 | 용어집 부트스트랩: 로컬 LLM이 "이 프로젝트만의 말"과 다른 표기 묶음을 제안 → **사람이 민감도 확정** ([ADR-0017](docs/adr/0017-glossary-bootstrap.md), 홀드아웃 항목 10/10·잘못 합침 0) | ✅ |
-| C3 | 정보 보존형 가림: 레벨별로 그대로 / 설명형 별칭 `[COMPONENT_01: 스케줄러]` / 토큰 / 차단 + 실험용 문맥 축소(일반화·문장 제거) | ✅ |
-| C6 | 측정: **효용 대 이름 유출 대 의미 유출** — 가림은 효용 손실 없이 이름을 지키지만 의미는 못 지킴 → 의미 보호는 L3 라우팅 ([ADR-0018](docs/adr/0018-utility-vs-leakage.md), [ADR-0019](docs/adr/0019-semantic-leakage.md)) | ✅ |
-| C4 | 코드: L3 경로 읽기 금지 + 가린 미러 작업공간(핵심 함수는 시그니처·설명만) → 변경분 역매핑 | 다음 후보 |
-| C5 | 라우터(클라우드 원문 / 가림 / 로컬만 / 차단) + 감사 로그 ([ADR-0020](docs/adr/0020-router.md)) | ✅ |
-| C7 | 관문 판정 완성: **의심 항목은 사용자 확인**(보류 → 로컬 대기 목록 → 기억), 복잡도 기준 거부 ([ADR-0021](docs/adr/0021-cascade-confirmation.md)) | ✅ |
-| **D** (3단계) | **설계 지식 기반과 핵심 로직 분리**: 수천 줄 설계서를 로컬이 빠짐없이 들고(절 트리·엔티티 색인·BM25·전달 범위 장부), 그 근거로 핵심 로직을 식별해 코드에서 분리 ([ADR-0023](docs/adr/0023-knowledge-base-direction.md), [상정 시나리오](docs/scenario-knowledge.md)) | D0 ✅ · D1부터 진행 예정 |
-| 후속 | **관문 강제 장치**: 지금은 Claude Code가 관문 도구를 거치지 않고 파일을 직접 읽을 수 있다(안내문에만 의존). 권한 설정·훅으로 보호 폴더의 직접 읽기를 막는다 | 후속 과제 |
+| P0–P5 | Personal-data entities: rule + local LLM detection, cross-script linking, reversible pseudonymization, Gate/CLI/MCP, local translation and summary | ✅ |
+| C0 | Redefinition (PII masker → cascading DLP), rename | ✅ |
+| C1 | More entities (`PROJECT` `COMPONENT` `ALGORITHM` `TERM` `SECRET`) + sensitivity L0–L3 + safe descriptions + project glossary ([ADR-0016](docs/adr/0016-project-glossary.md)) | ✅ |
+| C2 | Glossary bootstrap: the local LLM proposes "words specific to this project" and groups of variant spellings → **a person confirms sensitivity** ([ADR-0017](docs/adr/0017-glossary-bootstrap.md), holdout items 10/10, wrong merges 0) | ✅ |
+| C3 | Information-preserving masking: by level, as is / descriptive alias `[COMPONENT_01: scheduler]` / token / block + experimental context reduction (generalization, sentence removal) | ✅ |
+| C6 | Measurement: **utility vs name leakage vs meaning leakage** — masking protects names without losing utility but does not protect meaning → meaning is protected by L3 routing ([ADR-0018](docs/adr/0018-utility-vs-leakage.md), [ADR-0019](docs/adr/0019-semantic-leakage.md)) | ✅ |
+| C4 | Code: no reading of L3 paths + a masked mirror workspace (core functions as signatures and descriptions only) → reverse-map the changes | next candidate |
+| C5 | Router (cloud raw / masked / local only / block) + audit log ([ADR-0020](docs/adr/0020-router.md)) | ✅ |
+| C7 | Gate decision completed: **suspicious items are confirmed by the user** (hold → local pending list → remembered), refusal by complexity ([ADR-0021](docs/adr/0021-cascade-confirmation.md)) | ✅ |
+| **D** (stage 3) | **Design knowledge base and separation of core logic**: the local side holds thousand-line design documents without dropping anything (section tree, entity index, BM25, ledger of what was sent), and uses that to identify core logic and separate it from the code ([ADR-0023](docs/adr/0023-knowledge-base-direction.md), [scenario](docs/scenario-knowledge.md)) | D0 ✅ · D1 next |
+| Later | **Gate enforcement**: Claude Code can currently read files directly without going through the gate tools (it relies on instructions only). Block direct reads of protected folders with permission settings and hooks | later |
 
-### 지금까지의 핵심 발견 (합성 가상 프로젝트 2곳, 로컬 모델 기준)
-| 방식 | 효용 | 이름 노출 | 의미 유출 |
+### Key findings so far (two synthetic fictional projects, local models)
+| Method | Utility | Name exposure | Meaning leakage |
 |---|---|---|---|
-| 원문 | 기준 | 전부 | 0.83–0.89 |
-| **L2 토큰 (기본)** | 원문과 같음 | **0** | 0.89–0.94 |
-| L2 + 문장 일반화 | 약 45% 하락 | 0 | 0.44–0.83 |
-| L2 + 문장 제거 | 거의 0 | 0 | 0.39–0.44 |
+| Original | baseline | all | 0.83–0.89 |
+| **L2 tokens (default)** | same as original | **0** | 0.89–0.94 |
+| L2 + sentence generalization | about 45% lower | 0 | 0.44–0.83 |
+| L2 + sentence removal | nearly 0 | 0 | 0.39–0.44 |
 
-→ **가림은 이름·개인정보를 효용 손실 없이 지킨다. 그러나 "무엇을 어떻게 하는가"(설계 의도)는 문장 단위로 가려도 새어 나간다.** 의미가 비밀인 것은 가리지 말고 **로컬에서만 처리(L3 라우팅)**해야 한다 — 그래서 라우터(C5)를 만들었다.
+→ **Masking protects names and personal data without losing utility. But "what is done and how" (design intent) leaks even when masked sentence by sentence.** What is secret in meaning should not be masked but **handled locally only (L3 routing)** — which is why the router (C5) was built.
 
-그 밖의 측정 결과:
-- 용어집 초안: 처음 보는 가상 프로젝트에서 정답 10항목이 모두 후보에 오르고, 다른 대상을 잘못 합친 것 0 ([ADR-0017](docs/adr/0017-glossary-bootstrap.md)).
-- 용어집 적용: 용어 유출 0, 과잉 가림 0, 복원 바이트 일치 ([ADR-0016](docs/adr/0016-project-glossary.md)).
-- 의심 확인: 용어집에서 일부러 뺀 용어의 87%(홀드아웃)–93%(개발용)를 관문이 막았다. 용어집이 다 찼을 때 헛멈춤은 문서 5개 중 0–2개 ([ADR-0021](docs/adr/0021-cascade-confirmation.md)).
+Other measurements:
+- Glossary draft: on a fictional project it had never seen, all 10 answer items appeared among the candidates, with 0 wrong merges ([ADR-0017](docs/adr/0017-glossary-bootstrap.md)).
+- Glossary application: 0 term leaks, 0 over-masking, byte-exact restoration ([ADR-0016](docs/adr/0016-project-glossary.md)).
+- Suspicious-item confirmation: the gate stopped 87% (holdout) to 93% (dev) of terms deliberately left out of the glossary. With a full glossary, false stops were 0–2 out of 5 documents ([ADR-0021](docs/adr/0021-cascade-confirmation.md)).
 
-## 알려진 한계
-- **가림은 의미를 지키지 못한다.** 설계 의도가 비밀이면 L3로 두고 로컬에서만 처리해야 한다.
-- **관문은 아직 우회할 수 있다.** Claude Code는 관문 도구를 거치지 않고 파일을 직접 읽을 수 있다. 강제 장치는 후속 과제다.
-- **의심 확인은 낯선 용어를 전부 막지 못한다(7–13%는 통과).** 특히 한국어·일본어 용어를 놓친다. 용어집을 먼저 채워 두는 것이 기본 방어선이다.
-- **L3를 넉넉히 지정하면 클라우드를 못 쓴다.** L3 용어 하나가 문서 5개 중 4개에 나와 대부분 로컬 전용이 됐다 — L3는 소수 항목에만([ADR-0020](docs/adr/0020-router.md)).
-- **긴 문서에서 사람 이름 탐지가 가끔 흔들린다.** 조각을 작게 나눠 크게 줄였지만(노출 10 → 1) 0은 아니다([ADR-0018](docs/adr/0018-utility-vs-leakage.md)).
-- 로컬 전용 경로의 답은 로컬 모델(8K 컨텍스트) 품질이다. 긴 문서는 앞부분만 쓴다.
-- **모든 수치는 분석자가 만든 합성 데이터 기준이다.** 실제 문서 파일럿은 아직 하지 못했다.
-- 한자 이름만으로는 읽기가 모호하다(伊藤大翔 → hiroto? daisho?) → 교차 연결 실패.
-- 공백으로만 붙은 두 사람 이름(`정민호 김민준`)은 한 사람으로 합쳐진다.
-- 주소 경계가 부정확하다(ADDRESS 완전 F1 0.44–0.57).
-- 같은 표기의 동명이인은 구분하지 않는다.
-- 가명화 결과(개인정보가 아닌 부분)는 외부로 나간다. **민감한 문서는 가명화 결과를 확인한 뒤 보낼 것.** 이 도구는 개인정보 보호를 돕는 보조 수단이며 완전한 탐지를 보장하지 않는다.
+## Known limitations
+- **Masking does not protect meaning.** If design intent is secret, set it to L3 and handle it locally only.
+- **The gate can still be bypassed.** Claude Code can read files directly without the gate tools. Enforcement is later work.
+- **Suspicious-item confirmation does not stop every unknown term (7–13% get through).** Korean and Japanese terms are missed in particular. Filling the glossary first is the basic line of defense.
+- **Generous L3 assignments make the cloud unusable.** One L3 term appeared in 4 of 5 documents and most became local only — keep L3 to a few items ([ADR-0020](docs/adr/0020-router.md)).
+- **Person-name detection sometimes wobbles in long documents.** Splitting into smaller chunks reduced it a lot (exposure 10 → 1), but not to 0 ([ADR-0018](docs/adr/0018-utility-vs-leakage.md)).
+- Answers on the local-only path have local-model (8K context) quality. Long documents use only the beginning.
+- **All numbers are on synthetic data made by the analyst.** A pilot on real documents has not been done yet.
+- Kanji-only names are ambiguous to read (伊藤大翔 → hiroto? daisho?) → cross-script linking fails.
+- Two names joined only by a space (`정민호 김민준`) are merged into one person.
+- Address boundaries are imprecise (ADDRESS exact F1 0.44–0.57).
+- People with the same name in the same spelling are not distinguished.
+- The pseudonymized output (the non-personal parts) does go out. **For sensitive documents, check the pseudonymized result before sending.** This tool helps protect personal data; it does not guarantee complete detection.
 
-## 평가 데이터에 대해
-`data/eval/`의 이름·주소·연락처는 모두 **지어낸 것**이다. 메일·URL은 예약 도메인(`example.com/.jp/.org`)만 쓴다. 전화·ID 번호는 형식만 맞춘 임의의 숫자로, 실제 번호와 일치한다면 우연이다.
+## About the evaluation data
+The names, addresses and contact details in `data/eval/` are all **made up**. Mail and URLs use reserved domains only (`example.com/.jp/.org`). Phone and ID numbers are random digits that only match the format; any match with a real number is coincidence.
 
 ## License
 [MIT](LICENSE)
