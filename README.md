@@ -1,4 +1,4 @@
-<!-- Source: README_KR.md (Korean is the source; English and Japanese are translations) · synced 2026-11-24 -->
+<!-- Source: README_KR.md (Korean is the source; English and Japanese are translations) · synced 2026-11-26 -->
 
 # Prudentia
 
@@ -10,6 +10,8 @@ Formerly CascadeDLP (renamed 2026-11-24, [ADR-0024](docs/adr/0024-rename-to-prud
 
 One GPU (RTX 3070, 8 GB) cannot replace a top-tier model, and yet not everything can be sent to the cloud.
 In Prudentia **a local model reads the document first and makes a gate decision; only what passes goes to the cloud model, and the answer that comes back is restored to the original values locally.**
+
+*Prudentia* is Latin for "prudence", knowing what to show and what to keep: the local side decides what the cloud gets to see.
 
 ## The local DLP gate: detection cascade and gate decision (the criterion is sensitivity)
 
