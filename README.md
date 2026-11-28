@@ -47,7 +47,7 @@ In this project the two words mean different things.
 
 - **Detection cascade** — how the local gate *finds* sensitive material. It filters from cheap and certain to expensive:
   `rules (formats) → glossary confirmed by a person → local LLM (ambiguous cases)`. A later stage cannot overturn what an earlier stage caught.
-  The "cascade" in the name Prudentia means **only this**.
+  In this document "cascade" (including "cascading DLP layer" at the top) means **only this**.
 - **Gate decision** — the five outcomes (table above) that decide *what to do* with the document given what was found: pass · mask · confirm · local only · refuse.
 
 This is **not** the usual LLM cascade (a cheap model tries first and hands hard cases to an expensive one, for performance and cost). Whether to hand off to the cloud is decided by **sensitivity**, not by difficulty. Handing off by difficulty would send "hard and sensitive" documents to the cloud, which cannot coexist with DLP.
