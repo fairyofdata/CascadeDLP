@@ -1,6 +1,6 @@
-# ADR-0009 GLiNER 기준선: 측정했고, 채택하지 않음
+# 0009. GLiNER 기준선: 측정했고, 채택하지 않음
 
-- 날짜: 2026-09-30 · 상태: 채택(기준선으로만 유지, 본체 미포함)
+- 상태: 채택 (2026-09-30) · 기준선으로만 유지, 본체 미포함
 
 ## 맥락
 차별점 4: 기존 도구를 기준선으로 실측하고 모자란 곳만 만든다. `urchade/gliner_multi_pii-v1`(1.1GB, CPU). Python 3.14에서 설치됨, 단 토크나이저에 `sentencepiece`·`protobuf` 필요(requirements-optional에 추가).

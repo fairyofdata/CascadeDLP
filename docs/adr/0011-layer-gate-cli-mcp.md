@@ -1,6 +1,6 @@
-# ADR-0011 레이어화: Gate API 중심 + CLI·MCP 어댑터, 경계 원칙
+# 0011. 레이어화: Gate API 중심 + CLI·MCP 어댑터, 경계 원칙
 
-- 날짜: 2026-09-30 · 상태: 채택 (사용자 선택: Python API + MCP. 로컬 HTTP·외부 LLM 프록시는 보류)
+- 상태: 채택 (2026-09-30) · 사용자 선택: Python API + MCP. 로컬 HTTP·외부 LLM 프록시는 보류
 
 ## 맥락
 다른 Claude Code 대화나 API식 호출에서 결합해 쓸 수 있는 레이어가 필요. **호출자(Claude Code 등)가 곧 외부 LLM**이라는 점이 설계의 핵심 제약.
